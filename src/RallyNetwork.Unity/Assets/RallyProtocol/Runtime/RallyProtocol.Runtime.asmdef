@@ -1,0 +1,21 @@
+{
+    "name": "RallyProtocol.Runtime",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "BouncyCastle.Cryptography.dll",
+        "Nethereum.Web3.dll",
+        "Nethereum.Accounts.dll",
+        "Nethereum.Hex.dll",
+        "Nethereum.Signer.dll",
+        "Nethereum.HdWallet.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
