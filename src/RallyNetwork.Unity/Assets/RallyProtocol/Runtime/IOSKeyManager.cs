@@ -25,6 +25,8 @@ namespace RallyProtocol
 
         [DllImport("__Internal")]
         static extern string getPrivateKeyFromMnemonic(string mnemonic);
+
+        static extern bool mnemonicBackedUpToCloud();
 #else
 #pragma warning disable IDE0060, IDE1006
         static string getBundleId() => string.Empty;
@@ -33,6 +35,7 @@ namespace RallyProtocol
         static bool saveMnemonic(string mnemonic, bool saveToCloud, bool rejectOnCloudSaveFailure) => false;
         static bool deleteMnemonic() => false;
         static string getPrivateKeyFromMnemonic(string mnemonic) => string.Empty;
+        static bool mnemonicBackedUpToCloud() => false;
 #pragma warning restore IDE0060, IDE1006
 #endif
 
@@ -47,6 +50,8 @@ namespace RallyProtocol
         public Task<bool> DeleteMnemonic() => Task.FromResult(deleteMnemonic());
 
         public Task<string> GetPrivateKeyFromMnemonic(string mnemonic) => Task.FromResult(getPrivateKeyFromMnemonic(mnemonic));
+
+        public Task<bool> IsMnemonicBackedUpToCloud() => Task.FromResult(mnemonicBackedUpToCloud());
 
     }
 

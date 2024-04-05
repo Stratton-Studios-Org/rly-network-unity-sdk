@@ -41,6 +41,10 @@ static RlyNetworkMobileSdk *instance = nil;
     return [instance deleteMnemonic];
 }
 
++ (BOOL)mnemonicBackedUpToCloud {
+    return [instance mnemonicBackedUpToCloud];
+}
+
 + (NSString *)getPrivateKeyFromMnemonic:(NSString *)mnemonic {
     id privateKey = [instance getPrivateKeyFromMnemonic:mnemonic];
 
@@ -91,6 +95,10 @@ extern "C" {
     
     bool deleteMnemonic() {
         return [UnitySdkPlugin deleteMnemonic];
+    }
+    
+    bool mnemonicBackedUpToCloud() {
+        return [UnitySdkPlugin mnemonicBackedUpToCloud];
     }
     
     const char *getPrivateKeyFromMnemonic(const char *mnemonic) {

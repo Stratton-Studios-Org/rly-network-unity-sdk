@@ -41,10 +41,18 @@ namespace RallyProtocol
             await SaveMnemonic(mnemonic, overwrite, saveToCloud, rejectOnCloudSaveFailure);
         }
 
-        public Task<bool> IsAccountBackedUpToCloud()
+        /// <summary>
+        /// Returns the cloud backup status of the existing wallet.
+        /// Returns false if there is currently no wallet. This method should not be used as a check for wallet existence
+        /// as it will return false if there is no wallet or if the wallet does exist but is not backed up to cloud.
+        ///
+        /// If a wallet already exists the reponse will be true or false depending on whether the wallet is backed up to cloud or not.
+        /// TRUE response means wallet is backed up to cloud, FALSE means wallet is not backed up to cloud.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> IsAccountBackedUpToCloud()
         {
-            // TODO: Implement backup sync using native plugins
-            return Task.FromResult(true);
+            return await this.keyManager.IsMnemonicBackedUpToCloud();
         }
 
         public async Task<Account> GetAccount()

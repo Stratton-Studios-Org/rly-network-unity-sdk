@@ -43,6 +43,18 @@ public class RlyNetworkMobileSdk: NSObject {
             // reject("mnemonic_generation_failure", "failed to generate secure bytes", nil);
         }
     }
+
+    public func mnemonicBackedUpToCloud() -> Bool {
+        let mnemonicAttributes = KeychainHelper.standard.readAttributes(service: SERVICE_KEY, account: MNEMONIC_ACCOUNT_KEY)
+
+        if (mnemonicAttributes == nil) {
+            return false;
+        }
+
+        let keyAccessibility = mnemonicAttributes?[kSecAttrAccessible as String] as? String
+
+        return keyAccessibility == (kSecAttrAccessibleWhenUnlocked as String)
+    }
     
     public func saveMnemonic(
       _ mnemonic: String,

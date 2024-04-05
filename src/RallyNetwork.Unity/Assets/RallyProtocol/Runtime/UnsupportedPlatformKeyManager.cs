@@ -13,6 +13,7 @@ namespace RallyProtocol
         public Task<bool> SaveMnemonic(string mnemonic, bool saveToCloud, bool rejectOnCloudSaveFailure) => throw new NotImplementedException();
         public Task<bool> DeleteMnemonic() => throw new NotImplementedException();
         public Task<string> GetPrivateKeyFromMnemonic(string mnemonic) => throw new NotImplementedException();
+        public Task<bool> IsMnemonicBackedUpToCloud() => throw new NotImplementedException();
 
     }
 

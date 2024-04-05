@@ -90,6 +90,15 @@ namespace RallyProtocol
             return tcs.Task;
         }
 
+        public Task<bool> IsMnemonicBackedUpToCloud()
+        {
+            var tcs = new TaskCompletionSource<bool>();
+
+            _pluginInstance.Call("mnemonicBackedUpToCloud", new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
+
+            return tcs.Task;
+        }
+
         public Task<string> GetPrivateKeyFromMnemonic(string mnemonic)
         {
             var tcs = new TaskCompletionSource<string>();

@@ -11,6 +11,7 @@ namespace RallyProtocol
         Task<string> GenerateNewMnemonic();
         Task<bool> SaveMnemonic(string mnemonic, bool saveToCloud, bool rejectOnCloudSaveFailure);
         Task<bool> DeleteMnemonic();
+        Task<bool> IsMnemonicBackedUpToCloud();
         Task<string> GetPrivateKeyFromMnemonic(string mnemonic);
 
     }
