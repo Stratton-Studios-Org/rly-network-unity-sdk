@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.nethereum.unity": {
+      "version": "https://github.com/Nethereum/Nethereum.Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2640eebad7eac2516a909f23e50057d9b8e1ba45"
+    },
     "com.unity.collab-proxy": {
       "version": "2.3.1",
       "depth": 0,
