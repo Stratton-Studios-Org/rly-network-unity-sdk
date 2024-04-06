@@ -9,7 +9,22 @@ namespace RallyProtocol
     public class KeyManager
     {
 
+        protected static KeyManager defaultInstance;
+
         protected readonly IPlatformKeyManager platform;
+
+        public static KeyManager Default
+        {
+            get
+            {
+                if (defaultInstance == null)
+                {
+                    defaultInstance = new();
+                }
+
+                return defaultInstance;
+            }
+        }
 
         public KeyManager()
         {

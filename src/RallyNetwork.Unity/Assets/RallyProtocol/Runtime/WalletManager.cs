@@ -13,14 +13,28 @@ namespace RallyProtocol
     public class WalletManager
     {
 
+        protected static WalletManager defaultInstance;
+
         protected Account currentAccount;
         protected KeyManager keyManager;
 
+        public static WalletManager Default
+        {
+            get
+            {
+                if (defaultInstance == null)
+                {
+                    defaultInstance = new(KeyManager.Default);
+                }
+
+                return defaultInstance;
+            }
+        }
+
         public Account CurrentAccount => this.currentAccount;
 
-        public WalletManager(Account account, KeyManager keyManager)
+        public WalletManager(KeyManager keyManager)
         {
-            this.currentAccount = account;
             this.keyManager = keyManager;
         }
 

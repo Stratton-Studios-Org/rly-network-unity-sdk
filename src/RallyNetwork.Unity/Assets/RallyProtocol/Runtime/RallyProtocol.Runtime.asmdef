@@ -12,7 +12,12 @@
         "Nethereum.Accounts.dll",
         "Nethereum.Hex.dll",
         "Nethereum.Signer.dll",
-        "Nethereum.HdWallet.dll"
+        "Nethereum.HdWallet.dll",
+        "Nethereum.JsonRpc.Client.dll",
+        "Nethereum.JsonRpc.RpcClient.dll",
+        "Nethereum.RPC.dll",
+        "Microsoft.Extensions.Logging.Abstractions.dll",
+        "Nethereum.Contracts.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
