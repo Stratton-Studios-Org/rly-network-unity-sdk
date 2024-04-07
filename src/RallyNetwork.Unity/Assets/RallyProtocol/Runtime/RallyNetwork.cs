@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
 
+using Nethereum.ABI;
+using Nethereum.ABI.Model;
+using Nethereum.Contracts;
+using Nethereum.Contracts.ContractHandlers;
+using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+
+using RallyProtocol.Contracts;
 
 using UnityEngine;
 
@@ -45,11 +53,6 @@ namespace RallyProtocol
             this.config = config;
         }
 
-        public Task<GsnTransactionDetails> GetClaimTx(Account account, RallyNetworkConfig networkConfig, Web3 client)
-        {
-
-        }
-
         public Web3 GetEthClient(string apiUrl)
         {
             return new(apiUrl);
@@ -69,8 +72,26 @@ namespace RallyProtocol
                 throw new System.Exception("Account already dusted, will not dust again");
             }
 
-            Web3 client = GetEthClient(config.Gsn.RpcUrl);
+            string contractAddress = this.config.Contracts.TokenFaucet;
+            Web3 web3 = GetEthClient(config.Gsn.RpcUrl);
+            IContractTransactionHandler<ClaimFunction> claimHandler = web3.Eth.GetContractTransactionHandler<ClaimFunction>();
+            ClaimFunction claim = new()
+            {
+                FromAddress = account.Address,
+            };
+            TransactionInput input = await claimHandler.CreateTransactionInputEstimatingGasAsync(contractAddress, claim);
+            GsnTransactionDetails gsnTx = new()
+            {
+                From = account.Address,
+                Data = input.Data,
+                Value = "0",
+                To = input.To,
+                Gas = input.Gas,
+                MaxFeePerGas = input.MaxFeePerGas,
+                MaxPriorityFeePerGas = input.MaxPriorityFeePerGas
+            };
 
+            return await Relay(gsnTx);
         }
 
         public Task<string> GetBalance(string tokenAddress = null, bool humanReadable = false)
