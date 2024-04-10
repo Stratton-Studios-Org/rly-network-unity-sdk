@@ -18,7 +18,8 @@
         "Nethereum.RPC.dll",
         "Microsoft.Extensions.Logging.Abstractions.dll",
         "Nethereum.Contracts.dll",
-        "Nethereum.ABI.dll"
+        "Nethereum.ABI.dll",
+        "Nethereum.Model.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

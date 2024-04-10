@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+using Nethereum.Model;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
 using UnityEngine;
+
+using Account = Nethereum.Web3.Accounts.Account;
 
 namespace RallyProtocol
 {
@@ -145,7 +148,8 @@ namespace RallyProtocol
             return signer.EncodeUTF8AndSign(message, new(account.PrivateKey));
         }
 
-        public async Task<string> SignTransaction()
+        public async Task<string> SignTransaction<T>(T transaction)
+            where T : SignedTypeTransaction
         {
             Account account = await GetAccount();
             if (account == null)
@@ -153,8 +157,8 @@ namespace RallyProtocol
                 throw new Exception("No account");
             }
 
-            // TODO: Sign transaction
-            return null;
+            TypeTransactionSigner<T> signer = new();
+            return signer.SignTransaction(account.PrivateKey, transaction);
         }
 
         private async Task<Account> SaveMnemonic(string mnemonic, CreateAccountOptions options)
