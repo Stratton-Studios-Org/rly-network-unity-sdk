@@ -1,14 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Signer;
+using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
 using UnityEngine;
 
 namespace RallyProtocol
 {
+
+    public class CreateAccountOptions
+    {
+
+        public bool? Overwrite;
+        public KeyStorageConfig StorageOptions;
+
+    }
 
     public class WalletManager
     {
@@ -49,10 +61,15 @@ namespace RallyProtocol
         /// The saveToCloud flag is used to specify whether to save the wallet to cloud or not. When set to true, the wallet will be saved to cloud. When set to false, the wallet will be saved only on device.
         /// After the wallet is created, you can check the cloud backup status of the wallet using the walletBackedUpToCloud method.
         /// </summary>
-        public async Task CreateAccount(bool overwrite = false, bool saveToCloud = true, bool rejectOnCloudSaveFailure = true)
+        public async Task<Account> CreateAccount(CreateAccountOptions options)
         {
             string mnemonic = await this.keyManager.GenerateNewMnemonic();
-            await SaveMnemonic(mnemonic, overwrite, saveToCloud, rejectOnCloudSaveFailure);
+            return await SaveMnemonic(mnemonic, options);
+        }
+
+        public async Task<Account> ImportExistingAccount(string mnemonic, CreateAccountOptions options)
+        {
+            return await SaveMnemonic(mnemonic, options);
         }
 
         /// <summary>
@@ -64,7 +81,7 @@ namespace RallyProtocol
         /// TRUE response means wallet is backed up to cloud, FALSE means wallet is not backed up to cloud.
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> IsAccountBackedUpToCloud()
+        public async Task<bool> IsWalletBackedUpToCloud()
         {
             return await this.keyManager.IsMnemonicBackedUpToCloud();
         }
@@ -87,14 +104,6 @@ namespace RallyProtocol
             return account;
         }
 
-        public async Task<Account> ImportExistingAccount(string mnemonic, bool overwrite = false, bool saveToCloud = true, bool rejectOnCloudSaveFailure = true)
-        {
-            await SaveMnemonic(mnemonic, overwrite, saveToCloud, rejectOnCloudSaveFailure);
-            Account account = await CreateAccountFromMnemonic(mnemonic);
-            this.currentAccount = account;
-            return account;
-        }
-
         public async Task<string> GetPublicAddress()
         {
             Account account = await GetAccount();
@@ -106,7 +115,7 @@ namespace RallyProtocol
             return account.Address;
         }
 
-        public async Task DeleteAccountPermanently()
+        public async Task PermanentlyDeleteAccount()
         {
             await this.keyManager.DeleteMnemonic();
             this.currentAccount = null;
@@ -124,15 +133,63 @@ namespace RallyProtocol
             }
         }
 
-        private async Task SaveMnemonic(string mnemonic, bool overwrite, bool saveToCloud = true, bool rejectOnCloudSaveFailure = true)
+        public async Task<string> SignMessage(string message)
         {
             Account account = await GetAccount();
-            if (account != null && !overwrite)
+            if (account == null)
             {
-                throw new System.Exception("Wallet already exists. Use overwrite flag to overwrite");
+                throw new Exception("No account");
             }
 
-            await this.keyManager.SaveMnemonic(mnemonic, saveToCloud, rejectOnCloudSaveFailure);
+            EthereumMessageSigner signer = new();
+            return signer.EncodeUTF8AndSign(message, new(account.PrivateKey));
+        }
+
+        public async Task<string> SignTransaction()
+        {
+            Account account = await GetAccount();
+            if (account == null)
+            {
+                throw new Exception("No account");
+            }
+
+            // TODO: Sign transaction
+            return null;
+        }
+
+        private async Task<Account> SaveMnemonic(string mnemonic, CreateAccountOptions options)
+        {
+            bool overwrite = options.Overwrite ?? false;
+            Account existingAccount;
+            try
+            {
+                existingAccount = await GetAccount();
+            }
+            catch (Exception error)
+            {
+                if (!overwrite)
+                {
+                    Debug.LogError("Error while reading existing wallet");
+                    Debug.LogException(error);
+                }
+
+                existingAccount = null;
+            }
+
+            if (existingAccount != null && !overwrite)
+            {
+                throw new System.Exception("Account already exists. Use overwrite flag to overwrite");
+            }
+
+            KeyStorageConfig storageOptions = options.StorageOptions ?? new KeyStorageConfig() { SaveToCloud = true, RejectOnCloudSaveFailure = false };
+
+            // Get private key to check for a valid mnemonic first before passing anything invalid into saveMnemonic
+            string privateKey = await this.keyManager.GetPrivateKeyFromMnemonic(mnemonic);
+            await this.keyManager.SaveMnemonic(mnemonic, storageOptions);
+            Account newAccount = new(privateKey);
+            this.currentAccount = newAccount;
+
+            return newAccount;
         }
 
         private async Task<Account> CreateAccountFromMnemonic(string mnemonic)

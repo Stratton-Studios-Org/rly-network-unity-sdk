@@ -53,9 +53,9 @@ namespace RallyProtocol
             this.config = config;
         }
 
-        public Web3 GetEthClient(string apiUrl)
+        public Web3 GetRpcClient()
         {
-            return new(apiUrl);
+            return new Web3(this.config.Gsn.RpcUrl, authenticationHeader: new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", this.config.RelayerApiKey ?? ""));
         }
 
         public async Task<string> ClaimRly()
@@ -73,7 +73,7 @@ namespace RallyProtocol
             }
 
             string contractAddress = this.config.Contracts.TokenFaucet;
-            Web3 web3 = GetEthClient(config.Gsn.RpcUrl);
+            Web3 web3 = GetRpcClient();
             IContractTransactionHandler<ClaimFunction> claimHandler = web3.Eth.GetContractTransactionHandler<ClaimFunction>();
             ClaimFunction claim = new()
             {

@@ -29,10 +29,11 @@ namespace RallyProtocol
 
         public RallyContracts Contracts;
         public RallyGSNConfig Gsn;
+        public string RelayerApiKey;
 
         public override string ToString()
         {
-            return $"NetworkConfig{{contracts: {Contracts}, gsn: {Gsn}, relayerApiKey: $relayerApiKey}}";
+            return $"NetworkConfig{{contracts: {Contracts}, gsn: {Gsn}, relayerApiKey: {RelayerApiKey}}}";
         }
 
     }

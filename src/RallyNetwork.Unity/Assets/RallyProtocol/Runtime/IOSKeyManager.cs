@@ -45,7 +45,7 @@ namespace RallyProtocol
 
         public Task<string> GenerateNewMnemonic() => Task.FromResult(generateMnemonic());
 
-        public Task<bool> SaveMnemonic(string mnemonic, bool saveToCloud, bool rejectOnCloudSaveFailure) => Task.FromResult(saveMnemonic(mnemonic, saveToCloud, rejectOnCloudSaveFailure));
+        public Task<bool> SaveMnemonic(string mnemonic, KeyStorageConfig options = null) => Task.FromResult(saveMnemonic(mnemonic, options.SaveToCloud.GetValueOrDefault(), options.RejectOnCloudSaveFailure.GetValueOrDefault()));
 
         public Task<bool> DeleteMnemonic() => Task.FromResult(deleteMnemonic());
 

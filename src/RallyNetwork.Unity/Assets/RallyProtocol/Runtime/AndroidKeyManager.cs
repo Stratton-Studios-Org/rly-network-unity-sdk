@@ -72,11 +72,11 @@ namespace RallyProtocol
             return tcs.Task;
         }
 
-        public Task<bool> SaveMnemonic(string mnemonic, bool saveToCloud, bool rejectOnCloudSaveFailure)
+        public Task<bool> SaveMnemonic(string mnemonic, KeyStorageConfig options = null)
         {
             var tcs = new TaskCompletionSource<bool>();
 
-            _pluginInstance.Call("saveMnemonic", mnemonic, saveToCloud, rejectOnCloudSaveFailure, new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
+            _pluginInstance.Call("saveMnemonic", mnemonic, options.SaveToCloud.GetValueOrDefault(), options.RejectOnCloudSaveFailure.GetValueOrDefault(), new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
