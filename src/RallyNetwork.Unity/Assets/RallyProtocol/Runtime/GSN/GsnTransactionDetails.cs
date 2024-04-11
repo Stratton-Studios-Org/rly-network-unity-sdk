@@ -34,9 +34,9 @@ namespace RallyProtocol
         public HexBigInteger? Gas;
 
         //should be hex
-        public HexBigInteger MaxFeePerGas;
+        public string MaxFeePerGas;
         //should be hex
-        public HexBigInteger MaxPriorityFeePerGas;
+        public string MaxPriorityFeePerGas;
         //paymaster contract address
         public string? PaymasterData;
 

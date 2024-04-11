@@ -19,7 +19,8 @@
         "Microsoft.Extensions.Logging.Abstractions.dll",
         "Nethereum.Contracts.dll",
         "Nethereum.ABI.dll",
-        "Nethereum.Model.dll"
+        "Nethereum.Model.dll",
+        "Newtonsoft.Json.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
