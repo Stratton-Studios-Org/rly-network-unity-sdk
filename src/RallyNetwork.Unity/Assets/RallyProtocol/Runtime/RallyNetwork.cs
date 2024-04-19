@@ -4,15 +4,19 @@ using System.Numerics;
 using System.Threading.Tasks;
 
 using Nethereum.ABI;
+using Nethereum.ABI.EIP712.EIP2612;
 using Nethereum.ABI.Model;
 using Nethereum.Contracts;
 using Nethereum.Contracts.ContractHandlers;
+using Nethereum.Contracts.Standards.ERC20;
+using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
 using RallyProtocol.Contracts;
+using RallyProtocol.GSN;
 
 using UnityEngine;
 
@@ -53,28 +57,79 @@ namespace RallyProtocol
             this.config = config;
         }
 
-        public Web3 GetRpcClient()
+        public Web3 GetProvider()
         {
             return new Web3(this.config.Gsn.RpcUrl, authenticationHeader: new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", this.config.RelayerApiKey ?? ""));
         }
 
-        public async Task<string> ClaimRly()
+        public async Task<Account> GetAccountAsync()
         {
-            Account account = await WalletManager.Default.GetAccount();
+            Account account = await WalletManager.Default.GetAccountAsync();
             if (account == null)
             {
-                throw new System.Exception("Account does not exists");
+                throw new MissingWalletException();
             }
 
-            BigInteger balance = await GetExactBalance();
-            if (balance < BigInteger.Zero)
+            return account;
+        }
+
+        public async Task<string> Transfer(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string tokenAddress = null)
+        {
+            Web3 provider = GetProvider();
+            Account account = await GetAccountAsync();
+            tokenAddress = GetTokenAddress(tokenAddress);
+            ERC20ContractService token = new(provider.Eth, tokenAddress);
+            byte decimals = await token.DecimalsQueryAsync();
+            BigInteger amountBigNum = Web3.Convert.ToWei(amount, decimals);
+            return await TransferExact(destinationAddress, amountBigNum, metaTxMethod, tokenAddress);
+        }
+
+        public async Task<string> TransferExact(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string tokenAddress = null)
+        {
+            Web3 provider = GetProvider();
+            Account account = await GetAccountAsync();
+            tokenAddress = GetTokenAddress(tokenAddress);
+            BigInteger sourceBalance = await GetExactBalance(tokenAddress);
+            BigInteger sourceFinalBalance = sourceBalance - amount;
+            if (sourceFinalBalance < 0)
             {
-                throw new System.Exception("Account already dusted, will not dust again");
+                throw new InsufficientBalanceException();
+            }
+
+            GsnTransactionDetails transferTx = null;
+            if (metaTxMethod != null && metaTxMethod == MetaTxMethod.Permit || metaTxMethod == MetaTxMethod.ExecuteMetaTransaction)
+            {
+                if (metaTxMethod == MetaTxMethod.Permit)
+                {
+                    transferTx = await PermitTransaction.GetPermitTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                }
+                else if (metaTxMethod == MetaTxMethod.ExecuteMetaTransaction)
+                {
+                    transferTx = await MetaTransaction.GetExecuteMetaTransactionTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                }
+            }
+            else
+            {
+                // TODO: hasExecuteMetaTransaction
+                // TODO: hasPermit
+            }
+
+            return await Relay(transferTx);
+        }
+
+        public async Task<string> ClaimRly()
+        {
+            Account account = await GetAccountAsync();
+
+            decimal balance = await GetDisplayBalance();
+            if (balance < 0)
+            {
+                throw new PriorDustingException();
             }
 
             string contractAddress = this.config.Contracts.TokenFaucet;
-            Web3 web3 = GetRpcClient();
-            IContractTransactionHandler<ClaimFunction> claimHandler = web3.Eth.GetContractTransactionHandler<ClaimFunction>();
+            Web3 provider = GetProvider();
+            IContractTransactionHandler<ClaimFunction> claimHandler = provider.Eth.GetContractTransactionHandler<ClaimFunction>();
             ClaimFunction claim = new()
             {
                 FromAddress = account.Address,
@@ -84,11 +139,11 @@ namespace RallyProtocol
             {
                 From = account.Address,
                 Data = input.Data,
-                Value = "0",
+                Value = BigInteger.Zero,
                 To = input.To,
-                Gas = input.Gas,
-                MaxFeePerGas = input.MaxFeePerGas,
-                MaxPriorityFeePerGas = input.MaxPriorityFeePerGas
+                Gas = input.Gas.HexValue,
+                MaxFeePerGas = input.MaxFeePerGas.HexValue,
+                MaxPriorityFeePerGas = input.MaxPriorityFeePerGas.HexValue
             };
 
             return await Relay(gsnTx);
@@ -99,14 +154,24 @@ namespace RallyProtocol
             throw new System.NotImplementedException();
         }
 
-        public Task<double> GetDisplayBalance(string tokenAddress = null)
+        public async Task<decimal> GetDisplayBalance(string tokenAddress = null)
         {
-            throw new System.NotImplementedException();
+            tokenAddress = GetTokenAddress(tokenAddress);
+            Web3 provider = GetProvider();
+            ERC20ContractService token = new(provider.Eth, tokenAddress);
+            byte decimals = await token.DecimalsQueryAsync();
+            BigInteger exactBalance = await GetExactBalance(tokenAddress);
+            return Web3.Convert.FromWei(exactBalance, decimals);
         }
 
-        public Task<BigInteger> GetExactBalance(string tokenAddress = null)
+        public async Task<BigInteger> GetExactBalance(string tokenAddress = null)
         {
-            throw new System.NotImplementedException();
+            Account account = await GetAccountAsync();
+            tokenAddress = GetTokenAddress(tokenAddress);
+            Web3 provider = GetProvider();
+            ERC20ContractService token = new(provider.Eth, tokenAddress);
+            BigInteger bal = await token.BalanceOfQueryAsync(account.Address);
+            return bal;
         }
 
         public Task<string> RegisterAccount()
@@ -129,15 +194,11 @@ namespace RallyProtocol
             throw new System.NotImplementedException();
         }
 
-        public Task<string> Transfer(string destinationAddress, double amount, MetaTxMethod metaTxMethod, string tokenAddress = null)
+        private string GetTokenAddress(string tokenAddress)
         {
-            throw new System.NotImplementedException();
+            return string.IsNullOrEmpty(tokenAddress) ? config.Contracts.RlyERC20 : tokenAddress;
         }
 
-        public Task<string> TransferExact(string destinationAddress, BigInteger amount, MetaTxMethod metaTxMethod, string tokenAddress = null)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
 }

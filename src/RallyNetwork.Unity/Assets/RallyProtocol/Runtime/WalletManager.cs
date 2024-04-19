@@ -64,15 +64,15 @@ namespace RallyProtocol
         /// The saveToCloud flag is used to specify whether to save the wallet to cloud or not. When set to true, the wallet will be saved to cloud. When set to false, the wallet will be saved only on device.
         /// After the wallet is created, you can check the cloud backup status of the wallet using the walletBackedUpToCloud method.
         /// </summary>
-        public async Task<Account> CreateAccount(CreateAccountOptions options)
+        public async Task<Account> CreateAccountAsync(CreateAccountOptions options)
         {
             string mnemonic = await this.keyManager.GenerateNewMnemonic();
-            return await SaveMnemonic(mnemonic, options);
+            return await SaveMnemonicAsync(mnemonic, options);
         }
 
-        public async Task<Account> ImportExistingAccount(string mnemonic, CreateAccountOptions options)
+        public async Task<Account> ImportExistingAccountAsync(string mnemonic, CreateAccountOptions options)
         {
-            return await SaveMnemonic(mnemonic, options);
+            return await SaveMnemonicAsync(mnemonic, options);
         }
 
         /// <summary>
@@ -84,12 +84,12 @@ namespace RallyProtocol
         /// TRUE response means wallet is backed up to cloud, FALSE means wallet is not backed up to cloud.
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> IsWalletBackedUpToCloud()
+        public async Task<bool> IsWalletBackedUpToCloudAsync()
         {
             return await this.keyManager.IsMnemonicBackedUpToCloud();
         }
 
-        public async Task<Account> GetAccount()
+        public async Task<Account> GetAccountAsync()
         {
             if (this.currentAccount != null)
             {
@@ -102,14 +102,14 @@ namespace RallyProtocol
                 return null;
             }
 
-            Account account = await CreateAccountFromMnemonic(mnemonic);
+            Account account = await CreateAccountFromMnemonicAsync(mnemonic);
             this.currentAccount = account;
             return account;
         }
 
-        public async Task<string> GetPublicAddress()
+        public async Task<string> GetPublicAddressAsync()
         {
-            Account account = await GetAccount();
+            Account account = await GetAccountAsync();
             if (account == null)
             {
                 return null;
@@ -118,13 +118,13 @@ namespace RallyProtocol
             return account.Address;
         }
 
-        public async Task PermanentlyDeleteAccount()
+        public async Task PermanentlyDeleteAccountAsync()
         {
             await this.keyManager.DeleteMnemonic();
             this.currentAccount = null;
         }
 
-        public async Task<string> GetAccountPhrase()
+        public async Task<string> GetAccountPhraseAsync()
         {
             try
             {
@@ -136,9 +136,9 @@ namespace RallyProtocol
             }
         }
 
-        public async Task<string> SignMessage(string message)
+        public async Task<string> SignMessageAsync(string message)
         {
-            Account account = await GetAccount();
+            Account account = await GetAccountAsync();
             if (account == null)
             {
                 throw new Exception("No account");
@@ -148,10 +148,10 @@ namespace RallyProtocol
             return signer.EncodeUTF8AndSign(message, new(account.PrivateKey));
         }
 
-        public async Task<string> SignTransaction<T>(T transaction)
+        public async Task<string> SignTransactionAsync<T>(T transaction)
             where T : SignedTypeTransaction
         {
-            Account account = await GetAccount();
+            Account account = await GetAccountAsync();
             if (account == null)
             {
                 throw new Exception("No account");
@@ -161,13 +161,13 @@ namespace RallyProtocol
             return signer.SignTransaction(account.PrivateKey, transaction);
         }
 
-        private async Task<Account> SaveMnemonic(string mnemonic, CreateAccountOptions options)
+        private async Task<Account> SaveMnemonicAsync(string mnemonic, CreateAccountOptions options)
         {
             bool overwrite = options.Overwrite ?? false;
             Account existingAccount;
             try
             {
-                existingAccount = await GetAccount();
+                existingAccount = await GetAccountAsync();
             }
             catch (Exception error)
             {
@@ -196,7 +196,7 @@ namespace RallyProtocol
             return newAccount;
         }
 
-        private async Task<Account> CreateAccountFromMnemonic(string mnemonic)
+        private async Task<Account> CreateAccountFromMnemonicAsync(string mnemonic)
         {
             string privateKey = await this.keyManager.GetPrivateKeyFromMnemonic(mnemonic);
             return new(privateKey);

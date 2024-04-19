@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 
 using Nethereum.Hex.HexTypes;
 
@@ -29,9 +30,9 @@ namespace RallyProtocol
         /// <summary>
         /// Ether value
         /// </summary>
-        public string? Value;
+        public BigInteger? Value;
         //optional gas
-        public HexBigInteger? Gas;
+        public string Gas;
 
         //should be hex
         public string MaxFeePerGas;
@@ -41,7 +42,7 @@ namespace RallyProtocol
         public string? PaymasterData;
 
         //Value used to identify applications in RelayRequests.
-        public string? ClientId;
+        public string ClientId;
 
         // Optional parameters for RelayProvider only:
         /**

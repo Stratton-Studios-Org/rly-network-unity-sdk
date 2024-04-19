@@ -20,7 +20,10 @@
         "Nethereum.Contracts.dll",
         "Nethereum.ABI.dll",
         "Nethereum.Model.dll",
-        "Newtonsoft.Json.dll"
+        "Newtonsoft.Json.dll",
+        "Nethereum.Signer.EIP712.dll",
+        "Nethereum.Util.dll",
+        "Nethereum.BlockchainProcessing.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
