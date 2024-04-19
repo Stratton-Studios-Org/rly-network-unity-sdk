@@ -31,6 +31,40 @@ namespace RallyProtocol.GSN
     public class PermitTransaction
     {
 
+        public static async Task<bool> HasPermit(Account account, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
+        {
+            try
+            {
+                ERC20ContractService token = new(provider.Eth, contractAddress);
+
+                string name = await token.NameQueryAsync();
+                BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(token, account.Address);
+                BigInteger deadline = await GetPermitDeadline(provider);
+                Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
+
+                byte[] salt = eip712Domain.Salt;
+
+                ISignature signature = await GetPermitEIP712Signature(account, name, token.ContractAddress, config, nonce, amount, deadline, salt);
+                PermitFunction permitFunction = new()
+                {
+                    Owner = account.Address,
+                    Spender = config.Gsn.PaymasterAddress,
+                    Value = amount,
+                    Deadline = deadline,
+                    V = signature.V[0],
+                    R = signature.R,
+                    S = signature.S,
+                    FromAddress = account.Address
+                };
+                await token.ContractHandler.EstimateGasAsync(permitFunction);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static TypedData<DomainWithSalt> GetTypedPermitTransaction(string name, string version, BigInteger chainId, string verifyingContract, string owner, string spender, BigInteger value, BigInteger nonce, BigInteger deadline, byte[] salt)
         {
             TypedData<DomainWithSalt> typedData = new();

@@ -35,11 +35,11 @@ namespace RallyProtocol
     {
 
         public Task<string> GetBalance(string tokenAddress = null, bool humanReadable = false);
-        public Task<double> GetDisplayBalance(string tokenAddress = null);
+        public Task<decimal> GetDisplayBalance(string tokenAddress = null);
         public Task<BigInteger> GetExactBalance(string tokenAddress = null);
-        public Task<string> Transfer(string destinationAddress, double amount, MetaTxMethod metaTxMethod, string tokenAddress = null);
-        public Task<string> TransferExact(string destinationAddress, BigInteger amount, MetaTxMethod metaTxMethod, string tokenAddress = null);
-        public Task<string> SimpleTransfer(string destinationAddress, double amount, string tokenAddress = null, MetaTxMethod? metaTxMethod = null);
+        public Task<string> Transfer(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string tokenAddress = null);
+        public Task<string> TransferExact(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod, string tokenAddress = null);
+        public Task<string> SimpleTransfer(string destinationAddress, decimal amount, string tokenAddress = null, MetaTxMethod? metaTxMethod = null);
         public Task<string> ClaimRly();
         public Task<string> RegisterAccount();
         public Task<string> Relay(GsnTransactionDetails tx);
@@ -110,8 +110,22 @@ namespace RallyProtocol
             }
             else
             {
-                // TODO: hasExecuteMetaTransaction
-                // TODO: hasPermit
+                bool executeMetaTransactionSupported = await MetaTransaction.HasExecuteMetaTransaction(account, destinationAddress, amount, config, tokenAddress, provider);
+
+                bool permitSupported = await PermitTransaction.HasPermit(account, amount, config, tokenAddress, provider);
+
+                if (executeMetaTransactionSupported)
+                {
+                    transferTx = await MetaTransaction.GetExecuteMetaTransactionTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                }
+                else if (permitSupported)
+                {
+                    transferTx = await PermitTransaction.GetPermitTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                }
+                else
+                {
+                    throw new TransferMethodNotSupportedException();
+                }
             }
 
             return await Relay(transferTx);
@@ -189,7 +203,7 @@ namespace RallyProtocol
             throw new System.NotImplementedException();
         }
 
-        public Task<string> SimpleTransfer(string destinationAddress, double amount, string tokenAddress = null, MetaTxMethod? metaTxMethod = null)
+        public Task<string> SimpleTransfer(string destinationAddress, decimal amount, string tokenAddress = null, MetaTxMethod? metaTxMethod = null)
         {
             throw new System.NotImplementedException();
         }
