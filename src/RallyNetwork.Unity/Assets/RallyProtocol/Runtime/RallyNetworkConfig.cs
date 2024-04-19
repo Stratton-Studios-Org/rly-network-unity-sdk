@@ -27,6 +27,12 @@ namespace RallyProtocol
             Gsn = RallyGSNConfig.Polygon
         };
 
+        public static readonly RallyNetworkConfig Test = new()
+        {
+            Contracts = RallyContracts.Test,
+            Gsn = RallyGSNConfig.Test
+        };
+
         public RallyContracts Contracts;
         public RallyGSNConfig Gsn;
         public string RelayerApiKey;
@@ -57,6 +63,12 @@ namespace RallyProtocol
         {
             RlyERC20 = "0x78a0794Bb3BB06238ed5f8D926419bD8fc9546d8",
             TokenFaucet = "0x76b8D57e5ac6afAc5D415a054453d1DD2c3C0094",
+        };
+
+        public static readonly RallyContracts Test = new()
+        {
+            RlyERC20 = "0x1C7312Cb60b40cF586e796FEdD60Cf243286c9E9",
+            TokenFaucet = "0xe7C3BD692C77Ec0C0bde523455B9D142c49720fF",
         };
 
         public string TokenFaucet;
@@ -98,8 +110,7 @@ namespace RallyProtocol
             RelayHubAddress = "0x3232f21A6E08312654270c78A773f00dd61d60f5",
             RelayWorkerAddress = "0xb9950b71ec94cbb274aeb1be98e697678077a17f",
             RelayUrl = "https://api.rallyprotocol.com",
-            RpcUrl =
-                "https://polygon-mumbai.g.alchemy.com/v2/-dYNjZXvre3GC9kYtwDzzX4N8tcgomU4",
+            RpcUrl = "https://polygon-mumbai.g.alchemy.com/v2/-dYNjZXvre3GC9kYtwDzzX4N8tcgomU4",
             ChainId = "80001",
             MaxAcceptanceBudget = "285252",
             DomainSeparatorName = "GSN Relayed Transaction",
@@ -118,8 +129,7 @@ namespace RallyProtocol
             RelayHubAddress = "0xfCEE9036EDc85cD5c12A9De6b267c4672Eb4bA1B",
             RelayWorkerAddress = "0x579de7c56cd9a07330504a7c734023a9f703778a",
             RelayUrl = "https://api.rallyprotocol.com",
-            RpcUrl =
-                "https://polygon-mainnet.g.alchemy.com/v2/-dYNjZXvre3GC9kYtwDzzX4N8tcgomU4",
+            RpcUrl = "https://polygon-mainnet.g.alchemy.com/v2/-dYNjZXvre3GC9kYtwDzzX4N8tcgomU4",
             ChainId = "137",
             MaxAcceptanceBudget = "285252",
             DomainSeparatorName = "GSN Relayed Transaction",
@@ -128,6 +138,25 @@ namespace RallyProtocol
             RequestValidSeconds = 172800,
             MaxPaymasterDataLength = 300,
             MaxApprovalDataLength = 0,
+            MaxRelayNonceGap = 3,
+        };
+
+        public static readonly RallyGSNConfig Test = new()
+        {
+            PaymasterAddress = "0x8b3a505413Ca3B0A17F077e507aF8E3b3ad4Ce4d",
+            ForwarderAddress = "0xB2b5841DBeF766d4b521221732F9B618fCf34A87",
+            RelayHubAddress = "0x3232f21A6E08312654270c78A773f00dd61d60f5",
+            RelayWorkerAddress = "0xb9950b71ec94cbb274aeb1be98e697678077a17f",
+            RelayUrl = "http://localhost:3004",
+            RpcUrl = "http://localhost:3004/rpc4",
+            ChainId = "80001",
+            MaxAcceptanceBudget = "285252",
+            DomainSeparatorName = "GSN Relayed Transaction",
+            GtxDataNonZero = 16,
+            GtxDataZero = 4,
+            RequestValidSeconds = 172800,
+            MaxPaymasterDataLength = 300,
+            MaxApprovalDataLength = 300,
             MaxRelayNonceGap = 3,
         };
 

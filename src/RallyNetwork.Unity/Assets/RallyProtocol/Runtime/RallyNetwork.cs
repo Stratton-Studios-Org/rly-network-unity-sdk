@@ -29,7 +29,7 @@ namespace RallyProtocol
         Local,
         Mumbai,
         Polygon,
-        Custom
+        Test
     }
 
     public interface IRallyNetwork
@@ -42,6 +42,32 @@ namespace RallyProtocol
         public Task<string> ClaimRly();
         public Task<string> Relay(GsnTransactionDetails tx);
         public void SetApiKey(string apiKey);
+
+    }
+
+    public class RallyNetworkFactory
+    {
+
+        public static IRallyNetwork Create(RallyNetworkType type)
+        {
+            switch (type)
+            {
+                default:
+                case RallyNetworkType.Local:
+                    return Create(RallyNetworkConfig.Local);
+                case RallyNetworkType.Mumbai:
+                    return Create(RallyNetworkConfig.Mumbai);
+                case RallyNetworkType.Polygon:
+                    return Create(RallyNetworkConfig.Polygon);
+                case RallyNetworkType.Test:
+                    return Create(RallyNetworkConfig.Test);
+            }
+        }
+
+        public static IRallyNetwork Create(RallyNetworkConfig config)
+        {
+            return new RallyNetwork(config);
+        }
 
     }
 
