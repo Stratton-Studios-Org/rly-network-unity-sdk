@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -34,14 +35,11 @@ namespace RallyProtocol
     public interface IRallyNetwork
     {
 
-        public Task<string> GetBalance(string tokenAddress = null, bool humanReadable = false);
         public Task<decimal> GetDisplayBalance(string tokenAddress = null);
         public Task<BigInteger> GetExactBalance(string tokenAddress = null);
         public Task<string> Transfer(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string tokenAddress = null);
         public Task<string> TransferExact(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod, string tokenAddress = null);
-        public Task<string> SimpleTransfer(string destinationAddress, decimal amount, string tokenAddress = null, MetaTxMethod? metaTxMethod = null);
         public Task<string> ClaimRly();
-        public Task<string> RegisterAccount();
         public Task<string> Relay(GsnTransactionDetails tx);
         public void SetApiKey(string apiKey);
 
@@ -163,11 +161,6 @@ namespace RallyProtocol
             return await Relay(gsnTx);
         }
 
-        public Task<string> GetBalance(string tokenAddress = null, bool humanReadable = false)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<decimal> GetDisplayBalance(string tokenAddress = null)
         {
             tokenAddress = GetTokenAddress(tokenAddress);
@@ -188,11 +181,6 @@ namespace RallyProtocol
             return bal;
         }
 
-        public Task<string> RegisterAccount()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public Task<string> Relay(GsnTransactionDetails tx)
         {
             throw new System.NotImplementedException();
@@ -200,12 +188,7 @@ namespace RallyProtocol
 
         public void SetApiKey(string apiKey)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<string> SimpleTransfer(string destinationAddress, decimal amount, string tokenAddress = null, MetaTxMethod? metaTxMethod = null)
-        {
-            throw new System.NotImplementedException();
+            config.RelayerApiKey = apiKey;
         }
 
         private string GetTokenAddress(string tokenAddress)
