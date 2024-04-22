@@ -29,9 +29,11 @@ namespace RallyProtocol
         public KeyManager()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-            platform = new RallyProtocolAndroidPlatform();
+            platform = new AndroidKeyManager();
 #elif UNITY_IOS && !UNITY_EDITOR
-            platform = new RallyProtocolIOSPlatform();
+            platform = new IOSKeyManager();
+#elif UNITY_EDITOR
+            platform = new StandaloneKeyManager();
 #else
             platform = new UnsupportedPlatformKeyManager();
 #endif

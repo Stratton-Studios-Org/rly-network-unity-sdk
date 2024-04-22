@@ -36,7 +36,7 @@ namespace RallyProtocol
         public AndroidKeyManager()
         {
             if (Application.platform != RuntimePlatform.Android)
-                throw new InvalidOperationException("AndroidUnitySdkPlugin can only be used on Android");
+                throw new InvalidOperationException($"{nameof(AndroidKeyManager)} can only be used on Android");
 
             using var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             _currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");

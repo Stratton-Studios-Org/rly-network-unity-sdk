@@ -37,6 +37,16 @@ namespace RallyProtocol
         public RallyGSNConfig Gsn;
         public string RelayerApiKey;
 
+        public RallyNetworkConfig Clone()
+        {
+            return new()
+            {
+                Contracts = Contracts.Clone(),
+                Gsn = Gsn.Clone(),
+                RelayerApiKey = RelayerApiKey
+            };
+        }
+
         public override string ToString()
         {
             return $"NetworkConfig{{contracts: {Contracts}, gsn: {Gsn}, relayerApiKey: {RelayerApiKey}}}";
@@ -73,6 +83,15 @@ namespace RallyProtocol
 
         public string TokenFaucet;
         public string RlyERC20;
+
+        public RallyContracts Clone()
+        {
+            return new()
+            {
+                TokenFaucet = TokenFaucet,
+                RlyERC20 = RlyERC20
+            };
+        }
 
         public override string ToString()
         {
@@ -175,6 +194,28 @@ namespace RallyProtocol
         public int MaxPaymasterDataLength;
         public int MaxApprovalDataLength;
         public int MaxRelayNonceGap;
+
+        public RallyGSNConfig Clone()
+        {
+            return new()
+            {
+                PaymasterAddress = PaymasterAddress,
+                ForwarderAddress = ForwarderAddress,
+                RelayHubAddress = RelayHubAddress,
+                RelayWorkerAddress = RelayWorkerAddress,
+                RelayUrl = RelayUrl,
+                RpcUrl = RpcUrl,
+                ChainId = ChainId,
+                MaxAcceptanceBudget = MaxAcceptanceBudget,
+                DomainSeparatorName = DomainSeparatorName,
+                GtxDataZero = GtxDataZero,
+                GtxDataNonZero = GtxDataNonZero,
+                RequestValidSeconds = RequestValidSeconds,
+                MaxPaymasterDataLength = MaxPaymasterDataLength,
+                MaxApprovalDataLength = MaxApprovalDataLength,
+                MaxRelayNonceGap = MaxRelayNonceGap,
+            };
+        }
 
         public override string ToString()
         {
