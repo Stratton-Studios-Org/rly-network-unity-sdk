@@ -23,11 +23,11 @@ namespace RallyProtocol.Samples
                 IRallyNetwork rlyNetwork = RallyNetworkFactory.Create(this.networkType, this.apiKey);
 
                 // Create account
-                Debug.LogError("CreateAccount");
+                Debug.Log("CreateAccount");
                 await WalletManager.Default.CreateAccountAsync(new() { Overwrite = true });
 
                 // Claim some RLY for the newly created account
-                Debug.LogError("ClaimRly");
+                Debug.Log("ClaimRly");
                 await rlyNetwork.ClaimRly();
             }
             catch (Exception ex)
