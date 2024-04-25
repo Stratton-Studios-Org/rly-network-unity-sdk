@@ -42,7 +42,7 @@ namespace RallyProtocol.GSN
         {
             if (request.result != UnityWebRequest.Result.Success)
             {
-                throw new System.Exception($"Unable to perform web request, error: {request.error}\nRequest URL: {request.url}\nResponse Code: {request.responseCode}\nResponse Text: {request.downloadHandler.text}");
+                throw new System.Exception($"Unable to perform web request, error: {request.error}\nRequest URL: {request.url}\nResponse Code: {request.responseCode}\nResponse Text: {request.downloadHandler.text}\nRequest Text: {Encoding.UTF8.GetString(request.uploadHandler.data)}");
             }
 
             GsnResponse response = JsonConvert.DeserializeObject<GsnResponse>(request.downloadHandler.text);

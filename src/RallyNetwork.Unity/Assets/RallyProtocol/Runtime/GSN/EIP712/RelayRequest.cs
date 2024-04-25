@@ -35,7 +35,10 @@ namespace RallyProtocol.GSN
     public class RelayHttpRequest
     {
 
+        [JsonProperty("relayRequest")]
         public RelayRequest RelayRequest;
+
+        [JsonProperty("metaData")]
         public RelayHttpRequestMetadata Metadata;
 
     }
@@ -43,12 +46,25 @@ namespace RallyProtocol.GSN
     public class RelayHttpRequestMetadata
     {
 
+        [JsonProperty("maxAcceptanceBudget")]
         public string MaxAcceptanceBudget;
+
+        [JsonProperty("relayHubAddress")]
         public string RelayHubAddress;
+
+        [JsonProperty("signature")]
         public string Signature;
+
+        [JsonProperty("approvalData")]
         public string ApprovalData;
+
+        [JsonProperty("relayMaxNonce")]
         public BigInteger RelayLastKnownNonce;
+
+        [JsonProperty("domainSeparatorName")]
         public string DomainSeparatorName;
+
+        [JsonProperty("relayRequestId")]
         public string RelayRequestId;
 
     }

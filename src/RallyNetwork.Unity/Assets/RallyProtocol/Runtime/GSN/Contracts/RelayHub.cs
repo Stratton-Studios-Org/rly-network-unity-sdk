@@ -5,6 +5,8 @@ using System.Numerics;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using Nethereum.Contracts;
 
+using Newtonsoft.Json;
+
 using UnityEngine;
 
 namespace RallyProtocol.GSN.Contracts
@@ -633,20 +635,35 @@ namespace RallyProtocol.GSN.Contracts
     public class RelayDataBase
     {
         [Parameter("uint256", "maxFeePerGas", 1)]
+        [JsonProperty("maxFeePerGas")]
         public virtual BigInteger MaxFeePerGas { get; set; }
+
         [Parameter("uint256", "maxPriorityFeePerGas", 2)]
+        [JsonProperty("maxPriorityFeePerGas")]
         public virtual BigInteger MaxPriorityFeePerGas { get; set; }
+
         [Parameter("uint256", "transactionCalldataGasUsed", 3)]
+        [JsonProperty("transactionCalldataGasUsed")]
         public virtual BigInteger TransactionCalldataGasUsed { get; set; }
+
         [Parameter("address", "relayWorker", 4)]
+        [JsonProperty("relayWorker")]
         public virtual string RelayWorker { get; set; }
+
         [Parameter("address", "paymaster", 5)]
+        [JsonProperty("paymaster")]
         public virtual string Paymaster { get; set; }
+
         [Parameter("address", "forwarder", 6)]
+        [JsonProperty("forwarder")]
         public virtual string Forwarder { get; set; }
+
         [Parameter("bytes", "paymasterData", 7)]
+        [JsonProperty("paymasterData")]
         public virtual byte[] PaymasterData { get; set; }
+
         [Parameter("uint256", "clientId", 8)]
+        [JsonProperty("clientId")]
         public virtual BigInteger ClientId { get; set; }
     }
 
@@ -656,8 +673,10 @@ namespace RallyProtocol.GSN.Contracts
     public class RelayRequestBase
     {
         [Parameter("tuple", "request", 1)]
+        [JsonProperty("request")]
         public virtual ForwardRequest Request { get; set; }
         [Parameter("tuple", "relayData", 2)]
+        [JsonProperty("relayData")]
         public virtual RelayData RelayData { get; set; }
     }
 
