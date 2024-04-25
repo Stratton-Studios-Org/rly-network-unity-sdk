@@ -10,11 +10,16 @@ namespace RallyProtocol.Samples
     public class RallyExample : MonoBehaviour
     {
 
+        [SerializeField]
+        protected RallyNetworkType networkType;
+        [SerializeField]
+        protected string apiKey;
+
         async void Start()
         {
             try
             {
-                IRallyNetwork rlyNetwork = RallyNetworkFactory.Create(RallyNetworkType.Mumbai);
+                IRallyNetwork rlyNetwork = RallyNetworkFactory.Create(this.networkType, this.apiKey);
 
                 // Create account
                 Debug.LogError("CreateAccount");

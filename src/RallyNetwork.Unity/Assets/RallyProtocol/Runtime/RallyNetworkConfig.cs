@@ -15,10 +15,10 @@ namespace RallyProtocol
             Gsn = RallyGSNConfig.Local
         };
 
-        public static readonly RallyNetworkConfig Mumbai = new()
+        public static readonly RallyNetworkConfig Arnoy = new()
         {
-            Contracts = RallyContracts.Mumbai,
-            Gsn = RallyGSNConfig.Mumbai
+            Contracts = RallyContracts.Arnoy,
+            Gsn = RallyGSNConfig.Arnoy
         };
 
         public static readonly RallyNetworkConfig Polygon = new()
@@ -59,20 +59,20 @@ namespace RallyProtocol
 
         public static readonly RallyContracts Local = new()
         {
-            TokenFaucet = "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
-            RlyERC20 = "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
+            RlyERC20 = "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+            TokenFaucet = "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
         };
 
-        public static readonly RallyContracts Mumbai = new()
+        public static readonly RallyContracts Arnoy = new()
         {
-            RlyERC20 = "0x1C7312Cb60b40cF586e796FEdD60Cf243286c9E9",
-            TokenFaucet = "0xe7C3BD692C77Ec0C0bde523455B9D142c49720fF",
+            RlyERC20 = "0x846d8a5fb8a003b431b67115f809a9b9fffe5012",
+            TokenFaucet = "0xb8c8274f775474f4f2549edcc4db45cbad936fac",
         };
 
         public static readonly RallyContracts Polygon = new()
         {
-            RlyERC20 = "0x78a0794Bb3BB06238ed5f8D926419bD8fc9546d8",
-            TokenFaucet = "0x76b8D57e5ac6afAc5D415a054453d1DD2c3C0094",
+            RlyERC20 = "0x76b8D57e5ac6afAc5D415a054453d1DD2c3C0094",
+            TokenFaucet = "0x78a0794Bb3BB06238ed5f8D926419bD8fc9546d8",
         };
 
         public static readonly RallyContracts Test = new()
@@ -122,15 +122,15 @@ namespace RallyProtocol
             MaxRelayNonceGap = 3,
         };
 
-        public static readonly RallyGSNConfig Mumbai = new()
+        public static readonly RallyGSNConfig Arnoy = new()
         {
-            PaymasterAddress = "0x8b3a505413Ca3B0A17F077e507aF8E3b3ad4Ce4d",
-            ForwarderAddress = "0xB2b5841DBeF766d4b521221732F9B618fCf34A87",
-            RelayHubAddress = "0x3232f21A6E08312654270c78A773f00dd61d60f5",
+            PaymasterAddress = "0xb570b57b821670707fF4E38Ea53fcb67192278F8",
+            ForwarderAddress = "0x0ae8FC9867CB4a124d7114B8bd15C4c78C4D40E5",
+            RelayHubAddress = "0xe213A20A9E6CBAfd8456f9669D8a0b9e41Cb2751",
             RelayWorkerAddress = "0xb9950b71ec94cbb274aeb1be98e697678077a17f",
             RelayUrl = "https://api.rallyprotocol.com",
-            RpcUrl = "https://polygon-mumbai.g.alchemy.com/v2/-dYNjZXvre3GC9kYtwDzzX4N8tcgomU4",
-            ChainId = "80001",
+            RpcUrl = "https://api.rallyprotocol.com/rpc",
+            ChainId = "80002",
             MaxAcceptanceBudget = "285252",
             DomainSeparatorName = "GSN Relayed Transaction",
             GtxDataNonZero = 16,
@@ -148,7 +148,7 @@ namespace RallyProtocol
             RelayHubAddress = "0xfCEE9036EDc85cD5c12A9De6b267c4672Eb4bA1B",
             RelayWorkerAddress = "0x579de7c56cd9a07330504a7c734023a9f703778a",
             RelayUrl = "https://api.rallyprotocol.com",
-            RpcUrl = "https://polygon-mainnet.g.alchemy.com/v2/-dYNjZXvre3GC9kYtwDzzX4N8tcgomU4",
+            RpcUrl = "https://api.rallyprotocol.com/rpc",
             ChainId = "137",
             MaxAcceptanceBudget = "285252",
             DomainSeparatorName = "GSN Relayed Transaction",

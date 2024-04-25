@@ -42,7 +42,7 @@ namespace RallyProtocol.GSN
         {
             if (request.result != UnityWebRequest.Result.Success)
             {
-                throw new System.Exception($"Unable to perform web request, error: {request.error}\nresponse code: {request.responseCode}");
+                throw new System.Exception($"Unable to perform web request, error: {request.error}\nRequest URL: {request.url}\nResponse Code: {request.responseCode}\nResponse Text: {request.downloadHandler.text}");
             }
 
             GsnResponse response = JsonConvert.DeserializeObject<GsnResponse>(request.downloadHandler.text);
@@ -64,7 +64,7 @@ namespace RallyProtocol.GSN
             ABIValue[] values = new ABIValue[] {
                 new("address", relayRequest.Request.From),
                 new("uint256", relayRequest.Request.Nonce),
-                new("bytes", signature),
+                new("bytes", signature.HexToByteArray()),
             };
             ABIEncode abiEncode = new();
             string hash = abiEncode.GetSha3ABIEncoded(values).ToHex(false);
@@ -79,21 +79,31 @@ namespace RallyProtocol.GSN
         {
             Eip712TypedDataSigner signer = new();
             TypedData<Domain> typedData = new();
-            typedData.Domain = new()
-            {
-                Name = domainSeparatorName,
-                Version = GsnDomainSeparatorVersion,
-                ChainId = int.Parse(chainId),
-                VerifyingContract = relayRequest.RelayData.Forwarder
-            };
+            GsnRequestMessage message = new(relayRequest.Request, relayRequest.RelayData);
             typedData.PrimaryType = "RelayRequest";
             typedData.Types = new Dictionary<string, MemberDescription[]>()
             {
-                { "RelayRequest", TypedGsnRequestData.RelayRequestType2.ToArray() },
-                { "RelayData", TypedGsnRequestData.RelayDataType2.ToArray() }
+                ["EIP712Domain"] = new MemberDescription[]
+                    {
+                        new() {Name = "name", Type = "string"},
+                        new() {Name = "version", Type = "string"},
+                        new() {Name = "chainId", Type = "uint256"},
+                        new() {Name = "verifyingContract", Type = "address"},
+                    },
+                ["RelayRequest"] = TypedGsnRequestData.RelayRequestType2.ToArray(),
+                ["RelayData"] = TypedGsnRequestData.RelayDataType2.ToArray(),
             };
-            typedData.SetMessage<GsnRequestMessage>(new(relayRequest.Request, relayRequest.RelayData));
-            return Task.FromResult(signer.SignTypedData(typedData, new EthECKey(account.PrivateKey)));
+            typedData.SetMessage(message);
+            Domain domain = new()
+            {
+                Name = domainSeparatorName,
+                Version = GsnDomainSeparatorVersion,
+                ChainId = BigInteger.Parse(chainId),
+                VerifyingContract = relayRequest.RelayData.Forwarder
+            };
+            typedData.Domain = domain;
+            string signature = signer.SignTypedData(typedData, new EthECKey(account.PrivateKey));
+            return Task.FromResult(signature);
         }
 
         public static (int ZeroBytes, int NonZeroBytes) CalculateCallDataBytesZeroNonZero(string callData)

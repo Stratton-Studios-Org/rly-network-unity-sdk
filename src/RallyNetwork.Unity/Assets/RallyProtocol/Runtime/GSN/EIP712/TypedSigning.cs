@@ -86,7 +86,7 @@ namespace RallyProtocol.GSN
         public virtual byte[] Data { get; set; }
         [Parameter("uint256", "validUntilTime", 7)]
         public virtual BigInteger ValidUntilTime { get; set; }
-        [Parameter("tuple", "relayData", 2)]
+        [Parameter("tuple", "relayData", 8, "RelayData")]
         public virtual RelayData RelayData { get; set; }
 
         public GsnRequestMessage() { }
@@ -153,27 +153,24 @@ namespace RallyProtocol.GSN
 
         public static readonly List<MemberDescription> ForwardRequestType2 = new()
         {
-            new () { Name = "maxFeePerGas", Type = "uint256" },
-            new () { Name = "maxPriorityFeePerGas", Type = "uint256" },
-            new () { Name = "transactionCalldataGasUsed", Type = "uint256" },
-            new () { Name = "relayWorker", Type = "address" },
-            new () { Name = "paymaster", Type = "address" },
-            new () { Name = "forwarder", Type = "address" },
-            new () { Name = "paymasterData", Type = "bytes" },
-            new () { Name = "clientId", Type = "uint256" },
+            new () { Name = "from", Type = "address" },
+            new () { Name = "to", Type = "address" },
+            new () { Name = "value", Type = "uint256" },
+            new () { Name = "gas", Type = "uint256" },
+            new () { Name = "nonce", Type = "uint256" },
+            new () { Name = "data", Type = "bytes" },
+            new () { Name = "validUntilTime", Type = "uint256" },
         };
 
         public static readonly List<MemberDescription> RelayRequestType2 = new(ForwardRequestType2)
         {
-            new () { Name = "maxFeePerGas", Type = "uint256" },
-            new () { Name = "maxPriorityFeePerGas", Type = "uint256" },
-            new () { Name = "transactionCalldataGasUsed", Type = "uint256" },
-            new () { Name = "relayWorker", Type = "address" },
-            new () { Name = "paymaster", Type = "address" },
-            new () { Name = "forwarder", Type = "address" },
-            new () { Name = "paymasterData", Type = "bytes" },
-            new () { Name = "clientId", Type = "uint256" },
+            new () { Name = "relayData", Type = "RelayData" },
         };
+
+        static TypedGsnRequestData()
+        {
+
+        }
 
         public readonly GsnPrimaryType Types;
         //public readonly EIP712Domain Domain;

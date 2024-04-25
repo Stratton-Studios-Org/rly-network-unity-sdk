@@ -150,6 +150,13 @@ namespace RallyProtocol.GSN
                 await Task.Yield();
             }
 
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.result);
+                Debug.LogError(request.responseCode);
+                Debug.LogError(request.error);
+                throw new RallyException("Updating config failed");
+            }
             string response = request.downloadHandler.text;
             GsnServerConfigPayload serverConfigUpdate = JsonConvert.DeserializeObject<GsnServerConfigPayload>(response);
             SetGasFeesForTransaction(transaction, serverConfigUpdate);
@@ -158,8 +165,8 @@ namespace RallyProtocol.GSN
 
         protected void SetGasFeesForTransaction(GsnTransactionDetails transaction, GsnServerConfigPayload serverConfigUpdate)
         {
-            int serverSuggestedMinPriorityFeePerGas = Convert.ToInt32(serverConfigUpdate.MinMaxPriorityFeePerGas, 10);
-            int paddedMaxPriority = Mathf.RoundToInt(serverSuggestedMinPriorityFeePerGas / 1.4f);
+            decimal serverSuggestedMinPriorityFeePerGas = Convert.ToDecimal(serverConfigUpdate.MinMaxPriorityFeePerGas);
+            decimal paddedMaxPriority = Math.Round(serverSuggestedMinPriorityFeePerGas / 1.4m);
             transaction.MaxPriorityFeePerGas = paddedMaxPriority.ToString();
 
             // Special handling for mumbai because of quirk with gas estimate returned by GSN for mumbai

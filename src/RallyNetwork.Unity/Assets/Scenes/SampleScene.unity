@@ -338,6 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2799d5d806d487640bf891d8a28ce4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkType: 1
+  apiKey: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjY2NX0.989NV-f5raFMuRwfZ1DRbrlZcHxATbk-6mulgdTQZ3_hKxePK9CD_F8m2ttHzhdvKr6r1CeKRdRlqoA7Yrd93Q
 --- !u!4 &1469334196
 Transform:
   m_ObjectHideFlags: 0

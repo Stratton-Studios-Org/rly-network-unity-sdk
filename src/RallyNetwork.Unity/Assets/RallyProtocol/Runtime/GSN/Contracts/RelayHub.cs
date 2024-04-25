@@ -627,6 +627,7 @@ namespace RallyProtocol.GSN.Contracts
         public virtual ushort PctRelayFee { get; set; }
     }
 
+    [Struct("RelayData")]
     public partial class RelayData : RelayDataBase { }
 
     public class RelayDataBase
@@ -649,6 +650,7 @@ namespace RallyProtocol.GSN.Contracts
         public virtual BigInteger ClientId { get; set; }
     }
 
+    [Struct("RelayRequest")]
     public partial class RelayRequest : RelayRequestBase { }
 
     public class RelayRequestBase

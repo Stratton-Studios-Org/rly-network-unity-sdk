@@ -8,13 +8,16 @@ using Cysharp.Threading.Tasks;
 
 using Nethereum.ABI;
 using Nethereum.ABI.EIP712.EIP2612;
+using Nethereum.ABI.FunctionEncoding;
 using Nethereum.ABI.Model;
 using Nethereum.Contracts;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts.Standards.ERC20;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
 using Nethereum.Hex.HexTypes;
+using Nethereum.JsonRpc.Client;
 using Nethereum.RPC.Eth.DTOs;
+using Nethereum.RPC.Fee1559Suggestions;
 using Nethereum.Unity.Rpc;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -30,7 +33,7 @@ namespace RallyProtocol
     public enum RallyNetworkType
     {
         Local,
-        Mumbai,
+        Arnoy,
         Polygon,
         Test
     }
@@ -58,8 +61,8 @@ namespace RallyProtocol
                 default:
                 case RallyNetworkType.Local:
                     return Create(RallyNetworkConfig.Local, apiKey);
-                case RallyNetworkType.Mumbai:
-                    return Create(RallyNetworkConfig.Mumbai, apiKey);
+                case RallyNetworkType.Arnoy:
+                    return Create(RallyNetworkConfig.Arnoy, apiKey);
                 case RallyNetworkType.Polygon:
                     return Create(RallyNetworkConfig.Polygon, apiKey);
                 case RallyNetworkType.Test:
@@ -80,10 +83,12 @@ namespace RallyProtocol
     {
 
         protected RallyNetworkConfig config;
+        protected GsnClient gsnClient;
 
         public RallyEvmNetwork(RallyNetworkConfig config)
         {
             this.config = config;
+            this.gsnClient = new();
         }
 
         public Web3 GetProvider()
@@ -132,26 +137,26 @@ namespace RallyProtocol
             {
                 if (metaTxMethod == MetaTxMethod.Permit)
                 {
-                    transferTx = await PermitTransaction.GetPermitTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                    transferTx = await PermitTransaction.GetPermitTx(account, destinationAddress, amount, this.config, tokenAddress, provider);
                 }
                 else if (metaTxMethod == MetaTxMethod.ExecuteMetaTransaction)
                 {
-                    transferTx = await MetaTransaction.GetExecuteMetaTransactionTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                    transferTx = await MetaTransaction.GetExecuteMetaTransactionTx(account, destinationAddress, amount, this.config, tokenAddress, provider);
                 }
             }
             else
             {
-                bool executeMetaTransactionSupported = await MetaTransaction.HasExecuteMetaTransaction(account, destinationAddress, amount, config, tokenAddress, provider);
+                bool executeMetaTransactionSupported = await MetaTransaction.HasExecuteMetaTransaction(account, destinationAddress, amount, this.config, tokenAddress, provider);
 
-                bool permitSupported = await PermitTransaction.HasPermit(account, amount, config, tokenAddress, provider);
+                bool permitSupported = await PermitTransaction.HasPermit(account, amount, this.config, tokenAddress, provider);
 
                 if (executeMetaTransactionSupported)
                 {
-                    transferTx = await MetaTransaction.GetExecuteMetaTransactionTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                    transferTx = await MetaTransaction.GetExecuteMetaTransactionTx(account, destinationAddress, amount, this.config, tokenAddress, provider);
                 }
                 else if (permitSupported)
                 {
-                    transferTx = await PermitTransaction.GetPermitTx(account, destinationAddress, amount, config, tokenAddress, provider);
+                    transferTx = await PermitTransaction.GetPermitTx(account, destinationAddress, amount, this.config, tokenAddress, provider);
                 }
                 else
                 {
@@ -180,6 +185,24 @@ namespace RallyProtocol
                 FromAddress = account.Address,
             };
             TransactionInput input = await claimHandler.CreateTransactionInputEstimatingGasAsync(contractAddress, claim);
+            Debug.Log(input.Data);
+            Debug.Log(input.To);
+            Debug.Log(input.Gas);
+            Debug.Log(input.MaxFeePerGas);
+            Debug.Log(input.MaxPriorityFeePerGas);
+            Fee1559 fee = await provider.FeeSuggestion.GetSimpleFeeSuggestionStrategy().SuggestFeeAsync();
+            string maxFeePerGas = string.Empty;
+            if (fee.MaxFeePerGas != null)
+            {
+                maxFeePerGas = new HexBigInteger(fee.MaxFeePerGas.Value).HexValue;
+            }
+
+            string maxPriorityFeePerGas = string.Empty;
+            if (fee.MaxPriorityFeePerGas != null)
+            {
+                maxPriorityFeePerGas = new HexBigInteger(fee.MaxPriorityFeePerGas.Value).HexValue;
+            }
+
             GsnTransactionDetails gsnTx = new()
             {
                 From = account.Address,
@@ -187,8 +210,8 @@ namespace RallyProtocol
                 Value = BigInteger.Zero,
                 To = input.To,
                 Gas = input.Gas.HexValue,
-                MaxFeePerGas = input.MaxFeePerGas.HexValue,
-                MaxPriorityFeePerGas = input.MaxPriorityFeePerGas.HexValue
+                MaxFeePerGas = maxFeePerGas,
+                MaxPriorityFeePerGas = maxPriorityFeePerGas
             };
 
             return await Relay(gsnTx);
@@ -199,26 +222,10 @@ namespace RallyProtocol
             tokenAddress = GetTokenAddress(tokenAddress);
             Web3 provider = GetProvider();
             ERC20ContractService token = new(provider.Eth, tokenAddress);
-            try
-            {
-                Account account = await GetAccountAsync();
-                Debug.LogWarning("DecimalsQueryAsync");
-                byte decimals = await token.DecimalsQueryAsync();
-                Debug.LogWarning("DecimalsQueryAsync");
-                BigInteger exactBalance = await GetExactBalance(tokenAddress);
-                Debug.LogWarning("GetExactBalance");
-                return Web3.Convert.FromWei(exactBalance, decimals);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning("GetDisplayBalance failed");
-                Debug.LogWarning(tokenAddress);
-                Debug.LogException(ex);
-                Debug.LogWarning(ex.Message);
-                Debug.LogException(ex.InnerException);
-                Debug.LogWarning(ex.InnerException.Message);
-                return decimal.Zero;
-            }
+            Account account = await GetAccountAsync();
+            byte decimals = await token.DecimalsQueryAsync();
+            BigInteger exactBalance = await GetExactBalance(tokenAddress);
+            return Web3.Convert.FromWei(exactBalance, decimals);
         }
 
         public async Task<BigInteger> GetExactBalance(string tokenAddress = null)
@@ -231,19 +238,44 @@ namespace RallyProtocol
             return bal;
         }
 
-        public Task<string> Relay(GsnTransactionDetails tx)
+        public async Task<string> Relay(GsnTransactionDetails tx)
         {
-            throw new System.NotImplementedException();
+            Account account = await GetAccountAsync();
+            return await this.gsnClient.RelayTransaction(account, this.config, tx);
         }
 
         public void SetApiKey(string apiKey)
         {
-            config.RelayerApiKey = apiKey;
+            this.config.RelayerApiKey = apiKey;
         }
 
         private string GetTokenAddress(string tokenAddress)
         {
-            return string.IsNullOrEmpty(tokenAddress) ? config.Contracts.RlyERC20 : tokenAddress;
+            return string.IsNullOrEmpty(tokenAddress) ? this.config.Contracts.RlyERC20 : tokenAddress;
+        }
+        private static async Task<SmartContractRevertException> TryGetRevertMessage<TFunction>(
+            Web3 web3, string contractAddress, TFunction functionArgs, BlockParameter blockParameter = null)
+            where TFunction : FunctionMessage, new()
+        {
+            try
+            {
+                Console.WriteLine($"* Querying Function {typeof(TFunction).Name}");
+                // instead of sending a transaction again, we do a query with the same function parameters
+                // the smart contract code will be executed but no changes will be made on chain
+                var functionHandler = web3.Eth.GetContractQueryHandler<TFunction>();
+                // we're not bothered about the return value here
+                // we'd only get that if it was successful
+                // we only want the revert reason which we'll get from the exception
+                // we cant use QueryRaw as that will never throw a SmartContractRevertException
+                await functionHandler.QueryAsync<bool>(contractAddress, functionArgs, blockParameter);
+
+                // if we got here there was no revert message to retrieve
+                return null;
+            }
+            catch (SmartContractRevertException revertException)
+            {
+                return revertException;
+            }
         }
 
     }
