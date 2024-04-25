@@ -12,6 +12,7 @@ namespace RallyProtocol.Samples
 
         [SerializeField]
         protected RallyNetworkType networkType;
+        [TextArea]
         [SerializeField]
         protected string apiKey;
 

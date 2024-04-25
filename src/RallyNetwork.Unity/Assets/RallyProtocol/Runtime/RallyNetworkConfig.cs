@@ -15,10 +15,10 @@ namespace RallyProtocol
             Gsn = RallyGSNConfig.Local
         };
 
-        public static readonly RallyNetworkConfig Arnoy = new()
+        public static readonly RallyNetworkConfig Amoy = new()
         {
-            Contracts = RallyContracts.Arnoy,
-            Gsn = RallyGSNConfig.Arnoy
+            Contracts = RallyContracts.Amoy,
+            Gsn = RallyGSNConfig.Amoy
         };
 
         public static readonly RallyNetworkConfig Polygon = new()
@@ -63,7 +63,7 @@ namespace RallyProtocol
             TokenFaucet = "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
         };
 
-        public static readonly RallyContracts Arnoy = new()
+        public static readonly RallyContracts Amoy = new()
         {
             RlyERC20 = "0x846d8a5fb8a003b431b67115f809a9b9fffe5012",
             TokenFaucet = "0xb8c8274f775474f4f2549edcc4db45cbad936fac",
@@ -122,7 +122,7 @@ namespace RallyProtocol
             MaxRelayNonceGap = 3,
         };
 
-        public static readonly RallyGSNConfig Arnoy = new()
+        public static readonly RallyGSNConfig Amoy = new()
         {
             PaymasterAddress = "0xb570b57b821670707fF4E38Ea53fcb67192278F8",
             ForwarderAddress = "0x0ae8FC9867CB4a124d7114B8bd15C4c78C4D40E5",

@@ -26,6 +26,7 @@ using RallyProtocol.Contracts;
 using RallyProtocol.GSN;
 
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RallyProtocol
 {
@@ -33,7 +34,7 @@ namespace RallyProtocol
     public enum RallyNetworkType
     {
         Local,
-        Arnoy,
+        Amoy,
         Polygon,
         Test
     }
@@ -61,8 +62,8 @@ namespace RallyProtocol
                 default:
                 case RallyNetworkType.Local:
                     return Create(RallyNetworkConfig.Local, apiKey);
-                case RallyNetworkType.Arnoy:
-                    return Create(RallyNetworkConfig.Arnoy, apiKey);
+                case RallyNetworkType.Amoy:
+                    return Create(RallyNetworkConfig.Amoy, apiKey);
                 case RallyNetworkType.Polygon:
                     return Create(RallyNetworkConfig.Polygon, apiKey);
                 case RallyNetworkType.Test:
@@ -94,7 +95,13 @@ namespace RallyProtocol
         public Web3 GetProvider()
         {
             UnityWebRequestRpcTaskClient unityClient = new(new Uri(this.config.Gsn.RpcUrl), null, null);
-            unityClient.RequestHeaders["Authorization"] = $"Bearer {this.config.RelayerApiKey ?? ""}";
+            string apiKey = "";
+            if (!string.IsNullOrEmpty(this.config.RelayerApiKey))
+            {
+                apiKey = UnityWebRequest.EscapeURL(config.RelayerApiKey);
+            }
+
+            unityClient.RequestHeaders["Authorization"] = $"Bearer {apiKey}";
             return new Web3(unityClient);
         }
 

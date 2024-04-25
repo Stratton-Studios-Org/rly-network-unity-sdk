@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -61,7 +62,13 @@ namespace RallyProtocol.GSN
             string relayRequestId = GsnTransactionHelper.GetRelayRequestId(httpRequest.RelayRequest, httpRequest.Metadata.Signature);
             httpRequest.Metadata.RelayRequestId = relayRequestId;
 
-            UnityWebRequest request = UnityWebRequest.Post($"{config.Gsn.RelayUrl}/relay", JsonConvert.SerializeObject(httpRequest), "application/json");
+            string url = $"{config.Gsn.RelayUrl}/relay";
+            //UnityWebRequest request = new(url, UnityWebRequest.kHttpVerbPOST);
+            //request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(httpRequest)));
+            //request.uploadHandler.contentType = "application/json";
+            //request.SetRequestHeader("Content-Type", "application/json");
+            //request.downloadHandler = new DownloadHandlerBuffer();
+            UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(httpRequest), "application/json");
             AddAuthHeader(request, config);
             request.SendWebRequest();
             while (!request.isDone)
@@ -182,7 +189,13 @@ namespace RallyProtocol.GSN
 
         protected UnityWebRequest AddAuthHeader(UnityWebRequest request, RallyNetworkConfig config)
         {
-            request.SetRequestHeader("Authorization", $"Bearer ${config.RelayerApiKey ?? ""}");
+            string apiKey = "";
+            if (!string.IsNullOrEmpty(config.RelayerApiKey))
+            {
+                apiKey = UnityWebRequest.EscapeURL(config.RelayerApiKey);
+            }
+
+            request.SetRequestHeader("Authorization", $"Bearer ${apiKey}");
             return request;
         }
 
