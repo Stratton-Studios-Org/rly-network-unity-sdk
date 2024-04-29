@@ -86,7 +86,6 @@ namespace RallyProtocol
             }
 
             await UniTask.SwitchToMainThread();
-            Debug.Log(uri);
             byte[] bytes = Encoding.UTF8.GetBytes(rpcRequestJson);
             using UnityWebRequest unityRequest = new UnityWebRequest(uri, "POST");
             UploadHandlerRaw uploadHandlerRaw = new UploadHandlerRaw(bytes);
@@ -98,12 +97,12 @@ namespace RallyProtocol
             {
                 foreach (KeyValuePair<string, string> requestHeader in RequestHeaders)
                 {
-                    Debug.Log(requestHeader);
                     unityRequest.SetRequestHeader(requestHeader.Key, requestHeader.Value);
                 }
             }
 
-            Debug.Log(rpcRequestJson);
+            Debug.Log($"Sending RPC Request At: {uri}");
+            Debug.Log($"RPC Request JSON:\n{rpcRequestJson}");
             logger.LogRequest(rpcRequestJson);
             await unityRequest.SendWebRequest();
             if (unityRequest.error != null)
@@ -111,9 +110,8 @@ namespace RallyProtocol
                 throw new RpcClientUnknownException("Error occurred when trying to send rpc request(s): " + rpcRequestMethod, new Exception(unityRequest.error));
             }
 
+            Debug.Log($"RPC Response:\n{unityRequest.downloadHandler.text}");
             byte[] data = unityRequest.downloadHandler.data;
-            Debug.Log(unityRequest.downloadHandler.text);
-            Debug.Log(unityRequest.responseCode);
             return Encoding.UTF8.GetString(data);
         }
     }

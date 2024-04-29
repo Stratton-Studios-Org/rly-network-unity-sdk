@@ -137,7 +137,7 @@ namespace RallyProtocol.GSN
             {
                 From = account.Address,
                 Data = permitFunctionData,
-                Value = BigInteger.Zero,
+                Value = "0",
                 To = token.ContractAddress,
                 Gas = gas.HexValue,
                 MaxFeePerGas = new HexBigInteger(fee.MaxFeePerGas.Value).HexValue,

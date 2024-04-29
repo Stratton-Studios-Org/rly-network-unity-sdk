@@ -16,23 +16,39 @@ namespace RallyProtocol.Samples
         [SerializeField]
         protected string apiKey;
 
-        async void Start()
+        protected IRallyNetwork rlyNetwork;
+
+        void Start()
+        {
+            Debug.Log("Initializing Rally Network...");
+            this.rlyNetwork = RallyNetworkFactory.Create(this.networkType, this.apiKey);
+            Debug.Log($"Initialized Rally {this.networkType} network using API key: {this.apiKey}");
+        }
+
+        public async void CreateAccount()
         {
             try
             {
-                IRallyNetwork rlyNetwork = RallyNetworkFactory.Create(this.networkType, this.apiKey);
-
-                // Create account
-                Debug.Log("CreateAccount");
+                Debug.Log("Creating account...");
                 await WalletManager.Default.CreateAccountAsync(new() { Overwrite = true });
-
-                // Claim some RLY for the newly created account
-                Debug.Log("ClaimRly");
-                await rlyNetwork.ClaimRly();
+                Debug.Log("Account created successfully");
             }
             catch (Exception ex)
             {
-                Debug.LogError("Failed to claim");
+                Debug.LogError("Account creation failed");
+                Debug.LogException(ex);
+            }
+        }
+
+        public async void ClaimRly()
+        {
+            try
+            {
+                await this.rlyNetwork.ClaimRly();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Claiming RLY failed");
                 Debug.LogException(ex);
             }
         }

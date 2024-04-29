@@ -99,6 +99,7 @@ namespace RallyProtocol
             if (!string.IsNullOrEmpty(this.config.RelayerApiKey))
             {
                 apiKey = UnityWebRequest.EscapeURL(config.RelayerApiKey);
+                apiKey = this.config.RelayerApiKey;
             }
 
             unityClient.RequestHeaders["Authorization"] = $"Bearer {apiKey}";
@@ -192,11 +193,6 @@ namespace RallyProtocol
                 FromAddress = account.Address,
             };
             TransactionInput input = await claimHandler.CreateTransactionInputEstimatingGasAsync(contractAddress, claim);
-            Debug.Log(input.Data);
-            Debug.Log(input.To);
-            Debug.Log(input.Gas);
-            Debug.Log(input.MaxFeePerGas);
-            Debug.Log(input.MaxPriorityFeePerGas);
             Fee1559 fee = await provider.FeeSuggestion.GetSimpleFeeSuggestionStrategy().SuggestFeeAsync();
             string maxFeePerGas = string.Empty;
             if (fee.MaxFeePerGas != null)
@@ -214,7 +210,7 @@ namespace RallyProtocol
             {
                 From = account.Address,
                 Data = input.Data,
-                Value = BigInteger.Zero,
+                Value = "0",
                 To = input.To,
                 Gas = input.Gas.HexValue,
                 MaxFeePerGas = maxFeePerGas,

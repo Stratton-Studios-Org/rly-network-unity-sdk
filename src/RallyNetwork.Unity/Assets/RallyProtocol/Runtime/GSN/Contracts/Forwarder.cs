@@ -151,6 +151,7 @@ namespace RallyProtocol.GSN.Contracts
         public virtual byte[] Ret { get; set; }
     }
 
+    [Struct("ForwardRequest")]
     public partial class ForwardRequest : ForwardRequestBase { }
 
     public class ForwardRequestBase

@@ -8,6 +8,8 @@ using System.Transactions;
 
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.RPC.NonceServices;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
@@ -48,15 +50,24 @@ namespace RallyProtocol.GSN
 
         public Web3 GetProvider(RallyNetworkConfig config)
         {
-            return new Web3(config.Gsn.RpcUrl, authenticationHeader: new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", config.RelayerApiKey));
+            UnityWebRequestRpcTaskClient unityClient = new(new Uri(config.Gsn.RpcUrl), null, null);
+            string apiKey = "";
+            if (!string.IsNullOrEmpty(config.RelayerApiKey))
+            {
+                apiKey = UnityWebRequest.EscapeURL(config.RelayerApiKey);
+                apiKey = config.RelayerApiKey;
+            }
+
+            unityClient.RequestHeaders["Authorization"] = $"Bearer {apiKey}";
+            return new Web3(unityClient);
         }
 
         public async Task<string> RelayTransaction(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction)
         {
             Web3 provider = GetProvider(config);
             var updatedConfig = await UpdateConfig(config, transaction);
-            RelayRequest relayRequest = await BuildRelayRequest(updatedConfig.Transaction, updatedConfig.Config, account, provider);
-            RelayHttpRequest httpRequest = await BuildRelayHttpRequest(relayRequest, updatedConfig.Config, account, provider);
+            GsnRelayRequest relayRequest = await BuildRelayRequest(updatedConfig.Transaction, updatedConfig.Config, account, provider);
+            GsnRelayHttpRequest httpRequest = await BuildRelayHttpRequest(relayRequest, updatedConfig.Config, account, provider);
 
             // Update request metadata with relayRequestId
             string relayRequestId = GsnTransactionHelper.GetRelayRequestId(httpRequest.RelayRequest, httpRequest.Metadata.Signature);
@@ -83,22 +94,27 @@ namespace RallyProtocol.GSN
 
         #region Protected Methods
 
-        protected async Task<RelayHttpRequest> BuildRelayHttpRequest(RelayRequest relayRequest, RallyNetworkConfig config, Account account, Web3 provider)
+        protected async Task<GsnRelayHttpRequest> BuildRelayHttpRequest(GsnRelayRequest relayRequest, RallyNetworkConfig config, Account account, Web3 provider)
         {
             string signature = await GsnTransactionHelper.SignRequest(relayRequest, config.Gsn.DomainSeparatorName, config.Gsn.ChainId, account);
-            HexBigInteger relayLastKnownNonce = await provider.Eth.Transactions.GetTransactionCount.SendRequestAsync(relayRequest.RelayData.RelayWorker);
+            HexBigInteger relayLastKnownNonce = await provider.Eth.Transactions.GetTransactionCount.SendRequestAsync(relayRequest.RelayData.RelayWorker, BlockParameter.CreatePending());
+
+            InMemoryNonceService nonceSercive = new(relayRequest.RelayData.RelayWorker, provider.Client);
+            HexBigInteger lastNonce = await nonceSercive.GetNextNonceAsync();
+
             BigInteger relayMaxNonce = relayLastKnownNonce.Value + config.Gsn.MaxRelayNonceGap;
-            RelayHttpRequestMetadata metadata = new()
+            GsnRelayHttpRequestMetadata metadata = new()
             {
                 MaxAcceptanceBudget = config.Gsn.MaxAcceptanceBudget,
                 RelayHubAddress = config.Gsn.RelayHubAddress,
                 Signature = signature,
                 ApprovalData = "0x",
                 RelayLastKnownNonce = relayLastKnownNonce,
+                RelayMaxNonce = relayMaxNonce,
                 DomainSeparatorName = config.Gsn.DomainSeparatorName,
                 RelayRequestId = ""
             };
-            RelayHttpRequest httpRequest = new()
+            GsnRelayHttpRequest httpRequest = new()
             {
                 RelayRequest = relayRequest,
                 Metadata = metadata,
@@ -107,41 +123,41 @@ namespace RallyProtocol.GSN
             return httpRequest;
         }
 
-        protected async Task<RelayRequest> BuildRelayRequest(GsnTransactionDetails transaction, RallyNetworkConfig config, Account account, Web3 provider)
+        protected async Task<GsnRelayRequest> BuildRelayRequest(GsnTransactionDetails transaction, RallyNetworkConfig config, Account account, Web3 provider)
         {
             transaction.Gas = GsnTransactionHelper.EstimateGasWithoutCallData(transaction, config.Gsn.GtxDataNonZero, config.Gsn.GtxDataZero);
-            double secondsNow = TimeSpan.FromTicks(DateTime.UtcNow.Ticks).TotalSeconds;
-            double validUntilTime = (secondsNow + config.Gsn.RequestValidSeconds);
+            long secondsNow = (long)TimeSpan.FromTicks(DateTime.UtcNow.Ticks).TotalSeconds;
+            long validUntilTime = (secondsNow + config.Gsn.RequestValidSeconds);
 
             BigInteger senderNonce = await GsnTransactionHelper.GetSenderNonce(account.Address, config.Gsn.ForwarderAddress, provider);
 
-            RelayRequest relayRequest = new()
+            GsnRelayRequest relayRequest = new()
             {
                 Request = new()
                 {
                     From = transaction.From,
                     To = transaction.To,
-                    Value = transaction.Value == null ? BigInteger.Zero : transaction.Value.Value,
-                    Gas = new HexBigInteger(transaction.Gas).Value, // parse from hex to bigint
-                    Nonce = senderNonce,
-                    Data = transaction.Data == null ? new byte[0] : transaction.Data.HexToByteArray(),
-                    ValidUntilTime = new BigInteger(validUntilTime),
+                    Value = string.IsNullOrEmpty(transaction.Value) ? "0" : transaction.Value,
+                    Gas = new HexBigInteger(transaction.Gas).Value.ToString(), // parse from hex to bigint
+                    Nonce = senderNonce.ToString(),
+                    Data = transaction.Data == null ? "" : transaction.Data,
+                    ValidUntilTime = validUntilTime.ToString(),
                 },
                 RelayData = new()
                 {
-                    MaxFeePerGas = BigInteger.Parse(transaction.MaxFeePerGas),
-                    MaxPriorityFeePerGas = BigInteger.Parse(transaction.MaxPriorityFeePerGas),
-                    TransactionCalldataGasUsed = BigInteger.Zero,
-                    RelayWorker = config.Gsn.RelayHubAddress,
+                    MaxFeePerGas = transaction.MaxFeePerGas,
+                    MaxPriorityFeePerGas = transaction.MaxPriorityFeePerGas,
+                    TransactionCalldataGasUsed = "0",
+                    RelayWorker = config.Gsn.RelayWorkerAddress,
                     Paymaster = config.Gsn.PaymasterAddress,
                     Forwarder = config.Gsn.ForwarderAddress,
-                    PaymasterData = string.IsNullOrEmpty(transaction.PaymasterData) ? new HexBigInteger("0x").ToHexByteArray() : new HexBigInteger(transaction.PaymasterData).ToHexByteArray(),
-                    ClientId = BigInteger.One
+                    PaymasterData = string.IsNullOrEmpty(transaction.PaymasterData) ? "0x" : transaction.PaymasterData,
+                    ClientId = "1"
                 }
             };
 
-            string transactionCallDataGasUsed = await GsnTransactionHelper.EstimateCallDataCostForRequest(relayRequest, config.Gsn, provider);
-            relayRequest.RelayData.TransactionCalldataGasUsed = new HexBigInteger(transactionCallDataGasUsed);
+            HexBigInteger transactionCallDataGasUsed = await GsnTransactionHelper.EstimateCallDataCostForRequest(relayRequest, config.Gsn, provider);
+            relayRequest.RelayData.TransactionCalldataGasUsed = transactionCallDataGasUsed.Value.ToString();
 
             return relayRequest;
         }
@@ -159,13 +175,11 @@ namespace RallyProtocol.GSN
 
             if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError(request.result);
-                Debug.LogError(request.responseCode);
-                Debug.LogError(request.error);
-                throw new RallyException("Updating config failed");
+                throw new RallyException($"Updating config failed:\nResponse Code: {request.responseCode}\nError: {request.error}\nResponse Text: {request.downloadHandler.text}");
             }
             string response = request.downloadHandler.text;
             GsnServerConfigPayload serverConfigUpdate = JsonConvert.DeserializeObject<GsnServerConfigPayload>(response);
+            config.Gsn.RelayWorkerAddress = serverConfigUpdate.RelayWorkerAddress;
             SetGasFeesForTransaction(transaction, serverConfigUpdate);
             return (Config: config, Transaction: transaction);
         }
@@ -173,7 +187,7 @@ namespace RallyProtocol.GSN
         protected void SetGasFeesForTransaction(GsnTransactionDetails transaction, GsnServerConfigPayload serverConfigUpdate)
         {
             decimal serverSuggestedMinPriorityFeePerGas = Convert.ToDecimal(serverConfigUpdate.MinMaxPriorityFeePerGas);
-            decimal paddedMaxPriority = Math.Round(serverSuggestedMinPriorityFeePerGas / 1.4m);
+            decimal paddedMaxPriority = Math.Round(serverSuggestedMinPriorityFeePerGas * 1.4m);
             transaction.MaxPriorityFeePerGas = paddedMaxPriority.ToString();
 
             // Special handling for mumbai because of quirk with gas estimate returned by GSN for mumbai
@@ -193,9 +207,10 @@ namespace RallyProtocol.GSN
             if (!string.IsNullOrEmpty(config.RelayerApiKey))
             {
                 apiKey = UnityWebRequest.EscapeURL(config.RelayerApiKey);
+                apiKey = config.RelayerApiKey;
             }
 
-            request.SetRequestHeader("Authorization", $"Bearer ${apiKey}");
+            request.SetRequestHeader("Authorization", $"Bearer {apiKey}");
             return request;
         }
 

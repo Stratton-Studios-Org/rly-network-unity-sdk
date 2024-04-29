@@ -672,10 +672,10 @@ namespace RallyProtocol.GSN.Contracts
 
     public class RelayRequestBase
     {
-        [Parameter("tuple", "request", 1)]
+        [Parameter("tuple", "request", 1, "ForwardRequest")]
         [JsonProperty("request")]
         public virtual ForwardRequest Request { get; set; }
-        [Parameter("tuple", "relayData", 2)]
+        [Parameter("tuple", "relayData", 2, "RelayData")]
         [JsonProperty("relayData")]
         public virtual RelayData RelayData { get; set; }
     }
