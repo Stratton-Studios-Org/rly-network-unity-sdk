@@ -14,6 +14,7 @@ using Nethereum.Contracts;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts.Standards.ERC20;
 using Nethereum.Contracts.Standards.ERC20.ContractDefinition;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Hex.HexTypes;
 using Nethereum.JsonRpc.Client;
 using Nethereum.RPC.Eth.DTOs;
@@ -187,34 +188,38 @@ namespace RallyProtocol
 
             string contractAddress = this.config.Contracts.TokenFaucet;
             Web3 provider = GetProvider();
-            IContractTransactionHandler<ClaimFunction> claimHandler = provider.Eth.GetContractTransactionHandler<ClaimFunction>();
-            ClaimFunction claim = new()
+            ClaimFunction claimFunctionInput = new()
             {
                 FromAddress = account.Address,
             };
-            TransactionInput input = await claimHandler.CreateTransactionInputEstimatingGasAsync(contractAddress, claim);
-            Fee1559 fee = await provider.FeeSuggestion.GetSimpleFeeSuggestionStrategy().SuggestFeeAsync();
-            string maxFeePerGas = string.Empty;
-            if (fee.MaxFeePerGas != null)
-            {
-                maxFeePerGas = new HexBigInteger(fee.MaxFeePerGas.Value).HexValue;
-            }
+            HexBigInteger estimatedGas = await provider.Eth.GetContractTransactionHandler<ClaimFunction>().EstimateGasAsync(this.config.Contracts.TokenFaucet, claimFunctionInput);
 
-            string maxPriorityFeePerGas = string.Empty;
-            if (fee.MaxPriorityFeePerGas != null)
-            {
-                maxPriorityFeePerGas = new HexBigInteger(fee.MaxPriorityFeePerGas.Value).HexValue;
-            }
+            BlockWithTransactions blockInformation = await provider.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(BlockParameter.CreateLatest());
+            BigInteger maxPriorityFeePerGas = BigInteger.Parse("1500000000");
+            BigInteger maxFeePerGas = blockInformation.BaseFeePerGas.Value * 2 + maxPriorityFeePerGas;
+
+            //Fee1559 fee = await provider.FeeSuggestion.GetTimePreferenceFeeSuggestionStrategy().SuggestFeeAsync();
+            //string maxFeePerGas = string.Empty;
+            //if (fee.MaxFeePerGas != null)
+            //{
+            //    maxFeePerGas = new HexBigInteger(fee.MaxFeePerGas.Value).HexValue;
+            //}
+
+            //string maxPriorityFeePerGas = string.Empty;
+            //if (fee.MaxPriorityFeePerGas != null)
+            //{
+            //    maxPriorityFeePerGas = new HexBigInteger(fee.MaxPriorityFeePerGas.Value).HexValue;
+            //}
 
             GsnTransactionDetails gsnTx = new()
             {
                 From = account.Address,
-                Data = input.Data,
+                Data = claimFunctionInput.GetCallData().ToHex(true),
+                To = this.config.Contracts.TokenFaucet,
+                MaxFeePerGas = new HexBigInteger(maxFeePerGas).HexValue,
+                MaxPriorityFeePerGas = new HexBigInteger(maxPriorityFeePerGas).HexValue,
                 Value = "0",
-                To = input.To,
-                Gas = input.Gas.HexValue,
-                MaxFeePerGas = maxFeePerGas,
-                MaxPriorityFeePerGas = maxPriorityFeePerGas
+                Gas = estimatedGas.HexValue,
             };
 
             return await Relay(gsnTx);

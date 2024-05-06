@@ -97,22 +97,21 @@ namespace RallyProtocol.GSN
         protected async Task<GsnRelayHttpRequest> BuildRelayHttpRequest(GsnRelayRequest relayRequest, RallyNetworkConfig config, Account account, Web3 provider)
         {
             string signature = await GsnTransactionHelper.SignRequest(relayRequest, config.Gsn.DomainSeparatorName, config.Gsn.ChainId, account);
-            HexBigInteger relayLastKnownNonce = await provider.Eth.Transactions.GetTransactionCount.SendRequestAsync(relayRequest.RelayData.RelayWorker, BlockParameter.CreatePending());
+            const string approvalData = "0x";
 
-            InMemoryNonceService nonceSercive = new(relayRequest.RelayData.RelayWorker, provider.Client);
-            HexBigInteger lastNonce = await nonceSercive.GetNextNonceAsync();
-
+            HexBigInteger relayLastKnownNonce = await provider.Eth.Transactions.GetTransactionCount.SendRequestAsync(relayRequest.RelayData.RelayWorker);
             BigInteger relayMaxNonce = relayLastKnownNonce.Value + config.Gsn.MaxRelayNonceGap;
+
             GsnRelayHttpRequestMetadata metadata = new()
             {
                 MaxAcceptanceBudget = config.Gsn.MaxAcceptanceBudget,
                 RelayHubAddress = config.Gsn.RelayHubAddress,
                 Signature = signature,
-                ApprovalData = "0x",
+                ApprovalData = approvalData,
                 RelayLastKnownNonce = relayLastKnownNonce,
                 RelayMaxNonce = relayMaxNonce,
                 DomainSeparatorName = config.Gsn.DomainSeparatorName,
-                RelayRequestId = ""
+                RelayRequestId = string.Empty
             };
             GsnRelayHttpRequest httpRequest = new()
             {
@@ -126,8 +125,9 @@ namespace RallyProtocol.GSN
         protected async Task<GsnRelayRequest> BuildRelayRequest(GsnTransactionDetails transaction, RallyNetworkConfig config, Account account, Web3 provider)
         {
             transaction.Gas = GsnTransactionHelper.EstimateGasWithoutCallData(transaction, config.Gsn.GtxDataNonZero, config.Gsn.GtxDataZero);
-            long secondsNow = (long)TimeSpan.FromTicks(DateTime.UtcNow.Ticks).TotalSeconds;
-            long validUntilTime = (secondsNow + config.Gsn.RequestValidSeconds);
+
+            long secondsNow = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            long validUntilTime = secondsNow + config.Gsn.RequestValidSeconds;
 
             BigInteger senderNonce = await GsnTransactionHelper.GetSenderNonce(account.Address, config.Gsn.ForwarderAddress, provider);
 
@@ -138,16 +138,16 @@ namespace RallyProtocol.GSN
                     From = transaction.From,
                     To = transaction.To,
                     Value = string.IsNullOrEmpty(transaction.Value) ? "0" : transaction.Value,
-                    Gas = new HexBigInteger(transaction.Gas).Value.ToString(), // parse from hex to bigint
+                    Gas = new HexBigInteger(transaction.Gas).HexValue.ToString(), // parse from hex to bigint
                     Nonce = senderNonce.ToString(),
-                    Data = transaction.Data == null ? "" : transaction.Data,
+                    Data = transaction.Data,
                     ValidUntilTime = validUntilTime.ToString(),
                 },
                 RelayData = new()
                 {
                     MaxFeePerGas = transaction.MaxFeePerGas,
                     MaxPriorityFeePerGas = transaction.MaxPriorityFeePerGas,
-                    TransactionCalldataGasUsed = "0",
+                    TransactionCalldataGasUsed = string.Empty,
                     RelayWorker = config.Gsn.RelayWorkerAddress,
                     Paymaster = config.Gsn.PaymasterAddress,
                     Forwarder = config.Gsn.ForwarderAddress,
@@ -179,15 +179,17 @@ namespace RallyProtocol.GSN
             }
             string response = request.downloadHandler.text;
             GsnServerConfigPayload serverConfigUpdate = JsonConvert.DeserializeObject<GsnServerConfigPayload>(response);
+
             config.Gsn.RelayWorkerAddress = serverConfigUpdate.RelayWorkerAddress;
             SetGasFeesForTransaction(transaction, serverConfigUpdate);
+
             return (Config: config, Transaction: transaction);
         }
 
         protected void SetGasFeesForTransaction(GsnTransactionDetails transaction, GsnServerConfigPayload serverConfigUpdate)
         {
-            decimal serverSuggestedMinPriorityFeePerGas = Convert.ToDecimal(serverConfigUpdate.MinMaxPriorityFeePerGas);
-            decimal paddedMaxPriority = Math.Round(serverSuggestedMinPriorityFeePerGas * 1.4m);
+            BigInteger serverSuggestedMinPriorityFeePerGas = BigInteger.Parse(serverConfigUpdate.MinMaxPriorityFeePerGas);
+            BigInteger paddedMaxPriority = serverSuggestedMinPriorityFeePerGas * 140 / 100;
             transaction.MaxPriorityFeePerGas = paddedMaxPriority.ToString();
 
             // Special handling for mumbai because of quirk with gas estimate returned by GSN for mumbai

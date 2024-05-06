@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -151,37 +152,23 @@ namespace RallyProtocol.GSN.Contracts
         public virtual byte[] Ret { get; set; }
     }
 
-    [Struct("ForwardRequest")]
     public partial class ForwardRequest : ForwardRequestBase { }
 
     public class ForwardRequestBase
     {
         [Parameter("address", "from", 1)]
-        [JsonProperty("from")]
-        public virtual string From { get; set; }
-
+        public virtual string From { get; set; } = string.Empty;
         [Parameter("address", "to", 2)]
-        [JsonProperty("to")]
-        public virtual string To { get; set; }
-
+        public virtual string To { get; set; } = string.Empty;
         [Parameter("uint256", "value", 3)]
-        [JsonProperty("value")]
         public virtual BigInteger Value { get; set; }
-
         [Parameter("uint256", "gas", 4)]
-        [JsonProperty("gas")]
         public virtual BigInteger Gas { get; set; }
-
         [Parameter("uint256", "nonce", 5)]
-        [JsonProperty("nonce")]
         public virtual BigInteger Nonce { get; set; }
-
         [Parameter("bytes", "data", 6)]
-        [JsonProperty("data")]
-        public virtual byte[] Data { get; set; }
-
+        public virtual byte[] Data { get; set; } = Array.Empty<byte>();
         [Parameter("uint256", "validUntilTime", 7)]
-        [JsonProperty("validUntilTime")]
         public virtual BigInteger ValidUntilTime { get; set; }
     }
 

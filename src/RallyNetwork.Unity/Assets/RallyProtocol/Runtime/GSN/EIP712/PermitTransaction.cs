@@ -38,7 +38,7 @@ namespace RallyProtocol.GSN
                 ERC20ContractService token = new(provider.Eth, contractAddress);
 
                 string name = await token.NameQueryAsync();
-                BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(token, account.Address);
+                BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
                 BigInteger deadline = await GetPermitDeadline(provider);
                 Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
 
@@ -103,7 +103,7 @@ namespace RallyProtocol.GSN
         {
             ERC20ContractService token = new(provider.Eth, contractAddress);
             string name = await token.NameQueryAsync();
-            BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(token, account.Address);
+            BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
             BigInteger deadline = await GetPermitDeadline(provider);
             Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
 

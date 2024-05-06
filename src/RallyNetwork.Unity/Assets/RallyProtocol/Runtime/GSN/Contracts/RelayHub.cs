@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -629,55 +630,36 @@ namespace RallyProtocol.GSN.Contracts
         public virtual ushort PctRelayFee { get; set; }
     }
 
-    [Struct("RelayData")]
     public partial class RelayData : RelayDataBase { }
 
     public class RelayDataBase
     {
         [Parameter("uint256", "maxFeePerGas", 1)]
-        [JsonProperty("maxFeePerGas")]
         public virtual BigInteger MaxFeePerGas { get; set; }
-
         [Parameter("uint256", "maxPriorityFeePerGas", 2)]
-        [JsonProperty("maxPriorityFeePerGas")]
         public virtual BigInteger MaxPriorityFeePerGas { get; set; }
-
         [Parameter("uint256", "transactionCalldataGasUsed", 3)]
-        [JsonProperty("transactionCalldataGasUsed")]
         public virtual BigInteger TransactionCalldataGasUsed { get; set; }
-
         [Parameter("address", "relayWorker", 4)]
-        [JsonProperty("relayWorker")]
-        public virtual string RelayWorker { get; set; }
-
+        public virtual string RelayWorker { get; set; } = string.Empty;
         [Parameter("address", "paymaster", 5)]
-        [JsonProperty("paymaster")]
-        public virtual string Paymaster { get; set; }
-
+        public virtual string Paymaster { get; set; } = string.Empty;
         [Parameter("address", "forwarder", 6)]
-        [JsonProperty("forwarder")]
-        public virtual string Forwarder { get; set; }
-
+        public virtual string Forwarder { get; set; } = string.Empty;
         [Parameter("bytes", "paymasterData", 7)]
-        [JsonProperty("paymasterData")]
-        public virtual byte[] PaymasterData { get; set; }
-
+        public virtual byte[] PaymasterData { get; set; } = Array.Empty<byte>();
         [Parameter("uint256", "clientId", 8)]
-        [JsonProperty("clientId")]
         public virtual BigInteger ClientId { get; set; }
     }
 
-    [Struct("RelayRequest")]
     public partial class RelayRequest : RelayRequestBase { }
 
     public class RelayRequestBase
     {
-        [Parameter("tuple", "request", 1, "ForwardRequest")]
-        [JsonProperty("request")]
-        public virtual ForwardRequest Request { get; set; }
-        [Parameter("tuple", "relayData", 2, "RelayData")]
-        [JsonProperty("relayData")]
-        public virtual RelayData RelayData { get; set; }
+        [Parameter("tuple", "request", 1)]
+        public virtual ForwardRequest Request { get; set; } = new ForwardRequest();
+        [Parameter("tuple", "relayData", 2)]
+        public virtual RelayData RelayData { get; set; } = new RelayData();
     }
 
 }

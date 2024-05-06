@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
+using Nethereum.ABI.EIP712;
+
 using Newtonsoft.Json;
 
 using RallyProtocol.GSN.Contracts;
@@ -90,6 +92,21 @@ namespace RallyProtocol.GSN
                 Forwarder = Forwarder,
                 PaymasterData = PaymasterData,
                 ClientId = ClientId
+            };
+        }
+
+        public MemberValue[] ToEip712Values()
+        {
+            return new MemberValue[]
+            {
+                new() { TypeName = "uint256", Value = MaxFeePerGas },
+                new() { TypeName = "uint256", Value = MaxPriorityFeePerGas },
+                new() { TypeName = "uint256", Value = TransactionCalldataGasUsed },
+                new() { TypeName = "address", Value = RelayWorker },
+                new() { TypeName = "address", Value = Paymaster },
+                new() { TypeName = "address", Value = Forwarder },
+                new() { TypeName = "bytes", Value = PaymasterData },
+                new() { TypeName = "uint256", Value = ClientId }
             };
         }
 

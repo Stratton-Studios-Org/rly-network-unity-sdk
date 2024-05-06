@@ -31,7 +31,7 @@ namespace RallyProtocol.GSN
             {
                 ERC20ContractService token = new(provider.Eth, contractAddress);
                 string name = await token.NameQueryAsync();
-                BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(token, account.Address);
+                BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
 
                 TransferFunction transferFunction = new()
                 {
@@ -109,7 +109,7 @@ namespace RallyProtocol.GSN
         {
             ERC20ContractService token = new(provider.Eth, contractAddress);
             string name = await token.NameQueryAsync();
-            BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(token, account.Address);
+            BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
 
             TransferFunction transferFunction = new()
             {

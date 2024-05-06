@@ -43,6 +43,22 @@ namespace RallyProtocol.GSN
     //}
 
     [Struct("EIP712Domain")]
+    public class DomainWithChainIdString : IDomain
+    {
+        [Parameter("string", "name", 1)]
+        public virtual string Name { get; set; } = string.Empty;
+
+        [Parameter("string", "version", 2)]
+        public virtual string Version { get; set; } = string.Empty;
+
+        [Parameter("uint256", "chainId", 3)]
+        public virtual string ChainId { get; set; } = string.Empty;
+
+        [Parameter("address", "verifyingContract", 4)]
+        public virtual string VerifyingContract { get; set; } = string.Empty;
+    }
+
+    [Struct("EIP712Domain")]
     public class EIP712Domain : IDomain
     {
         [Parameter("string", "name", 1)]
@@ -108,7 +124,9 @@ namespace RallyProtocol.GSN
     public class TypedGsnRequestData
     {
 
-        public const string GsnDomainSeparatorVersion = "3";
+        public const string PrimaryType = "RelayRequest";
+
+        public const string Version = "3";
         public const string GsnDomainSeparatorPrefix = "string name,string version";
 
         public static readonly List<MessageTypeProperty> RelayDataType = new()
@@ -174,7 +192,6 @@ namespace RallyProtocol.GSN
 
         public readonly GsnPrimaryType Types;
         //public readonly EIP712Domain Domain;
-        public readonly string PrimaryType;
         public readonly GsnRequestMessage Message;
 
         public TypedGsnRequestData(string name, int chainId, string verifier, RelayRequest relayRequest)
