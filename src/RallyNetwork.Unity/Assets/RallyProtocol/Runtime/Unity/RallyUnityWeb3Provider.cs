@@ -6,6 +6,7 @@ using Nethereum.JsonRpc.Client;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
+using RallyProtocol.Logging;
 using RallyProtocol.Networks;
 
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace RallyProtocol.Core
 
         public IClient GetRpcClient(RallyNetworkConfig config)
         {
-            UnityWebRequestRpcTaskClient unityClient = new(new Uri(config.Gsn.RpcUrl), null, null);
+            UnityWebRequestRpcTaskClient unityClient = new(new Uri(config.Gsn.RpcUrl), null, RallyUnityLogger.Default);
             string apiKey = "";
             if (!string.IsNullOrEmpty(config.RelayerApiKey))
             {

@@ -16,6 +16,9 @@ namespace RallyProtocol
 
     }
 
+    /// <summary>
+    /// A generic HTTP response.
+    /// </summary>
     public class RallyHttpResponse
     {
 

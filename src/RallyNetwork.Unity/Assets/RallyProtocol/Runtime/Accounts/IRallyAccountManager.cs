@@ -27,7 +27,7 @@ namespace RallyProtocol.Accounts
         /// The saveToCloud flag is used to specify whether to save the wallet to cloud or not. When set to true, the wallet will be saved to cloud. When set to false, the wallet will be saved only on device.
         /// After the wallet is created, you can check the cloud backup status of the wallet using the walletBackedUpToCloud method.
         /// </summary>
-        public Task<Account> CreateAccountAsync(CreateAccountOptions options);
+        public Task<Account> CreateAccountAsync(CreateAccountOptions options = null);
 
         public Task<Account> ImportExistingAccountAsync(string mnemonic, CreateAccountOptions options);
 

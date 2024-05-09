@@ -10,6 +10,9 @@ using UnityEngine.Networking;
 namespace RallyProtocol
 {
 
+    /// <summary>
+    /// Uses <see cref="UnityWebRequest"/> to perform web requests.
+    /// </summary>
     public class RallyUnityHttpHandler : IRallyHttpHandler
     {
 

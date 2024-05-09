@@ -78,7 +78,7 @@ namespace RallyProtocol.Accounts
 
             if (existingAccount != null && !overwrite)
             {
-                throw new System.Exception("Account already exists. Use overwrite flag to overwrite");
+                throw new RallyAccountExistsException();
             }
 
             KeyStorageConfig storageOptions = options.StorageOptions ?? new KeyStorageConfig() { SaveToCloud = true, RejectOnCloudSaveFailure = false };
@@ -113,8 +113,13 @@ namespace RallyProtocol.Accounts
         /// The saveToCloud flag is used to specify whether to save the wallet to cloud or not. When set to true, the wallet will be saved to cloud. When set to false, the wallet will be saved only on device.
         /// After the wallet is created, you can check the cloud backup status of the wallet using the walletBackedUpToCloud method.
         /// </summary>
-        public async Task<Account> CreateAccountAsync(CreateAccountOptions options)
+        public async Task<Account> CreateAccountAsync(CreateAccountOptions options = null)
         {
+            if (options == null)
+            {
+                options = new();
+            }
+
             string mnemonic = await this.keyManager.GenerateNewMnemonic();
             return await SaveMnemonicAsync(mnemonic, options);
         }
@@ -211,7 +216,7 @@ namespace RallyProtocol.Accounts
             Account account = await GetAccountAsync();
             if (account == null)
             {
-                throw new Exception("No account");
+                throw new RallyNoAccountException();
             }
 
             EthereumMessageSigner signer = new();
@@ -231,7 +236,7 @@ namespace RallyProtocol.Accounts
             Account account = await GetAccountAsync();
             if (account == null)
             {
-                throw new Exception("No account");
+                throw new RallyNoAccountException();
             }
 
             TypeTransactionSigner<T> signer = new();

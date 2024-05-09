@@ -101,8 +101,6 @@ namespace RallyProtocol
                 }
             }
 
-            Debug.Log($"Sending RPC Request At: {uri}");
-            Debug.Log($"RPC Request JSON:\n{rpcRequestJson}");
             logger.LogRequest(rpcRequestJson);
             await unityRequest.SendWebRequest();
             if (unityRequest.error != null)
@@ -110,7 +108,6 @@ namespace RallyProtocol
                 throw new RpcClientUnknownException("Error occurred when trying to send rpc request(s): " + rpcRequestMethod, new Exception(unityRequest.error));
             }
 
-            Debug.Log($"RPC Response:\n{unityRequest.downloadHandler.text}");
             byte[] data = unityRequest.downloadHandler.data;
             return Encoding.UTF8.GetString(data);
         }
