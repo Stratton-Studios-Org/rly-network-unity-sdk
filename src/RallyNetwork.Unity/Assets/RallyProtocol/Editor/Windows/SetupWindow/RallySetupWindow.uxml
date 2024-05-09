@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/RallyProtocol/Editor/Windows/SetupWindow/RallySetupWindow.uss?fileID=7433441132597879392&amp;guid=9189c521165e5aa48a08f870926da72d&amp;type=3#RallySetupWindow" />
+    <ui:TextField picking-mode="Ignore" label="API Key" name="apiKey" />
+    <ui:EnumField label="Network Type" type="RallyProtocol.Networks.RallyNetworkType, RallyProtocol.Runtime" name="networkType" value="Amoy" />
+    <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="saveButton" />
+</ui:UXML>

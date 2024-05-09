@@ -13,6 +13,8 @@ namespace RallyProtocol.Networks
     public class RallyUnityNetworkFactory
     {
 
+        public const string MainSettingsResourcesPath = "RallyProtocol/Main";
+
         public static IRallyWeb3Provider GetWeb3Provider()
         {
             return RallyUnityWeb3Provider.Default;
@@ -31,6 +33,22 @@ namespace RallyProtocol.Networks
         public static IRallyAccountManager GetAccountManager()
         {
             return RallyUnityAccountManager.Default;
+        }
+
+        public static RallyProtocolSettingsPreset LoadMainSettingsPreset()
+        {
+            return Resources.Load<RallyProtocolSettingsPreset>(MainSettingsResourcesPath);
+        }
+
+        public static IRallyNetwork Create()
+        {
+            RallyProtocolSettingsPreset preset = LoadMainSettingsPreset();
+            if (preset == null)
+            {
+                throw new System.Exception($"There are no default settings preset available at {MainSettingsResourcesPath}");
+            }
+
+            return Create(preset);
         }
 
         public static IRallyNetwork Create(RallyProtocolSettingsPreset preset)

@@ -14,9 +14,6 @@ namespace RallyProtocol.Samples
     public class RallyExample : MonoBehaviour
     {
 
-        [SerializeField]
-        protected RallyProtocolSettingsPreset preset;
-
         protected IRallyNetwork rlyNetwork;
 
         void Start()
@@ -25,7 +22,9 @@ namespace RallyProtocol.Samples
             RallyUnityLogger.Default.UnityLogger.filterLogType = LogType.Log;
 
             Debug.Log("Initializing Rally network...");
-            this.rlyNetwork = RallyUnityNetworkFactory.Create(this.preset);
+
+            // Create a Rally network instance from the Main settings preset created by Window > Rally Protocol > Setup window
+            this.rlyNetwork = RallyUnityNetworkFactory.Create();
             Debug.Log("Initialized Rally network");
         }
 

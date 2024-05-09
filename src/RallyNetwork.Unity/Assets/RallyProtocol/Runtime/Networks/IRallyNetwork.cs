@@ -10,9 +10,9 @@ namespace RallyProtocol.Networks
 
     public enum RallyNetworkType
     {
-        Local,
         Amoy,
         Polygon,
+        Local,
         Test,
         Custom
     }
