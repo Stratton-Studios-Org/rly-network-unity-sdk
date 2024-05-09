@@ -12,7 +12,7 @@ namespace RallyProtocol.Core
 {
 
     /// <summary>
-    /// A web3/eth provider, implement this to customize the Web3 and RPC client.
+    /// A web3/eth provider, implement this interface to customize the Web3 and RPC client.
     /// </summary>
     public interface IRallyWeb3Provider
     {

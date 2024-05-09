@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 
 using RallyProtocol.Core;
 using RallyProtocol.GSN.Contracts;
+using RallyProtocol.GSN.Models;
 using RallyProtocol.Logging;
 using RallyProtocol.Networks;
 

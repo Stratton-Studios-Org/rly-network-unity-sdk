@@ -10,6 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 396d3fda8c25bfa4e8da315b0f4f6ddb, type: 3}
-  m_Name: Rally Protocol - P{olygon
+  m_Name: Polygon
   m_EditorClassIdentifier: 
   apiKey: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjUwNn0.a1rlfOQZvtG74vxs5nj8t51WEB1aiFERaVKlF4Q3jfAuT-432DWwiZD3gId8YYPftsazY33vJgBpdV38zDJB6A
+  networkType: 2
+  customNetworkConfig:
+    Contracts:
+      TokenFaucet: 
+      RlyERC20: 
+    Gsn:
+      PaymasterAddress: 
+      ForwarderAddress: 
+      RelayHubAddress: 
+      RelayWorkerAddress: 
+      RelayUrl: 
+      RpcUrl: 
+      ChainId: 
+      MaxAcceptanceBudget: 
+      DomainSeparatorName: 
+      GtxDataZero: 0
+      GtxDataNonZero: 0
+      RequestValidSeconds: 0
+      MaxPaymasterDataLength: 0
+      MaxApprovalDataLength: 0
+      MaxRelayNonceGap: 0
+    RelayerApiKey: 

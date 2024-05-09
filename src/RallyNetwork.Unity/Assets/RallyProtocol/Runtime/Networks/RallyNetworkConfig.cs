@@ -6,6 +6,7 @@ using UnityEngine;
 namespace RallyProtocol.Networks
 {
 
+    [System.Serializable]
     public class RallyNetworkConfig
     {
 
@@ -54,6 +55,7 @@ namespace RallyProtocol.Networks
 
     }
 
+    [System.Serializable]
     public class RallyContracts
     {
 
@@ -100,6 +102,7 @@ namespace RallyProtocol.Networks
 
     }
 
+    [System.Serializable]
     public class RallyGSNConfig
     {
 

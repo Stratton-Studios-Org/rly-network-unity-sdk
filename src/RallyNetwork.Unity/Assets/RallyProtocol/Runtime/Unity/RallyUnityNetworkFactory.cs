@@ -33,6 +33,19 @@ namespace RallyProtocol.Networks
             return RallyUnityAccountManager.Default;
         }
 
+        public static IRallyNetwork Create(RallyProtocolSettingsPreset preset)
+        {
+            if (preset.NetworkType == RallyNetworkType.Custom)
+            {
+                RallyNetworkConfig clonedCustomConfig = preset.CustomNetworkConfig.Clone();
+                return Create(clonedCustomConfig, preset.ApiKey);
+            }
+            else
+            {
+                return Create(preset.NetworkType, preset.ApiKey);
+            }
+        }
+
         public static IRallyNetwork Create(RallyNetworkType type, string apiKey = null)
         {
             return RallyNetworkFactory.Create(GetWeb3Provider(), GetHttpHandler(), GetLogger(), GetAccountManager(), type, apiKey);

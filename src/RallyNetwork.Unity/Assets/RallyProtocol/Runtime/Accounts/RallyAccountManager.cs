@@ -23,18 +23,84 @@ namespace RallyProtocol.Accounts
     public class RallyAccountManager : IRallyAccountManager
     {
 
+        #region Fields
+
         protected Account currentAccount;
         protected IRallyLogger logger;
         protected IPlatformKeyManager keyManager;
 
+        #endregion
+
+        #region Properties
+
         public Account CurrentAccount => this.currentAccount;
         public IRallyLogger Logger => this.logger;
+
+        #endregion
+
+        #region Constructors
 
         public RallyAccountManager(IPlatformKeyManager keyManager, IRallyLogger logger)
         {
             this.keyManager = keyManager;
             this.logger = logger;
         }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Saves the mnemonic to disk/cloud based on the platform using <see cref="RallyUnityKeyManager"/>.
+        /// </summary>
+        /// <param name="mnemonic">The mnemonic to save</param>
+        /// <param name="options">The options</param>
+        /// <returns>Returns the newly created account based on the mnemonic before storage</returns>
+        /// <exception cref="System.Exception">Thrown when the account already exists and the <see cref="CreateAccountOptions.Overwrite"/> flag is not set</exception>
+        private async Task<Account> SaveMnemonicAsync(string mnemonic, CreateAccountOptions options)
+        {
+            bool overwrite = options.Overwrite ?? false;
+            Account existingAccount;
+            try
+            {
+                existingAccount = await GetAccountAsync();
+            }
+            catch (Exception error)
+            {
+                if (!overwrite)
+                {
+                    Logger.LogError("Error while reading existing wallet");
+                    Logger.LogException(error);
+                }
+
+                existingAccount = null;
+            }
+
+            if (existingAccount != null && !overwrite)
+            {
+                throw new System.Exception("Account already exists. Use overwrite flag to overwrite");
+            }
+
+            KeyStorageConfig storageOptions = options.StorageOptions ?? new KeyStorageConfig() { SaveToCloud = true, RejectOnCloudSaveFailure = false };
+
+            // Get private key to check for a valid mnemonic first before passing anything invalid into saveMnemonic
+            string privateKey = await this.keyManager.GetPrivateKeyFromMnemonic(mnemonic);
+            await this.keyManager.SaveMnemonic(mnemonic, storageOptions);
+            Account newAccount = new(privateKey);
+            this.currentAccount = newAccount;
+
+            return newAccount;
+        }
+
+        private async Task<Account> CreateAccountFromMnemonicAsync(string mnemonic)
+        {
+            string privateKey = await this.keyManager.GetPrivateKeyFromMnemonic(mnemonic);
+            return new(privateKey);
+        }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Creates a new wallet and saves it to the device based on the storage options provided.
@@ -172,53 +238,7 @@ namespace RallyProtocol.Accounts
             return signer.SignTransaction(account.PrivateKey, transaction);
         }
 
-        /// <summary>
-        /// Saves the mnemonic to disk/cloud based on the platform using <see cref="RallyUnityKeyManager"/>.
-        /// </summary>
-        /// <param name="mnemonic">The mnemonic to save</param>
-        /// <param name="options">The options</param>
-        /// <returns>Returns the newly created account based on the mnemonic before storage</returns>
-        /// <exception cref="System.Exception">Thrown when the account already exists and the <see cref="CreateAccountOptions.Overwrite"/> flag is not set</exception>
-        private async Task<Account> SaveMnemonicAsync(string mnemonic, CreateAccountOptions options)
-        {
-            bool overwrite = options.Overwrite ?? false;
-            Account existingAccount;
-            try
-            {
-                existingAccount = await GetAccountAsync();
-            }
-            catch (Exception error)
-            {
-                if (!overwrite)
-                {
-                    Logger.LogError("Error while reading existing wallet");
-                    Logger.LogException(error);
-                }
-
-                existingAccount = null;
-            }
-
-            if (existingAccount != null && !overwrite)
-            {
-                throw new System.Exception("Account already exists. Use overwrite flag to overwrite");
-            }
-
-            KeyStorageConfig storageOptions = options.StorageOptions ?? new KeyStorageConfig() { SaveToCloud = true, RejectOnCloudSaveFailure = false };
-
-            // Get private key to check for a valid mnemonic first before passing anything invalid into saveMnemonic
-            string privateKey = await this.keyManager.GetPrivateKeyFromMnemonic(mnemonic);
-            await this.keyManager.SaveMnemonic(mnemonic, storageOptions);
-            Account newAccount = new(privateKey);
-            this.currentAccount = newAccount;
-
-            return newAccount;
-        }
-
-        private async Task<Account> CreateAccountFromMnemonicAsync(string mnemonic)
-        {
-            string privateKey = await this.keyManager.GetPrivateKeyFromMnemonic(mnemonic);
-            return new(privateKey);
-        }
+        #endregion
 
     }
 

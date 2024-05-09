@@ -55,6 +55,7 @@ namespace RallyProtocol
             this.requestText = requestText;
             this.responseHeaders = responseHeaders;
             this.errorMessage = errorMessage;
+            this.success = success;
         }
 
         #endregion

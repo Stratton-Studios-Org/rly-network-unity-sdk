@@ -1,38 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 
 using Newtonsoft.Json;
 
-using UnityEngine;
-
-namespace RallyProtocol.GSN
+namespace RallyProtocol.GSN.Models
 {
 
-    public class OldForwardRequest
+    public class GsnForwardRequest
     {
 
         [JsonProperty("from")]
-        public string From;
+        public virtual string From { get; set; }
 
         [JsonProperty("to")]
-        public string To;
+        public virtual string To { get; set; }
 
         [JsonProperty("value")]
-        public string Value;
+        public virtual string Value { get; set; }
 
         [JsonProperty("gas")]
-        public string Gas;
+        public virtual string Gas { get; set; }
 
         [JsonProperty("nonce")]
-        public string Nonce;
+        public virtual string Nonce { get; set; }
 
         [JsonProperty("data")]
-        public string Data;
+        public virtual string Data { get; set; }
 
         [JsonProperty("validUntilTime")]
-        public string ValidUntilTime;
+        public virtual string ValidUntilTime { get; set; }
 
-        public OldForwardRequest Clone()
+        public GsnForwardRequest Clone()
         {
             return new()
             {
@@ -45,7 +45,6 @@ namespace RallyProtocol.GSN
                 ValidUntilTime = ValidUntilTime
             };
         }
-
 
     }
 

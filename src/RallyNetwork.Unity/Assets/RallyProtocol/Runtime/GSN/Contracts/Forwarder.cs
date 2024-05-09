@@ -6,10 +6,6 @@ using System.Numerics;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using Nethereum.Contracts;
 
-using Newtonsoft.Json;
-
-using UnityEngine;
-
 namespace RallyProtocol.GSN.Contracts
 {
 

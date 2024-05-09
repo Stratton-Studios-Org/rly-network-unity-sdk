@@ -13,7 +13,8 @@ namespace RallyProtocol.Networks
         Local,
         Amoy,
         Polygon,
-        Test
+        Test,
+        Custom
     }
 
     public interface IRallyNetwork

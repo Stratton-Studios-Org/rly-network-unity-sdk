@@ -14,18 +14,15 @@ namespace RallyProtocol.Samples
     {
 
         [SerializeField]
-        protected RallyNetworkType networkType;
-        [TextArea]
-        [SerializeField]
-        protected string apiKey;
+        protected RallyProtocolSettingsPreset preset;
 
         protected IRallyNetwork rlyNetwork;
 
         void Start()
         {
-            Debug.Log("Initializing Rally Network...");
-            this.rlyNetwork = RallyUnityNetworkFactory.Create(this.networkType, this.apiKey);
-            Debug.Log($"Initialized Rally {this.networkType} network using API key: {this.apiKey}");
+            Debug.Log("Initializing Rally network...");
+            this.rlyNetwork = RallyUnityNetworkFactory.Create(this.preset);
+            Debug.Log("Initialized Rally network");
         }
 
         public async void CreateAccount()
@@ -33,6 +30,8 @@ namespace RallyProtocol.Samples
             try
             {
                 Debug.Log("Creating account...");
+
+                // Create a new account & overwrite everytime for testing purposes
                 await RallyUnityAccountManager.Default.CreateAccountAsync(new() { Overwrite = true });
                 Debug.Log("Account created successfully");
             }

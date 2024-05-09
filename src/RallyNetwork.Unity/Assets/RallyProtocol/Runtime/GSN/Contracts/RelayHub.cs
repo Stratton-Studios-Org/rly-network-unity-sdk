@@ -8,8 +8,6 @@ using Nethereum.Contracts;
 
 using Newtonsoft.Json;
 
-using UnityEngine;
-
 namespace RallyProtocol.GSN.Contracts
 {
 

@@ -49,7 +49,7 @@ namespace RallyProtocol
         public string MaxPriorityFeePerGas;
         //paymaster contract address
         [JsonProperty("paymasterData")]
-        public string? PaymasterData;
+        public string PaymasterData;
 
         //Value used to identify applications in RelayRequests.
         [JsonProperty("clientId")]

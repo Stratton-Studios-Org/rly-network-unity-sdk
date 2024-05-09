@@ -25,6 +25,7 @@ using Newtonsoft.Json;
 
 using RallyProtocol.Contracts;
 using RallyProtocol.GSN.Contracts;
+using RallyProtocol.GSN.Models;
 using RallyProtocol.Logging;
 using RallyProtocol.Networks;
 
@@ -185,7 +186,7 @@ namespace RallyProtocol.GSN
             return adjustedGas.HexValue;
         }
 
-        public async Task<HexBigInteger> EstimateCallDataCostForRequest(GsnRelayRequest relayRequestOriginal, RallyGSNConfig config, Web3 provider)
+        public Task<HexBigInteger> EstimateCallDataCostForRequest(GsnRelayRequest relayRequestOriginal, RallyGSNConfig config, Web3 provider)
         {
             const int MaxSignatureLength = 65;
 
@@ -197,7 +198,6 @@ namespace RallyProtocol.GSN
             BigInteger maxAcceptanceBudget = new HexBigInteger("0xffffffffff");
             string signature = "0x" + "ff".PadLeft(MaxSignatureLength * 2, 'f');
             string approvalData = "0x" + "ff".PadLeft(config.MaxApprovalDataLength * 2, 'f');
-
             RelayCallFunction functionInput = new()
             {
                 DomainSeparatorName = config.DomainSeparatorName,
@@ -206,14 +206,14 @@ namespace RallyProtocol.GSN
                 Signature = signature.HexToByteArray(),
                 ApprovalData = approvalData.HexToByteArray()
             };
-            string data = functionInput.GetCallData().ToHex(true);
 
+            string data = functionInput.GetCallData().ToHex(true);
             if (string.IsNullOrEmpty(data))
             {
                 throw new System.Exception("Transaction data is empty");
             }
 
-            return new HexBigInteger(CalculateCallDataCost(data, config.GtxDataNonZero, config.GtxDataZero));
+            return Task.FromResult(new HexBigInteger(CalculateCallDataCost(data, config.GtxDataNonZero, config.GtxDataZero)));
         }
 
         public RelayRequest CreateAbiRelayRequest(GsnRelayRequest gsnRelayRequest)
