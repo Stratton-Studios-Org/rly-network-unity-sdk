@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using RallyProtocol.Accounts;
+using RallyProtocol.Logging;
 using RallyProtocol.Networks;
 
 using UnityEngine;
@@ -20,6 +21,9 @@ namespace RallyProtocol.Samples
 
         void Start()
         {
+            // You can set the logging filter using this in Unity
+            RallyUnityLogger.Default.UnityLogger.filterLogType = LogType.Log;
+
             Debug.Log("Initializing Rally network...");
             this.rlyNetwork = RallyUnityNetworkFactory.Create(this.preset);
             Debug.Log("Initialized Rally network");
@@ -46,7 +50,9 @@ namespace RallyProtocol.Samples
         {
             try
             {
+                Debug.Log("Claiming RLY...");
                 await this.rlyNetwork.ClaimRly();
+                Debug.Log("Claimed RLY successfully");
             }
             catch (Exception ex)
             {
