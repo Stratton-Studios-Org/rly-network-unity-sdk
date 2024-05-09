@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396d3fda8c25bfa4e8da315b0f4f6ddb, type: 3}
   m_Name: Main
   m_EditorClassIdentifier: 
-  apiKey: 
+  apiKey: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjYxMX0.PUxW-wsXnE28BBRS8LhltsErvWCSPd6N0xpSCk1MkJ7TxXF4cvCfB7nDptakv5myAtIjJNMS-Gs9D_VTTH2tXQ
   networkType: 0
   customNetworkConfig:
     Contracts:

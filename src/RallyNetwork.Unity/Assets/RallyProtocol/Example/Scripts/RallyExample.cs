@@ -14,6 +14,8 @@ namespace RallyProtocol.Samples
     public class RallyExample : MonoBehaviour
     {
 
+        public const string NftContractAddress = "0xe7d4b732df200fefb28e5bb1f2cac129155f511a";
+
         protected IRallyNetwork rlyNetwork;
 
         void Start()
@@ -58,6 +60,11 @@ namespace RallyProtocol.Samples
                 Debug.LogError("Claiming RLY failed");
                 Debug.LogException(ex);
             }
+        }
+
+        public void MintNft()
+        {
+            // TODO
         }
 
     }
