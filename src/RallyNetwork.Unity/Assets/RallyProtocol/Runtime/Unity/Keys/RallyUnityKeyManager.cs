@@ -6,14 +6,14 @@ namespace RallyProtocol
     /// <summary>
     /// Handles platform-specific key storage.
     /// </summary>
-    public class KeyManager
+    public class RallyUnityKeyManager : IPlatformKeyManager
     {
 
-        protected static KeyManager defaultInstance;
+        protected static RallyUnityKeyManager defaultInstance;
 
         protected readonly IPlatformKeyManager platform;
 
-        public static KeyManager Default
+        public static RallyUnityKeyManager Default
         {
             get
             {
@@ -26,7 +26,7 @@ namespace RallyProtocol
             }
         }
 
-        public KeyManager()
+        public RallyUnityKeyManager()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             platform = new AndroidKeyManager();

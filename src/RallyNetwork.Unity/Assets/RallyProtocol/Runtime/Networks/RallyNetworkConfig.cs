@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace RallyProtocol
+namespace RallyProtocol.Networks
 {
 
     public class RallyNetworkConfig

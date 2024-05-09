@@ -10,47 +10,30 @@ using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
-using UnityEngine;
+using RallyProtocol.Logging;
 
 using Account = Nethereum.Web3.Accounts.Account;
 
-namespace RallyProtocol
+namespace RallyProtocol.Accounts
 {
 
-    public class CreateAccountOptions
+    /// <summary>
+    /// The default implementation of <see cref="IRallyAccountManager"/>.
+    /// </summary>
+    public class RallyAccountManager : IRallyAccountManager
     {
-
-        public bool? Overwrite;
-        public KeyStorageConfig StorageOptions;
-
-    }
-
-    public class WalletManager
-    {
-
-        protected static WalletManager defaultInstance;
 
         protected Account currentAccount;
-        protected KeyManager keyManager;
-
-        public static WalletManager Default
-        {
-            get
-            {
-                if (defaultInstance == null)
-                {
-                    defaultInstance = new(KeyManager.Default);
-                }
-
-                return defaultInstance;
-            }
-        }
+        protected IRallyLogger logger;
+        protected IPlatformKeyManager keyManager;
 
         public Account CurrentAccount => this.currentAccount;
+        public IRallyLogger Logger => this.logger;
 
-        public WalletManager(KeyManager keyManager)
+        public RallyAccountManager(IPlatformKeyManager keyManager, IRallyLogger logger)
         {
             this.keyManager = keyManager;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -89,6 +72,10 @@ namespace RallyProtocol
             return await this.keyManager.IsMnemonicBackedUpToCloud();
         }
 
+        /// <summary>
+        /// Checks if there is any account currently loaded, if not, checks if there are any mnemonic stored and if there are no mnemonic stored, returns null, otherwise creates a new account based on the mnemonic and caches it for further calls.
+        /// </summary>
+        /// <returns>Returns the existing account or the newly created account</returns>
         public async Task<Account> GetAccountAsync()
         {
             if (this.currentAccount != null)
@@ -107,6 +94,10 @@ namespace RallyProtocol
             return account;
         }
 
+        /// <summary>
+        /// Gets account's public address.
+        /// </summary>
+        /// <returns>Returns the existing account's public address, otherwise null</returns>
         public async Task<string> GetPublicAddressAsync()
         {
             Account account = await GetAccountAsync();
@@ -118,12 +109,19 @@ namespace RallyProtocol
             return account.Address;
         }
 
+        /// <summary>
+        /// Permanently deletes the account.
+        /// </summary>
         public async Task PermanentlyDeleteAccountAsync()
         {
             await this.keyManager.DeleteMnemonic();
             this.currentAccount = null;
         }
 
+        /// <summary>
+        /// Gets the account mnemonic/seed phrase.
+        /// </summary>
+        /// <returns>Returns the account mnemonic/seed phrase if it exists, otherwise null</returns>
         public async Task<string> GetAccountPhraseAsync()
         {
             try
@@ -136,6 +134,12 @@ namespace RallyProtocol
             }
         }
 
+        /// <summary>
+        /// Signs the message using the existing account's private key.
+        /// </summary>
+        /// <param name="message">The message to sign</param>
+        /// <returns>Returns the signed message</returns>
+        /// <exception cref="Exception">Thrown when there is no existing account</exception>
         public async Task<string> SignMessageAsync(string message)
         {
             Account account = await GetAccountAsync();
@@ -148,6 +152,13 @@ namespace RallyProtocol
             return signer.EncodeUTF8AndSign(message, new(account.PrivateKey));
         }
 
+        /// <summary>
+        /// Signs the transaction using the existing account's private key.
+        /// </summary>
+        /// <typeparam name="T">The transaction type</typeparam>
+        /// <param name="transaction">The transaction</param>
+        /// <returns>Returns the signature</returns>
+        /// <exception cref="Exception">Thrown when there is no existing account</exception>
         public async Task<string> SignTransactionAsync<T>(T transaction)
             where T : SignedTypeTransaction
         {
@@ -161,6 +172,13 @@ namespace RallyProtocol
             return signer.SignTransaction(account.PrivateKey, transaction);
         }
 
+        /// <summary>
+        /// Saves the mnemonic to disk/cloud based on the platform using <see cref="RallyUnityKeyManager"/>.
+        /// </summary>
+        /// <param name="mnemonic">The mnemonic to save</param>
+        /// <param name="options">The options</param>
+        /// <returns>Returns the newly created account based on the mnemonic before storage</returns>
+        /// <exception cref="System.Exception">Thrown when the account already exists and the <see cref="CreateAccountOptions.Overwrite"/> flag is not set</exception>
         private async Task<Account> SaveMnemonicAsync(string mnemonic, CreateAccountOptions options)
         {
             bool overwrite = options.Overwrite ?? false;
@@ -173,8 +191,8 @@ namespace RallyProtocol
             {
                 if (!overwrite)
                 {
-                    Debug.LogError("Error while reading existing wallet");
-                    Debug.LogException(error);
+                    Logger.LogError("Error while reading existing wallet");
+                    Logger.LogException(error);
                 }
 
                 existingAccount = null;

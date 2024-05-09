@@ -21,7 +21,8 @@ using Nethereum.Web3.Accounts;
 
 using Org.BouncyCastle.Tsp;
 
-using UnityEngine;
+using RallyProtocol.Logging;
+using RallyProtocol.Networks;
 
 using Account = Nethereum.Web3.Accounts.Account;
 
@@ -31,14 +32,25 @@ namespace RallyProtocol.GSN
     public class PermitTransaction
     {
 
-        public static async Task<bool> HasPermit(Account account, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
+        protected IRallyLogger logger;
+        protected GsnTransactionHelper transactionHelper;
+
+        public IRallyLogger Logger => this.logger;
+
+        public PermitTransaction(IRallyLogger logger, GsnTransactionHelper transactionHelper)
+        {
+            this.logger = logger;
+            this.transactionHelper = transactionHelper;
+        }
+
+        public async Task<bool> HasPermit(Account account, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
         {
             try
             {
                 ERC20ContractService token = new(provider.Eth, contractAddress);
 
                 string name = await token.NameQueryAsync();
-                BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
+                BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
                 BigInteger deadline = await GetPermitDeadline(provider);
                 Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
 
@@ -65,7 +77,7 @@ namespace RallyProtocol.GSN
             }
         }
 
-        public static TypedData<DomainWithSalt> GetTypedPermitTransaction(string name, string version, BigInteger chainId, string verifyingContract, string owner, string spender, BigInteger value, BigInteger nonce, BigInteger deadline, byte[] salt)
+        public TypedData<DomainWithSalt> GetTypedPermitTransaction(string name, string version, BigInteger chainId, string verifyingContract, string owner, string spender, BigInteger value, BigInteger nonce, BigInteger deadline, byte[] salt)
         {
             TypedData<DomainWithSalt> typedData = new();
             typedData.Types = new Dictionary<string, MemberDescription[]>()
@@ -99,11 +111,11 @@ namespace RallyProtocol.GSN
             return typedData;
         }
 
-        public static async Task<GsnTransactionDetails> GetPermitTx(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
+        public async Task<GsnTransactionDetails> GetPermitTx(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
         {
             ERC20ContractService token = new(provider.Eth, contractAddress);
             string name = await token.NameQueryAsync();
-            BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
+            BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
             BigInteger deadline = await GetPermitDeadline(provider);
             Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
 
@@ -148,14 +160,14 @@ namespace RallyProtocol.GSN
             return gsnTx;
         }
 
-        public static async Task<BigInteger> GetPermitDeadline(Web3 provider)
+        public async Task<BigInteger> GetPermitDeadline(Web3 provider)
         {
             HexBigInteger latestBlockNumber = await provider.Eth.Blocks.GetBlockNumber.SendRequestAsync();
             BlockWithTransactionHashes latestBlock = await provider.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
             return latestBlock.Timestamp.Value + 45;
         }
 
-        public static Task<ISignature> GetPermitEIP712Signature(Account account, string contractName, string contractAddress, RallyNetworkConfig config, BigInteger nonce, BigInteger amount, BigInteger deadline, byte[] salt)
+        public Task<ISignature> GetPermitEIP712Signature(Account account, string contractName, string contractAddress, RallyNetworkConfig config, BigInteger nonce, BigInteger amount, BigInteger deadline, byte[] salt)
         {
 
             // chainId to be used in EIP712

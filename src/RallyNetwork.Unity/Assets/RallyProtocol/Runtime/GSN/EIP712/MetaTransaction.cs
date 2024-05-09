@@ -13,6 +13,8 @@ using Nethereum.Signer;
 using Nethereum.Signer.EIP712;
 using Nethereum.Web3;
 
+using RallyProtocol.Logging;
+using RallyProtocol.Networks;
 using RallyProtocol.Utilities;
 
 using UnityEngine;
@@ -25,13 +27,24 @@ namespace RallyProtocol.GSN
     public class MetaTransaction
     {
 
-        public static async Task<bool> HasExecuteMetaTransaction(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
+        protected IRallyLogger logger;
+        protected GsnTransactionHelper transactionHelper;
+
+        public IRallyLogger Logger => this.logger;
+
+        public MetaTransaction(IRallyLogger logger, GsnTransactionHelper transactionHelper)
+        {
+            this.logger = logger;
+            this.transactionHelper = transactionHelper;
+        }
+
+        public async Task<bool> HasExecuteMetaTransaction(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
         {
             try
             {
                 ERC20ContractService token = new(provider.Eth, contractAddress);
                 string name = await token.NameQueryAsync();
-                BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
+                BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
 
                 TransferFunction transferFunction = new()
                 {
@@ -59,7 +72,7 @@ namespace RallyProtocol.GSN
             }
         }
 
-        public static TypedData<DomainWithSalt> GetTypedMetaTransaction(string name, string version, byte[] salt, string verifyingContract, BigInteger nonce, string from, string functionSignature)
+        public TypedData<DomainWithSalt> GetTypedMetaTransaction(string name, string version, byte[] salt, string verifyingContract, BigInteger nonce, string from, string functionSignature)
         {
             TypedData<DomainWithSalt> typedData = new();
             typedData.Types = new Dictionary<string, MemberDescription[]>()
@@ -88,7 +101,7 @@ namespace RallyProtocol.GSN
             return typedData;
         }
 
-        public static Task<ISignature> GetMetaTransactionEIP712Signature(Account account, string contractName, string contractAddress, string functionSignatuer, RallyNetworkConfig config, BigInteger nonce)
+        public Task<ISignature> GetMetaTransactionEIP712Signature(Account account, string contractName, string contractAddress, string functionSignatuer, RallyNetworkConfig config, BigInteger nonce)
         {
 
             // name and chainId to be used in EIP712
@@ -105,11 +118,11 @@ namespace RallyProtocol.GSN
             return Task.FromResult<ISignature>(ethSignature);
         }
 
-        public static async Task<GsnTransactionDetails> GetExecuteMetaTransactionTx(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
+        public async Task<GsnTransactionDetails> GetExecuteMetaTransactionTx(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
         {
             ERC20ContractService token = new(provider.Eth, contractAddress);
             string name = await token.NameQueryAsync();
-            BigInteger nonce = await GsnTransactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
+            BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
 
             TransferFunction transferFunction = new()
             {

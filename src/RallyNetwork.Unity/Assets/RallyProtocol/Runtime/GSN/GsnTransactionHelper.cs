@@ -25,9 +25,8 @@ using Newtonsoft.Json;
 
 using RallyProtocol.Contracts;
 using RallyProtocol.GSN.Contracts;
-
-using UnityEngine;
-using UnityEngine.Networking;
+using RallyProtocol.Logging;
+using RallyProtocol.Networks;
 
 using Account = Nethereum.Web3.Accounts.Account;
 
@@ -39,17 +38,26 @@ namespace RallyProtocol.GSN
 
         public const string GsnDomainSeparatorVersion = "3";
 
-        public static async Task<string> HandleGsnResponse(UnityWebRequest request, Web3 provider)
+        protected IRallyLogger logger;
+
+        public IRallyLogger Logger => this.logger;
+
+        public GsnTransactionHelper(IRallyLogger logger)
         {
-            if (request.result != UnityWebRequest.Result.Success)
+            this.logger = logger;
+        }
+
+        public async Task<string> HandleGsnResponse(RallyHttpResponse httpResponse, Web3 provider)
+        {
+            if (!httpResponse.IsCompletedSuccessfully)
             {
-                throw new System.Exception($"Unable to perform web request, error: {request.error}\nRequest URL: {request.url}\nResponse Code: {request.responseCode}\nResponse Text: {request.downloadHandler.text}\nRequest Text: {Encoding.UTF8.GetString(request.uploadHandler.data)}");
+                throw new System.Exception($"Unable to perform web request, error: {httpResponse.ErrorMessage}\nRequest URL: {httpResponse.Url}\nResponse Code: {httpResponse.ResponseCode}\nResponse Text: {httpResponse.ResponseText}\nRequest Text: {httpResponse.RequestText}");
             }
 
-            GsnResponse response = JsonConvert.DeserializeObject<GsnResponse>(request.downloadHandler.text);
+            GsnResponse response = JsonConvert.DeserializeObject<GsnResponse>(httpResponse.ResponseText);
             if (!string.IsNullOrEmpty(response.Error))
             {
-                Debug.LogError($"Relay failed, error: {request.error}\nRequest URL: {request.url}\nResponse Code: {request.responseCode}\nResponse Text: {request.downloadHandler.text}\nRequest Text: {Encoding.UTF8.GetString(request.uploadHandler.data)}");
+                Logger.LogError($"Relay failed, error: {httpResponse.ErrorMessage}\nRequest URL: {httpResponse.Url}\nResponse Code: {httpResponse.ResponseCode}\nResponse Text: {httpResponse.ResponseText}\nRequest Text: {httpResponse.RequestText}");
                 throw new RelayException(new System.Exception(response.Error));
             }
             else
@@ -70,7 +78,7 @@ namespace RallyProtocol.GSN
             }
         }
 
-        public static string GetRelayRequestId(GsnRelayRequest gsnRelayRequest, string signature)
+        public string GetRelayRequestId(GsnRelayRequest gsnRelayRequest, string signature)
         {
             RelayRequest relayRequest = CreateAbiRelayRequest(gsnRelayRequest);
             ABIValue[] values = new ABIValue[] {
@@ -88,7 +96,7 @@ namespace RallyProtocol.GSN
             return $"0x{prefixedRelayRequestId}";
         }
 
-        public static Task<string> SignRequest(GsnRelayRequest relayRequest, string domainSeparatorName, string chainId, Account account)
+        public Task<string> SignRequest(GsnRelayRequest relayRequest, string domainSeparatorName, string chainId, Account account)
         {
             Eip712TypedDataSigner signer = new();
             TypedData<DomainWithChainIdString> typedData = new();
@@ -107,7 +115,7 @@ namespace RallyProtocol.GSN
                 ["RelayData"] = TypedGsnRequestData.RelayDataType2.ToArray(),
             };
 
-            var messageData = new MemberValue[] {
+            MemberValue[] messageData = new MemberValue[] {
                 new() { TypeName = "address", Value = relayRequest.Request.From.ToLowerInvariant() },
                 new() { TypeName = "address", Value = relayRequest.Request.To.ToLowerInvariant() },
                 new() { TypeName = "uint256", Value = relayRequest.Request.Value },
@@ -135,13 +143,13 @@ namespace RallyProtocol.GSN
             return Task.FromResult(newSig);
         }
 
-        public static GsnRequestMessage CreateGsnRequestMessage(GsnRelayRequest gsnRelayRequest)
+        public GsnRequestMessage CreateGsnRequestMessage(GsnRelayRequest gsnRelayRequest)
         {
             RelayRequest relayRequest = CreateAbiRelayRequest(gsnRelayRequest);
             return new(relayRequest.Request, relayRequest.RelayData);
         }
 
-        public static (int ZeroBytes, int NonZeroBytes) CalculateCallDataBytesZeroNonZero(string callData)
+        public (int ZeroBytes, int NonZeroBytes) CalculateCallDataBytesZeroNonZero(string callData)
         {
             byte[] callDataBuf = callData.HexToByteArray();
             int callDataZeroBytes = 0;
@@ -162,13 +170,13 @@ namespace RallyProtocol.GSN
             return (ZeroBytes: callDataZeroBytes, NonZeroBytes: callDataNonZeroBytes);
         }
 
-        public static int CalculateCallDataCost(string msgData, int gtxDataNonZero, int gtxDataZero)
+        public int CalculateCallDataCost(string msgData, int gtxDataNonZero, int gtxDataZero)
         {
             var callDataBytes = CalculateCallDataBytesZeroNonZero(msgData);
             return callDataBytes.ZeroBytes * gtxDataZero + callDataBytes.NonZeroBytes * gtxDataNonZero;
         }
 
-        public static string EstimateGasWithoutCallData(GsnTransactionDetails transaction, int gtxDataNonZero, int gtxDataZero)
+        public string EstimateGasWithoutCallData(GsnTransactionDetails transaction, int gtxDataNonZero, int gtxDataZero)
         {
             string originalGas = transaction.Gas;
             int callDataCost = CalculateCallDataCost(transaction.Data, gtxDataNonZero, gtxDataZero);
@@ -177,7 +185,7 @@ namespace RallyProtocol.GSN
             return adjustedGas.HexValue;
         }
 
-        public static async Task<HexBigInteger> EstimateCallDataCostForRequest(GsnRelayRequest relayRequestOriginal, RallyGSNConfig config, Web3 provider)
+        public async Task<HexBigInteger> EstimateCallDataCostForRequest(GsnRelayRequest relayRequestOriginal, RallyGSNConfig config, Web3 provider)
         {
             const int MaxSignatureLength = 65;
 
@@ -208,7 +216,7 @@ namespace RallyProtocol.GSN
             return new HexBigInteger(CalculateCallDataCost(data, config.GtxDataNonZero, config.GtxDataZero));
         }
 
-        public static RelayRequest CreateAbiRelayRequest(GsnRelayRequest gsnRelayRequest)
+        public RelayRequest CreateAbiRelayRequest(GsnRelayRequest gsnRelayRequest)
         {
             return new()
             {
@@ -217,7 +225,7 @@ namespace RallyProtocol.GSN
             };
         }
 
-        public static RelayData CreateAbiRelayData(GsnRelayData gsnRelayData)
+        public RelayData CreateAbiRelayData(GsnRelayData gsnRelayData)
         {
             BigInteger transactionCalldataGasUsed;
             if (gsnRelayData.TransactionCalldataGasUsed.IsHex())
@@ -242,7 +250,7 @@ namespace RallyProtocol.GSN
             };
         }
 
-        public static ForwardRequest CreateAbiForwardRequest(GsnForwardRequest gsnForwardRequest)
+        public ForwardRequest CreateAbiForwardRequest(GsnForwardRequest gsnForwardRequest)
         {
             BigInteger gas;
             if (gsnForwardRequest.Gas.IsHex())
@@ -266,13 +274,13 @@ namespace RallyProtocol.GSN
             };
         }
 
-        public static async Task<BigInteger> GetSenderNonce(string sender, string forwarderAddress, Web3 provider)
+        public async Task<BigInteger> GetSenderNonce(string sender, string forwarderAddress, Web3 provider)
         {
             IContractQueryHandler<GetNonceFunction> function = provider.Eth.GetContractQueryHandler<GetNonceFunction>();
             return await function.QueryAsync<BigInteger>(forwarderAddress, new() { From = sender });
         }
 
-        public static async Task<BigInteger> GetSenderContractNonce(Web3 provider, string tokenAddress, string address)
+        public async Task<BigInteger> GetSenderContractNonce(Web3 provider, string tokenAddress, string address)
         {
             try
             {
@@ -282,37 +290,6 @@ namespace RallyProtocol.GSN
             {
                 return await provider.Eth.GetContractQueryHandler<GetNonceFunction>().QueryAsync<BigInteger>(tokenAddress, new GetNonceFunction { From = address });
             }
-
-            // TODO: to be removed
-            // 0x2d0335ab is the function selector for the 'getNonce' function
-            // 0x7ecebe00 is the function selector for the 'nonces' function
-            //string getNonceSelectr = "2d0335ab";
-            //string noncesSelector = "7ecebe00";
-
-            //string bytecode = await contract.ContractHandler.EthApiContractService.GetCode.SendRequestAsync(address);
-            //if (string.IsNullOrEmpty(bytecode) || bytecode.Length <= 2)
-            //{
-            //    throw new RallyException("Could not get nonce: No bytecode found for token");
-            //}
-
-            //// check if the bytecode includes the function selector for the relative functions
-            //// there is still an issue with fallback functions, and data that may include the function selector
-            //if (bytecode.Contains(getNonceSelectr))
-            //{
-            //    ERC20GetNonceFunction getNonceFunction = new();
-            //    getNonceFunction.User = address;
-            //    return await contract.ContractHandler.QueryAsync<ERC20GetNonceFunction, BigInteger>(getNonceFunction);
-            //}
-            //else if (bytecode.Contains(noncesSelector))
-            //{
-            //    NoncesFunction noncesFunction = new();
-            //    noncesFunction.Owner = address;
-            //    return await contract.ContractHandler.QueryAsync<NoncesFunction, BigInteger>(noncesFunction);
-            //}
-            //else
-            //{
-            //    throw new RallyException("Could not get nonce: No nonce function found for token");
-            //}
         }
 
     }

@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using RallyProtocol.Accounts;
+using RallyProtocol.Networks;
+
 using UnityEngine;
 
 namespace RallyProtocol.Samples
@@ -21,7 +24,7 @@ namespace RallyProtocol.Samples
         void Start()
         {
             Debug.Log("Initializing Rally Network...");
-            this.rlyNetwork = RallyNetworkFactory.Create(this.networkType, this.apiKey);
+            this.rlyNetwork = RallyUnityNetworkFactory.Create(this.networkType, this.apiKey);
             Debug.Log($"Initialized Rally {this.networkType} network using API key: {this.apiKey}");
         }
 
@@ -30,7 +33,7 @@ namespace RallyProtocol.Samples
             try
             {
                 Debug.Log("Creating account...");
-                await WalletManager.Default.CreateAccountAsync(new() { Overwrite = true });
+                await RallyUnityAccountManager.Default.CreateAccountAsync(new() { Overwrite = true });
                 Debug.Log("Account created successfully");
             }
             catch (Exception ex)

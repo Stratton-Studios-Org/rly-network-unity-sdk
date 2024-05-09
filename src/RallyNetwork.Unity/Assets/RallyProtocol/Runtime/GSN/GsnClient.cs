@@ -15,10 +15,10 @@ using Nethereum.Web3.Accounts;
 
 using Newtonsoft.Json;
 
+using RallyProtocol.Core;
 using RallyProtocol.GSN.Contracts;
-
-using UnityEngine;
-using UnityEngine.Networking;
+using RallyProtocol.Logging;
+using RallyProtocol.Networks;
 
 namespace RallyProtocol.GSN
 {
@@ -37,29 +37,35 @@ namespace RallyProtocol.GSN
     public interface IGsnClient
     {
 
+        public Task<string> RelayTransaction(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction);
+
     }
 
     public class GsnClient
     {
 
-        public GsnClient()
+        protected IRallyWeb3Provider web3Provider;
+        protected IRallyHttpHandler httpHandler;
+
+        protected IRallyLogger logger;
+        protected GsnTransactionHelper transactionHelper;
+
+        public IRallyLogger Logger => this.logger;
+        public GsnTransactionHelper TransactionHelper => this.transactionHelper;
+
+        public GsnClient(IRallyWeb3Provider web3Provider, IRallyHttpHandler httpHandler, IRallyLogger logger)
         {
+            this.web3Provider = web3Provider;
+            this.httpHandler = httpHandler;
+            this.logger = logger;
+            this.transactionHelper = new(logger);
         }
 
         #region Public Methods
 
         public Web3 GetProvider(RallyNetworkConfig config)
         {
-            UnityWebRequestRpcTaskClient unityClient = new(new Uri(config.Gsn.RpcUrl), null, null);
-            string apiKey = "";
-            if (!string.IsNullOrEmpty(config.RelayerApiKey))
-            {
-                apiKey = UnityWebRequest.EscapeURL(config.RelayerApiKey);
-                apiKey = config.RelayerApiKey;
-            }
-
-            unityClient.RequestHeaders["Authorization"] = $"Bearer {apiKey}";
-            return new Web3(unityClient);
+            return this.web3Provider.GetWeb3(config);
         }
 
         public async Task<string> RelayTransaction(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction)
@@ -70,24 +76,13 @@ namespace RallyProtocol.GSN
             GsnRelayHttpRequest httpRequest = await BuildRelayHttpRequest(relayRequest, updatedConfig.Config, account, provider);
 
             // Update request metadata with relayRequestId
-            string relayRequestId = GsnTransactionHelper.GetRelayRequestId(httpRequest.RelayRequest, httpRequest.Metadata.Signature);
+            string relayRequestId = this.transactionHelper.GetRelayRequestId(httpRequest.RelayRequest, httpRequest.Metadata.Signature);
             httpRequest.Metadata.RelayRequestId = relayRequestId;
 
             string url = $"{config.Gsn.RelayUrl}/relay";
-            //UnityWebRequest request = new(url, UnityWebRequest.kHttpVerbPOST);
-            //request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(httpRequest)));
-            //request.uploadHandler.contentType = "application/json";
-            //request.SetRequestHeader("Content-Type", "application/json");
-            //request.downloadHandler = new DownloadHandlerBuffer();
-            UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(httpRequest), "application/json");
-            AddAuthHeader(request, config);
-            request.SendWebRequest();
-            while (!request.isDone)
-            {
-                await Task.Yield();
-            }
+            RallyHttpResponse response = await this.httpHandler.PostJson(url, JsonConvert.SerializeObject(httpRequest), AddAuthHeader(config));
 
-            return await GsnTransactionHelper.HandleGsnResponse(request, provider);
+            return await this.transactionHelper.HandleGsnResponse(response, provider);
         }
 
         #endregion
@@ -96,7 +91,7 @@ namespace RallyProtocol.GSN
 
         protected async Task<GsnRelayHttpRequest> BuildRelayHttpRequest(GsnRelayRequest relayRequest, RallyNetworkConfig config, Account account, Web3 provider)
         {
-            string signature = await GsnTransactionHelper.SignRequest(relayRequest, config.Gsn.DomainSeparatorName, config.Gsn.ChainId, account);
+            string signature = await this.transactionHelper.SignRequest(relayRequest, config.Gsn.DomainSeparatorName, config.Gsn.ChainId, account);
             const string approvalData = "0x";
 
             HexBigInteger relayLastKnownNonce = await provider.Eth.Transactions.GetTransactionCount.SendRequestAsync(relayRequest.RelayData.RelayWorker);
@@ -124,12 +119,12 @@ namespace RallyProtocol.GSN
 
         protected async Task<GsnRelayRequest> BuildRelayRequest(GsnTransactionDetails transaction, RallyNetworkConfig config, Account account, Web3 provider)
         {
-            transaction.Gas = GsnTransactionHelper.EstimateGasWithoutCallData(transaction, config.Gsn.GtxDataNonZero, config.Gsn.GtxDataZero);
+            transaction.Gas = this.transactionHelper.EstimateGasWithoutCallData(transaction, config.Gsn.GtxDataNonZero, config.Gsn.GtxDataZero);
 
             long secondsNow = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             long validUntilTime = secondsNow + config.Gsn.RequestValidSeconds;
 
-            BigInteger senderNonce = await GsnTransactionHelper.GetSenderNonce(account.Address, config.Gsn.ForwarderAddress, provider);
+            BigInteger senderNonce = await this.transactionHelper.GetSenderNonce(account.Address, config.Gsn.ForwarderAddress, provider);
 
             GsnRelayRequest relayRequest = new()
             {
@@ -156,7 +151,7 @@ namespace RallyProtocol.GSN
                 }
             };
 
-            HexBigInteger transactionCallDataGasUsed = await GsnTransactionHelper.EstimateCallDataCostForRequest(relayRequest, config.Gsn, provider);
+            HexBigInteger transactionCallDataGasUsed = await this.transactionHelper.EstimateCallDataCostForRequest(relayRequest, config.Gsn, provider);
             relayRequest.RelayData.TransactionCalldataGasUsed = transactionCallDataGasUsed.Value.ToString();
 
             return relayRequest;
@@ -165,24 +160,15 @@ namespace RallyProtocol.GSN
         protected async Task<(RallyNetworkConfig Config, GsnTransactionDetails Transaction)> UpdateConfig(RallyNetworkConfig config, GsnTransactionDetails transaction)
         {
             string url = $"{config.Gsn.RelayUrl}/getaddr";
-            UnityWebRequest request = UnityWebRequest.Get(url);
-            AddAuthHeader(request, config);
-            request.SendWebRequest();
-            while (!request.isDone)
+            RallyHttpResponse httpResponse = await this.httpHandler.Get(url, AddAuthHeader(config));
+            if (!httpResponse.IsCompletedSuccessfully)
             {
-                await Task.Yield();
+                throw new RallyException($"Updating config failed:\nResponse Code: {httpResponse.ResponseCode}\nError: {httpResponse.ErrorMessage}\nResponse Text: {httpResponse.ResponseText}");
             }
 
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                throw new RallyException($"Updating config failed:\nResponse Code: {request.responseCode}\nError: {request.error}\nResponse Text: {request.downloadHandler.text}");
-            }
-            string response = request.downloadHandler.text;
-            GsnServerConfigPayload serverConfigUpdate = JsonConvert.DeserializeObject<GsnServerConfigPayload>(response);
-
+            GsnServerConfigPayload serverConfigUpdate = httpResponse.DeserializeJson<GsnServerConfigPayload>();
             config.Gsn.RelayWorkerAddress = serverConfigUpdate.RelayWorkerAddress;
             SetGasFeesForTransaction(transaction, serverConfigUpdate);
-
             return (Config: config, Transaction: transaction);
         }
 
@@ -203,17 +189,21 @@ namespace RallyProtocol.GSN
             }
         }
 
-        protected UnityWebRequest AddAuthHeader(UnityWebRequest request, RallyNetworkConfig config)
+        protected Dictionary<string, string> AddAuthHeader(RallyNetworkConfig config, Dictionary<string, string> existingHeaders = null)
         {
+            if (existingHeaders == null)
+            {
+                existingHeaders = new();
+            }
+
             string apiKey = "";
             if (!string.IsNullOrEmpty(config.RelayerApiKey))
             {
-                apiKey = UnityWebRequest.EscapeURL(config.RelayerApiKey);
                 apiKey = config.RelayerApiKey;
             }
 
-            request.SetRequestHeader("Authorization", $"Bearer {apiKey}");
-            return request;
+            existingHeaders["Authorization"] = $"Bearer {apiKey}";
+            return existingHeaders;
         }
 
         #endregion
