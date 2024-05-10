@@ -87,7 +87,7 @@ namespace RallyProtocol.Tests
                 {
 
                     // Claim RLY
-                    string result = await network.ClaimRly();
+                    string result = await network.ClaimRlyAsync();
                     Assert.IsNotEmpty(result);
                 }
                 catch (Exception ex)

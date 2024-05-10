@@ -14,6 +14,8 @@ namespace RallyProtocol
     public class GsnTransactionDetails
     {
 
+        #region Fields
+
         /// <summary>
         /// Users address
         /// </summary>
@@ -37,30 +39,76 @@ namespace RallyProtocol
         /// </summary>
         [JsonProperty("value")]
         public string Value;
-        //optional gas
+
+        /// <summary>
+        /// Optional gas
+        /// </summary>
         [JsonProperty("gas")]
         public string Gas;
 
-        //should be hex
+        /// <summary>
+        /// Should be in hex format.
+        /// </summary>
         [JsonProperty("maxFeePerGas")]
         public string MaxFeePerGas;
-        //should be hex
+
+        /// <summary>
+        /// Should be in hex format.
+        /// </summary>
         [JsonProperty("maxPriorityFeePerGas")]
         public string MaxPriorityFeePerGas;
-        //paymaster contract address
+
+        /// <summary>
+        /// Paymaster contract address.
+        /// </summary>
         [JsonProperty("paymasterData")]
         public string PaymasterData;
 
-        //Value used to identify applications in RelayRequests.
+        /// <summary>
+        /// Value used to identify applications in RelayRequests.
+        /// </summary>
         [JsonProperty("clientId")]
         public string ClientId;
 
-        // Optional parameters for RelayProvider only:
-        /**
-         * Set to 'false' to create a direct transaction
-         */
+        /// <summary>
+        /// Set to 'false' to create a direct transaction.
+        /// </summary>
+        /// <remarks>
+        /// Optional parameters for relay providers only.
+        /// </remarks>
         [JsonProperty("useGSN")]
         public bool? UseGSN;
+
+        #endregion
+
+        #region Constructors
+
+        public GsnTransactionDetails() { }
+
+        public GsnTransactionDetails(string from, string data, string to, string maxFeePerGas, string maxPriorityFeePerGas, string? value = null, string? gas = null, string? paymasterData = null, string? clientId = null, bool? useGsn = null)
+        {
+            From = from.ToLowerInvariant();
+            Data = data;
+            To = to.ToLowerInvariant();
+            Value = value;
+            Gas = gas;
+            MaxFeePerGas = maxFeePerGas;
+            MaxPriorityFeePerGas = maxPriorityFeePerGas;
+            PaymasterData = paymasterData;
+            ClientId = clientId;
+            UseGSN = useGsn;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public override string ToString()
+        {
+            return $"from: {From}, data: {Data}, to: {To}, value: {Value}, gas: {Gas}, maxFeePerGas: {MaxFeePerGas}, maxPriorityFeePerGas: {MaxPriorityFeePerGas}, paymasterData: {PaymasterData}, clientId: {ClientId}, useGSN: {UseGSN}";
+        }
+
+        #endregion
 
     }
 

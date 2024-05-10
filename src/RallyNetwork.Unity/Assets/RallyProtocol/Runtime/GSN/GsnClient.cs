@@ -38,12 +38,17 @@ namespace RallyProtocol.GSN
     public interface IGsnClient
     {
 
-        public Task<string> RelayTransaction(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction);
+        public IRallyLogger Logger { get; }
+        public GsnTransactionHelper TransactionHelper { get; }
+
+        public Task<string> RelayTransactionAsync(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction);
 
     }
 
-    public class GsnClient
+    public class GsnClient : IGsnClient
     {
+
+        #region Fields
 
         protected IRallyWeb3Provider web3Provider;
         protected IRallyHttpHandler httpHandler;
@@ -51,8 +56,16 @@ namespace RallyProtocol.GSN
         protected IRallyLogger logger;
         protected GsnTransactionHelper transactionHelper;
 
+        #endregion
+
+        #region Properties
+
         public IRallyLogger Logger => this.logger;
         public GsnTransactionHelper TransactionHelper => this.transactionHelper;
+
+        #endregion
+
+        #region Constructors
 
         public GsnClient(IRallyWeb3Provider web3Provider, IRallyHttpHandler httpHandler, IRallyLogger logger)
         {
@@ -62,6 +75,8 @@ namespace RallyProtocol.GSN
             this.transactionHelper = new(logger);
         }
 
+        #endregion
+
         #region Public Methods
 
         public Web3 GetProvider(RallyNetworkConfig config)
@@ -69,7 +84,7 @@ namespace RallyProtocol.GSN
             return this.web3Provider.GetWeb3(config);
         }
 
-        public async Task<string> RelayTransaction(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction)
+        public async Task<string> RelayTransactionAsync(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction)
         {
             Web3 provider = GetProvider(config);
             var updatedConfig = await UpdateConfig(config, transaction);

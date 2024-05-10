@@ -40,10 +40,22 @@ namespace RallyProtocol.Networks
         protected IRallyLogger logger;
         protected IRallyAccountManager accountManager;
         protected RallyNetworkConfig config;
-        protected GsnClient gsnClient;
+        protected IGsnClient gsnClient;
 
         protected PermitTransaction permitTransaction;
         protected MetaTransaction metaTransaction;
+
+        #endregion
+
+        #region Properties
+
+        public IRallyAccountManager AccountManager => this.accountManager;
+
+        public IRallyLogger Logger => this.logger;
+
+        public IRallyHttpHandler HttpHandler => this.httpHandler;
+
+        public IGsnClient GsnClient => this.gsnClient;
 
         #endregion
 
@@ -56,7 +68,7 @@ namespace RallyProtocol.Networks
             this.logger = logger;
             this.accountManager = accountManager;
             this.config = config;
-            this.gsnClient = new(web3Provider, httpHandler, logger);
+            this.gsnClient = new GsnClient(web3Provider, httpHandler, logger);
 
             this.permitTransaction = new(this.logger, this.gsnClient.TransactionHelper);
             this.metaTransaction = new(this.logger, this.gsnClient.TransactionHelper);
@@ -75,9 +87,10 @@ namespace RallyProtocol.Networks
 
         #region Public Methods
 
-        public Web3 GetProvider()
+        public async Task<Web3> GetProviderAsync()
         {
-            return web3Provider.GetWeb3(this.config);
+            Account account = await GetAccountAsync();
+            return web3Provider.GetWeb3(account, this.config);
         }
 
         public async Task<Account> GetAccountAsync()
@@ -91,23 +104,23 @@ namespace RallyProtocol.Networks
             return account;
         }
 
-        public async Task<string> Transfer(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string tokenAddress = null)
+        public async Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string tokenAddress = null)
         {
-            Web3 provider = GetProvider();
+            Web3 provider = await GetProviderAsync();
             Account account = await GetAccountAsync();
             tokenAddress = GetTokenAddress(tokenAddress);
             ERC20ContractService token = new(provider.Eth, tokenAddress);
             byte decimals = await token.DecimalsQueryAsync();
             BigInteger amountBigNum = Web3.Convert.ToWei(amount, decimals);
-            return await TransferExact(destinationAddress, amountBigNum, metaTxMethod, tokenAddress);
+            return await TransferExactAsync(destinationAddress, amountBigNum, metaTxMethod, tokenAddress);
         }
 
-        public async Task<string> TransferExact(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string tokenAddress = null)
+        public async Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string tokenAddress = null)
         {
-            Web3 provider = GetProvider();
+            Web3 provider = await GetProviderAsync();
             Account account = await GetAccountAsync();
             tokenAddress = GetTokenAddress(tokenAddress);
-            BigInteger sourceBalance = await GetExactBalance(tokenAddress);
+            BigInteger sourceBalance = await GetExactBalanceAsync(tokenAddress);
             BigInteger sourceFinalBalance = sourceBalance - amount;
             if (sourceFinalBalance < 0)
             {
@@ -146,21 +159,21 @@ namespace RallyProtocol.Networks
                 }
             }
 
-            return await Relay(transferTx);
+            return await RelayAsync(transferTx);
         }
 
-        public async Task<string> ClaimRly()
+        public async Task<string> ClaimRlyAsync()
         {
             Account account = await GetAccountAsync();
 
-            decimal balance = await GetDisplayBalance();
+            decimal balance = await GetDisplayBalanceAsync();
             if (balance < 0)
             {
                 throw new PriorDustingException();
             }
 
             string contractAddress = this.config.Contracts.TokenFaucet;
-            Web3 provider = GetProvider();
+            Web3 provider = await GetProviderAsync();
             ClaimFunction claimFunctionInput = new()
             {
                 FromAddress = account.Address,
@@ -181,34 +194,34 @@ namespace RallyProtocol.Networks
                 Gas = estimatedGas.HexValue,
             };
 
-            return await Relay(gsnTx);
+            return await RelayAsync(gsnTx);
         }
 
-        public async Task<decimal> GetDisplayBalance(string tokenAddress = null)
+        public async Task<decimal> GetDisplayBalanceAsync(string tokenAddress = null)
         {
             tokenAddress = GetTokenAddress(tokenAddress);
-            Web3 provider = GetProvider();
+            Web3 provider = await GetProviderAsync();
             ERC20ContractService token = new(provider.Eth, tokenAddress);
             Account account = await GetAccountAsync();
             byte decimals = await token.DecimalsQueryAsync();
-            BigInteger exactBalance = await GetExactBalance(tokenAddress);
+            BigInteger exactBalance = await GetExactBalanceAsync(tokenAddress);
             return Web3.Convert.FromWei(exactBalance, decimals);
         }
 
-        public async Task<BigInteger> GetExactBalance(string tokenAddress = null)
+        public async Task<BigInteger> GetExactBalanceAsync(string tokenAddress = null)
         {
             Account account = await GetAccountAsync();
             tokenAddress = GetTokenAddress(tokenAddress);
-            Web3 provider = GetProvider();
+            Web3 provider = await GetProviderAsync();
             ERC20ContractService token = new(provider.Eth, tokenAddress);
             BigInteger bal = await token.BalanceOfQueryAsync(account.Address);
             return bal;
         }
 
-        public async Task<string> Relay(GsnTransactionDetails tx)
+        public async Task<string> RelayAsync(GsnTransactionDetails tx)
         {
             Account account = await GetAccountAsync();
-            return await this.gsnClient.RelayTransaction(account, this.config, tx);
+            return await this.gsnClient.RelayTransactionAsync(account, this.config, tx);
         }
 
         public void SetApiKey(string apiKey)
