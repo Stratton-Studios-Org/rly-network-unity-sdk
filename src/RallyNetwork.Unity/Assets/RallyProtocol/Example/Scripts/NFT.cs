@@ -16,7 +16,7 @@ using UnityEngine;
 namespace RallyProtocol.Samples
 {
 
-    public class NFT : MonoBehaviour
+    public class NFT
     {
 
         public const string TestNftResourcePath = "RallyProtocol/Samples/TestNft";

@@ -117,16 +117,25 @@ namespace RallyProtocol.Samples
             NFT nft = new NFT(NftContractAddress, walletAddress, provider);
             int nextNFTId = await nft.GetCurrentNFTIdAsync();
             GsnTransactionDetails gsnTx = await nft.GetMinftNFTTx();
-            string txHash = await this.rlyNetwork.RelayAsync(gsnTx);
-            string tokenURI = await nft.GetTokenURIAsync(nextNFTId);
-            string[] parts = tokenURI.Split(',');
-            string base64Data = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(parts[1]));
+            try
+            {
+                string txHash = await this.rlyNetwork.RelayAsync(gsnTx);
+                string tokenURI = await nft.GetTokenURIAsync(nextNFTId);
+                string[] parts = tokenURI.Split(',');
+                string base64Data = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(parts[1]));
 
-            Dictionary<string, string> json = JsonConvert.DeserializeObject<Dictionary<string, string>>(base64Data);
-            string imageData = json!["image"].Split(",")[1];
+                Dictionary<string, string> json = JsonConvert.DeserializeObject<Dictionary<string, string>>(base64Data);
+                string imageData = json!["image"].Split(",")[1];
 
-            Debug.Log($"NFT Image text: {Encoding.UTF8.GetString(Convert.FromBase64String(imageData))}");
-            Debug.Log($"NFT Image data: {imageData}");
+                Debug.Log($"NFT Image text: {Encoding.UTF8.GetString(Convert.FromBase64String(imageData))}");
+                Debug.Log($"NFT Image data: {imageData}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Miting NFT failed");
+                Debug.LogException(ex);
+            }
+
             this.canvasGroup.interactable = true;
         }
 
