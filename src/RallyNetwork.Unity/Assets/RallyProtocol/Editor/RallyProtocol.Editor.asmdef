@@ -1,0 +1,18 @@
+{
+    "name": "RallyProtocol.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6e78ccb746d8b5a42838b6e8e2442107"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

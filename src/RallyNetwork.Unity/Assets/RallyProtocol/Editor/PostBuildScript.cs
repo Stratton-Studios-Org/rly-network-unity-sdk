@@ -6,10 +6,12 @@ using UnityEditor.Callbacks;
 
 using UnityEngine;
 
-namespace RlyNetwork.Editor
+namespace RallyProtocol.Editor
 {
+
     public class PostBuildScript
     {
+
         [PostProcessBuild]
         public static void OnPostprocessBuild(BuildTarget buildTarget, string pathToBuiltProject)
         {
@@ -68,6 +70,7 @@ namespace RlyNetwork.Editor
 
             File.WriteAllLines(path, lines);
         }
+
     }
 
 }

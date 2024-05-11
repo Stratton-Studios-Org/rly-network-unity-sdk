@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2e225fb8414e023df2aa3acae2ef225471981316"
+    },
+    "com.nethereum.unity": {
+      "version": "https://github.com/Nethereum/Nethereum.Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0aee0feb80762f8e81a6e51ba6af22371f70c72c"
+    },
     "com.unity.collab-proxy": {
       "version": "2.3.1",
       "depth": 0,
@@ -56,6 +70,20 @@
     "com.unity.ide.vscode": {
       "version": "1.2.5",
       "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.mobile.android-logcat": {
+      "version": "1.4.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
