@@ -17,6 +17,7 @@ using RallyProtocol.Networks;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RallyProtocol.Samples
 {
@@ -127,7 +128,8 @@ namespace RallyProtocol.Samples
                 Dictionary<string, string> json = JsonConvert.DeserializeObject<Dictionary<string, string>>(base64Data);
                 string imageData = json!["image"].Split(",")[1];
 
-                Debug.Log($"NFT Image text: {Encoding.UTF8.GetString(Convert.FromBase64String(imageData))}");
+                string text = Encoding.UTF8.GetString(Convert.FromBase64String(imageData));
+                Debug.Log($"NFT Image text: {text}");
                 Debug.Log($"NFT Image data: {imageData}");
             }
             catch (Exception ex)
