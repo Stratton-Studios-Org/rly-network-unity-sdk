@@ -122,12 +122,13 @@ namespace RallyProtocol.Networks
             tokenAddress = GetTokenAddress(tokenAddress);
             BigInteger sourceBalance = await GetExactBalanceAsync(tokenAddress);
             BigInteger sourceFinalBalance = sourceBalance - amount;
-            if (sourceFinalBalance < 0)
+            if (sourceFinalBalance < BigInteger.Zero)
             {
                 throw new InsufficientBalanceException();
             }
 
             GsnTransactionDetails transferTx = null;
+            // TODO: MetaTxMethod.Permit isn't working
             if (metaTxMethod != null && metaTxMethod == MetaTxMethod.Permit || metaTxMethod == MetaTxMethod.ExecuteMetaTransaction)
             {
                 if (metaTxMethod == MetaTxMethod.Permit)

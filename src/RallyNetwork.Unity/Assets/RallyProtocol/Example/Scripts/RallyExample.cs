@@ -32,6 +32,11 @@ namespace RallyProtocol.Samples
         [SerializeField]
         protected TMP_Text infoText;
 
+        [SerializeField]
+        protected TMP_InputField recipientField;
+        [SerializeField]
+        protected TMP_InputField amountField;
+
         protected IRallyAccountManager accountManager;
         protected IRallyNetwork rlyNetwork;
 
@@ -66,8 +71,9 @@ namespace RallyProtocol.Samples
             string address = await this.accountManager.GetPublicAddressAsync();
             decimal balance = await this.rlyNetwork.GetDisplayBalanceAsync();
             BigInteger exactBalance = await this.rlyNetwork.GetExactBalanceAsync();
+            bool backedUp = await this.accountManager.IsWalletBackedUpToCloudAsync();
 
-            this.infoText.text = $"Mnemonic: {mnemonic}<br>Address: {address}<br>Balance: {balance}<br>Exact Balance: {exactBalance}";
+            this.infoText.text = $"Mnemonic: {mnemonic}<br>Address: {address}<br>Balance: {balance}<br>Exact Balance: {exactBalance}<br>Backed Up: {backedUp}";
         }
 
         public async void CreateAccount()
@@ -135,6 +141,22 @@ namespace RallyProtocol.Samples
             catch (Exception ex)
             {
                 Debug.LogError("Miting NFT failed");
+                Debug.LogException(ex);
+            }
+
+            this.canvasGroup.interactable = true;
+        }
+
+        public async void Transfer()
+        {
+            this.canvasGroup.interactable = false;
+            try
+            {
+                await this.rlyNetwork.TransferAsync(this.recipientField.text, decimal.Parse(this.amountField.text), MetaTxMethod.ExecuteMetaTransaction);
+                await UpdateInfoText();
+            }
+            catch (Exception ex)
+            {
                 Debug.LogException(ex);
             }
 
