@@ -72,16 +72,28 @@ namespace RallyProtocol.GSN
             }
         }
 
-        public TypedData<DomainWithSalt> GetTypedMetaTransaction(string name, string version, byte[] salt, string verifyingContract, BigInteger nonce, string from, string functionSignature)
+        public TypedData<DomainWithoutChainIdButSalt> GetTypedMetaTransaction(string name, string version, byte[] salt, string verifyingContract, BigInteger nonce, string from, string functionSignature)
         {
-            TypedData<DomainWithSalt> typedData = new();
+            TypedData<DomainWithoutChainIdButSalt> typedData = new();
             typedData.Types = new Dictionary<string, MemberDescription[]>()
             {
-                { "MetaTransaction", new MemberDescription[] {
-                    new() { Name = "nonce", Type = "uint256" },
-                    new() { Name = "from", Type = "address" },
-                    new() { Name = "functionSignature", Type = "bytes" },
-                } }
+                {
+                    "EIP712Domain",
+                    new MemberDescription[] {
+                        new() { Name = "name", Type = "string" },
+                        new() { Name = "version", Type = "string" },
+                        new() { Name = "verifyingContract", Type = "address" },
+                        new() { Name = "salt", Type = "bytes32" },
+                    }
+                },
+                {
+                    "MetaTransaction",
+                    new MemberDescription[] {
+                        new() { Name = "nonce", Type = "uint256" },
+                        new() { Name = "from", Type = "address" },
+                        new() { Name = "functionSignature", Type = "bytes" },
+                    }
+                }
             };
             typedData.PrimaryType = "MetaTransaction";
             typedData.Domain = new()
@@ -93,26 +105,26 @@ namespace RallyProtocol.GSN
             };
             typedData.Message = new MemberValue[]
             {
-                new() { TypeName = "owner", Value = nonce },
-                new() { TypeName = "from", Value = from },
-                new() { TypeName = "functionSignature", Value = functionSignature }
+                new() { TypeName = "uint256", Value = nonce },
+                new() { TypeName = "address", Value = from },
+                new() { TypeName = "bytes", Value = functionSignature }
             };
 
             return typedData;
         }
 
-        public Task<ISignature> GetMetaTransactionEIP712Signature(Account account, string contractName, string contractAddress, string functionSignatuer, RallyNetworkConfig config, BigInteger nonce)
+        public Task<ISignature> GetMetaTransactionEIP712Signature(Account account, string contractName, string contractAddress, string functionSignatue, RallyNetworkConfig config, BigInteger nonce)
         {
 
             // name and chainId to be used in EIP712
             BigInteger chainId = BigInteger.Parse(config.Gsn.ChainId);
             ;
             // typed data for signing
-            TypedData<DomainWithSalt> eip712Data = GetTypedMetaTransaction(contractName, "1", new HexBigInteger(chainId).HexValue.HexZeroPad(32).HexToByteArray(), contractAddress, nonce, account.Address, functionSignatuer);
+            TypedData<DomainWithoutChainIdButSalt> eip712Data = GetTypedMetaTransaction(contractName, "1", new HexBigInteger(chainId).HexValue.HexZeroPad(32).HexToByteArray(), contractAddress, nonce, account.Address, functionSignatue);
 
             //signature for metatransaction
             Eip712TypedDataSigner signer = new();
-            string signature = signer.SignTypedData(eip712Data, new EthECKey(account.PrivateKey));
+            string signature = signer.SignTypedDataV4(eip712Data, new EthECKey(account.PrivateKey));
             EthECDSASignature ethSignature = EthECDSASignatureFactory.ExtractECDSASignature(signature);
 
             return Task.FromResult<ISignature>(ethSignature);

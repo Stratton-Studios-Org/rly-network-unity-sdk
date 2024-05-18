@@ -114,10 +114,16 @@ namespace RallyProtocol.GSN
         public async Task<GsnTransactionDetails> GetPermitTx(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
         {
             ERC20ContractService token = new(provider.Eth, contractAddress);
-            string name = await token.NameQueryAsync();
+            //ERC721ContractService token = new ERC721Service(provider.Eth).GetContractService(contractAddress);
+            //ERC721ContractService token = new(provider.Eth, contractAddress);
+
             BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
+            string name = await token.NameQueryAsync();
+            //BigInteger nonce = await token.NoncesQueryAsync(account.Address);
+
             BigInteger deadline = await GetPermitDeadline(provider);
-            Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
+            //Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
+            Eip712DomainOutputDTO eip712Domain = await provider.Eth.GetContractQueryHandler<Eip712DomainFunction>().QueryAsync<Eip712DomainOutputDTO>(contractAddress);
 
             byte[] salt = eip712Domain.Salt;
             ISignature signature = await GetPermitEIP712Signature(account, name, token.ContractAddress, config, nonce, amount, deadline, salt);
