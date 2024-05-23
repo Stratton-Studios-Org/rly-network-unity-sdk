@@ -66,14 +66,21 @@ namespace RallyProtocol.Samples
 
         protected async Task UpdateInfoText()
         {
-            Account account = await this.accountManager.GetAccountAsync();
-            string mnemonic = await this.accountManager.GetAccountPhraseAsync();
-            string address = await this.accountManager.GetPublicAddressAsync();
-            decimal balance = await this.rlyNetwork.GetDisplayBalanceAsync();
-            BigInteger exactBalance = await this.rlyNetwork.GetExactBalanceAsync();
-            bool backedUp = await this.accountManager.IsWalletBackedUpToCloudAsync();
+            try
+            {
+                Account account = await this.accountManager.GetAccountAsync();
+                string mnemonic = await this.accountManager.GetAccountPhraseAsync();
+                string address = await this.accountManager.GetPublicAddressAsync();
+                decimal balance = await this.rlyNetwork.GetDisplayBalanceAsync();
+                BigInteger exactBalance = await this.rlyNetwork.GetExactBalanceAsync();
+                bool backedUp = await this.accountManager.IsWalletBackedUpToCloudAsync();
 
-            this.infoText.text = $"Mnemonic: {mnemonic}<br>Address: {address}<br>Balance: {balance}<br>Exact Balance: {exactBalance}<br>Backed Up: {backedUp}";
+                this.infoText.text = $"Mnemonic: {mnemonic}<br>Address: {address}<br>Balance: {balance}<br>Exact Balance: {exactBalance}<br>Backed Up: {backedUp}";
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+            }
         }
 
         public async void CreateAccount()

@@ -66,11 +66,29 @@ namespace RallyProtocol.Networks
 
         public static IRallyNetwork Create(RallyNetworkType type, string apiKey = null)
         {
+            if (apiKey == null)
+            {
+                RallyProtocolSettingsPreset preset = LoadMainSettingsPreset();
+                if (preset != null)
+                {
+                    apiKey = preset.ApiKey;
+                }
+            }
+
             return RallyNetworkFactory.Create(GetWeb3Provider(), GetHttpHandler(), GetLogger(), GetAccountManager(), type, apiKey);
         }
 
         public static IRallyNetwork Create(RallyNetworkConfig config, string apiKey = null)
         {
+            if (apiKey == null)
+            {
+                RallyProtocolSettingsPreset preset = LoadMainSettingsPreset();
+                if (preset != null)
+                {
+                    apiKey = preset.ApiKey;
+                }
+            }
+
             return RallyNetworkFactory.Create(GetWeb3Provider(), GetHttpHandler(), GetLogger(), GetAccountManager(), config, apiKey);
         }
 

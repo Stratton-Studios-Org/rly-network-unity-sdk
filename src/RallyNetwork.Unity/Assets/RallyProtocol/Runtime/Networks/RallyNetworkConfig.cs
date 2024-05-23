@@ -22,6 +22,12 @@ namespace RallyProtocol.Networks
             Gsn = RallyGSNConfig.Amoy
         };
 
+        public static readonly RallyNetworkConfig AmoyWithPermit = new()
+        {
+            Contracts = RallyContracts.AmoyWithPermit,
+            Gsn = RallyGSNConfig.AmoyWithPermit
+        };
+
         public static readonly RallyNetworkConfig Polygon = new()
         {
             Contracts = RallyContracts.Polygon,
@@ -69,6 +75,12 @@ namespace RallyProtocol.Networks
         {
             RlyERC20 = "0x846d8a5fb8a003b431b67115f809a9b9fffe5012",
             TokenFaucet = "0xb8c8274f775474f4f2549edcc4db45cbad936fac",
+        };
+
+        public static readonly RallyContracts AmoyWithPermit = new()
+        {
+            RlyERC20 = "0x758641a1b566998CaC5Bc5fC8032F001e1CEBeEf",
+            TokenFaucet = "0xAb5C5633a5c483499047e552C96E1760136dc70A",
         };
 
         public static readonly RallyContracts Polygon = new()
@@ -133,6 +145,25 @@ namespace RallyProtocol.Networks
             RelayWorkerAddress = "0xb9950b71ec94cbb274aeb1be98e697678077a17f",
             RelayUrl = "https://api.rallyprotocol.com",
             RpcUrl = "https://api.rallyprotocol.com/rpc",
+            ChainId = "80002",
+            MaxAcceptanceBudget = "285252",
+            DomainSeparatorName = "GSN Relayed Transaction",
+            GtxDataNonZero = 16,
+            GtxDataZero = 4,
+            RequestValidSeconds = 172800,
+            MaxPaymasterDataLength = 300,
+            MaxApprovalDataLength = 300,
+            MaxRelayNonceGap = 3,
+        };
+
+        public static readonly RallyGSNConfig AmoyWithPermit = new()
+        {
+            PaymasterAddress = "0xb570b57b821670707fF4E38Ea53fcb67192278F8",
+            ForwarderAddress = "0x0ae8FC9867CB4a124d7114B8bd15C4c78C4D40E5",
+            RelayHubAddress = "0xe213A20A9E6CBAfd8456f9669D8a0b9e41Cb2751",
+            RelayWorkerAddress = "0xb9950b71ec94cbb274aeb1be98e697678077a17f",
+            RelayUrl = "https://api.rallyprotocol.com",
+            RpcUrl = "https://polygon-amoy.g.alchemy.com/v2/oOsX9gjRzWeq5WQrlM3zvWAXZ9nIT2Cr",
             ChainId = "80002",
             MaxAcceptanceBudget = "285252",
             DomainSeparatorName = "GSN Relayed Transaction",

@@ -85,7 +85,7 @@ namespace RallyProtocol
 
         public GsnTransactionDetails() { }
 
-        public GsnTransactionDetails(string from, string data, string to, string maxFeePerGas, string maxPriorityFeePerGas, string? value = null, string? gas = null, string? paymasterData = null, string? clientId = null, bool? useGsn = null)
+        public GsnTransactionDetails(string from, string data, string to, string maxFeePerGas, string maxPriorityFeePerGas, string value = null, string gas = null, string paymasterData = null, string clientId = null, bool? useGsn = null)
         {
             From = from.ToLowerInvariant();
             Data = data;

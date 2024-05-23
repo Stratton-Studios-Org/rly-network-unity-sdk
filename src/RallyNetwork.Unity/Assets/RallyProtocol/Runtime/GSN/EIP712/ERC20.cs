@@ -10,7 +10,7 @@ namespace RallyProtocol.GSN
 
     public partial class PermitFunction : PermitFunctionBase { }
 
-    [Function("permit")]
+    [Function("permit", "bool")]
     public class PermitFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
@@ -104,8 +104,8 @@ namespace RallyProtocol.GSN
         public virtual string VerifyingContract { get; set; }
         [Parameter("bytes32", "salt", 6)]
         public virtual byte[] Salt { get; set; }
-        [Parameter("uint256[]", "extensions", 7)]
-        public virtual List<BigInteger> Extensions { get; set; }
+        //[Parameter("uint256[]", "extensions", 7)]
+        //public virtual List<BigInteger> Extensions { get; set; }
     }
 
 }

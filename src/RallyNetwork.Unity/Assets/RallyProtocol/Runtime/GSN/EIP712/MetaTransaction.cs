@@ -13,6 +13,7 @@ using Nethereum.Signer;
 using Nethereum.Signer.EIP712;
 using Nethereum.Web3;
 
+using RallyProtocol.Accounts;
 using RallyProtocol.Logging;
 using RallyProtocol.Networks;
 using RallyProtocol.Utilities;
@@ -123,10 +124,8 @@ namespace RallyProtocol.GSN
             TypedData<DomainWithoutChainIdButSalt> eip712Data = GetTypedMetaTransaction(contractName, "1", new HexBigInteger(chainId).HexValue.HexZeroPad(32).HexToByteArray(), contractAddress, nonce, account.Address, functionSignatue);
 
             //signature for metatransaction
-            Eip712TypedDataSigner signer = new();
-            string signature = signer.SignTypedDataV4(eip712Data, new EthECKey(account.PrivateKey));
+            string signature = account.SignTypedDataV4(eip712Data);
             EthECDSASignature ethSignature = EthECDSASignatureFactory.ExtractECDSASignature(signature);
-
             return Task.FromResult<ISignature>(ethSignature);
         }
 

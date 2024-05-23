@@ -1,6 +1,36 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/RallyProtocol/Editor/Windows/SetupWindow/RallySetupWindow.uss?fileID=7433441132597879392&amp;guid=9189c521165e5aa48a08f870926da72d&amp;type=3#RallySetupWindow" />
-    <ui:TextField picking-mode="Ignore" label="API Key" name="apiKey" />
-    <ui:EnumField label="Network Type" type="RallyProtocol.Networks.RallyNetworkType, RallyProtocol.Runtime" name="networkType" value="Amoy" />
-    <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="saveButton" />
+    <ui:VisualElement name="container" style="flex-grow: 1;">
+        <ui:VisualElement name="logo" style="flex-grow: 0; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; -unity-background-scale-mode: scale-to-fit; height: 80px;" />
+        <ui:ScrollView style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap; align-items: auto; justify-content: flex-start;">
+            <ui:GroupBox style="flex-grow: 1;">
+                <ui:TextField picking-mode="Ignore" label="API Key" name="apiKey">
+                    <ui:Button text="Get" parse-escape-sequences="true" display-tooltip-when-elided="true" name="getApiKey" enable-rich-text="true" />
+                </ui:TextField>
+                <ui:EnumField label="Network Type" type="RallyProtocol.Networks.RallyNetworkType, RallyProtocol.Runtime" name="networkType" value="Amoy" />
+                <ui:GroupBox name="customConfig" style="display: flex;">
+                    <ui:Label tabindex="-1" text="Custom Config" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                    <ui:TextField picking-mode="Ignore" label="Rly ERC20" name="customRlyERC20Address" />
+                    <ui:TextField picking-mode="Ignore" label="Token Faucet" name="customTokenFaucetAddress" />
+                    <ui:TextField picking-mode="Ignore" label="Paymaster Address" name="customPaymasterAddress" />
+                    <ui:TextField picking-mode="Ignore" label="Forwarder Address" name="customForwarderAddress" />
+                    <ui:TextField picking-mode="Ignore" label="Relay Hub Address" name="customRelayHubAddress" />
+                    <ui:TextField picking-mode="Ignore" label="Relay Worker Address" name="customRelayWorkerAddress" />
+                    <ui:TextField picking-mode="Ignore" label="Relay URL" name="customRelayUrl" />
+                    <ui:TextField picking-mode="Ignore" label="RPC URL" name="customRpcUrl" />
+                    <ui:TextField picking-mode="Ignore" label="Chain ID" name="customChainId" />
+                    <ui:TextField picking-mode="Ignore" label="Max Acceptance Budget" name="customMaxAcceptanceBudget" />
+                    <ui:TextField picking-mode="Ignore" label="Domain Separator Name" name="customDomainSeparatorName" />
+                    <ui:IntegerField label="GTX Data Non Zero" value="0" name="customGtxDataNonZero" />
+                    <ui:IntegerField label="GTX Data Zero" value="0" name="customGtxDataZero" />
+                    <ui:IntegerField label="Request Valid Seconds" value="0" name="customRequestValidSeconds" />
+                    <ui:IntegerField label="Max Paymaster Data Length" value="0" name="customMaxPaymasterDataLength" />
+                    <ui:IntegerField label="Max Approval Data Length" value="0" name="customMaxApprovalDataLength" />
+                    <ui:IntegerField label="Max Relay Nonce Gap" value="0" name="customMaxRelayNonceGap" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:ScrollView>
+        <ui:VisualElement name="spacer" style="flex-grow: 1;" />
+        <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="saveButton" style="align-items: auto; align-self: auto; justify-content: flex-start; flex-direction: column; flex-wrap: nowrap; bottom: 0; top: auto; margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; height: 40px;" />
+    </ui:VisualElement>
 </ui:UXML>

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 using Cysharp.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
+
 using Nethereum.JsonRpc.Client;
 using Nethereum.JsonRpc.Client.RpcMessages;
 
 using Newtonsoft.Json;
 
-using UnityEngine;
 using UnityEngine.Networking;
 
 using ILogger = Microsoft.Extensions.Logging.ILogger;
@@ -102,7 +103,15 @@ namespace RallyProtocol
             }
 
             logger.LogRequest(rpcRequestJson);
-            await unityRequest.SendWebRequest();
+            try
+            {
+                await unityRequest.SendWebRequest();
+            }
+            catch (Exception innerException)
+            {
+                logger.LogException(innerException);
+            }
+
             if (unityRequest.error != null)
             {
                 throw new RpcClientUnknownException("Error occurred when trying to send rpc request(s): " + rpcRequestMethod, new Exception(unityRequest.error));

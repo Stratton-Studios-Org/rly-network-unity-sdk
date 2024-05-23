@@ -23,6 +23,7 @@ using Nethereum.Web3;
 
 using Newtonsoft.Json;
 
+using RallyProtocol.Accounts;
 using RallyProtocol.Contracts;
 using RallyProtocol.GSN.Contracts;
 using RallyProtocol.GSN.Models;
@@ -137,7 +138,7 @@ namespace RallyProtocol.GSN
                 VerifyingContract = relayRequest.RelayData.Forwarder
             };
             typedData.Domain = domain;
-            string signature = signer.SignTypedDataV4(typedData, new EthECKey(account.PrivateKey));
+            string signature = account.SignTypedDataV4(typedData);
 
             var hashedData = Sha3Keccack.Current.CalculateHash(Eip712TypedDataSigner.Current.EncodeTypedData(typedData));
             string newSig = EthECDSASignature.CreateStringSignature(new EthECKey(account.PrivateKey).SignAndCalculateV(hashedData));
