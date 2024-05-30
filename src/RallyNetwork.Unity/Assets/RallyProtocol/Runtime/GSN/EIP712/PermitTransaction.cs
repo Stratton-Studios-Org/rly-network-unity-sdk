@@ -35,6 +35,8 @@ namespace RallyProtocol.GSN
     public class PermitTransaction
     {
 
+        public const string HashZero = "0x0000000000000000000000000000000000000000000000000000000000000000";
+
         protected IRallyLogger logger;
         protected GsnTransactionHelper transactionHelper;
 
@@ -99,8 +101,8 @@ namespace RallyProtocol.GSN
             {
                 new() { Name = "name", Type = "string" },
                 new() { Name = "version", Type = "string" },
-                new() { Name = "verifyingContract", Type = "address" },
                 new() { Name = "chainId", Type = "uint256" },
+                new() { Name = "verifyingContract", Type = "address" },
             };
             List<MemberValue> domainValues = new()
             {
@@ -195,7 +197,8 @@ namespace RallyProtocol.GSN
         {
             ERC721ContractService token = new(provider.Eth, contractAddress);
 
-            BigInteger nonce = await token.NoncesQueryAsync(account.Address);
+            BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
+            //BigInteger nonce = await token.NoncesQueryAsync(account.Address);
             string name = await token.NameQueryAsync();
 
             BigInteger deadline = await GetPermitDeadline(provider);
@@ -205,9 +208,9 @@ namespace RallyProtocol.GSN
             ISignature signature = await GetPermitEIP712Signature(account, name, token.ContractAddress, config, nonce, amount, deadline, salt);
             TransferFromFunction transferTx = new()
             {
-                Sender = account.Address,
-                Recipient = destinationAddress,
-                Amount = amount
+                From = account.Address,
+                To = destinationAddress,
+                Value = amount
             };
             PermitFunction permitTx = new()
             {
@@ -224,7 +227,7 @@ namespace RallyProtocol.GSN
             HexBigInteger gas = await provider.Eth.GetContractTransactionHandler<PermitFunction>().EstimateGasAsync(contractAddress, permitTx);
             //HexBigInteger gas = await token.ContractHandler.EstimateGasAsync(permitTx);
 
-            string paymasterData = $"0x{contractAddress.Replace("0x", "")}{transferTx.GetCallData().ToHex()}";
+            string paymasterData = $"0x{contractAddress.Replace("0x", "")}{transferTx.GetCallData().ToHex(false)}";
             BlockWithTransactions info = await provider.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(BlockParameter.CreateLatest());
 
             BigInteger maxPriorityFeePerGas = BigInteger.Parse("1500000000");
@@ -252,6 +255,19 @@ namespace RallyProtocol.GSN
             //HexBigInteger latestBlockNumber = await provider.Eth.Blocks.GetBlockNumber.SendRequestAsync();
             //BlockWithTransactionHashes latestBlock = await provider.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
             //return latestBlock.Timestamp.Value + 45;
+        }
+
+        [Function("transferFrom", "bool")]
+        public class TransferFromFunction : FunctionMessage
+        {
+            [Parameter("address", "from", 1)]
+            public virtual string From { get; set; } = string.Empty;
+
+            [Parameter("address", "to", 2)]
+            public virtual string To { get; set; } = string.Empty;
+
+            [Parameter("uint256", "value", 3)]
+            public virtual BigInteger Value { get; set; }
         }
 
     }

@@ -58,7 +58,7 @@ namespace RallyProtocol.Samples
             Debug.Log("Initializing Rally network...");
 
             // Create a Rally network instance from the Main settings preset created by Window > Rally Protocol > Setup window
-            this.rlyNetwork = RallyUnityNetworkFactory.Create();
+            this.rlyNetwork = RallyUnityNetworkFactory.Create(RallyNetworkConfig.AmoyWithPermit);
             Debug.Log("Initialized Rally network");
             await UpdateInfoText();
             this.canvasGroup.interactable = true;
@@ -159,7 +159,7 @@ namespace RallyProtocol.Samples
             this.canvasGroup.interactable = false;
             try
             {
-                await this.rlyNetwork.TransferAsync(this.recipientField.text, decimal.Parse(this.amountField.text), MetaTxMethod.ExecuteMetaTransaction);
+                await this.rlyNetwork.TransferAsync(this.recipientField.text, decimal.Parse(this.amountField.text), MetaTxMethod.Permit);
                 await UpdateInfoText();
             }
             catch (Exception ex)
