@@ -4,15 +4,15 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 // Android Resolver Dependencies Start
-    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:5
-    implementation 'com.github.komputing.kethereum:bip32:0.85.7' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:6
-    implementation 'com.github.komputing.kethereum:bip39:0.85.7' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:7
-    implementation 'com.github.komputing.kethereum:bip39_wordlist_en:0.85.7' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:8
-    implementation 'com.github.komputing.kethereum:crypto_impl_spongycastle:0.85.7' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:9
-    implementation 'com.github.komputing.kethereum:extensions_kotlin:0.85.7' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:10
-    implementation 'com.github.komputing.kethereum:model:0.85.7' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:11
-    implementation 'com.google.android.gms:play-services-auth-blockstore:16.2.0' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:12
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10' // Assets/RallyProtocol/Editor/RlyNetworkDependencies.xml:4
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:5
+    implementation 'com.github.komputing.kethereum:bip32:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:6
+    implementation 'com.github.komputing.kethereum:bip39:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:7
+    implementation 'com.github.komputing.kethereum:bip39_wordlist_en:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:8
+    implementation 'com.github.komputing.kethereum:crypto_impl_spongycastle:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:9
+    implementation 'com.github.komputing.kethereum:extensions_kotlin:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:10
+    implementation 'com.github.komputing.kethereum:model:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:11
+    implementation 'com.google.android.gms:play-services-auth-blockstore:16.2.0' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:12
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:4
 // Android Resolver Dependencies End
 **DEPS**}
 

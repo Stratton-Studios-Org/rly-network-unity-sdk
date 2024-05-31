@@ -5,7 +5,7 @@ using RallyProtocol.Core;
 
 using UnityEngine;
 
-namespace RallyProtocolUnity.Core
+namespace RallyProtocolUnity.Storage
 {
 
     public class AndroidKeyManager : IPlatformKeyManager
@@ -21,9 +21,16 @@ namespace RallyProtocolUnity.Core
 
         class ResultCallback<T> : AndroidJavaProxy
         {
+
+            #region Fields
+
             readonly AndroidKeyManager _plugin;
             readonly Action<T> _onSuccess;
             readonly Action<string> _onError;
+
+            #endregion
+
+            #region Constructors
 
             public ResultCallback(AndroidKeyManager plugin, Action<T> onSuccess, Action<string> onError) : base($"{UNITY_SDK_PLUGIN_CLASS}$ResultCallback")
             {
@@ -32,90 +39,107 @@ namespace RallyProtocolUnity.Core
                 _onError = onError;
             }
 
+            #endregion
+
+            #region Public Methods
+
 #pragma warning disable IDE1006
             public void onSuccess(T result) => _onSuccess?.Invoke(result);
             public void onError(string error) => _onError?.Invoke(error);
 #pragma warning restore IDE1006
+
+            #endregion
+
         }
 
         #endregion
 
         #region Fields
 
-        private readonly AndroidJavaObject _currentActivity;
-        private readonly AndroidJavaObject _pluginInstance;
+        private readonly AndroidJavaObject currentActivity;
+        private readonly AndroidJavaObject pluginInstance;
+
+        #endregion
+
+        #region Constructors
 
         public AndroidKeyManager()
         {
             if (Application.platform != RuntimePlatform.Android)
+            {
                 throw new InvalidOperationException($"{nameof(AndroidKeyManager)} can only be used on Android");
+            }
 
-            using var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            _currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            using AndroidJavaClass unityPlayer = new("com.unity3d.player.UnityPlayer");
+            currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 
-            using var pluginClass = new AndroidJavaClass(UNITY_SDK_PLUGIN_CLASS);
-            _pluginInstance = new AndroidJavaObject(UNITY_SDK_PLUGIN_CLASS, _currentActivity);
+            using AndroidJavaClass pluginClass = new(UNITY_SDK_PLUGIN_CLASS);
+            pluginInstance = new AndroidJavaObject(UNITY_SDK_PLUGIN_CLASS, currentActivity);
         }
+
+        #endregion
+
+        #region Public Methods
 
         public Task<string> GetBundleId()
         {
-            var tcs = new TaskCompletionSource<string>();
+            TaskCompletionSource<string> tcs = new();
 
-            _pluginInstance.Call("getBundleId", new ResultCallback<string>(this, bundleId => tcs.SetResult(bundleId), err => tcs.SetException(new Exception(err))));
+            pluginInstance.Call("getBundleId", new ResultCallback<string>(this, bundleId => tcs.SetResult(bundleId), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
 
         public Task<string> GetMnemonic()
         {
-            var tcs = new TaskCompletionSource<string>();
+            TaskCompletionSource<string> tcs = new();
 
-            _pluginInstance.Call("getMnemonic", new ResultCallback<string>(this, mnemonic => tcs.SetResult(mnemonic), err => tcs.SetException(new Exception(err))));
+            pluginInstance.Call("getMnemonic", new ResultCallback<string>(this, mnemonic => tcs.SetResult(mnemonic), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
 
         public Task<string> GenerateNewMnemonic()
         {
-            var tcs = new TaskCompletionSource<string>();
+            TaskCompletionSource<string> tcs = new();
 
-            _pluginInstance.Call("generateNewMnemonic", new ResultCallback<string>(this, mnemonic => tcs.SetResult(mnemonic), err => tcs.SetException(new Exception(err))));
+            pluginInstance.Call("generateNewMnemonic", new ResultCallback<string>(this, mnemonic => tcs.SetResult(mnemonic), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
 
         public Task<bool> SaveMnemonic(string mnemonic, KeyStorageConfig options = null)
         {
-            var tcs = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> tcs = new();
 
-            _pluginInstance.Call("saveMnemonic", mnemonic, options.SaveToCloud.GetValueOrDefault(), options.RejectOnCloudSaveFailure.GetValueOrDefault(), new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
+            pluginInstance.Call("saveMnemonic", mnemonic, options.SaveToCloud.GetValueOrDefault(), options.RejectOnCloudSaveFailure.GetValueOrDefault(), new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
 
         public Task<bool> DeleteMnemonic()
         {
-            var tcs = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> tcs = new();
 
-            _pluginInstance.Call("deleteMnemonic", new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
+            pluginInstance.Call("deleteMnemonic", new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
 
         public Task<bool> IsMnemonicBackedUpToCloud()
         {
-            var tcs = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> tcs = new();
 
-            _pluginInstance.Call("mnemonicBackedUpToCloud", new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
+            pluginInstance.Call("mnemonicBackedUpToCloud", new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
 
         public Task<string> GetPrivateKeyFromMnemonic(string mnemonic)
         {
-            var tcs = new TaskCompletionSource<string>();
+            TaskCompletionSource<string> tcs = new();
 
-            _pluginInstance.Call("getPrivateKeyFromMnemonic", mnemonic, new ResultCallback<string>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
+            pluginInstance.Call("getPrivateKeyFromMnemonic", mnemonic, new ResultCallback<string>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
 
             return tcs.Task;
         }
