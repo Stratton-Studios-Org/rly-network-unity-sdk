@@ -6,8 +6,13 @@ using UnityEngine;
 namespace RallyProtocol.Utilities
 {
 
+    /// <summary>
+    /// Hexadecimal utilities.
+    /// </summary>
     public static class HexUtility
     {
+
+        #region Public Methods
 
         public static string HexZeroPad(this string value, int length)
         {
@@ -18,6 +23,8 @@ namespace RallyProtocol.Utilities
 
             return value;
         }
+
+        #endregion
 
     }
 

@@ -10,29 +10,33 @@ namespace RallyProtocol.GSN.Models
     public class GsnRelayHttpRequestMetadata
     {
 
+        #region Fields
+
         [JsonProperty("maxAcceptanceBudget")]
-        public string MaxAcceptanceBudget;
+        public virtual string MaxAcceptanceBudget { get; set; }
 
         [JsonProperty("relayHubAddress")]
-        public string RelayHubAddress;
+        public string RelayHubAddress { get; set; }
 
         [JsonProperty("signature")]
-        public string Signature;
+        public virtual string Signature { get; set; }
 
         [JsonProperty("approvalData")]
-        public string ApprovalData;
+        public virtual string ApprovalData { get; set; }
 
         [JsonProperty("relayLastKnownNonce")]
-        public BigInteger RelayLastKnownNonce;
+        public virtual BigInteger RelayLastKnownNonce { get; set; }
 
         [JsonProperty("relayMaxNonce")]
-        public BigInteger RelayMaxNonce;
+        public BigInteger RelayMaxNonce { get; set; }
 
         [JsonProperty("domainSeparatorName")]
-        public string DomainSeparatorName;
+        public virtual string DomainSeparatorName { get; set; }
 
         [JsonProperty("relayRequestId")]
-        public string RelayRequestId;
+        public virtual string RelayRequestId { get; set; }
+
+        #endregion
 
     }
 

@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
+using Nethereum.Hex.HexConvertors.Extensions;
+using Nethereum.Hex.HexTypes;
+
 using Newtonsoft.Json;
+
+using RallyProtocol.Contracts.Forwarder;
 
 namespace RallyProtocol.GSN.Models
 {
 
     public class GsnForwardRequest
     {
+
+        #region Properties
 
         [JsonProperty("from")]
         public virtual string From { get; set; }
@@ -32,6 +39,10 @@ namespace RallyProtocol.GSN.Models
         [JsonProperty("validUntilTime")]
         public virtual string ValidUntilTime { get; set; }
 
+        #endregion
+
+        #region Public Methods
+
         public GsnForwardRequest Clone()
         {
             return new()
@@ -45,6 +56,32 @@ namespace RallyProtocol.GSN.Models
                 ValidUntilTime = ValidUntilTime
             };
         }
+
+        public ForwardRequest ToAbi()
+        {
+            BigInteger gas;
+            if (Gas.IsHex())
+            {
+                gas = new HexBigInteger(Gas);
+            }
+            else
+            {
+                gas = BigInteger.Parse(Gas);
+            }
+
+            return new()
+            {
+                Data = Data.HexToByteArray(),
+                From = From,
+                To = To,
+                Gas = gas,
+                Nonce = BigInteger.Parse(Nonce),
+                ValidUntilTime = BigInteger.Parse(ValidUntilTime),
+                Value = BigInteger.Parse(Value)
+            };
+        }
+
+        #endregion
 
     }
 

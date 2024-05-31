@@ -7,10 +7,9 @@ using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
 using RallyProtocol.Accounts;
+using RallyProtocol.Core;
 using RallyProtocol.GSN;
 using RallyProtocol.Logging;
-
-using UnityEngine;
 
 namespace RallyProtocol.Networks
 {
@@ -27,10 +26,16 @@ namespace RallyProtocol.Networks
     public interface IRallyNetwork
     {
 
+        #region Proerpties
+
         public IRallyAccountManager AccountManager { get; }
         public IRallyLogger Logger { get; }
         public IRallyHttpHandler HttpHandler { get; }
         public IGsnClient GsnClient { get; }
+
+        #endregion
+
+        #region Public Methods
 
         public Task<Web3> GetProviderAsync();
         public Task<Account> GetAccountAsync();
@@ -41,6 +46,8 @@ namespace RallyProtocol.Networks
         public Task<string> ClaimRlyAsync();
         public Task<string> RelayAsync(GsnTransactionDetails tx);
         public void SetApiKey(string apiKey);
+
+        #endregion
 
     }
 

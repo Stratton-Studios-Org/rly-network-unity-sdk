@@ -10,6 +10,7 @@ using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
+using RallyProtocol.Core;
 using RallyProtocol.Logging;
 
 using Account = Nethereum.Web3.Accounts.Account;

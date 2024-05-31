@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
 
-namespace RallyProtocol
+namespace RallyProtocol.Core
 {
 
     public interface IPlatformKeyManager
     {
+
+        #region Public Methods
 
         Task<string> GetBundleId();
         Task<string> GetMnemonic();
@@ -13,6 +15,8 @@ namespace RallyProtocol
         Task<bool> DeleteMnemonic();
         Task<bool> IsMnemonicBackedUpToCloud();
         Task<string> GetPrivateKeyFromMnemonic(string mnemonic);
+
+        #endregion
 
     }
 

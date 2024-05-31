@@ -6,8 +6,6 @@ using Nethereum.Hex.HexTypes;
 
 using Newtonsoft.Json;
 
-using UnityEngine;
-
 namespace RallyProtocol
 {
 
@@ -17,67 +15,67 @@ namespace RallyProtocol
         #region Fields
 
         /// <summary>
-        /// Users address
+        /// User's address
         /// </summary>
         [JsonProperty("from")]
-        public string From;
+        public virtual string From { get; set; }
 
         /// <summary>
         /// Transaction data
         /// </summary>
         [JsonProperty("data")]
-        public string Data;
+        public virtual string Data { get; set; }
 
         /// <summary>
         /// Contract address
         /// </summary>
         [JsonProperty("to")]
-        public string To;
+        public virtual string To { get; set; }
 
         /// <summary>
         /// Ether value
         /// </summary>
         [JsonProperty("value")]
-        public string Value;
+        public virtual string Value { get; set; }
 
         /// <summary>
         /// Optional gas
         /// </summary>
         [JsonProperty("gas")]
-        public string Gas;
+        public virtual string Gas { get; set; }
 
         /// <summary>
         /// Should be in hex format.
         /// </summary>
         [JsonProperty("maxFeePerGas")]
-        public string MaxFeePerGas;
+        public virtual string MaxFeePerGas { get; set; }
 
         /// <summary>
         /// Should be in hex format.
         /// </summary>
         [JsonProperty("maxPriorityFeePerGas")]
-        public string MaxPriorityFeePerGas;
+        public virtual string MaxPriorityFeePerGas { get; set; }
 
         /// <summary>
         /// Paymaster contract address.
         /// </summary>
         [JsonProperty("paymasterData")]
-        public string PaymasterData;
+        public virtual string PaymasterData { get; set; }
 
         /// <summary>
         /// Value used to identify applications in RelayRequests.
         /// </summary>
         [JsonProperty("clientId")]
-        public string ClientId;
+        public virtual string ClientId { get; set; }
 
         /// <summary>
         /// Set to 'false' to create a direct transaction.
         /// </summary>
         /// <remarks>
-        /// Optional parameters for relay providers only.
+        /// Optional parameter for relay providers only.
         /// </remarks>
         [JsonProperty("useGSN")]
-        public bool? UseGSN;
+        public virtual bool? UseGSN { get; set; }
 
         #endregion
 

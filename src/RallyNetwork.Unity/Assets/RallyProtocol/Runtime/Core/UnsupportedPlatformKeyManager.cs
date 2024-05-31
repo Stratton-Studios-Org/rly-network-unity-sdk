@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace RallyProtocol
+namespace RallyProtocol.Core
 {
 
     public class UnsupportedPlatformKeyManager : IPlatformKeyManager

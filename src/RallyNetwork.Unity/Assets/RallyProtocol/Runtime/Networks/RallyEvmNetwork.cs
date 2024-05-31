@@ -22,7 +22,7 @@ using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
 using RallyProtocol.Accounts;
-using RallyProtocol.Contracts;
+using RallyProtocol.Contracts.TokenFaucet;
 using RallyProtocol.Core;
 using RallyProtocol.GSN;
 using RallyProtocol.Logging;

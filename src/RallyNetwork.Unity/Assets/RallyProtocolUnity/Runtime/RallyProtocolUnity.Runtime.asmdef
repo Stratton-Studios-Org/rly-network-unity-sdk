@@ -1,0 +1,17 @@
+{
+    "name": "RallyProtocolUnity.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6e78ccb746d8b5a42838b6e8e2442107",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

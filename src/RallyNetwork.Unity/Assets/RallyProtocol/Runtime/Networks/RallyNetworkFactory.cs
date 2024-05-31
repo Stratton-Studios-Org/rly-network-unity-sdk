@@ -5,8 +5,6 @@ using RallyProtocol.Accounts;
 using RallyProtocol.Core;
 using RallyProtocol.Logging;
 
-using UnityEngine;
-
 namespace RallyProtocol.Networks
 {
 

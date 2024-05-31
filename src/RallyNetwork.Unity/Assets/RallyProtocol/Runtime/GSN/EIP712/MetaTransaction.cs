@@ -4,6 +4,8 @@ using System.Numerics;
 using System.Threading.Tasks;
 
 using Nethereum.ABI.EIP712;
+using Nethereum.ABI.FunctionEncoding.Attributes;
+using Nethereum.Contracts;
 using Nethereum.Contracts.Standards.ERC20;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Hex.HexTypes;
@@ -14,11 +16,10 @@ using Nethereum.Signer.EIP712;
 using Nethereum.Web3;
 
 using RallyProtocol.Accounts;
+using RallyProtocol.GSN.Models;
 using RallyProtocol.Logging;
 using RallyProtocol.Networks;
 using RallyProtocol.Utilities;
-
-using UnityEngine;
 
 using Account = Nethereum.Web3.Accounts.Account;
 
@@ -28,16 +29,30 @@ namespace RallyProtocol.GSN
     public class MetaTransaction
     {
 
+        #region Fields
+
         protected IRallyLogger logger;
         protected GsnTransactionHelper transactionHelper;
 
+        #endregion
+
+        #region Properties
+
         public IRallyLogger Logger => this.logger;
+
+        #endregion
+
+        #region Constructors
 
         public MetaTransaction(IRallyLogger logger, GsnTransactionHelper transactionHelper)
         {
             this.logger = logger;
             this.transactionHelper = transactionHelper;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public async Task<bool> HasExecuteMetaTransaction(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
         {
@@ -168,6 +183,40 @@ namespace RallyProtocol.GSN
 
             return gsnTx;
         }
+
+        #endregion
+
+        #region Contract Definition
+
+        public partial class TransferFunction : TransferFunctionBase { }
+
+        [Function("transfer", "bool")]
+        public class TransferFunctionBase : FunctionMessage
+        {
+            [Parameter("address", "recipient", 1)]
+            public virtual string Recipient { get; set; }
+            [Parameter("uint256", "amount", 2)]
+            public virtual BigInteger Amount { get; set; }
+        }
+
+        public partial class ExecuteMetaTransactionFunction : ExecuteMetaTransactionFunctionBase { }
+
+        [Function("executeMetaTransaction", "bytes")]
+        public class ExecuteMetaTransactionFunctionBase : FunctionMessage
+        {
+            [Parameter("address", "userAddress", 1)]
+            public virtual string UserAddress { get; set; }
+            [Parameter("bytes", "functionSignature", 2)]
+            public virtual byte[] FunctionSignature { get; set; }
+            [Parameter("bytes32", "sigR", 3)]
+            public virtual byte[] SigR { get; set; }
+            [Parameter("bytes32", "sigS", 4)]
+            public virtual byte[] SigS { get; set; }
+            [Parameter("uint8", "sigV", 5)]
+            public virtual byte SigV { get; set; }
+        }
+
+        #endregion
 
     }
 

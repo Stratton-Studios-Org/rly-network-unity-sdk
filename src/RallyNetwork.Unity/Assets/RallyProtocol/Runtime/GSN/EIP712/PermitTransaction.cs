@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Nethereum.ABI.EIP712;
-using Nethereum.ABI.EIP712.EIP2612;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using Nethereum.Contracts;
 using Nethereum.Contracts.Standards.ERC20;
@@ -13,15 +12,9 @@ using Nethereum.Contracts.Standards.ERC721;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Hex.HexTypes;
 using Nethereum.Model;
-using Nethereum.RPC;
 using Nethereum.RPC.Eth.DTOs;
-using Nethereum.RPC.Fee1559Suggestions;
 using Nethereum.Signer;
-using Nethereum.Signer.EIP712;
 using Nethereum.Web3;
-using Nethereum.Web3.Accounts;
-
-using Org.BouncyCastle.Tsp;
 
 using RallyProtocol.Accounts;
 using RallyProtocol.Logging;
@@ -35,18 +28,36 @@ namespace RallyProtocol.GSN
     public class PermitTransaction
     {
 
+        #region Constants
+
         public const string HashZero = "0x0000000000000000000000000000000000000000000000000000000000000000";
+
+        #endregion
+
+        #region Fields
 
         protected IRallyLogger logger;
         protected GsnTransactionHelper transactionHelper;
 
+        #endregion
+
+        #region Properties
+
         public IRallyLogger Logger => this.logger;
+
+        #endregion
+
+        #region Constructors
 
         public PermitTransaction(IRallyLogger logger, GsnTransactionHelper transactionHelper)
         {
             this.logger = logger;
             this.transactionHelper = transactionHelper;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public async Task<bool> HasPermit(Account account, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
         {
@@ -198,7 +209,6 @@ namespace RallyProtocol.GSN
             ERC721ContractService token = new(provider.Eth, contractAddress);
 
             BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
-            //BigInteger nonce = await token.NoncesQueryAsync(account.Address);
             string name = await token.NameQueryAsync();
 
             BigInteger deadline = await GetPermitDeadline(provider);
@@ -225,7 +235,6 @@ namespace RallyProtocol.GSN
             };
 
             HexBigInteger gas = await provider.Eth.GetContractTransactionHandler<PermitFunction>().EstimateGasAsync(contractAddress, permitTx);
-            //HexBigInteger gas = await token.ContractHandler.EstimateGasAsync(permitTx);
 
             string paymasterData = $"0x{contractAddress.Replace("0x", "")}{transferTx.GetCallData().ToHex(false)}";
             BlockWithTransactions info = await provider.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(BlockParameter.CreateLatest());
@@ -252,13 +261,37 @@ namespace RallyProtocol.GSN
         {
             BlockWithTransactions block = await provider.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(BlockParameter.CreateLatest());
             return (block.Timestamp.Value + 45) * 1000;
-            //HexBigInteger latestBlockNumber = await provider.Eth.Blocks.GetBlockNumber.SendRequestAsync();
-            //BlockWithTransactionHashes latestBlock = await provider.Eth.Blocks.GetBlockWithTransactionsHashesByNumber.SendRequestAsync(latestBlockNumber);
-            //return latestBlock.Timestamp.Value + 45;
         }
 
+        #endregion
+
+        #region Contract Definition
+
+        public partial class PermitFunction : PermitFunctionBase { }
+
+        [Function("permit", "bool")]
+        public class PermitFunctionBase : FunctionMessage
+        {
+            [Parameter("address", "owner", 1)]
+            public virtual string Owner { get; set; }
+            [Parameter("address", "spender", 2)]
+            public virtual string Spender { get; set; }
+            [Parameter("uint256", "value", 3)]
+            public virtual BigInteger Value { get; set; }
+            [Parameter("uint256", "deadline", 4)]
+            public virtual BigInteger Deadline { get; set; }
+            [Parameter("uint8", "v", 5)]
+            public virtual byte V { get; set; }
+            [Parameter("bytes32", "r", 6)]
+            public virtual byte[] R { get; set; }
+            [Parameter("bytes32", "s", 7)]
+            public virtual byte[] S { get; set; }
+        }
+
+        public partial class TransferFromFunction : TransferFromFunctionBase { }
+
         [Function("transferFrom", "bool")]
-        public class TransferFromFunction : FunctionMessage
+        public class TransferFromFunctionBase : FunctionMessage
         {
             [Parameter("address", "from", 1)]
             public virtual string From { get; set; } = string.Empty;
@@ -269,6 +302,37 @@ namespace RallyProtocol.GSN
             [Parameter("uint256", "value", 3)]
             public virtual BigInteger Value { get; set; }
         }
+
+        public partial class Eip712DomainFunction : Eip712DomainFunctionBase { }
+
+        [Function("eip712Domain", typeof(Eip712DomainOutputDTO))]
+        public class Eip712DomainFunctionBase : FunctionMessage
+        {
+
+        }
+
+        public partial class Eip712DomainOutputDTO : Eip712DomainOutputDTOBase { }
+
+        [FunctionOutput]
+        public class Eip712DomainOutputDTOBase : IFunctionOutputDTO
+        {
+            [Parameter("bytes1", "fields", 1)]
+            public virtual byte[] Fields { get; set; }
+            [Parameter("string", "name", 2)]
+            public virtual string Name { get; set; }
+            [Parameter("string", "version", 3)]
+            public virtual string Version { get; set; }
+            [Parameter("uint256", "chainId", 4)]
+            public virtual BigInteger ChainId { get; set; }
+            [Parameter("address", "verifyingContract", 5)]
+            public virtual string VerifyingContract { get; set; }
+            [Parameter("bytes32", "salt", 6)]
+            public virtual byte[] Salt { get; set; }
+            //[Parameter("uint256[]", "extensions", 7)]
+            //public virtual List<BigInteger> Extensions { get; set; }
+        }
+
+        #endregion
 
     }
 

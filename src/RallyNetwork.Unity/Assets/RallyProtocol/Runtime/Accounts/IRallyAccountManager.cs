@@ -16,6 +16,8 @@ namespace RallyProtocol.Accounts
     public interface IRallyAccountManager
     {
 
+        #region Public Methods
+
         /// <summary>
         /// Creates a new wallet and saves it to the device based on the storage options provided.
         /// If a wallet already exists, it will throw an error unless the overwrite flag is set to true.
@@ -82,6 +84,8 @@ namespace RallyProtocol.Accounts
         /// <exception cref="Exception">Thrown when there is no existing account</exception>
         public Task<string> SignTransactionAsync<T>(T transaction)
             where T : SignedTypeTransaction;
+
+        #endregion
 
     }
 

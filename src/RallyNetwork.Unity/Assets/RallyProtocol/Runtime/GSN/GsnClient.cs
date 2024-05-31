@@ -16,34 +16,12 @@ using Nethereum.Web3.Accounts;
 using Newtonsoft.Json;
 
 using RallyProtocol.Core;
-using RallyProtocol.GSN.Contracts;
 using RallyProtocol.GSN.Models;
 using RallyProtocol.Logging;
 using RallyProtocol.Networks;
 
 namespace RallyProtocol.GSN
 {
-
-    public class GsnResponse
-    {
-
-        [JsonProperty("error")]
-        public string Error { get; set; }
-
-        [JsonProperty("signedTx")]
-        public string SignedTx { get; set; }
-
-    }
-
-    public interface IGsnClient
-    {
-
-        public IRallyLogger Logger { get; }
-        public GsnTransactionHelper TransactionHelper { get; }
-
-        public Task<string> RelayTransactionAsync(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction);
-
-    }
 
     public class GsnClient : IGsnClient
     {
@@ -73,32 +51,6 @@ namespace RallyProtocol.GSN
             this.httpHandler = httpHandler;
             this.logger = logger;
             this.transactionHelper = new(logger);
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        public Web3 GetProvider(RallyNetworkConfig config)
-        {
-            return this.web3Provider.GetWeb3(config);
-        }
-
-        public async Task<string> RelayTransactionAsync(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction)
-        {
-            Web3 provider = GetProvider(config);
-            var updatedConfig = await UpdateConfig(config, transaction);
-            GsnRelayRequest relayRequest = await BuildRelayRequest(updatedConfig.Transaction, updatedConfig.Config, account, provider);
-            GsnRelayHttpRequest httpRequest = await BuildRelayHttpRequest(relayRequest, updatedConfig.Config, account, provider);
-
-            // Update request metadata with relayRequestId
-            string relayRequestId = this.transactionHelper.GetRelayRequestId(httpRequest.RelayRequest, httpRequest.Metadata.Signature);
-            httpRequest.Metadata.RelayRequestId = relayRequestId;
-
-            string url = $"{config.Gsn.RelayUrl}/relay";
-            RallyHttpResponse response = await this.httpHandler.PostJson(url, JsonConvert.SerializeObject(httpRequest), AddAuthHeader(config));
-
-            return await this.transactionHelper.HandleGsnResponse(response, provider);
         }
 
         #endregion
@@ -220,6 +172,32 @@ namespace RallyProtocol.GSN
 
             existingHeaders["Authorization"] = $"Bearer {apiKey}";
             return existingHeaders;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public Web3 GetProvider(RallyNetworkConfig config)
+        {
+            return this.web3Provider.GetWeb3(config);
+        }
+
+        public async Task<string> RelayTransactionAsync(Account account, RallyNetworkConfig config, GsnTransactionDetails transaction)
+        {
+            Web3 provider = GetProvider(config);
+            var updatedConfig = await UpdateConfig(config, transaction);
+            GsnRelayRequest relayRequest = await BuildRelayRequest(updatedConfig.Transaction, updatedConfig.Config, account, provider);
+            GsnRelayHttpRequest httpRequest = await BuildRelayHttpRequest(relayRequest, updatedConfig.Config, account, provider);
+
+            // Update request metadata with relayRequestId
+            string relayRequestId = this.transactionHelper.GetRelayRequestId(httpRequest.RelayRequest, httpRequest.Metadata.Signature);
+            httpRequest.Metadata.RelayRequestId = relayRequestId;
+
+            string url = $"{config.Gsn.RelayUrl}/relay";
+            RallyHttpResponse response = await this.httpHandler.PostJson(url, JsonConvert.SerializeObject(httpRequest), AddAuthHeader(config));
+
+            return await this.transactionHelper.HandleGsnResponse(response, provider);
         }
 
         #endregion
