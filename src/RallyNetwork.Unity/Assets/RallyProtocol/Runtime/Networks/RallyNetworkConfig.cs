@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine;
-
 namespace RallyProtocol.Networks
 {
 
@@ -10,33 +8,55 @@ namespace RallyProtocol.Networks
     public class RallyNetworkConfig
     {
 
-        public static readonly RallyNetworkConfig Local = new()
+        #region Fields
+
+        public static readonly RallyNetworkConfig AmoyDefault = new()
         {
-            Contracts = RallyContracts.Local,
-            Gsn = RallyGSNConfig.Local
+            Contracts = RallyContracts.AmoyDefault,
+            Gsn = RallyGSNConfig.AmoyDefault
         };
 
-        public static readonly RallyNetworkConfig Amoy = new()
+        public static readonly RallyNetworkConfig AmoyWithPermitDefault = new()
         {
-            Contracts = RallyContracts.Amoy,
-            Gsn = RallyGSNConfig.Amoy
+            Contracts = RallyContracts.AmoyWithPermitDefault,
+            Gsn = RallyGSNConfig.AmoyWithPermitDefault
         };
 
-        public static readonly RallyNetworkConfig Polygon = new()
+        public static readonly RallyNetworkConfig PolygonDefault = new()
         {
-            Contracts = RallyContracts.Polygon,
-            Gsn = RallyGSNConfig.Polygon
+            Contracts = RallyContracts.PolygonDefault,
+            Gsn = RallyGSNConfig.PolygonDefault
         };
 
-        public static readonly RallyNetworkConfig Test = new()
+        public static readonly RallyNetworkConfig LocalDefault = new()
         {
-            Contracts = RallyContracts.Test,
-            Gsn = RallyGSNConfig.Test
+            Contracts = RallyContracts.LocalDefault,
+            Gsn = RallyGSNConfig.LocalDefault
         };
 
-        public RallyContracts Contracts;
-        public RallyGSNConfig Gsn;
-        public string RelayerApiKey;
+        public static readonly RallyNetworkConfig TestDefault = new()
+        {
+            Contracts = RallyContracts.TestDefault,
+            Gsn = RallyGSNConfig.TestDefault
+        };
+
+        #endregion
+
+        #region Properties
+
+        public static RallyNetworkConfig Amoy => AmoyDefault.Clone();
+        public static RallyNetworkConfig AmoyWithPermit => AmoyWithPermitDefault.Clone();
+        public static RallyNetworkConfig Polygon => PolygonDefault.Clone();
+        public static RallyNetworkConfig Local => LocalDefault.Clone();
+        public static RallyNetworkConfig Test => TestDefault.Clone();
+
+        public virtual RallyContracts Contracts { get; set; }
+        public virtual RallyGSNConfig Gsn { get; set; }
+        public virtual string RelayerApiKey { get; set; }
+
+        #endregion
+
+        #region Public Methods
 
         public RallyNetworkConfig Clone()
         {
@@ -53,38 +73,62 @@ namespace RallyProtocol.Networks
             return $"NetworkConfig{{contracts: {Contracts}, gsn: {Gsn}, relayerApiKey: {RelayerApiKey}}}";
         }
 
+        #endregion
+
     }
 
     [System.Serializable]
     public class RallyContracts
     {
 
-        public static readonly RallyContracts Local = new()
-        {
-            RlyERC20 = "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
-            TokenFaucet = "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
-        };
+        #region Fields
 
-        public static readonly RallyContracts Amoy = new()
+        public static readonly RallyContracts AmoyDefault = new()
         {
             RlyERC20 = "0x846d8a5fb8a003b431b67115f809a9b9fffe5012",
             TokenFaucet = "0xb8c8274f775474f4f2549edcc4db45cbad936fac",
         };
 
-        public static readonly RallyContracts Polygon = new()
+        public static readonly RallyContracts AmoyWithPermitDefault = new()
+        {
+            RlyERC20 = "0x758641a1b566998CaC5Bc5fC8032F001e1CEBeEf",
+            TokenFaucet = "0xAb5C5633a5c483499047e552C96E1760136dc70A",
+        };
+
+        public static readonly RallyContracts PolygonDefault = new()
         {
             RlyERC20 = "0x76b8D57e5ac6afAc5D415a054453d1DD2c3C0094",
             TokenFaucet = "0x78a0794Bb3BB06238ed5f8D926419bD8fc9546d8",
         };
 
-        public static readonly RallyContracts Test = new()
+        public static readonly RallyContracts LocalDefault = new()
+        {
+            RlyERC20 = "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+            TokenFaucet = "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+        };
+
+        public static readonly RallyContracts TestDefault = new()
         {
             RlyERC20 = "0x1C7312Cb60b40cF586e796FEdD60Cf243286c9E9",
             TokenFaucet = "0xe7C3BD692C77Ec0C0bde523455B9D142c49720fF",
         };
 
-        public string TokenFaucet;
-        public string RlyERC20;
+        #endregion
+
+        #region Properties
+
+        public static RallyContracts Amoy => AmoyDefault.Clone();
+        public static RallyContracts AmoyWithPermit => AmoyWithPermitDefault.Clone();
+        public static RallyContracts Polygon => PolygonDefault.Clone();
+        public static RallyContracts Local => LocalDefault.Clone();
+        public static RallyContracts Test => TestDefault.Clone();
+
+        public virtual string TokenFaucet { get; set; }
+        public virtual string RlyERC20 { get; set; }
+
+        #endregion
+
+        #region Public Methods
 
         public RallyContracts Clone()
         {
@@ -100,32 +144,17 @@ namespace RallyProtocol.Networks
             return $"Contracts{{tokenFaucet: {TokenFaucet}, rlyERC20: {RlyERC20}}}";
         }
 
+        #endregion
+
     }
 
     [System.Serializable]
     public class RallyGSNConfig
     {
 
-        public static readonly RallyGSNConfig Local = new()
-        {
-            PaymasterAddress = "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-            ForwarderAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-            RelayHubAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-            RelayWorkerAddress = "0x84ef35506635109ce61544193e8f87b0a1a1b4fd",
-            RelayUrl = "http://localhost:8090",
-            RpcUrl = "http://127.0.0.1:8545",
-            ChainId = "1337",
-            MaxAcceptanceBudget = "285252",
-            DomainSeparatorName = "GSN Relayed Transaction",
-            GtxDataNonZero = 16,
-            GtxDataZero = 4,
-            RequestValidSeconds = 172800,
-            MaxPaymasterDataLength = 300,
-            MaxApprovalDataLength = 0,
-            MaxRelayNonceGap = 3,
-        };
+        #region Fields
 
-        public static readonly RallyGSNConfig Amoy = new()
+        public static readonly RallyGSNConfig AmoyDefault = new()
         {
             PaymasterAddress = "0xb570b57b821670707fF4E38Ea53fcb67192278F8",
             ForwarderAddress = "0x0ae8FC9867CB4a124d7114B8bd15C4c78C4D40E5",
@@ -144,7 +173,26 @@ namespace RallyProtocol.Networks
             MaxRelayNonceGap = 3,
         };
 
-        public static readonly RallyGSNConfig Polygon = new()
+        public static readonly RallyGSNConfig AmoyWithPermitDefault = new()
+        {
+            PaymasterAddress = "0xb570b57b821670707fF4E38Ea53fcb67192278F8",
+            ForwarderAddress = "0x0ae8FC9867CB4a124d7114B8bd15C4c78C4D40E5",
+            RelayHubAddress = "0xe213A20A9E6CBAfd8456f9669D8a0b9e41Cb2751",
+            RelayWorkerAddress = "0xb9950b71ec94cbb274aeb1be98e697678077a17f",
+            RelayUrl = "https://api.rallyprotocol.com",
+            RpcUrl = "https://polygon-amoy.g.alchemy.com/v2/oOsX9gjRzWeq5WQrlM3zvWAXZ9nIT2Cr",
+            ChainId = "80002",
+            MaxAcceptanceBudget = "285252",
+            DomainSeparatorName = "GSN Relayed Transaction",
+            GtxDataNonZero = 16,
+            GtxDataZero = 4,
+            RequestValidSeconds = 172800,
+            MaxPaymasterDataLength = 300,
+            MaxApprovalDataLength = 300,
+            MaxRelayNonceGap = 3,
+        };
+
+        public static readonly RallyGSNConfig PolygonDefault = new()
         {
             PaymasterAddress = "0x29CAa31142D17545C310437825aA4C53FbE621C3",
             ForwarderAddress = "0xB2b5841DBeF766d4b521221732F9B618fCf34A87",
@@ -163,7 +211,26 @@ namespace RallyProtocol.Networks
             MaxRelayNonceGap = 3,
         };
 
-        public static readonly RallyGSNConfig Test = new()
+        public static readonly RallyGSNConfig LocalDefault = new()
+        {
+            PaymasterAddress = "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
+            ForwarderAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+            RelayHubAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+            RelayWorkerAddress = "0x84ef35506635109ce61544193e8f87b0a1a1b4fd",
+            RelayUrl = "http://localhost:8090",
+            RpcUrl = "http://127.0.0.1:8545",
+            ChainId = "1337",
+            MaxAcceptanceBudget = "285252",
+            DomainSeparatorName = "GSN Relayed Transaction",
+            GtxDataNonZero = 16,
+            GtxDataZero = 4,
+            RequestValidSeconds = 172800,
+            MaxPaymasterDataLength = 300,
+            MaxApprovalDataLength = 0,
+            MaxRelayNonceGap = 3,
+        };
+
+        public static readonly RallyGSNConfig TestDefault = new()
         {
             PaymasterAddress = "0x8b3a505413Ca3B0A17F077e507aF8E3b3ad4Ce4d",
             ForwarderAddress = "0xB2b5841DBeF766d4b521221732F9B618fCf34A87",
@@ -182,21 +249,35 @@ namespace RallyProtocol.Networks
             MaxRelayNonceGap = 3,
         };
 
-        public string PaymasterAddress;
-        public string ForwarderAddress;
-        public string RelayHubAddress;
-        public string RelayWorkerAddress;
-        public string RelayUrl;
-        public string RpcUrl;
-        public string ChainId;
-        public string MaxAcceptanceBudget;
-        public string DomainSeparatorName;
-        public int GtxDataZero;
-        public int GtxDataNonZero;
-        public int RequestValidSeconds;
-        public int MaxPaymasterDataLength;
-        public int MaxApprovalDataLength;
-        public int MaxRelayNonceGap;
+        #endregion
+
+        #region Properties
+
+        public static RallyGSNConfig Amoy => AmoyDefault.Clone();
+        public static RallyGSNConfig AmoyWithPermit => AmoyWithPermit.Clone();
+        public static RallyGSNConfig Polygon => PolygonDefault.Clone();
+        public static RallyGSNConfig Local => LocalDefault.Clone();
+        public static RallyGSNConfig Test => TestDefault.Clone();
+
+        public virtual string PaymasterAddress { get; set; }
+        public virtual string ForwarderAddress { get; set; }
+        public virtual string RelayHubAddress { get; set; }
+        public virtual string RelayWorkerAddress { get; set; }
+        public virtual string RelayUrl { get; set; }
+        public virtual string RpcUrl { get; set; }
+        public virtual string ChainId { get; set; }
+        public virtual string MaxAcceptanceBudget { get; set; }
+        public virtual string DomainSeparatorName { get; set; }
+        public virtual int GtxDataZero { get; set; }
+        public virtual int GtxDataNonZero { get; set; }
+        public virtual int RequestValidSeconds { get; set; }
+        public virtual int MaxPaymasterDataLength { get; set; }
+        public virtual int MaxApprovalDataLength { get; set; }
+        public virtual int MaxRelayNonceGap { get; set; }
+
+        #endregion
+
+        #region Public Methods
 
         public RallyGSNConfig Clone()
         {
@@ -224,6 +305,8 @@ namespace RallyProtocol.Networks
         {
             return $"GSNConfig{{paymasterAddress: {PaymasterAddress}, forwarderAddress: {ForwarderAddress}, relayHubAddress: {RelayHubAddress}, relayWorkerAddress: {RelayWorkerAddress}, relayUrl: {RelayUrl}, rpcUrl: {RpcUrl}, chainId: {ChainId}, maxAcceptanceBudget: {MaxAcceptanceBudget}, domainSeparatorName: {DomainSeparatorName}, gtxDataZero: {GtxDataZero}, gtxDataNonZero: {GtxDataNonZero}, requestValidSeconds: {RequestValidSeconds}, maxPaymasterDataLength: {MaxPaymasterDataLength}, maxApprovalDataLength: {MaxApprovalDataLength}, maxRelayNonceGap: {MaxRelayNonceGap}}}";
         }
+
+        #endregion
 
     }
 

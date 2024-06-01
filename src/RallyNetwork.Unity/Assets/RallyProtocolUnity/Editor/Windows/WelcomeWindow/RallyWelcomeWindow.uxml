@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/RallyProtocol/Editor/Windows/WelcomeWindow/RallyWelcomeWindow.uss?fileID=7433441132597879392&amp;guid=72017497699694c4192ffac4c9cc8c6f&amp;type=3#RallyWelcomeWindow" />
+    <ui:VisualElement name="container" style="flex-grow: 1;">
+        <ui:VisualElement name="logo" style="flex-grow: 0; -unity-background-scale-mode: scale-to-fit; height: 50px; align-self: auto; align-items: stretch; justify-content: flex-start; flex-direction: column; flex-wrap: nowrap; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; width: auto;" />
+        <ui:Label tabindex="-1" text="Thank you for installing Rally Protocol&apos;s Unity SDK!&#10;Click &lt;b&gt;Setup&lt;/b&gt; to get started" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />
+        <ui:GroupBox style="align-items: flex-start; justify-content: flex-start; align-self: center; flex-direction: row;">
+            <ui:Button text="Documentation" parse-escape-sequences="true" display-tooltip-when-elided="true" name="documentationButton" style="height: 40px; width: 120px;" />
+            <ui:Button text="Setup" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setupButton" style="height: 40px; width: 120px; -unity-font-style: bold;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

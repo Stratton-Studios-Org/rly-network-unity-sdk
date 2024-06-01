@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 
 using Nethereum.ABI.EIP712;
+using Nethereum.Hex.HexConvertors.Extensions;
+using Nethereum.Hex.HexTypes;
 
 using Newtonsoft.Json;
+
+using RallyProtocol.Contracts.RelayHub;
 
 namespace RallyProtocol.GSN.Models
 {
 
     public class GsnRelayData
     {
+
+        #region Properties
 
         [JsonProperty("maxFeePerGas")]
         public virtual string MaxFeePerGas { get; set; }
@@ -35,6 +42,10 @@ namespace RallyProtocol.GSN.Models
         [JsonProperty("clientId")]
         public virtual string ClientId { get; set; }
 
+        #endregion
+
+        #region Public Methods
+
         public GsnRelayData Clone()
         {
             return new()
@@ -47,6 +58,31 @@ namespace RallyProtocol.GSN.Models
                 Forwarder = Forwarder,
                 PaymasterData = PaymasterData,
                 ClientId = ClientId
+            };
+        }
+
+        public RelayData ToAbi()
+        {
+            BigInteger transactionCalldataGasUsed;
+            if (TransactionCalldataGasUsed.IsHex())
+            {
+                transactionCalldataGasUsed = new HexBigInteger(TransactionCalldataGasUsed);
+            }
+            else
+            {
+                transactionCalldataGasUsed = BigInteger.Parse(TransactionCalldataGasUsed);
+            }
+
+            return new()
+            {
+                MaxFeePerGas = BigInteger.Parse(MaxFeePerGas),
+                MaxPriorityFeePerGas = BigInteger.Parse(MaxPriorityFeePerGas),
+                TransactionCalldataGasUsed = transactionCalldataGasUsed,
+                RelayWorker = RelayWorker,
+                Paymaster = Paymaster,
+                PaymasterData = PaymasterData.HexToByteArray(),
+                ClientId = BigInteger.Parse(ClientId),
+                Forwarder = Forwarder,
             };
         }
 
@@ -64,6 +100,8 @@ namespace RallyProtocol.GSN.Models
                 new() { TypeName = "uint256", Value = ClientId }
             };
         }
+
+        #endregion
 
     }
 

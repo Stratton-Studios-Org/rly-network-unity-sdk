@@ -18,7 +18,6 @@ namespace RallyProtocol.Logging
 
         public void LogException(Exception exception);
 
-
     }
 
 }

@@ -9,11 +9,15 @@ namespace RallyProtocol.GSN.Models
     public class GsnRelayHttpRequest
     {
 
+        #region Fields
+
         [JsonProperty("relayRequest")]
-        public GsnRelayRequest RelayRequest;
+        public virtual GsnRelayRequest RelayRequest { get; set; }
 
         [JsonProperty("metadata")]
-        public GsnRelayHttpRequestMetadata Metadata;
+        public virtual GsnRelayHttpRequestMetadata Metadata { get; set; }
+
+        #endregion
 
     }
 

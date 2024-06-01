@@ -10,6 +10,7 @@ using Nethereum.Signer;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
+using RallyProtocol.Core;
 using RallyProtocol.Logging;
 
 using Account = Nethereum.Web3.Accounts.Account;
@@ -25,21 +26,44 @@ namespace RallyProtocol.Accounts
 
         #region Fields
 
-        protected Account currentAccount;
+        /// <summary>
+        /// Current active account.
+        /// </summary>
+        protected Account? currentAccount;
+
+        /// <summary>
+        /// The custom logger.
+        /// </summary>
         protected IRallyLogger logger;
+
+        /// <summary>
+        /// The platform's key manager.
+        /// </summary>
         protected IPlatformKeyManager keyManager;
 
         #endregion
 
         #region Properties
 
-        public Account CurrentAccount => this.currentAccount;
+        /// <summary>
+        /// Gets the currently active account.
+        /// </summary>
+        public Account? CurrentAccount => this.currentAccount;
+
+        /// <summary>
+        /// Gets the logger instance used.
+        /// </summary>
         public IRallyLogger Logger => this.logger;
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Creates a new instance of <see cref="RallyAccountManager"/>
+        /// </summary>
+        /// <param name="keyManager">The platform key manager</param>
+        /// <param name="logger">The logger</param>
         public RallyAccountManager(IPlatformKeyManager keyManager, IRallyLogger logger)
         {
             this.keyManager = keyManager;
@@ -51,7 +75,7 @@ namespace RallyProtocol.Accounts
         #region Private Methods
 
         /// <summary>
-        /// Saves the mnemonic to disk/cloud based on the platform using <see cref="RallyUnityKeyManager"/>.
+        /// Saves the mnemonic to disk/cloud based on the platform using <see cref="IPlatformKeyManager"/>.
         /// </summary>
         /// <param name="mnemonic">The mnemonic to save</param>
         /// <param name="options">The options</param>
@@ -60,7 +84,7 @@ namespace RallyProtocol.Accounts
         private async Task<Account> SaveMnemonicAsync(string mnemonic, CreateAccountOptions options)
         {
             bool overwrite = options.Overwrite ?? false;
-            Account existingAccount;
+            Account? existingAccount;
             try
             {
                 existingAccount = await GetAccountAsync();
@@ -113,7 +137,7 @@ namespace RallyProtocol.Accounts
         /// The saveToCloud flag is used to specify whether to save the wallet to cloud or not. When set to true, the wallet will be saved to cloud. When set to false, the wallet will be saved only on device.
         /// After the wallet is created, you can check the cloud backup status of the wallet using the walletBackedUpToCloud method.
         /// </summary>
-        public async Task<Account> CreateAccountAsync(CreateAccountOptions options = null)
+        public async Task<Account> CreateAccountAsync(CreateAccountOptions? options = null)
         {
             if (options == null)
             {
@@ -124,6 +148,12 @@ namespace RallyProtocol.Accounts
             return await SaveMnemonicAsync(mnemonic, options);
         }
 
+        /// <summary>
+        /// Imports an existing mnemonic phrase and creates a wallet from that.
+        /// </summary>
+        /// <param name="mnemonic">The mnemonic phrase to import and create account from</param>
+        /// <param name="options">The create account options</param>
+        /// <returns>Returns a newly created account from the mnemonic</returns>
         public async Task<Account> ImportExistingAccountAsync(string mnemonic, CreateAccountOptions options)
         {
             return await SaveMnemonicAsync(mnemonic, options);
@@ -147,7 +177,7 @@ namespace RallyProtocol.Accounts
         /// Checks if there is any account currently loaded, if not, checks if there are any mnemonic stored and if there are no mnemonic stored, returns null, otherwise creates a new account based on the mnemonic and caches it for further calls.
         /// </summary>
         /// <returns>Returns the existing account or the newly created account</returns>
-        public async Task<Account> GetAccountAsync()
+        public async Task<Account?> GetAccountAsync()
         {
             if (this.currentAccount != null)
             {
@@ -169,9 +199,9 @@ namespace RallyProtocol.Accounts
         /// Gets account's public address.
         /// </summary>
         /// <returns>Returns the existing account's public address, otherwise null</returns>
-        public async Task<string> GetPublicAddressAsync()
+        public async Task<string?> GetPublicAddressAsync()
         {
-            Account account = await GetAccountAsync();
+            Account? account = await GetAccountAsync();
             if (account == null)
             {
                 return null;
@@ -193,7 +223,7 @@ namespace RallyProtocol.Accounts
         /// Gets the account mnemonic/seed phrase.
         /// </summary>
         /// <returns>Returns the account mnemonic/seed phrase if it exists, otherwise null</returns>
-        public async Task<string> GetAccountPhraseAsync()
+        public async Task<string?> GetAccountPhraseAsync()
         {
             try
             {
@@ -213,7 +243,7 @@ namespace RallyProtocol.Accounts
         /// <exception cref="Exception">Thrown when there is no existing account</exception>
         public async Task<string> SignMessageAsync(string message)
         {
-            Account account = await GetAccountAsync();
+            Account? account = await GetAccountAsync();
             if (account == null)
             {
                 throw new RallyNoAccountException();
@@ -233,7 +263,7 @@ namespace RallyProtocol.Accounts
         public async Task<string> SignTransactionAsync<T>(T transaction)
             where T : SignedTypeTransaction
         {
-            Account account = await GetAccountAsync();
+            Account? account = await GetAccountAsync();
             if (account == null)
             {
                 throw new RallyNoAccountException();

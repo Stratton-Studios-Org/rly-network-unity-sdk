@@ -1,9 +1,7 @@
 {
     "name": "RallyProtocol.Runtime",
     "rootNamespace": "",
-    "references": [
-        "GUID:f51ebe6a0ceec4240a699833d6309b23"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -25,9 +23,7 @@
         "Newtonsoft.Json.dll",
         "Nethereum.Signer.EIP712.dll",
         "Nethereum.Util.dll",
-        "Nethereum.BlockchainProcessing.dll",
-        "Nethereum.Unity.dll",
-        "NBitcoin.dll"
+        "Nethereum.BlockchainProcessing.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

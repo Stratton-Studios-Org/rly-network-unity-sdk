@@ -17,12 +17,11 @@ using Nethereum.Hex.HexTypes;
 using Nethereum.JsonRpc.Client;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.RPC.Fee1559Suggestions;
-using Nethereum.Unity.Rpc;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 
 using RallyProtocol.Accounts;
-using RallyProtocol.Contracts;
+using RallyProtocol.Contracts.TokenFaucet;
 using RallyProtocol.Core;
 using RallyProtocol.GSN;
 using RallyProtocol.Logging;
@@ -78,7 +77,7 @@ namespace RallyProtocol.Networks
 
         #region Private Methods
 
-        private string GetTokenAddress(string tokenAddress)
+        private string GetTokenAddress(string? tokenAddress)
         {
             return string.IsNullOrEmpty(tokenAddress) ? this.config.Contracts.RlyERC20 : tokenAddress;
         }
@@ -89,13 +88,13 @@ namespace RallyProtocol.Networks
 
         public async Task<Web3> GetProviderAsync()
         {
-            Account account = await GetAccountAsync();
+            Account? account = await GetAccountAsync();
             return web3Provider.GetWeb3(account, this.config);
         }
 
         public async Task<Account> GetAccountAsync()
         {
-            Account account = await this.accountManager.GetAccountAsync();
+            Account? account = await this.accountManager.GetAccountAsync();
             if (account == null)
             {
                 throw new MissingWalletException();
@@ -104,7 +103,7 @@ namespace RallyProtocol.Networks
             return account;
         }
 
-        public async Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string tokenAddress = null)
+        public async Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string? tokenAddress = null)
         {
             Web3 provider = await GetProviderAsync();
             Account account = await GetAccountAsync();
@@ -115,7 +114,7 @@ namespace RallyProtocol.Networks
             return await TransferExactAsync(destinationAddress, amountBigNum, metaTxMethod, tokenAddress);
         }
 
-        public async Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string tokenAddress = null)
+        public async Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null)
         {
             Web3 provider = await GetProviderAsync();
             Account account = await GetAccountAsync();
@@ -127,7 +126,7 @@ namespace RallyProtocol.Networks
                 throw new InsufficientBalanceException();
             }
 
-            GsnTransactionDetails transferTx = null;
+            GsnTransactionDetails? transferTx = null;
             // TODO: MetaTxMethod.Permit isn't working
             if (metaTxMethod != null && metaTxMethod == MetaTxMethod.Permit || metaTxMethod == MetaTxMethod.ExecuteMetaTransaction)
             {
@@ -166,7 +165,6 @@ namespace RallyProtocol.Networks
         public async Task<string> ClaimRlyAsync()
         {
             Account account = await GetAccountAsync();
-
             decimal balance = await GetDisplayBalanceAsync();
             if (balance < 0)
             {
@@ -179,7 +177,7 @@ namespace RallyProtocol.Networks
             {
                 FromAddress = account.Address,
             };
-            HexBigInteger estimatedGas = await provider.Eth.GetContractTransactionHandler<ClaimFunction>().EstimateGasAsync(this.config.Contracts.TokenFaucet, claimFunctionInput);
+            HexBigInteger estimatedGas = await provider.Eth.GetContractTransactionHandler<ClaimFunction>().EstimateGasAsync(contractAddress, claimFunctionInput);
 
             BlockWithTransactions blockInformation = await provider.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(BlockParameter.CreateLatest());
             BigInteger maxPriorityFeePerGas = BigInteger.Parse("1500000000");
@@ -188,7 +186,7 @@ namespace RallyProtocol.Networks
             {
                 From = account.Address,
                 Data = claimFunctionInput.GetCallData().ToHex(true),
-                To = this.config.Contracts.TokenFaucet,
+                To = contractAddress,
                 MaxFeePerGas = new HexBigInteger(maxFeePerGas).HexValue,
                 MaxPriorityFeePerGas = new HexBigInteger(maxPriorityFeePerGas).HexValue,
                 Value = "0",
@@ -198,7 +196,7 @@ namespace RallyProtocol.Networks
             return await RelayAsync(gsnTx);
         }
 
-        public async Task<decimal> GetDisplayBalanceAsync(string tokenAddress = null)
+        public async Task<decimal> GetDisplayBalanceAsync(string? tokenAddress = null)
         {
             tokenAddress = GetTokenAddress(tokenAddress);
             Web3 provider = await GetProviderAsync();
@@ -209,12 +207,17 @@ namespace RallyProtocol.Networks
             return Web3.Convert.FromWei(exactBalance, decimals);
         }
 
-        public async Task<BigInteger> GetExactBalanceAsync(string tokenAddress = null)
+        public async Task<BigInteger> GetExactBalanceAsync(string? tokenAddress = null)
         {
             Account account = await GetAccountAsync();
             tokenAddress = GetTokenAddress(tokenAddress);
             Web3 provider = await GetProviderAsync();
             ERC20ContractService token = new(provider.Eth, tokenAddress);
+            if (account == null)
+            {
+                throw new RallyNoAccountException();
+            }
+
             BigInteger bal = await token.BalanceOfQueryAsync(account.Address);
             return bal;
         }
