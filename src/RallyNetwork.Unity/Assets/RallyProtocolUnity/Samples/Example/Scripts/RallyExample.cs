@@ -71,7 +71,7 @@ namespace RallyProtocol.Samples
             Debug.Log("Initializing Rally network...");
 
             // Create a Rally network instance from the Main settings preset created by Window > Rally Protocol > Setup window
-            this.rlyNetwork = RallyUnityNetworkFactory.Create(RallyNetworkConfig.AmoyWithPermit);
+            this.rlyNetwork = RallyUnityNetworkFactory.Create();
             Debug.Log("Initialized Rally network");
             await UpdateInfoText();
             this.canvasGroup.interactable = true;
