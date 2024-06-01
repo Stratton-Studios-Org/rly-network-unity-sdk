@@ -45,7 +45,6 @@ namespace StrattonStudios.ExportPackageUtility
 
         public string BuildPackage(ExportPackageDefinition package)
         {
-            Debug.Log($"Exporting {package.Identifier}...");
 
             // Build dependencies
             if (package.Dependencies.Count > 0)
@@ -63,53 +62,68 @@ namespace StrattonStudios.ExportPackageUtility
             // Compile Assemblies
             if (package.CompileAssemblies)
             {
+                Debug.Log($"Compiling package {package.Identifier} assemblies...");
                 for (int i = 0; i < package.Assemblies.Count; i++)
                 {
                     ExportPackageAssemblyConfig assembly = package.Assemblies[i];
+                    Debug.Log($"Compiling package {package.Identifier}:{assembly.Identifier} assembly...");
                     string[] assemblyDeps = assembly.Dependencies.ToArray();
                     for (int j = 0; j < assemblyDeps.Length; j++)
                     {
                         assemblyDeps[j] = FormatPackagePath(assemblyDeps[j], package);
                     }
 
+                    string[] sourcePaths = assembly.SourcePaths.ToArray();
+                    for (int j = 0; j < sourcePaths.Length; j++)
+                    {
+                        sourcePaths[j] = FormatPackagePath(sourcePaths[j], package);
+                    }
+
                     CompileAssembly(
                         package.PackageName,
                         assembly.AssemblyName,
-                        FormatPackagePath(assembly.SourcePath, package),
+                        sourcePaths,
                         assemblyDeps,
                         FormatPackagePath(assembly.OutputFolder, package),
                         ExportPackageSettings.instance.CompileFramework,
                         ExportPackageSettings.instance.DllCompilationOptions);
+                    Debug.Log($"Compiled package {package.Identifier}:{assembly.Identifier} assembly");
                 }
+                Debug.Log($"Compiled package {package.Identifier} assemblies");
             }
 
-            // Gather asset GUIDs and paths
-            string regex = FormatPackagePath(package.ExcludeRegex, package);
-            string[] folders = package.Folders.ToArray();
-            for (int i = 0; i < folders.Length; i++)
+            // Export package, Gather asset GUIDs and paths
+            if (package.ExportUnityPackage)
             {
-                folders[i] = FormatPackagePath(folders[i], package);
-            }
-
-            string[] assetGuids = AssetDatabase.FindAssets(string.Empty, folders);
-            List<string> assetPaths = new();
-            for (int i = 0; i < assetGuids.Length; i++)
-            {
-                string assetGuid = assetGuids[i];
-                string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
-
-                // Exclusions
-                if (Regex.IsMatch(assetPath, regex))
+                Debug.Log($"Exporting {package.Identifier}...");
+                string regex = FormatPackagePath(package.ExcludeRegex, package);
+                string[] folders = package.Folders.ToArray();
+                for (int i = 0; i < folders.Length; i++)
                 {
-                    continue;
+                    folders[i] = FormatPackagePath(folders[i], package);
                 }
 
-                assetPaths.Add(assetPath);
+                string[] assetGuids = AssetDatabase.FindAssets(string.Empty, folders);
+                List<string> assetPaths = new();
+                for (int i = 0; i < assetGuids.Length; i++)
+                {
+                    string assetGuid = assetGuids[i];
+                    string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
+
+                    // Exclusions
+                    if (Regex.IsMatch(assetPath, regex))
+                    {
+                        continue;
+                    }
+
+                    assetPaths.Add(assetPath);
+                }
+
+                // Export package
+                AssetDatabase.ExportPackage(assetPaths.ToArray(), package.OutputPath);
+                Debug.Log($"Exported {package.Identifier}");
             }
 
-            // Export package
-            AssetDatabase.ExportPackage(assetPaths.ToArray(), package.OutputPath);
-            Debug.Log($"Exported {package.Identifier}");
             return package.OutputPath;
         }
 
@@ -118,7 +132,7 @@ namespace StrattonStudios.ExportPackageUtility
             return string.Format(path, package.Identifier, package.PackageName);
         }
 
-        public string GenerateCsProject(string dllName, string sourcePath, string[] dependencies)
+        public string GenerateCsProject(string dllName, string[] sourcePaths, string[] dependencies)
         {
             TextAsset templateXml = Resources.Load<TextAsset>(CsprojTemplateResourcePath);
             XmlDocument document = new();
@@ -126,9 +140,13 @@ namespace StrattonStudios.ExportPackageUtility
 
             // Compile item group
             XmlElement compileItemGroup = document.CreateElement("ItemGroup");
-            XmlElement compileItem = document.CreateElement("Compile");
-            compileItem.SetAttribute("Include", sourcePath);
-            compileItemGroup.AppendChild(compileItem);
+            for (int i = 0; i < sourcePaths.Length; i++)
+            {
+                XmlElement compileItem = document.CreateElement("Compile");
+                compileItem.SetAttribute("Include", sourcePaths[i]);
+                compileItemGroup.AppendChild(compileItem);
+            }
+
             document.FirstChild.AppendChild(compileItemGroup);
 
             // Reference item group
@@ -155,9 +173,9 @@ namespace StrattonStudios.ExportPackageUtility
             return fileName;
         }
 
-        public string[] CompileAssembly(string packageName, string assemblyName, string sourcePath, string[] dependencies, string outputFolder, string compileFramework, List<string> compilerOptions)
+        public string[] CompileAssembly(string packageName, string assemblyName, string[] sourcePaths, string[] dependencies, string outputFolder, string compileFramework, List<string> compilerOptions)
         {
-            string fileName = GenerateCsProject(assemblyName, sourcePath, dependencies);
+            string fileName = GenerateCsProject(assemblyName, sourcePaths, dependencies);
             using (System.Diagnostics.Process process = new())
             {
                 process.StartInfo = new System.Diagnostics.ProcessStartInfo()

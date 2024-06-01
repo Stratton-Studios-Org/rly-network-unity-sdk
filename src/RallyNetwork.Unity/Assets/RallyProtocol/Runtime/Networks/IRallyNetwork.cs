@@ -39,10 +39,10 @@ namespace RallyProtocol.Networks
 
         public Task<Web3> GetProviderAsync();
         public Task<Account> GetAccountAsync();
-        public Task<decimal> GetDisplayBalanceAsync(string tokenAddress = null);
-        public Task<BigInteger> GetExactBalanceAsync(string tokenAddress = null);
-        public Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string tokenAddress = null);
-        public Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod, string tokenAddress = null);
+        public Task<decimal> GetDisplayBalanceAsync(string? tokenAddress = null);
+        public Task<BigInteger> GetExactBalanceAsync(string? tokenAddress = null);
+        public Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string? tokenAddress = null);
+        public Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod, string? tokenAddress = null);
         public Task<string> ClaimRlyAsync();
         public Task<string> RelayAsync(GsnTransactionDetails tx);
         public void SetApiKey(string apiKey);

@@ -1,0 +1,14 @@
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.csproj.AssemblyReference.cache
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.AssemblyInfoInputs.cache
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.AssemblyInfo.cs
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.csproj.CoreCompileInputs.cache
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.sourcelink.json
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\dist\bin\Release\netstandard2.1\RallyNetwork.NET.deps.json
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\dist\bin\Release\netstandard2.1\RallyNetwork.NET.dll
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\dist\bin\Release\netstandard2.1\RallyNetwork.NET.pdb
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\dist\bin\Release\netstandard2.1\RallyNetwork.NET.xml
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNet.2C50C8B8.Up2Date
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.dll
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.xml
+D:\Projects\Josh\StrattonStudios\Rally Network\rly-network-unity-sdk\src\RallyNetwork.NET\obj\Release\netstandard2.1\RallyNetwork.NET.pdb

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using UnityEditorInternal;
+
 using UnityEngine;
 
 namespace StrattonStudios.ExportPackageUtility
@@ -12,6 +14,8 @@ namespace StrattonStudios.ExportPackageUtility
 
         [SerializeField]
         protected string identifier = "main";
+        [SerializeField]
+        protected bool exportUnityPackage = true;
         [SerializeField]
         protected string packageName = "MyPackage";
         [SerializeField]
@@ -41,8 +45,9 @@ namespace StrattonStudios.ExportPackageUtility
             new()
         };
 
-        public string PackageName => this.packageName;
         public string Identifier => this.identifier;
+        public bool ExportUnityPackage => this.exportUnityPackage;
+        public string PackageName => this.packageName;
         public string OutputPath => this.outputPath;
         public IReadOnlyList<string> Folders => this.folders;
         public IReadOnlyList<ExportPackageDefinition> Dependencies => this.dependencies;
@@ -62,7 +67,7 @@ namespace StrattonStudios.ExportPackageUtility
         [SerializeField]
         protected string assemblyName = "{1}.Runtime";
         [SerializeField]
-        protected string sourcePath = "Assets/{1}/Runtime";
+        protected List<string> sourcePaths = new() { "Assets/{1}/Runtime" };
         [SerializeField]
         protected List<string> dependencies = new();
         [SerializeField]
@@ -70,7 +75,7 @@ namespace StrattonStudios.ExportPackageUtility
 
         public string Identifier => this.identifier;
         public string AssemblyName => this.assemblyName;
-        public string SourcePath => this.sourcePath;
+        public IReadOnlyList<string> SourcePaths => this.sourcePaths;
         public IReadOnlyList<string> Dependencies => this.dependencies;
         public string OutputFolder => this.outputFolder;
 

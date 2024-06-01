@@ -157,7 +157,7 @@ namespace RallyProtocol.GSN
             }
         }
 
-        protected Dictionary<string, string> AddAuthHeader(RallyNetworkConfig config, Dictionary<string, string> existingHeaders = null)
+        protected Dictionary<string, string> AddAuthHeader(RallyNetworkConfig config, Dictionary<string, string>? existingHeaders = null)
         {
             if (existingHeaders == null)
             {

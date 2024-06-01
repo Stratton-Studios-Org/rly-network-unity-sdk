@@ -11,7 +11,7 @@ namespace RallyProtocol.Networks
     public class RallyNetworkFactory
     {
 
-        public static IRallyNetwork Create(IRallyWeb3Provider web3Provider, IRallyHttpHandler httpHandler, IRallyLogger logger, IRallyAccountManager accountManager, RallyNetworkType type, string apiKey = null)
+        public static IRallyNetwork Create(IRallyWeb3Provider web3Provider, IRallyHttpHandler httpHandler, IRallyLogger logger, IRallyAccountManager accountManager, RallyNetworkType type, string? apiKey = null)
         {
             RallyNetworkConfig config;
             switch (type)
@@ -34,10 +34,14 @@ namespace RallyProtocol.Networks
             return Create(web3Provider, httpHandler, logger, accountManager, config, apiKey);
         }
 
-        public static IRallyNetwork Create(IRallyWeb3Provider web3Provider, IRallyHttpHandler httpHandler, IRallyLogger logger, IRallyAccountManager accountManager, RallyNetworkConfig config, string apiKey = null)
+        public static IRallyNetwork Create(IRallyWeb3Provider web3Provider, IRallyHttpHandler httpHandler, IRallyLogger logger, IRallyAccountManager accountManager, RallyNetworkConfig config, string? apiKey = null)
         {
             RallyEvmNetwork network = new(web3Provider, httpHandler, logger, accountManager, config);
-            network.SetApiKey(apiKey);
+            if (!string.IsNullOrEmpty(apiKey))
+            {
+                network.SetApiKey(apiKey);
+            }
+
             return network;
         }
 

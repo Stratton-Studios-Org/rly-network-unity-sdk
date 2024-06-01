@@ -7,12 +7,28 @@ using Newtonsoft.Json;
 namespace RallyProtocol.Core
 {
 
+    /// <summary>
+    /// Custom HTTP request handler for Rally SDK.
+    /// </summary>
     public interface IRallyHttpHandler
     {
 
-        public Task<RallyHttpResponse> PostJson(string url, string json, Dictionary<string, string> headers = null);
+        /// <summary>
+        /// Sends a POST JSON request.
+        /// </summary>
+        /// <param name="url">The URL</param>
+        /// <param name="json">The JSON data</param>
+        /// <param name="headers">The headers</param>
+        /// <returns>Returns the HTTP request response</returns>
+        public Task<RallyHttpResponse> PostJson(string url, string json, Dictionary<string, string>? headers = null);
 
-        public Task<RallyHttpResponse> Get(string url, Dictionary<string, string> headers = null);
+        /// <summary>
+        /// Sends a GET request.
+        /// </summary>
+        /// <param name="url">The URL</param>
+        /// <param name="headers">The headers</param>
+        /// <returns>Returns the HTTP request response</returns>
+        public Task<RallyHttpResponse> Get(string url, Dictionary<string, string>? headers = null);
 
     }
 

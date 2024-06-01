@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6f2bfd018ef7bb4082947ac44d6c102, type: 3}
-  m_Name: Rally Protocol - Main
+  m_Name: Rally Protocol - Main (Unity)
   m_EditorClassIdentifier: 
   identifier: main
+  exportUnityPackage: 1
   packageName: RallyProtocolUnity
   outputPath: Assets/RallyProtocolUnityInstaller/Packages/main.unitypackage
   folders:
@@ -25,8 +26,13 @@ MonoBehaviour:
   - Assets/{1}/Third Party Notices
   dependencies: []
   excludeRegex: Assets[\/\/]{1}[\/\/]Runtime[\/\/].*(.cs|.jslib|.asmdef|.txt|.md)$
-  compileDLL: 0
-  dllName: '{1}.Runtime.dll'
-  dllSourcePath: Assets/MyPackage/Runtime
-  dllDependencies: []
-  dllOutputFolder: Assets/MyPackage/Runtime
+  compileAssemblies: 0
+  assemblies:
+  - identifier: runtime
+    assemblyName: '{1}.Runtime'
+    sourcePaths:
+    - Assets/{1}/Runtime
+    dependencies:
+    - Assets/{1}/Plugins/RallyProtocol.Runtime.dll
+    - Assets/{1}/Plugins/BouncyCastle.Cryptography.dll
+    outputFolder: Assets/{1}/Runtime

@@ -23,9 +23,7 @@
         "Newtonsoft.Json.dll",
         "Nethereum.Signer.EIP712.dll",
         "Nethereum.Util.dll",
-        "Nethereum.BlockchainProcessing.dll",
-        "Nethereum.Unity.dll",
-        "NBitcoin.dll"
+        "Nethereum.BlockchainProcessing.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
