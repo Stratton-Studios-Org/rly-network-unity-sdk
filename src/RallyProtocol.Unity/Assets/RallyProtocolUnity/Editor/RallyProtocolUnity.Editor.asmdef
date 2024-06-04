@@ -1,0 +1,21 @@
+{
+    "name": "RallyProtocolUnity.Editor",
+    "rootNamespace": "",
+    "references": [
+        "RallyProtocolUnity.Runtime",
+        "RallyProtocol.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "RallyProtocol.Runtime.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

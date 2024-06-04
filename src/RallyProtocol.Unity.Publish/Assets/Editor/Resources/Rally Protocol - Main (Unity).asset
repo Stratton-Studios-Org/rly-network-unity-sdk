@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f2bfd018ef7bb4082947ac44d6c102, type: 3}
+  m_Name: Rally Protocol - Main (Unity)
+  m_EditorClassIdentifier: 
+  identifier: main
+  exportUnityPackage: 1
+  packageName: RallyProtocolUnity
+  outputPath: Assets/RallyProtocolUnityInstaller/Packages/main.unitypackage
+  folders:
+  - Assets/{1}/Documentation
+  - Assets/{1}/Editor
+  - Assets/{1}/Plugins
+  - Assets/{1}/Resources
+  - Assets/{1}/Runtime
+  - Assets/{1}/Scripts
+  - Assets/{1}/Third Party Notices
+  dependencies:
+  - {fileID: 11400000, guid: 58069a3a7deca8046b4019931b40de97, type: 2}
+  excludeRegex: 
+  compileAssemblies: 0
+  assemblies:
+  - identifier: runtime
+    assemblyName: '{1}.Runtime'
+    outputFolder: Assets/{1}/Runtime
+    baseSourcePath: ../RallyProtocol.Unity
+    baseDependenciesPath: 
+    sourcePaths:
+    - Assets/{1}/Runtime/**/*.cs
+    dependencies:
+    - Assets/{1}/Plugins/RallyProtocol.Runtime.dll
+    - ../Dependencies/BouncyCastle.Cryptography.dll
+    - ../Dependencies/Newtonsoft.Json.dll
+    - ../Dependencies/Microsoft.Extensions.Logging.Abstractions.dll
+    - ../Dependencies/Nethereum.Web3.dll
+    - ../Dependencies/Nethereum.Accounts.dll
+    - ../Dependencies/Nethereum.HdWallet.dll
+    - ../Dependencies/Nethereum.JsonRpc.Client.dll
+    - ../Dependencies/Nethereum.RPC.dll
+    - ../Dependencies/NBitcoin.dll
+    - ../Dependencies/UnityEngine.dll
+    - ../Dependencies/UnityEngine.CoreModule.dll
+    - ../Dependencies/UnityEngine.UnityWebREquestModule.dll
+    - ../Dependencies/UnityEngine.AndroidJNIModule.dll
+    - ../Dependencies/UnityEngine.UnityWebRequestWWW.dll.dll
+    - ../Dependencies/UnityEngine.AssetBundleModule.dll
+    - ../Dependencies/UniTask.dll
+  - identifier: editor
+    assemblyName: '{1}.Editor'
+    outputFolder: Assets/{1}/Editor
+    baseSourcePath: ../RallyNetwork.Unity
+    baseDependenciesPath: 
+    sourcePaths:
+    - Assets/{1}/Editor/**/*.cs
+    - Assets/{1}/Editor/**/*.uxml
+    - Assets/{1}/Editor/**/*.uss
+    dependencies:
+    - Assets/{1}/Plugins/RallyProtocol.Runtime.dll
+    - Assets/{1}/Runtime/RallyProtocolUnity.Runtime.dll
+    - ../Dependencies/UnityEditor.dll
+    - ../Dependencies/UnityEngine.dll
+    - ../Dependencies/UnityEngine.CoreModule.dll
+    - ../Dependencies/UnityEngine.UnityWebREquestModule.dll
+    - ../Dependencies/UnityEngine.AndroidJNIModule.dll
+    - ../Dependencies/UnityEngine.UnityWebRequestWWW.dll.dll
+    - ../Dependencies/UnityEngine.AssetBundleModule.dll
+    - ../Dependencies/UniTask.dll
+    - ../Dependencies/UnityEditor.UIElementsModule.dll
+    - ../Dependencies/UnityEditor.CoreModule.dll
+    - ../Dependencies/UnityEngine.UIElementsModule.dll
+    - ../Dependencies/UnityEngine.IMGUIModule.dll
+  copy: 1
+  copyItems:
+  - identifier: all
+    sourceFolder: ../RallyProtocol.Unity/Assets/RallyProtocolUnity/
+    destinationFolder: Assets/RallyProtocolUnity/

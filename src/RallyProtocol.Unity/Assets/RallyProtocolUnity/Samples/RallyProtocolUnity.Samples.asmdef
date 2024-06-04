@@ -1,0 +1,30 @@
+{
+    "name": "RallyProtocolUnity.Samples",
+    "rootNamespace": "",
+    "references": [
+        "Unity.TextMeshPro",
+        "RallyProtocolUnity.Runtime",
+        "RallyProtocol.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "RallyProtocol.Runtime.dll",
+        "Nethereum.Contracts.dll",
+        "Newtonsoft.Json.dll",
+        "Nethereum.Accounts.dll",
+        "Nethereum.Web3.dll",
+        "Nethereum.ABI.dll",
+        "Nethereum.Hex.dll",
+        "Nethereum.JsonRpc.Client.dll",
+        "Nethereum.JsonRpc.RpcClient.dll",
+        "Nethereum.BlockchainProcessing.dll",
+        "Nethereum.RPC.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
