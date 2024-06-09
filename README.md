@@ -4,6 +4,40 @@ The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
 
 ## Getting Started
 
+1. Setup the API key and network through Window > Rally Protocol > Setup window
+2. Use `RallyUnityManager.Instance.RlyNetwork` to access the network created based upon the settings that were setup
+
+  ```cs
+  IRallyNetwork rlyNetwork = RallyUnityManager.Instance.RlyNetwork;
+
+  // Get account manager
+  IRallyAccountManager accountManager = rlyNetwork.AccountManager;
+
+  // Load any existing account
+  Nethereum.Web3.Accounts.Account account = await accountManager.GetAccountAsync();
+
+  // Create a new account if there are no existing accounts
+  if (account == null) {
+    await accountManager.CreateAccountAsync(new()
+    {
+      Overwrite = false,
+      StorageOptions = new()
+      {
+        RejectOnCloudSaveFailure = true,
+        SaveToCloud = true
+      }
+    });
+  }
+
+  // Claim RLY for example
+  await rlyNetwork.ClaimRlyAsync();
+
+  // Or transfer some RLY
+  string destinationAddress = "...";
+  decimal amount = 5;
+  await rlyNetwork.Transfer(destinationAddress, amount);
+  ```
+
 - Get the default instance of Rally Account Manager and Rally Network (EVM network):
   
   ```cs
