@@ -205,6 +205,29 @@ namespace RallyProtocolUnity.Tests
                 }
             });
         }
+
+        [Sequential]
+        [UnityTest]
+        public IEnumerator TransferInsufficientBalancePasses()
+        {
+            return UniTask.ToCoroutine(async () =>
+            {
+                LogAssert.ignoreFailingMessages = true;
+                IRallyAccountManager accountManager = RallyUnityAccountManager.Default;
+                IRallyNetwork network = RallyUnityNetworkFactory.Create(RallyNetworkConfig.Amoy, apiKey);
+
+                // Create a new account
+                await accountManager.CreateAccountAsync(new() { Overwrite = true });
+
+                UniTaskCompletionSource utcs = new();
+                Assert.ThrowsAsync<InsufficientBalanceException>(async () =>
+                {
+                    await network.TransferAsync("0xbEAE33FE2517b007C5765f74f428452210e02813", amount, MetaTxMethod.ExecuteMetaTransaction);
+                    utcs.TrySetResult();
+                });
+                await utcs.Task;
+            });
+        }
     }
 
 }

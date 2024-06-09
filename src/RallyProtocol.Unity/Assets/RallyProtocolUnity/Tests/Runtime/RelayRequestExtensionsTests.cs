@@ -12,7 +12,7 @@ using RallyProtocol.Extensions;
 
 using UnityEngine;
 
-namespace RallyProtocolUnity
+namespace RallyProtocolUnity.Tests
 {
 
     public class RelayRequestExtensionsTests
