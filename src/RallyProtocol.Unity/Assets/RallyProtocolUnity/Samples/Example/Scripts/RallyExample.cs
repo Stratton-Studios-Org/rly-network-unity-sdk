@@ -180,7 +180,7 @@ namespace RallyProtocol.Samples
             this.canvasGroup.interactable = false;
             try
             {
-                await this.rlyNetwork.TransferAsync(this.recipientField.text, decimal.Parse(this.amountField.text), MetaTxMethod.Permit);
+                await this.rlyNetwork.TransferAsync(this.recipientField.text, decimal.Parse(this.amountField.text), MetaTxMethod.ExecuteMetaTransaction);
                 await UpdateInfoText();
             }
             catch (Exception ex)

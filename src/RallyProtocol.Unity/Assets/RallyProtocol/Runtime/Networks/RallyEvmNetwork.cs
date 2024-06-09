@@ -103,7 +103,7 @@ namespace RallyProtocol.Networks
             return account;
         }
 
-        public async Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod metaTxMethod, string? tokenAddress = null)
+        public async Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null)
         {
             Web3 provider = await GetProviderAsync();
             Account account = await GetAccountAsync();

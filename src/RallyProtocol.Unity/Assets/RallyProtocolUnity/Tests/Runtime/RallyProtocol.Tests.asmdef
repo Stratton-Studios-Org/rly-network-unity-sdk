@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "UniTask",
         "RallyProtocolUnity.Runtime",
-        "RallyProtocol.Runtime"
+        "RallyProtocol.Runtime",
+        "BoundfoxStudios.FluentAssertions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

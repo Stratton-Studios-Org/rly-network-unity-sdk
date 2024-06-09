@@ -6,6 +6,7 @@ using RallyProtocol.Core;
 namespace RallyProtocol.Accounts
 {
 
+    [System.Serializable]
     public class CreateAccountOptions
     {
 
