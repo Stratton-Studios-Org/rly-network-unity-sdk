@@ -12,7 +12,8 @@ using UnityEngine;
 namespace RallyProtocolUnity.Components
 {
 
-    public class RallyUnityManager : MonoBehaviour
+    [AddComponentMenu(AddComponentMenuNameBase + "/Manager (Rally Protocol)")]
+    public class RallyUnityManager : RallyBehaviour
     {
 
         #region Fields
@@ -64,8 +65,8 @@ namespace RallyProtocolUnity.Components
                 return;
             }
 
-            DontDestroyOnLoad(gameObject);
             this.initialized = true;
+            DontDestroyOnLoad(gameObject);
             this.rlyNetwork = RallyUnityNetworkFactory.Create();
         }
 

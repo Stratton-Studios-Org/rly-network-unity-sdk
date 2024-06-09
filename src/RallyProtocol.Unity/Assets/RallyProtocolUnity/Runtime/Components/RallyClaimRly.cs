@@ -15,8 +15,8 @@ using UnityEngine.Events;
 namespace RallyProtocolUnity.Components
 {
 
-    [AddComponentMenu("Rally Protocol/Claim RLY")]
-    public class RallyClaimRly : MonoBehaviour
+    [AddComponentMenu(AddComponentMenuNameBase + "/Claim RLY (Rally Protocol)")]
+    public class RallyClaimRly : RallyBehaviour
     {
 
         #region Events

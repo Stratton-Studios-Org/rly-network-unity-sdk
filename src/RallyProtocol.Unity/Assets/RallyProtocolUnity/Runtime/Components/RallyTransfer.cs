@@ -14,8 +14,8 @@ using UnityEngine.Events;
 namespace RallyProtocolUnity.Components
 {
 
-    [AddComponentMenu("Rally Protocol/Transfer")]
-    public class RallyTransfer : MonoBehaviour
+    [AddComponentMenu(AddComponentMenuNameBase + "/Transfer (Rally Protocol)")]
+    public class RallyTransfer : RallyBehaviour
     {
 
         #region Events

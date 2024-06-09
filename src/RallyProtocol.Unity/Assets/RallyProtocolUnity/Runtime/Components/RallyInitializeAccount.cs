@@ -14,8 +14,8 @@ using UnityEngine.Events;
 namespace RallyProtocolUnity.Components
 {
 
-    [AddComponentMenu("Rally Protocol/Initialize Account")]
-    public class RallyInitializeAccount : MonoBehaviour
+    [AddComponentMenu(AddComponentMenuNameBase + "/Initialize Account (Rally Protocol)")]
+    public class RallyInitializeAccount : RallyBehaviour
     {
 
         #region Fields

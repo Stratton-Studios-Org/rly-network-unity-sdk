@@ -15,8 +15,8 @@ using UnityEngine.Events;
 namespace RallyProtocolUnity.Components
 {
 
-    [AddComponentMenu("Rally Protocol/Get Account Public Address")]
-    public class RallyGetAccountPublicAddress : MonoBehaviour
+    [AddComponentMenu(AddComponentMenuNameBase + "/Get Account Public Address (Rally Protocol)")]
+    public class RallyGetAccountPublicAddress : RallyBehaviour
     {
 
         #region Events

@@ -16,8 +16,8 @@ using UnityEngine.Events;
 namespace RallyProtocolUnity.Components
 {
 
-    [AddComponentMenu("Rally Protocol/Get Balance")]
-    public class RallyGetBalance : MonoBehaviour
+    [AddComponentMenu(AddComponentMenuNameBase + "/Get Balance (Rally Protocol)")]
+    public class RallyGetBalance : RallyBehaviour
     {
 
         #region Events
@@ -37,6 +37,7 @@ namespace RallyProtocolUnity.Components
         [SerializeField]
         protected bool getExactBalanceOnStart = false;
 
+        [Header("Events")]
         [SerializeField]
         protected UnityEvent<string> displayBalanceUpdateString;
         [SerializeField]

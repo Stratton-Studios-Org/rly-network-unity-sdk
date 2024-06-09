@@ -15,8 +15,8 @@ using UnityEngine.Events;
 namespace RallyProtocolUnity.Components
 {
 
-    [AddComponentMenu("Rally Protocol/Get Account Phrase")]
-    public class RallyGetAccountPhrase : MonoBehaviour
+    [AddComponentMenu(AddComponentMenuNameBase + "/Get Account Phrase (Rally Protocol)")]
+    public class RallyGetAccountPhrase : RallyBehaviour
     {
 
         #region Events
