@@ -267,10 +267,13 @@ namespace RallyProtocolUnityInstaller
                 packagesToAdd.Add(dependency.InstallData);
             }
 
-            this.bulkAddRequest = Client.AddAndRemove(packagesToAdd.ToArray());
-            while (!this.bulkAddRequest.IsCompleted)
+            if (packagesToAdd.Count > 0)
             {
-                await Task.Yield();
+                this.bulkAddRequest = Client.AddAndRemove(packagesToAdd.ToArray());
+                while (!this.bulkAddRequest.IsCompleted)
+                {
+                    await Task.Yield();
+                }
             }
 
             this.listCompleted = false;

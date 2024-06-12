@@ -12,6 +12,9 @@ namespace RallyProtocolUnity.Editor
     public class PostBuildScript
     {
 
+        protected const string RootPath = "RallyProtocolUnity";
+        protected const string PluginsPath = RootPath + "/Plugins";
+
         [PostProcessBuild]
         public static void OnPostprocessBuild(BuildTarget buildTarget, string pathToBuiltProject)
         {
@@ -25,7 +28,7 @@ namespace RallyProtocolUnity.Editor
 
         static void UpdateUnityFrameworkHeader(string pathToBuiltProject)
         {
-            const string BRIDGING_HEADER_PATH = "RlyNetwork/Runtime/Plugins/iOS/Classes/RlyNetworkMobileSdk-Bridging-Header.h";
+            const string BRIDGING_HEADER_PATH = PluginsPath + "/iOS/Classes/RlyNetworkMobileSdk-Bridging-Header.h";
             const string UMBRELLA_HEADER_PATH = "UnityFramework/UnityFramework.h";
 
             var sourcePath = Path.Combine(Application.dataPath, BRIDGING_HEADER_PATH);
@@ -43,7 +46,7 @@ namespace RallyProtocolUnity.Editor
 
         static void CopySecp256k1TableFile(string pathToBuiltProject)
         {
-            const string TABLE_PATH = "RlyNetwork/Runtime/Plugins/iOS/Classes/secp256k1.table";
+            const string TABLE_PATH = PluginsPath + "/iOS/Classes/secp256k1.table";
 
             var sourcePath = Path.Combine(Application.dataPath, TABLE_PATH);
             var destinationPath = Path.Combine(pathToBuiltProject, "Libraries", TABLE_PATH);
@@ -58,7 +61,7 @@ namespace RallyProtocolUnity.Editor
 
         static void UpdateRlyNetworkMobileSdk(string pathToBuiltProject)
         {
-            const string SDK_PATH = "RlyNetwork/Runtime/Plugins/iOS/Classes/RlyNetworkMobileSdk.swift";
+            const string SDK_PATH = PluginsPath + "/iOS/Classes/RlyNetworkMobileSdk.swift";
 
             var path = Path.Combine(pathToBuiltProject, "Libraries", SDK_PATH);
 

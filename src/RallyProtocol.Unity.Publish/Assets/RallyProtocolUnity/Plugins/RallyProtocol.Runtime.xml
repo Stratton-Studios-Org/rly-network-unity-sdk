@@ -352,6 +352,16 @@
             <param name="config">The network configuration</param>
             <returns>Returns a new RPC client instance</returns>
         </member>
+        <member name="P:RallyProtocol.Core.KeyStorageConfig.SaveToCloud">
+            <summary>
+            Gets or sets whether to save the key to the cloud.
+            </summary>
+        </member>
+        <member name="P:RallyProtocol.Core.KeyStorageConfig.RejectOnCloudSaveFailure">
+            <summary>
+            Gets or sets whether to reject the storage operation if cloud save fails.
+            </summary>
+        </member>
         <member name="T:RallyProtocol.Core.UnsupportedPlatformKeyManager">
             <summary>
             Unsupported platform key manager.
