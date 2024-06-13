@@ -1,0 +1,28 @@
+{
+    "name": "RallyProtocol.Tests",
+    "rootNamespace": "",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "UniTask",
+        "RallyProtocolUnity.Runtime",
+        "RallyProtocol.Runtime",
+        "BoundfoxStudios.FluentAssertions"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "Nethereum.Web3.dll",
+        "Nethereum.Accounts.dll",
+        "RallyProtocol.Runtime.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

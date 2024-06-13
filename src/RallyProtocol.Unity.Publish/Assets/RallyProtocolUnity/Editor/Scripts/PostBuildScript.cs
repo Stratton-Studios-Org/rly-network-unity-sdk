@@ -15,7 +15,7 @@ namespace RallyProtocolUnity.Editor
         protected const string RootPath = "RallyProtocolUnity";
         protected const string PluginsPath = RootPath + "/Plugins";
 
-        [PostProcessBuild]
+        // [PostProcessBuild]
         public static void OnPostprocessBuild(BuildTarget buildTarget, string pathToBuiltProject)
         {
             if (buildTarget == BuildTarget.iOS)
