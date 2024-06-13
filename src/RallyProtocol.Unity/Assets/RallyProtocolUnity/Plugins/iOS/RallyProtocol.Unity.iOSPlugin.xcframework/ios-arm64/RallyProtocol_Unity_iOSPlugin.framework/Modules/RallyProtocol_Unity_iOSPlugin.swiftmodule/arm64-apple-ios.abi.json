@@ -327,21 +327,21 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/hasanbayat\/Documents\/GitHub\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
+      "filePath": "\/Users\/hasanbayat\/Documents\/StrattonStudios\/RallyNetwork\/rly-network-unity-sdk\/src\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
       "kind": "IntegerLiteral",
       "offset": 92,
       "length": 2,
       "value": "24"
     },
     {
-      "filePath": "\/Users\/hasanbayat\/Documents\/GitHub\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
+      "filePath": "\/Users\/hasanbayat\/Documents\/StrattonStudios\/RallyNetwork\/rly-network-unity-sdk\/src\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
       "kind": "StringLiteral",
       "offset": 117,
       "length": 16,
       "value": "\"WALLET_STORAGE\""
     },
     {
-      "filePath": "\/Users\/hasanbayat\/Documents\/GitHub\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
+      "filePath": "\/Users\/hasanbayat\/Documents\/StrattonStudios\/RallyNetwork\/rly-network-unity-sdk\/src\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
       "kind": "StringLiteral",
       "offset": 165,
       "length": 16,

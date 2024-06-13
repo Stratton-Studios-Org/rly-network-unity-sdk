@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/RallyProtocolUnity/Samples/Example/Scenes/Example.unity
+    guid: a7b8941a17553bc4e8e13920541b4a40
   m_configObjects: {}

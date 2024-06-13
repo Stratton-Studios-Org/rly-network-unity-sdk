@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/RallyProtocol_Unity_iOSPlugin-Swift.h</key>
 		<data>
-		JY9Na4CWsTQsAhwg3RGpUtal//8=
+		GmOE5VjyYOU8h0vvUt9baGnpHDQ=
 		</data>
 		<key>Headers/RallyProtocol_Unity_iOSPlugin.h</key>
 		<data>
@@ -94,27 +94,47 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		mTGgo7dn1Ig9PWlc0Fq+1VPGeTo=
+		tMYwKqUaB5TaKJyzo5KF6OOaSPU=
 		</data>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.abi.json</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		/H22RGcLd1oTtGcNZGUNxsbMD2s=
+		8q5Bh/AQKbxxLfzKmYustetQ6xI=
 		</data>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		SDp9lVi7FimSS+HWWdVg5vCUDYI=
+		BfQ0pa+MCWPCxGqCIMysR0HfEMw=
 		</data>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftdoc</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		aj8iXT4DsvwwMP64/ou9rVDYFkY=
+		YzwtzCBmZ4q6opI3Ivs723gMikI=
 		</data>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftinterface</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		SDp9lVi7FimSS+HWWdVg5vCUDYI=
+		BfQ0pa+MCWPCxGqCIMysR0HfEMw=
 		</data>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftmodule</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		t+0GptCoOmCkMIQZz8lyynK+A1E=
+		NyM7k+yIJl7IZv8USaECI1TdSqs=
+		</data>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
+		<data>
+		8q5Bh/AQKbxxLfzKmYustetQ6xI=
+		</data>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
+		<data>
+		+/n28XZHxjZAnGKuR+6AL9X+Dmg=
+		</data>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
+		<data>
+		zIJT3nBRSaILY2y7tvSRrSL2Y3Y=
+		</data>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<data>
+		+/n28XZHxjZAnGKuR+6AL9X+Dmg=
+		</data>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
+		<data>
+		qZIcoVc1v6kWI+4gvwpVl8SNZZM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -131,7 +151,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			863ibxtDFPSh/MxXPbeHHQ93MzNvY1VAUIF9DO58OP4=
+			v61GH5xoQevM/Xxd+SSqH/RSFdCk7phTIVpVGjWcnCg=
 			</data>
 		</dict>
 		<key>Headers/RallyProtocol_Unity_iOSPlugin.h</key>
@@ -281,39 +301,74 @@
 			73LiG+6HhvZ8CUUa/GKviMI71meaRzegafC2XX5HF3g=
 			</data>
 		</dict>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.abi.json</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			M41nwqxjNJB6G4jmS3zja697ujmGAKJcy+YNxax8uSw=
+			lkI6jaPw5tABJCFhFYtU1QxGFNBriaGJHe/eZoIttRc=
 			</data>
 		</dict>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KjnQGouYO2r5XGz5C0Q9dO959QbDc5sKaK2L0wX70ak=
+			QOA+DrOvjifj0LtA/digInSIaRmhIpMtGgblYEDIxzU=
 			</data>
 		</dict>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftdoc</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vRUTY1eXhpQ9/ZZjCUBzojoa0UaEOoT50uAvXv/hEl0=
+			UJhHHgs/NxN17hmTUq8VIAGyeejQLoG3+NCHZf0f0WQ=
 			</data>
 		</dict>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftinterface</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KjnQGouYO2r5XGz5C0Q9dO959QbDc5sKaK2L0wX70ak=
+			QOA+DrOvjifj0LtA/digInSIaRmhIpMtGgblYEDIxzU=
 			</data>
 		</dict>
-		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftmodule</key>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RbBmrjzb6ZGp+AWlML36f5+5Td148viyDTZG+B25NBA=
+			101RNvxNasnahnsTcIAbwp7tClcwXO8vnIYbqxUpklU=
+			</data>
+		</dict>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			lkI6jaPw5tABJCFhFYtU1QxGFNBriaGJHe/eZoIttRc=
+			</data>
+		</dict>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			P+7OUcxFlloZzjTzfZA/7n45APB8/+Sngk7R7ZvaTSY=
+			</data>
+		</dict>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CocJyLgjanXJmn00a2fIUDSJkK3eo4ODZuhhm24wjW0=
+			</data>
+		</dict>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			P+7OUcxFlloZzjTzfZA/7n45APB8/+Sngk7R7ZvaTSY=
+			</data>
+		</dict>
+		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LxZrykT25hpZnVI3oM1KqNOe8EI9N9FSxyZYb3DEi0o=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
