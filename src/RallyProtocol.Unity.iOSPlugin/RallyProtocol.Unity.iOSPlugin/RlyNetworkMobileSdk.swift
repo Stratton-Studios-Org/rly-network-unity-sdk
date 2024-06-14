@@ -44,15 +44,9 @@ public class RlyNetworkMobileSdk: NSObject {
     }
 
     @objc public func mnemonicBackedUpToCloud() -> Bool {
-        let mnemonicAttributes = KeychainHelper.standard.readAttributes(service: SERVICE_KEY, account: MNEMONIC_ACCOUNT_KEY)
-
-        if (mnemonicAttributes == nil) {
-            return false;
-        }
-
-        let keyAccessibility = mnemonicAttributes?[kSecAttrAccessible as String] as? String
-
-        return keyAccessibility == (kSecAttrAccessibleWhenUnlocked as String)
+        let keyFromiCloudKeychain = KeychainHelper.standard.readFromiCloudKeychain(service: SERVICE_KEY, account: MNEMONIC_ACCOUNT_KEY)
+        
+        return keyFromiCloudKeychain != nil
     }
     
     @objc public func saveMnemonic(
@@ -66,6 +60,12 @@ public class RlyNetworkMobileSdk: NSObject {
     
     @objc public func deleteMnemonic() -> Bool {
         KeychainHelper.standard.delete(service: SERVICE_KEY, account: MNEMONIC_ACCOUNT_KEY)
+
+        return true
+    }
+    
+    public func deleteCloudMnemonic() -> Bool {
+        KeychainHelper.standard.deleteFromiCloudKeychain(service: SERVICE_KEY, account: MNEMONIC_ACCOUNT_KEY)
 
         return true
     }

@@ -205,6 +205,27 @@
           },
           {
             "kind": "Function",
+            "name": "deleteCloudMnemonic",
+            "printedName": "deleteCloudMnemonic()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC19deleteCloudMnemonicSbyF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC19deleteCloudMnemonicSbyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "getPrivateKeyFromMnemonic",
             "printedName": "getPrivateKeyFromMnemonic(_:)",
             "children": [
