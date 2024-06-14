@@ -126,7 +126,12 @@ namespace RallyProtocolUnity.Storage
             return tcs.Task;
         }
 
-        public Task<bool> IsMnemonicBackedUpToCloud()
+        public Task<bool> DeleteCloudMnemonic()
+        {
+            return Task.FromException<bool>(new NotImplementedException("This method is not implemented on Android platform"));
+        }
+
+        public Task<bool> IsMnemonicEligibleForCloudSync()
         {
             TaskCompletionSource<bool> tcs = new();
 

@@ -170,7 +170,7 @@ namespace RallyProtocol.Accounts
         /// <returns></returns>
         public async Task<bool> IsWalletBackedUpToCloudAsync()
         {
-            return await this.keyManager.IsMnemonicBackedUpToCloud();
+            return await this.keyManager.IsMnemonicEligibleForCloudSync();
         }
 
         /// <summary>

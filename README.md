@@ -2,6 +2,15 @@
 
 The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
 
+## Folder Structure
+
+- `src/RallyProtocol.Unity`: The primary Unity project and SDK code
+- `src/RallyProtocol.Unity.Publish`: The Unity publish project for exporting the installer
+- `src/RallyProtocol.Unity.AndroidPlugin`: The Android plugin for the Unity project
+- `src/RallyProtocol.Unity.iOSPlugin`: The iOS plugin for the Unity project
+- `src/RallyProtocol.NET`: The .NET SDK for the Rally Protocol
+- `src/Dependencies`: The dependencies for the .NET SDK project
+
 ## Getting Started
 
 1. Setup the API key and network through Window > Rally Protocol > Setup window
@@ -104,6 +113,14 @@ The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
   // You can set the logging filter using the default logger instance in Unity
   RallyUnityLogger.Default.UnityLogger.filterLogType = LogType.Log;
   ```
+
+## Running Tests
+
+The tests are included in the `src/RallyProtocol.Unity` project. To run the tests, open the project in Unity and run the tests from the Test Runner window.
+
+## Building the Installer
+
+To build the installer, open the `src/RallyProtocol.Unity.Publish` project in Unity and export the installer from the **Stratton Studios > Export Package Utility** menu and selecting **Rally Protocol - Installer** package.
 
 ## Resources
 
