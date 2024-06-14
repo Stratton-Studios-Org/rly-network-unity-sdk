@@ -29,7 +29,8 @@ namespace RallyProtocolUnity.Storage
 
         [DllImport("__Internal")]
         static extern string getPrivateKeyFromMnemonic(string mnemonic);
-
+        
+        [DllImport("__Internal")]
         static extern bool mnemonicBackedUpToCloud();
 #else
 #pragma warning disable IDE0060, IDE1006

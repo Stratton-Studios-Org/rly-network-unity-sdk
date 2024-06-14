@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
-#import <UnityFramework/UnityFramework-Swift.h>
+//#import <UnityFramework/UnityFramework-Swift.h>
+#import <RallyProtocol_Unity_iOSPlugin/RallyProtocol_Unity_iOSPlugin-Swift.h>
 
 @interface UnitySdkPlugin : NSObject
 
