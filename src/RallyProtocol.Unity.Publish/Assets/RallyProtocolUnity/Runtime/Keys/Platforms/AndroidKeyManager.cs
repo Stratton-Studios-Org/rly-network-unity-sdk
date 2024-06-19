@@ -126,7 +126,16 @@ namespace RallyProtocolUnity.Storage
             return tcs.Task;
         }
 
-        public Task<bool> IsMnemonicBackedUpToCloud()
+        public Task<bool> DeleteCloudMnemonic()
+        {
+            TaskCompletionSource<bool> tcs = new();
+
+            pluginInstance.Call("deleteCloudMnemonic", new ResultCallback<bool>(this, result => tcs.SetResult(result), err => tcs.SetException(new Exception(err))));
+
+            return tcs.Task;
+        }
+
+        public Task<bool> IsMnemonicEligibleForCloudSync()
         {
             TaskCompletionSource<bool> tcs = new();
 

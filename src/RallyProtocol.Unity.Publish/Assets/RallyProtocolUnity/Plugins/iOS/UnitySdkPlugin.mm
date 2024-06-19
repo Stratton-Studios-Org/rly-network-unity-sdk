@@ -42,6 +42,10 @@ static RlyNetworkMobileSdk *instance = nil;
     return [instance deleteMnemonic];
 }
 
++ (BOOL)deleteCloudMnemonic {
+    return [instance deleteCloudMnemonic];
+}
+
 + (BOOL)mnemonicBackedUpToCloud {
     return [instance mnemonicBackedUpToCloud];
 }

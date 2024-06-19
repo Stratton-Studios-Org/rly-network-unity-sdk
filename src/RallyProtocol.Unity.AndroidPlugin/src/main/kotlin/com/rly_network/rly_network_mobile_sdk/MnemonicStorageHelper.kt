@@ -73,7 +73,7 @@ class MnemonicStorageHelper(context: Context) {
                 }
         } else {
             if (forceBlockStore) {
-                onFailure("Failed to save mnemonic. No end to end encryption option is available and force cloud is on");
+                onFailure("Failed to save mnemonic. Android Blockstore is unavailable and force cloud is on");
             } else {
                 saveToSharedPref(key, mnemonic)
                 onSuccess()
@@ -120,14 +120,22 @@ class MnemonicStorageHelper(context: Context) {
     }
 
     fun delete(key: String) {
+        deleteFromCloudKeystore(key)
+        deleteFromSharedPref(key)
+    }
+
+    fun deleteFromCloudKeystore(key: String) {
         val retrieveRequest = DeleteBytesRequest.Builder()
             .setKeys(listOf(key))
             .build()
 
         blockstoreClient.deleteBytes(retrieveRequest)
+    }
 
+    fun deleteFromSharedPref(key: String) {
         val editor = getSharedPreferences().edit()
         editor.remove(key)
         editor.commit()
     }
+
 }

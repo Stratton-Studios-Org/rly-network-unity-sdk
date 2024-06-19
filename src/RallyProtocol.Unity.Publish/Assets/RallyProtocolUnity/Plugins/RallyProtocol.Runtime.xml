@@ -285,12 +285,16 @@
             </summary>
             <returns>Returns true if deleted, otherwise false</returns>
         </member>
-        <member name="M:RallyProtocol.Core.IPlatformKeyManager.IsMnemonicBackedUpToCloud">
+        <member name="M:RallyProtocol.Core.IPlatformKeyManager.DeleteCloudMnemonic">
             <summary>
-            Checks whether the mnemonic is backed up to the cloud.
+            Removes the mnemonic from the cloud storage. This is a destructive operation.
             </summary>
-            <returns>Returns true if is backed up, otherwise false</returns>
+            <remarks>
+            This is necessary for the case where dev wants to move user storage from cloud to local only.
+            </remarks>
+            <returns>Returns true if deleted, otherwise false</returns>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:RallyProtocol.Core.IPlatformKeyManager.IsMnemonicEligibleForCloudSync" -->
         <member name="M:RallyProtocol.Core.IPlatformKeyManager.GetPrivateKeyFromMnemonic(System.String)">
             <summary>
             Gets the private key from menonic phrase.
@@ -352,14 +356,28 @@
             <param name="config">The network configuration</param>
             <returns>Returns a new RPC client instance</returns>
         </member>
+        <member name="T:RallyProtocol.Core.KeyStorageConfig">
+             <summary>
+             Configuration for how the wallet key should be stored. This includes whether to save to cloud and whether to reject if saving to cloud fails.
+             </summary>
+             <remarks>
+             Please note that when moving from <see cref="P:RallyProtocol.Core.KeyStorageConfig.SaveToCloud"/> = false to true, the wallet will be moved to cross device sync. This can overwrite a device only wallet your user might have on a different device.
+             You should ensure you properly communicate to end users that moving to cloud storage will could cause issues if they currently have different wallets on different devices.
+            
+             There are several other gotchas to keep in mind when it comes to saveToCloud.
+             1. Keys are stored using the OS provided cross device backup mechanism. This mechanism is controlled by user and app preferences and can be disabled by the user or app developer.
+             2. On Android, the backup mechanism is Blockstore, which requires user to be logged in to play account and have a device pincode or password set.
+             3. On iOS, the backup mechanism is iCloud keychain, which requires user to be logged in to iCloud and have iCloud backup enabled.
+             </remarks>
+        </member>
         <member name="P:RallyProtocol.Core.KeyStorageConfig.SaveToCloud">
             <summary>
-            Gets or sets whether to save the key to the cloud.
+            Gets or sets whether to save the mnemonic in a way that is eligible for device OS cloud storage. If set to false, the mnemonic will only be stored on device.
             </summary>
         </member>
         <member name="P:RallyProtocol.Core.KeyStorageConfig.RejectOnCloudSaveFailure">
             <summary>
-            Gets or sets whether to reject the storage operation if cloud save fails.
+            Gets or sets whether to raise an error if saving to cloud fails. If set to false, the mnemonic will silently fall back to local on device only storage.
             </summary>
         </member>
         <member name="T:RallyProtocol.Core.UnsupportedPlatformKeyManager">

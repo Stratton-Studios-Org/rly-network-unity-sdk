@@ -74,6 +74,13 @@ class UnitySdkPlugin(private val context: Context) {
         }
     }
 
+    fun deleteCloudMnemonic(callback: ResultCallback<Boolean>) {
+        handler.post {
+            mnemonicHelper.deleteFromCloudKeystore(MNEMONIC_STORAGE_KEY)
+            callback.onSuccess(true)
+        }
+    }
+
     fun getPrivateKeyFromMnemonic(mnemonic: String, callback: ResultCallback<String>) {
         handler.post {
             if (!org.kethereum.bip39.model.MnemonicWords(mnemonic).validate(WORDLIST_ENGLISH)) {

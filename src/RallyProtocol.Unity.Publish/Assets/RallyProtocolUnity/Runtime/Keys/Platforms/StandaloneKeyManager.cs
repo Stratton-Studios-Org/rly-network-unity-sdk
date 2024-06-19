@@ -77,7 +77,13 @@ namespace RallyProtocolUnity.Storage
             return Task.FromResult(true);
         }
 
-        public Task<bool> IsMnemonicBackedUpToCloud()
+        public Task<bool> DeleteCloudMnemonic()
+        {
+            Debug.LogError("Deleting cloud mnemonic is not implemented on standalone platform");
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> IsMnemonicEligibleForCloudSync()
         {
             Debug.LogError("Backup functionality is not implemented on standalone platform");
             return Task.FromResult(false);
