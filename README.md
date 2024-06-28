@@ -11,6 +11,49 @@ The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
 - `src/RallyProtocol.NET`: The .NET SDK for the Rally Protocol
 - `src/Dependencies`: The dependencies for the .NET SDK project
 
+### Initialization
+
+You can initialize a Rally Network instance through any of the below methods:
+
+- Initialize through the main settings preset file that is setup using the **Window > Rally Protocol > Setup** window:
+
+  ```cs
+  IRallyNetwork rlyNetwork = RallyUnityManager.Instance.RlyNetwork;
+  ```
+
+- Equivelant to the above:
+
+  ```cs
+  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create();
+  ```
+
+- Create using custom settings preset
+
+  ```cs
+  RallyProtocolSettingsPreset preset = Resources.Load<RallyProtocolSettingsPreset>("myPreset");
+  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(preset);
+  ```
+
+- Create using network type
+
+  ```cs
+  string myApiKey = "...";
+  RallyNetworkType networkType = RallyNetworkType.Polygon;
+  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(networkType, myApiKey);
+  ```
+
+- Create using network config
+
+  ```cs
+  string myApiKey = "...";
+
+  // Create a clone from default Polygon config and apply any changes as needed
+  RallyNetworkConfig config = RallyNetworkConfig.Polygon;
+  config.Gsn.RelayUrl = "https://api.rallyprotocol.com";
+
+  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(config, myApiKey);
+  ```
+
 ## Getting Started
 
 1. Setup the API key and network through Window > Rally Protocol > Setup window
@@ -48,11 +91,11 @@ The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
   ```
 
 - Get the default instance of Rally Account Manager and Rally Network (EVM network):
-  
+
   ```cs
   IRallyAccountManager accountManager;
   IRallyNetwork rlyNetwork;
-  
+
   this.accountManager RallyUnityAccountManager.Default;
   this.rlyNetwork = RallyUnityNetworkFactory.Create();
   ```
@@ -65,7 +108,7 @@ The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
     try
     {
         Debug.Log("Creating account...");
-  
+
         // Create a new account & overwrite everytime for testing purposes
         await this.accountManager.CreateAccountAsync(new() { Overwrite = true });
         Debug.Log("Account created successfully");

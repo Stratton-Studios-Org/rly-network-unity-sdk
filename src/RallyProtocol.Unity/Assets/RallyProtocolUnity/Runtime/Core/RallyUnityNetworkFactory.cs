@@ -63,6 +63,17 @@ namespace RallyProtocolUnity.Networks
             return Create(preset);
         }
 
+        public static IRallyNetwork Create(string apiKey)
+        {
+            RallyProtocolSettingsPreset preset = LoadMainSettingsPreset();
+            if (preset == null)
+            {
+                throw new System.Exception($"There are no default settings preset available at {MainSettingsResourcesPath}");
+            }
+
+            return Create(preset, apiKey);
+        }
+
         public static IRallyNetwork Create(RallyProtocolSettingsPreset preset)
         {
             if (preset.NetworkType == RallyNetworkType.Custom)
@@ -73,6 +84,19 @@ namespace RallyProtocolUnity.Networks
             else
             {
                 return Create(preset.NetworkType, preset.ApiKey);
+            }
+        }
+
+        public static IRallyNetwork Create(RallyProtocolSettingsPreset preset, string apiKey)
+        {
+            if (preset.NetworkType == RallyNetworkType.Custom)
+            {
+                RallyNetworkConfig clonedCustomConfig = preset.CustomNetworkConfig.Clone();
+                return Create(clonedCustomConfig, apiKey);
+            }
+            else
+            {
+                return Create(preset.NetworkType, apiKey);
             }
         }
 

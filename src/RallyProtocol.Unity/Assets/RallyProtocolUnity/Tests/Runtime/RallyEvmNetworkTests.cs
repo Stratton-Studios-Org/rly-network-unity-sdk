@@ -25,10 +25,78 @@ namespace RallyProtocolUnity.Tests
     public class RallyEvmNetworkTests
     {
 
+        protected const string CustomPresetResourcePath = "RallyProtocol/Presets/Test";
+
         protected const decimal amount = 2;
         protected const string apiKey = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjYxMX0.PUxW-wsXnE28BBRS8LhltsErvWCSPd6N0xpSCk1MkJ7TxXF4cvCfB7nDptakv5myAtIjJNMS-Gs9D_VTTH2tXQ";
 
         protected RallyNetworkType networkType = RallyNetworkType.Amoy;
+
+        #region Initilization Tets
+
+        [Sequential]
+        [UnityTest]
+        public IEnumerator CreateDefaultPasses()
+        {
+            return UniTask.ToCoroutine(() =>
+            {
+                IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create();
+                Assert.IsNotNull(rlyNetwork);
+                return UniTask.CompletedTask;
+            });
+        }
+
+        [Sequential]
+        [UnityTest]
+        public IEnumerator CreateCustomConfigPasses()
+        {
+            return UniTask.ToCoroutine(() =>
+            {
+                RallyNetworkConfig config = RallyNetworkConfig.Amoy;
+                IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(config);
+                Assert.IsNotNull(rlyNetwork);
+
+                rlyNetwork = RallyUnityNetworkFactory.Create(config, apiKey);
+                Assert.IsNotNull(rlyNetwork);
+                return UniTask.CompletedTask;
+            });
+        }
+
+        [Sequential]
+        [UnityTest]
+        public IEnumerator CreateCustomNetworkTypePasses()
+        {
+            return UniTask.ToCoroutine(() =>
+            {
+                RallyNetworkType networkType = RallyNetworkType.Amoy;
+                IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(networkType);
+                Assert.IsNotNull(rlyNetwork);
+
+                rlyNetwork = RallyUnityNetworkFactory.Create(networkType, apiKey);
+                Assert.IsNotNull(rlyNetwork);
+                return UniTask.CompletedTask;
+            });
+        }
+
+        [Sequential]
+        [UnityTest]
+        public IEnumerator CreateCustomPresetPasses()
+        {
+            return UniTask.ToCoroutine(() =>
+            {
+                RallyProtocolSettingsPreset preset = Resources.Load<RallyProtocolSettingsPreset>(CustomPresetResourcePath);
+                IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(preset);
+                Assert.IsNotNull(rlyNetwork);
+
+                rlyNetwork = RallyUnityNetworkFactory.Create(preset, apiKey);
+                Assert.IsNotNull(rlyNetwork);
+                return UniTask.CompletedTask;
+            });
+        }
+
+        #endregion
+
+        #region Account Tests
 
         [Sequential]
         [UnityTest]
@@ -80,6 +148,10 @@ namespace RallyProtocolUnity.Tests
                 }
             });
         }
+
+        #endregion
+
+        #region Common Operations
 
         [Sequential]
         [UnityTest]
@@ -228,6 +300,9 @@ namespace RallyProtocolUnity.Tests
                 await utcs.Task;
             });
         }
+
+        #endregion
+
     }
 
 }

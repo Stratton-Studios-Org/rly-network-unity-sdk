@@ -14,6 +14,7 @@ using RallyProtocol.Accounts;
 using RallyProtocol.Networks;
 
 using RallyProtocolUnity.Accounts;
+using RallyProtocolUnity.Components;
 using RallyProtocolUnity.Logging;
 using RallyProtocolUnity.Networks;
 
@@ -70,8 +71,8 @@ namespace RallyProtocol.Samples
 
             Debug.Log("Initializing Rally network...");
 
-            // Create a Rally network instance from the Main settings preset created by Window > Rally Protocol > Setup window
-            this.rlyNetwork = RallyUnityNetworkFactory.Create();
+            // Retrieve the Rally network instance from the Main settings preset created by Window > Rally Protocol > Setup window
+            this.rlyNetwork = RallyUnityManager.Instance.RlyNetwork;
             Debug.Log("Initialized Rally network");
             await UpdateInfoText();
             this.canvasGroup.interactable = true;
