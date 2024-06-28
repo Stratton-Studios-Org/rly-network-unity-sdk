@@ -1,0 +1,27 @@
+{
+    "name": "RallyProtocolUnity.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "UniTask",
+        "RallyProtocol.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Microsoft.Extensions.Logging.Abstractions.dll",
+        "Nethereum.Web3.dll",
+        "Nethereum.JsonRpc.Client.dll",
+        "Nethereum.Accounts.dll",
+        "Nethereum.HdWallet.dll",
+        "Newtonsoft.Json.dll",
+        "Nethereum.RPC.dll",
+        "NBitcoin.dll",
+        "RallyProtocol.Runtime.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

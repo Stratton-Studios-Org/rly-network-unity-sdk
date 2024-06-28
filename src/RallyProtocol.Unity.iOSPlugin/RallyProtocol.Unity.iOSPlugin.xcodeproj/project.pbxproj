@@ -1,0 +1,636 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F5FD3602C189E5700A16BCC /* secp256k1.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3382C189E5600A16BCC /* secp256k1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3612C189E5700A16BCC /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3392C189E5600A16BCC /* sha2.c */; };
+		3F5FD3622C189E5700A16BCC /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD33A2C189E5600A16BCC /* aestab.c */; };
+		3F5FD3632C189E5700A16BCC /* pbkdf2.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD33B2C189E5600A16BCC /* pbkdf2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3642C189E5700A16BCC /* RlyNetworkMobileSdk-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD33C2C189E5600A16BCC /* RlyNetworkMobileSdk-Bridging-Header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3652C189E5700A16BCC /* sha3.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD33D2C189E5600A16BCC /* sha3.c */; };
+		3F5FD3662C189E5700A16BCC /* RlyNetworkMobileSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD33E2C189E5600A16BCC /* RlyNetworkMobileSdk.swift */; };
+		3F5FD3672C189E5700A16BCC /* options.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD33F2C189E5600A16BCC /* options.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3682C189E5700A16BCC /* bip39.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3402C189E5600A16BCC /* bip39.c */; };
+		3F5FD3692C189E5700A16BCC /* bip39.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3412C189E5700A16BCC /* bip39.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD36A2C189E5700A16BCC /* curves.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3422C189E5700A16BCC /* curves.c */; };
+		3F5FD36B2C189E5700A16BCC /* bip32.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3432C189E5700A16BCC /* bip32.c */; };
+		3F5FD36C2C189E5700A16BCC /* ecdsa.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3442C189E5700A16BCC /* ecdsa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD36D2C189E5700A16BCC /* ripemd160.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3452C189E5700A16BCC /* ripemd160.c */; };
+		3F5FD36E2C189E5700A16BCC /* pbkdf2.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3462C189E5700A16BCC /* pbkdf2.c */; };
+		3F5FD36F2C189E5700A16BCC /* sha2.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3472C189E5700A16BCC /* sha2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3702C189E5700A16BCC /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3482C189E5700A16BCC /* aeskey.c */; };
+		3F5FD3712C189E5700A16BCC /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3492C189E5700A16BCC /* KeyChainHelper.swift */; };
+		3F5FD3722C189E5700A16BCC /* bignum.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD34A2C189E5700A16BCC /* bignum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3732C189E5700A16BCC /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD34B2C189E5700A16BCC /* aes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3742C189E5700A16BCC /* secp256k1.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD34C2C189E5700A16BCC /* secp256k1.c */; };
+		3F5FD3752C189E5700A16BCC /* bignum.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD34D2C189E5700A16BCC /* bignum.c */; };
+		3F5FD3762C189E5700A16BCC /* rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD34E2C189E5700A16BCC /* rand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3772C189E5700A16BCC /* aestab.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD34F2C189E5700A16BCC /* aestab.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3782C189E5700A16BCC /* bip39_english.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3502C189E5700A16BCC /* bip39_english.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3792C189E5700A16BCC /* ecdsa.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3512C189E5700A16BCC /* ecdsa.c */; };
+		3F5FD37A2C189E5700A16BCC /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3522C189E5700A16BCC /* sha3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD37B2C189E5700A16BCC /* secp256k1.table in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FD3532C189E5700A16BCC /* secp256k1.table */; };
+		3F5FD37C2C189E5700A16BCC /* macros.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3542C189E5700A16BCC /* macros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD37D2C189E5700A16BCC /* base58.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3552C189E5700A16BCC /* base58.c */; };
+		3F5FD37E2C189E5700A16BCC /* ripemd160.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3562C189E5700A16BCC /* ripemd160.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD37F2C189E5700A16BCC /* curves.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3572C189E5700A16BCC /* curves.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3802C189E5700A16BCC /* aes_modes.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3582C189E5700A16BCC /* aes_modes.c */; };
+		3F5FD3812C189E5700A16BCC /* aesopt.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3592C189E5700A16BCC /* aesopt.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3822C189E5700A16BCC /* hmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD35A2C189E5700A16BCC /* hmac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3832C189E5700A16BCC /* rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD35B2C189E5700A16BCC /* rand.c */; };
+		3F5FD3842C189E5700A16BCC /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD35C2C189E5700A16BCC /* aescrypt.c */; };
+		3F5FD3852C189E5700A16BCC /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD35D2C189E5700A16BCC /* hmac.c */; };
+		3F5FD3862C189E5700A16BCC /* base58.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD35E2C189E5700A16BCC /* base58.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F5FD3872C189E5700A16BCC /* bip32.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD35F2C189E5700A16BCC /* bip32.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F9673612C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.docc in Sources */ = {isa = PBXBuildFile; fileRef = 3F9673602C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.docc */; };
+		3F9673672C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F96735C2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.framework */; };
+		3F96736C2C108CA100E4214E /* RallyProtocol_Unity_iOSPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F96736B2C108CA100E4214E /* RallyProtocol_Unity_iOSPluginTests.m */; };
+		3F96736D2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F96735F2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F9673682C108CA100E4214E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F9673532C108CA100E4214E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F96735B2C108CA100E4214E;
+			remoteInfo = RallyProtocol.Unity.iOSPlugin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3F5FD3382C189E5600A16BCC /* secp256k1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = secp256k1.h; sourceTree = "<group>"; };
+		3F5FD3392C189E5600A16BCC /* sha2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha2.c; sourceTree = "<group>"; };
+		3F5FD33A2C189E5600A16BCC /* aestab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aestab.c; sourceTree = "<group>"; };
+		3F5FD33B2C189E5600A16BCC /* pbkdf2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pbkdf2.h; sourceTree = "<group>"; };
+		3F5FD33C2C189E5600A16BCC /* RlyNetworkMobileSdk-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RlyNetworkMobileSdk-Bridging-Header.h"; sourceTree = "<group>"; };
+		3F5FD33D2C189E5600A16BCC /* sha3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha3.c; sourceTree = "<group>"; };
+		3F5FD33E2C189E5600A16BCC /* RlyNetworkMobileSdk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RlyNetworkMobileSdk.swift; sourceTree = "<group>"; };
+		3F5FD33F2C189E5600A16BCC /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
+		3F5FD3402C189E5600A16BCC /* bip39.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bip39.c; sourceTree = "<group>"; };
+		3F5FD3412C189E5700A16BCC /* bip39.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bip39.h; sourceTree = "<group>"; };
+		3F5FD3422C189E5700A16BCC /* curves.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = curves.c; sourceTree = "<group>"; };
+		3F5FD3432C189E5700A16BCC /* bip32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bip32.c; sourceTree = "<group>"; };
+		3F5FD3442C189E5700A16BCC /* ecdsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecdsa.h; sourceTree = "<group>"; };
+		3F5FD3452C189E5700A16BCC /* ripemd160.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ripemd160.c; sourceTree = "<group>"; };
+		3F5FD3462C189E5700A16BCC /* pbkdf2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pbkdf2.c; sourceTree = "<group>"; };
+		3F5FD3472C189E5700A16BCC /* sha2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha2.h; sourceTree = "<group>"; };
+		3F5FD3482C189E5700A16BCC /* aeskey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aeskey.c; sourceTree = "<group>"; };
+		3F5FD3492C189E5700A16BCC /* KeyChainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
+		3F5FD34A2C189E5700A16BCC /* bignum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bignum.h; sourceTree = "<group>"; };
+		3F5FD34B2C189E5700A16BCC /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		3F5FD34C2C189E5700A16BCC /* secp256k1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = secp256k1.c; sourceTree = "<group>"; };
+		3F5FD34D2C189E5700A16BCC /* bignum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bignum.c; sourceTree = "<group>"; };
+		3F5FD34E2C189E5700A16BCC /* rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rand.h; sourceTree = "<group>"; };
+		3F5FD34F2C189E5700A16BCC /* aestab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aestab.h; sourceTree = "<group>"; };
+		3F5FD3502C189E5700A16BCC /* bip39_english.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bip39_english.h; sourceTree = "<group>"; };
+		3F5FD3512C189E5700A16BCC /* ecdsa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ecdsa.c; sourceTree = "<group>"; };
+		3F5FD3522C189E5700A16BCC /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
+		3F5FD3532C189E5700A16BCC /* secp256k1.table */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secp256k1.table; sourceTree = "<group>"; };
+		3F5FD3542C189E5700A16BCC /* macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
+		3F5FD3552C189E5700A16BCC /* base58.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base58.c; sourceTree = "<group>"; };
+		3F5FD3562C189E5700A16BCC /* ripemd160.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ripemd160.h; sourceTree = "<group>"; };
+		3F5FD3572C189E5700A16BCC /* curves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curves.h; sourceTree = "<group>"; };
+		3F5FD3582C189E5700A16BCC /* aes_modes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes_modes.c; sourceTree = "<group>"; };
+		3F5FD3592C189E5700A16BCC /* aesopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aesopt.h; sourceTree = "<group>"; };
+		3F5FD35A2C189E5700A16BCC /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		3F5FD35B2C189E5700A16BCC /* rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rand.c; sourceTree = "<group>"; };
+		3F5FD35C2C189E5700A16BCC /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
+		3F5FD35D2C189E5700A16BCC /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
+		3F5FD35E2C189E5700A16BCC /* base58.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base58.h; sourceTree = "<group>"; };
+		3F5FD35F2C189E5700A16BCC /* bip32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bip32.h; sourceTree = "<group>"; };
+		3F96735C2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RallyProtocol_Unity_iOSPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F96735F2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RallyProtocol_Unity_iOSPlugin.h; sourceTree = "<group>"; };
+		3F9673602C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = RallyProtocol_Unity_iOSPlugin.docc; sourceTree = "<group>"; };
+		3F9673662C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RallyProtocol.Unity.iOSPluginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F96736B2C108CA100E4214E /* RallyProtocol_Unity_iOSPluginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RallyProtocol_Unity_iOSPluginTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F9673592C108CA100E4214E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F9673632C108CA100E4214E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F9673672C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F9673522C108CA100E4214E = {
+			isa = PBXGroup;
+			children = (
+				3F96735E2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */,
+				3F96736A2C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests */,
+				3F96735D2C108CA100E4214E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F96735D2C108CA100E4214E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F96735C2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.framework */,
+				3F9673662C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F96735E2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				3F5FD3582C189E5700A16BCC /* aes_modes.c */,
+				3F5FD34B2C189E5700A16BCC /* aes.h */,
+				3F5FD35C2C189E5700A16BCC /* aescrypt.c */,
+				3F5FD3482C189E5700A16BCC /* aeskey.c */,
+				3F5FD3592C189E5700A16BCC /* aesopt.h */,
+				3F5FD33A2C189E5600A16BCC /* aestab.c */,
+				3F5FD34F2C189E5700A16BCC /* aestab.h */,
+				3F5FD3552C189E5700A16BCC /* base58.c */,
+				3F5FD35E2C189E5700A16BCC /* base58.h */,
+				3F5FD34D2C189E5700A16BCC /* bignum.c */,
+				3F5FD34A2C189E5700A16BCC /* bignum.h */,
+				3F5FD3432C189E5700A16BCC /* bip32.c */,
+				3F5FD35F2C189E5700A16BCC /* bip32.h */,
+				3F5FD3502C189E5700A16BCC /* bip39_english.h */,
+				3F5FD3402C189E5600A16BCC /* bip39.c */,
+				3F5FD3412C189E5700A16BCC /* bip39.h */,
+				3F5FD3422C189E5700A16BCC /* curves.c */,
+				3F5FD3572C189E5700A16BCC /* curves.h */,
+				3F5FD3512C189E5700A16BCC /* ecdsa.c */,
+				3F5FD3442C189E5700A16BCC /* ecdsa.h */,
+				3F5FD35D2C189E5700A16BCC /* hmac.c */,
+				3F5FD35A2C189E5700A16BCC /* hmac.h */,
+				3F5FD3492C189E5700A16BCC /* KeyChainHelper.swift */,
+				3F5FD3542C189E5700A16BCC /* macros.h */,
+				3F5FD33F2C189E5600A16BCC /* options.h */,
+				3F5FD3462C189E5700A16BCC /* pbkdf2.c */,
+				3F5FD33B2C189E5600A16BCC /* pbkdf2.h */,
+				3F5FD35B2C189E5700A16BCC /* rand.c */,
+				3F5FD34E2C189E5700A16BCC /* rand.h */,
+				3F5FD3452C189E5700A16BCC /* ripemd160.c */,
+				3F5FD3562C189E5700A16BCC /* ripemd160.h */,
+				3F5FD33C2C189E5600A16BCC /* RlyNetworkMobileSdk-Bridging-Header.h */,
+				3F5FD33E2C189E5600A16BCC /* RlyNetworkMobileSdk.swift */,
+				3F5FD34C2C189E5700A16BCC /* secp256k1.c */,
+				3F5FD3382C189E5600A16BCC /* secp256k1.h */,
+				3F5FD3532C189E5700A16BCC /* secp256k1.table */,
+				3F5FD3392C189E5600A16BCC /* sha2.c */,
+				3F5FD3472C189E5700A16BCC /* sha2.h */,
+				3F5FD33D2C189E5600A16BCC /* sha3.c */,
+				3F5FD3522C189E5700A16BCC /* sha3.h */,
+				3F96735F2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.h */,
+				3F9673602C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.docc */,
+			);
+			path = RallyProtocol.Unity.iOSPlugin;
+			sourceTree = "<group>";
+		};
+		3F96736A2C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests */ = {
+			isa = PBXGroup;
+			children = (
+				3F96736B2C108CA100E4214E /* RallyProtocol_Unity_iOSPluginTests.m */,
+			);
+			path = RallyProtocol.Unity.iOSPluginTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3F9673572C108CA100E4214E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F96736D2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.h in Headers */,
+				3F5FD3872C189E5700A16BCC /* bip32.h in Headers */,
+				3F5FD37F2C189E5700A16BCC /* curves.h in Headers */,
+				3F5FD3692C189E5700A16BCC /* bip39.h in Headers */,
+				3F5FD3772C189E5700A16BCC /* aestab.h in Headers */,
+				3F5FD36F2C189E5700A16BCC /* sha2.h in Headers */,
+				3F5FD3762C189E5700A16BCC /* rand.h in Headers */,
+				3F5FD3862C189E5700A16BCC /* base58.h in Headers */,
+				3F5FD3672C189E5700A16BCC /* options.h in Headers */,
+				3F5FD36C2C189E5700A16BCC /* ecdsa.h in Headers */,
+				3F5FD3812C189E5700A16BCC /* aesopt.h in Headers */,
+				3F5FD3632C189E5700A16BCC /* pbkdf2.h in Headers */,
+				3F5FD3602C189E5700A16BCC /* secp256k1.h in Headers */,
+				3F5FD37E2C189E5700A16BCC /* ripemd160.h in Headers */,
+				3F5FD37A2C189E5700A16BCC /* sha3.h in Headers */,
+				3F5FD3642C189E5700A16BCC /* RlyNetworkMobileSdk-Bridging-Header.h in Headers */,
+				3F5FD3822C189E5700A16BCC /* hmac.h in Headers */,
+				3F5FD37C2C189E5700A16BCC /* macros.h in Headers */,
+				3F5FD3732C189E5700A16BCC /* aes.h in Headers */,
+				3F5FD3722C189E5700A16BCC /* bignum.h in Headers */,
+				3F5FD3782C189E5700A16BCC /* bip39_english.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3F96735B2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F9673702C108CA100E4214E /* Build configuration list for PBXNativeTarget "RallyProtocol.Unity.iOSPlugin" */;
+			buildPhases = (
+				3F9673572C108CA100E4214E /* Headers */,
+				3F9673582C108CA100E4214E /* Sources */,
+				3F9673592C108CA100E4214E /* Frameworks */,
+				3F96735A2C108CA100E4214E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RallyProtocol.Unity.iOSPlugin;
+			productName = RallyProtocol.Unity.iOSPlugin;
+			productReference = 3F96735C2C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3F9673652C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F9673732C108CA100E4214E /* Build configuration list for PBXNativeTarget "RallyProtocol.Unity.iOSPluginTests" */;
+			buildPhases = (
+				3F9673622C108CA100E4214E /* Sources */,
+				3F9673632C108CA100E4214E /* Frameworks */,
+				3F9673642C108CA100E4214E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F9673692C108CA100E4214E /* PBXTargetDependency */,
+			);
+			name = RallyProtocol.Unity.iOSPluginTests;
+			productName = RallyProtocol.Unity.iOSPluginTests;
+			productReference = 3F9673662C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F9673532C108CA100E4214E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					3F96735B2C108CA100E4214E = {
+						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1530;
+					};
+					3F9673652C108CA100E4214E = {
+						CreatedOnToolsVersion = 15.3;
+					};
+				};
+			};
+			buildConfigurationList = 3F9673562C108CA100E4214E /* Build configuration list for PBXProject "RallyProtocol.Unity.iOSPlugin" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3F9673522C108CA100E4214E;
+			productRefGroup = 3F96735D2C108CA100E4214E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F96735B2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */,
+				3F9673652C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F96735A2C108CA100E4214E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F5FD37B2C189E5700A16BCC /* secp256k1.table in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F9673642C108CA100E4214E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F9673582C108CA100E4214E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F5FD3852C189E5700A16BCC /* hmac.c in Sources */,
+				3F5FD36B2C189E5700A16BCC /* bip32.c in Sources */,
+				3F5FD37D2C189E5700A16BCC /* base58.c in Sources */,
+				3F5FD3842C189E5700A16BCC /* aescrypt.c in Sources */,
+				3F5FD3742C189E5700A16BCC /* secp256k1.c in Sources */,
+				3F9673612C108CA100E4214E /* RallyProtocol_Unity_iOSPlugin.docc in Sources */,
+				3F5FD3702C189E5700A16BCC /* aeskey.c in Sources */,
+				3F5FD3712C189E5700A16BCC /* KeyChainHelper.swift in Sources */,
+				3F5FD36E2C189E5700A16BCC /* pbkdf2.c in Sources */,
+				3F5FD3622C189E5700A16BCC /* aestab.c in Sources */,
+				3F5FD36D2C189E5700A16BCC /* ripemd160.c in Sources */,
+				3F5FD3652C189E5700A16BCC /* sha3.c in Sources */,
+				3F5FD3832C189E5700A16BCC /* rand.c in Sources */,
+				3F5FD3792C189E5700A16BCC /* ecdsa.c in Sources */,
+				3F5FD3752C189E5700A16BCC /* bignum.c in Sources */,
+				3F5FD3682C189E5700A16BCC /* bip39.c in Sources */,
+				3F5FD3802C189E5700A16BCC /* aes_modes.c in Sources */,
+				3F5FD3612C189E5700A16BCC /* sha2.c in Sources */,
+				3F5FD36A2C189E5700A16BCC /* curves.c in Sources */,
+				3F5FD3662C189E5700A16BCC /* RlyNetworkMobileSdk.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F9673622C108CA100E4214E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F96736C2C108CA100E4214E /* RallyProtocol_Unity_iOSPluginTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F9673692C108CA100E4214E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F96735B2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */;
+			targetProxy = 3F9673682C108CA100E4214E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3F96736E2C108CA100E4214E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3F96736F2C108CA100E4214E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3F9673712C108CA100E4214E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N5VW83Q2SX;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyprotocol.RallyProtocol-Unity-iOSPlugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3F9673722C108CA100E4214E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N5VW83Q2SX;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyprotocol.RallyProtocol-Unity-iOSPlugin";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3F9673742C108CA100E4214E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N5VW83Q2SX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyprotocol.RallyProtocol-Unity-iOSPluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3F9673752C108CA100E4214E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N5VW83Q2SX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rallyprotocol.RallyProtocol-Unity-iOSPluginTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F9673562C108CA100E4214E /* Build configuration list for PBXProject "RallyProtocol.Unity.iOSPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F96736E2C108CA100E4214E /* Debug */,
+				3F96736F2C108CA100E4214E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F9673702C108CA100E4214E /* Build configuration list for PBXNativeTarget "RallyProtocol.Unity.iOSPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F9673712C108CA100E4214E /* Debug */,
+				3F9673722C108CA100E4214E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F9673732C108CA100E4214E /* Build configuration list for PBXNativeTarget "RallyProtocol.Unity.iOSPluginTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F9673742C108CA100E4214E /* Debug */,
+				3F9673752C108CA100E4214E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3F9673532C108CA100E4214E /* Project object */;
+}

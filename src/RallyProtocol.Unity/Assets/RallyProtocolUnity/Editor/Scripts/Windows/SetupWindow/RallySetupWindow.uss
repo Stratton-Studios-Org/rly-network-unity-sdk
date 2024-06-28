@@ -1,0 +1,7 @@
+.unity-scroll-view__content-container {
+    flex-grow: 1;
+}
+
+#logo {
+    background-image: resource("RallyProtocol/rally_main_logo");
+}

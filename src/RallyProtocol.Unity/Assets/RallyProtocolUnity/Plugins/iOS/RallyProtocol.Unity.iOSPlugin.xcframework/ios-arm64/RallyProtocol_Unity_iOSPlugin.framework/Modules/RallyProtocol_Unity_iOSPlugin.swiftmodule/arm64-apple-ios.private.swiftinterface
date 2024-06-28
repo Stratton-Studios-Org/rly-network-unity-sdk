@@ -1,0 +1,22 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios17.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name RallyProtocol_Unity_iOSPlugin
+import Foundation
+@_exported import RallyProtocol_Unity_iOSPlugin
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@objc @_inheritsConvenienceInitializers public class RlyNetworkMobileSdk : ObjectiveC.NSObject {
+  @objc public func hello() -> Swift.String
+  @objc public func getBundleId() -> Swift.String
+  @objc public func getMnemonic() -> Swift.String?
+  @objc public func generateMnemonic() -> Swift.String
+  @objc public func mnemonicBackedUpToCloud() -> Swift.Bool
+  @objc public func saveMnemonic(_ mnemonic: Swift.String, saveToCloud: Swift.Bool, rejectOnCloudSaveFailure: Swift.Bool) -> Swift.Bool
+  @objc public func deleteMnemonic() -> Swift.Bool
+  public func deleteCloudMnemonic() -> Swift.Bool
+  @objc public func getPrivateKeyFromMnemonic(_ mnemonic: Swift.String) -> Any
+  @objc override dynamic public init()
+  @objc deinit
+}
