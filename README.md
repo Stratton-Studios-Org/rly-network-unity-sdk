@@ -2,6 +2,14 @@
 
 The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
 
+## Cloning
+
+You need to enable Git longpaths before cloning, just run the below command in the terminal (this is intended for Windows users only):
+
+```
+git config --system core.longpaths true
+```
+
 ## Folder Structure
 
 - `src/RallyProtocol.Unity`: The primary Unity project and SDK code
