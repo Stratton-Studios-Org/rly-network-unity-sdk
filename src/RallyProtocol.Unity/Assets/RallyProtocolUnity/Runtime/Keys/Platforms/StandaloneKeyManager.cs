@@ -56,7 +56,7 @@ namespace RallyProtocolUnity.Storage
 
         public Task<string> GetMnemonic()
         {
-            if (File.Exists(GetFilePath()))
+            if (!File.Exists(GetFilePath()))
             {
                 return Task.FromResult(string.Empty);
             }

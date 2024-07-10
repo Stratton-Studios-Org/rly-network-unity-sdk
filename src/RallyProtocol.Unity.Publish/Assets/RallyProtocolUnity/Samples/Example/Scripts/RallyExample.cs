@@ -68,6 +68,11 @@ namespace RallyProtocol.Samples
             {
                 Debug.Log("Account loaded successfully");
             }
+            else
+            {
+                account = await this.accountManager.CreateAccountAsync();
+                Debug.Log("Account created successfully");
+            }
 
             Debug.Log("Initializing Rally network...");
 
