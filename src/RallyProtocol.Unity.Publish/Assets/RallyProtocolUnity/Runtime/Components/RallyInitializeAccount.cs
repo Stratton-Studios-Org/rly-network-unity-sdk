@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -17,6 +18,15 @@ namespace RallyProtocolUnity.Components
     [AddComponentMenu(AddComponentMenuNameBase + "/Initialize Account (Rally Protocol)")]
     public class RallyInitializeAccount : RallyBehaviour
     {
+
+        #region Events
+
+        public event EventHandler AccountCreated;
+        public event EventHandler AccountLoaded;
+        public event EventHandler Initialized;
+        public event EventHandler NoAccountFound;
+
+        #endregion
 
         #region Fields
 
@@ -46,6 +56,8 @@ namespace RallyProtocolUnity.Components
         protected UnityEvent accountCreatedEvent;
         [SerializeField]
         protected UnityEvent initializedEvent;
+        [SerializeField]
+        protected UnityEvent noAccountFoundEvent;
 
         #endregion
 
@@ -66,16 +78,25 @@ namespace RallyProtocolUnity.Components
         protected void OnAccountCreated()
         {
             this.accountCreatedEvent?.Invoke();
+            AccountCreated?.Invoke(this, EventArgs.Empty);
         }
 
         protected void OnAccountLoaded()
         {
             this.accountLoadedEvent?.Invoke();
+            AccountLoaded?.Invoke(this, EventArgs.Empty);
         }
 
         protected void OnInitialized()
         {
             this.initializedEvent?.Invoke();
+            Initialized?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected void OnNoAccountFound()
+        {
+            this.noAccountFoundEvent?.Invoke();
+            NoAccountFound?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion
@@ -107,6 +128,7 @@ namespace RallyProtocolUnity.Components
                 }
                 else
                 {
+                    OnNoAccountFound();
                     return;
                 }
             }
