@@ -10,6 +10,12 @@ You need to enable Git longpaths before cloning, just run the below command in t
 git config --system core.longpaths true
 ```
 
+If you're using Git GUIs, use `--global` like so:
+
+```
+git config --global core.longpaths true
+```
+
 ## Folder Structure
 
 - `src/RallyProtocol.Unity`: The primary Unity project and SDK code
