@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace RallyProtocolUnityInstaller
 
     public class InstallerWindow : EditorWindow
     {
+
+        public const string GitInstallUrl = "https://git-scm.com/";
+        public const string GitCommand = "git";
 
         public const string BasePath = "Assets/RallyProtocolUnityInstaller";
         public const string PackagesPath = BasePath + "/Packages";
@@ -292,6 +296,16 @@ namespace RallyProtocolUnityInstaller
 
         public async void Install()
         {
+            if (!IsGitInstalled())
+            {
+                if (EditorUtility.DisplayDialog("Git is not installed", "You do not have Git installed on your system, but Git is required to be present for the installation of dependencies and packages through Unity package manager, press Install Git to open Git's website.\n\nIf you've just installed git, make sure to restart Unity and Unity hub", "Install Git", "Cancel"))
+                {
+                    Application.OpenURL(GitInstallUrl);
+                }
+
+                return;
+            }
+
             ShowLoading();
             if (IsMainPackageInstalled())
             {
@@ -304,6 +318,32 @@ namespace RallyProtocolUnityInstaller
             }
 
             HideLoading();
+        }
+
+        /// <summary>
+        /// Checks whether the git command exsits.
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsGitInstalled()
+        {
+            try
+            {
+                using (System.Diagnostics.Process p = new())
+                {
+                    p.StartInfo.UseShellExecute = false;
+                    p.StartInfo.CreateNoWindow = true;
+                    p.StartInfo.FileName = GitCommand;
+                    p.Start();
+                    p.WaitForExit();
+
+                    // If the process runs successfully it means the command exists
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
     }
