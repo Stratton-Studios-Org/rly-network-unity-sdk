@@ -216,11 +216,12 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC19deleteCloudMnemonicSbyF",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)deleteCloudMnemonic",
             "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC19deleteCloudMnemonicSbyF",
             "moduleName": "RallyProtocol_Unity_iOSPlugin",
             "declAttributes": [
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "funcSelfKind": "NonMutating"
           },

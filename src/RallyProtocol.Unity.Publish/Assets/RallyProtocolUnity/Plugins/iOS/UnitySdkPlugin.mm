@@ -9,7 +9,9 @@
 + (NSString *)generateMnemonic;
 + (BOOL)saveMnemonic:(NSString *)mnemonic saveToCloud:(BOOL)saveToCloud rejectOnCloudSaveFailure:(BOOL)rejectOnCloudSaveFailure;
 + (BOOL)deleteMnemonic;
++ (BOOL)deleteCloudMnemonic;
 + (NSString *)getPrivateKeyFromMnemonic:(NSString *)mnemonic;
++ (NSString *)mnemonicBackedUpToCloud:(NSString *)mnemonic;
 
 @end
 
@@ -97,9 +99,13 @@ extern "C" {
     bool saveMnemonic(const char *mnemonic, bool saveToCloud, bool rejectOnCloudSaveFailure) {
         return [UnitySdkPlugin saveMnemonic:CharArrayToNSString(mnemonic) saveToCloud:saveToCloud rejectOnCloudSaveFailure:rejectOnCloudSaveFailure];
     }
-    
+
     bool deleteMnemonic() {
         return [UnitySdkPlugin deleteMnemonic];
+    }
+
+    bool deleteCloudMnemonic() {
+        return [UnitySdkPlugin deleteCloudMnemonic];
     }
     
     bool mnemonicBackedUpToCloud() {
