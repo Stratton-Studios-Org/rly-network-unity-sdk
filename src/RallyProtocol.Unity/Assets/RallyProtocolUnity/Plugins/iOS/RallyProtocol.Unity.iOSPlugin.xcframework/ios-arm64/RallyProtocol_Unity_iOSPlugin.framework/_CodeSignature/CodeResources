@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/RallyProtocol_Unity_iOSPlugin-Swift.h</key>
 		<data>
-		JY9Na4CWsTQsAhwg3RGpUtal//8=
+		YPa4RbQxulR1cOxvxNGJTtt7lzA=
 		</data>
 		<key>Headers/RallyProtocol_Unity_iOSPlugin.h</key>
 		<data>
@@ -98,11 +98,11 @@
 		</data>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		ZFkr2oMR3bV+P/oaowHyCPsYV3U=
+		ax8jwP7hTXvmCqK/ghI9zNPQqJM=
 		</data>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		3dF9XAY/fUUmb/TseMelFDC0tGU=
+		lX5JsCo9cGfn3T/jWI4wxNQakUQ=
 		</data>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -110,11 +110,11 @@
 		</data>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		3dF9XAY/fUUmb/TseMelFDC0tGU=
+		lX5JsCo9cGfn3T/jWI4wxNQakUQ=
 		</data>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		kA7LqznQbQldrPvvgVYBuRJZHag=
+		IHdVhzZRn5ku5NIDBcRROweC0Xs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -131,7 +131,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			863ibxtDFPSh/MxXPbeHHQ93MzNvY1VAUIF9DO58OP4=
+			YIka5wWoKIC9SGoQU2CizL2GvUkmGhnz0vOjJC8ebHo=
 			</data>
 		</dict>
 		<key>Headers/RallyProtocol_Unity_iOSPlugin.h</key>
@@ -285,14 +285,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			pyYvMgPcw17O9ifpSR+0p6Zyq9qakxvvfHzPVk+PqaM=
+			8DPTh1c+ZOVLhbc91A0oJLbcyx8jl44ySiS0lpf2d5w=
 			</data>
 		</dict>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9O9AT3t7NFkPEKzIMZRK81HDhxLtIwOWDmMcclIokcA=
+			reTBng0lcq7uWicz1htnh1jQa8O2KYJr/XvWOJFbUPs=
 			</data>
 		</dict>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -306,14 +306,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9O9AT3t7NFkPEKzIMZRK81HDhxLtIwOWDmMcclIokcA=
+			reTBng0lcq7uWicz1htnh1jQa8O2KYJr/XvWOJFbUPs=
 			</data>
 		</dict>
 		<key>Modules/RallyProtocol_Unity_iOSPlugin.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YuZkqWPfwk5HeFcPoKqI+C1E5OzfCo1w2+JKVhLBLUw=
+			vQs8mHq9RtGy9wRs9LjMp8mO2NDMYN4Fx3dk9luzu80=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

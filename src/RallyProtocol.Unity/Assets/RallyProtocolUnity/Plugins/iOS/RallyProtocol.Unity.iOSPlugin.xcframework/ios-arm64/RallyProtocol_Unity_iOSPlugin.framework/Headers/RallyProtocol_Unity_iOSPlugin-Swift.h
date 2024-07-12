@@ -309,6 +309,7 @@ SWIFT_CLASS("_TtC29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdk")
 - (BOOL)mnemonicBackedUpToCloud SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)saveMnemonic:(NSString * _Nonnull)mnemonic saveToCloud:(BOOL)saveToCloud rejectOnCloudSaveFailure:(BOOL)rejectOnCloudSaveFailure SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)deleteMnemonic SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)deleteCloudMnemonic SWIFT_WARN_UNUSED_RESULT;
 - (id _Nonnull)getPrivateKeyFromMnemonic:(NSString * _Nonnull)mnemonic SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
