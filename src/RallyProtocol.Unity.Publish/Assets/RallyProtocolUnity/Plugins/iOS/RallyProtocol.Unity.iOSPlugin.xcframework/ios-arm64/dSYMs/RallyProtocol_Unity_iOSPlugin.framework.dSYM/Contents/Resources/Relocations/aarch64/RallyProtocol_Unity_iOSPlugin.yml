@@ -2,8 +2,8 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/hasanbayat/Library/Developer/Xcode/DerivedData/RallyProtocol.Unity.iOSPlugin-bxfcelippxfmtfbbvprgmbhgcrws/Build/Intermediates.noindex/ArchiveIntermediates/RallyProtocol.Unity.iOSPlugin/InstallationBuildProductsLocation/Library/Frameworks/RallyProtocol_Unity_iOSPlugin.framework/RallyProtocol_Unity_iOSPlugin'
 relocations:
-  - { offsetInCU: 0x34, offset: 0x4BF75, size: 0x8, addend: 0x0, symName: _RallyProtocol_Unity_iOSPluginVersionString, symObjAddr: 0x0, symBinAddr: 0x142B0, symSize: 0x0 }
-  - { offsetInCU: 0x69, offset: 0x4BFAA, size: 0x8, addend: 0x0, symName: _RallyProtocol_Unity_iOSPluginVersionNumber, symObjAddr: 0x58, symBinAddr: 0x14308, symSize: 0x0 }
+  - { offsetInCU: 0x34, offset: 0x4BF75, size: 0x8, addend: 0x0, symName: _RallyProtocol_Unity_iOSPluginVersionString, symObjAddr: 0x0, symBinAddr: 0x142E0, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x4BFAA, size: 0x8, addend: 0x0, symName: _RallyProtocol_Unity_iOSPluginVersionNumber, symObjAddr: 0x58, symBinAddr: 0x14338, symSize: 0x0 }
   - { offsetInCU: 0x26, offset: 0x4BFE6, size: 0x8, addend: 0x0, symName: _hmac_sha256_Init, symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0xD8 }
   - { offsetInCU: 0x63, offset: 0x4C023, size: 0x8, addend: 0x0, symName: _hmac_sha256_Init, symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0xD8 }
   - { offsetInCU: 0x1D6, offset: 0x4C196, size: 0x8, addend: 0x0, symName: _hmac_sha256_Update, symObjAddr: 0xD8, symBinAddr: 0x40D8, symSize: 0xC }
@@ -41,7 +41,7 @@ relocations:
   - { offsetInCU: 0x178E, offset: 0x4E28F, size: 0x8, addend: 0x0, symName: _hdnode_serialize_private, symObjAddr: 0xE48, symBinAddr: 0x54DC, symSize: 0x18 }
   - { offsetInCU: 0x181F, offset: 0x4E320, size: 0x8, addend: 0x0, symName: _hdnode_deserialize, symObjAddr: 0xE60, symBinAddr: 0x54F4, symSize: 0x160 }
   - { offsetInCU: 0x26, offset: 0x4E498, size: 0x8, addend: 0x0, symName: _b58tobin, symObjAddr: 0x0, symBinAddr: 0x5654, symSize: 0x274 }
-  - { offsetInCU: 0x40, offset: 0x4E4B2, size: 0x8, addend: 0x0, symName: _b58digits_map, symObjAddr: 0x7A4, symBinAddr: 0x14310, symSize: 0x0 }
+  - { offsetInCU: 0x40, offset: 0x4E4B2, size: 0x8, addend: 0x0, symName: _b58digits_map, symObjAddr: 0x7A4, symBinAddr: 0x14340, symSize: 0x0 }
   - { offsetInCU: 0xC5, offset: 0x4E537, size: 0x8, addend: 0x0, symName: _b58tobin, symObjAddr: 0x0, symBinAddr: 0x5654, symSize: 0x274 }
   - { offsetInCU: 0x1FA, offset: 0x4E66C, size: 0x8, addend: 0x0, symName: _b58check, symObjAddr: 0x274, symBinAddr: 0x58C8, symSize: 0xE4 }
   - { offsetInCU: 0x2DF, offset: 0x4E751, size: 0x8, addend: 0x0, symName: _b58enc, symObjAddr: 0x358, symBinAddr: 0x59AC, symSize: 0x218 }
@@ -50,7 +50,7 @@ relocations:
   - { offsetInCU: 0x26, offset: 0x4EAD1, size: 0x8, addend: 0x0, symName: _aes_encrypt, symObjAddr: 0x0, symBinAddr: 0x5DF8, symSize: 0xC0C }
   - { offsetInCU: 0x57, offset: 0x4EB02, size: 0x8, addend: 0x0, symName: _aes_encrypt, symObjAddr: 0x0, symBinAddr: 0x5DF8, symSize: 0xC0C }
   - { offsetInCU: 0xD0, offset: 0x4EB7B, size: 0x8, addend: 0x0, symName: _aes_decrypt, symObjAddr: 0xC0C, symBinAddr: 0x6A04, symSize: 0xC0C }
-  - { offsetInCU: 0x34, offset: 0x4ECFF, size: 0x8, addend: 0x0, symName: _secp256k1, symObjAddr: 0x0, symBinAddr: 0x14390, symSize: 0x0 }
+  - { offsetInCU: 0x34, offset: 0x4ECFF, size: 0x8, addend: 0x0, symName: _secp256k1, symObjAddr: 0x0, symBinAddr: 0x143C0, symSize: 0x0 }
   - { offsetInCU: 0x137, offset: 0x4EE02, size: 0x8, addend: 0x0, symName: _secp256k1_info, symObjAddr: 0x90F0, symBinAddr: 0x28388, symSize: 0x0 }
   - { offsetInCU: 0x26, offset: 0x4EE98, size: 0x8, addend: 0x0, symName: _aes_encrypt_key128, symObjAddr: 0x0, symBinAddr: 0x7610, symSize: 0x340 }
   - { offsetInCU: 0x57, offset: 0x4EEC9, size: 0x8, addend: 0x0, symName: _aes_encrypt_key128, symObjAddr: 0x0, symBinAddr: 0x7610, symSize: 0x340 }
@@ -67,22 +67,22 @@ relocations:
   - { offsetInCU: 0x7EE, offset: 0x4F8C5, size: 0x8, addend: 0x0, symName: _pbkdf2_hmac_sha512_Final, symObjAddr: 0x3D0, symBinAddr: 0x9094, symSize: 0x60 }
   - { offsetInCU: 0x858, offset: 0x4F92F, size: 0x8, addend: 0x0, symName: _pbkdf2_hmac_sha512, symObjAddr: 0x430, symBinAddr: 0x90F4, symSize: 0x60 }
   - { offsetInCU: 0x26, offset: 0x4FB05, size: 0x8, addend: 0x0, symName: _aes_init, symObjAddr: 0x0, symBinAddr: 0x9154, symSize: 0x8 }
-  - { offsetInCU: 0x40, offset: 0x4FB1F, size: 0x8, addend: 0x0, symName: _t_rc, symObjAddr: 0x8, symBinAddr: 0x1D480, symSize: 0x0 }
-  - { offsetInCU: 0x75, offset: 0x4FB54, size: 0x8, addend: 0x0, symName: _t_fn, symObjAddr: 0x30, symBinAddr: 0x1D4A8, symSize: 0x0 }
-  - { offsetInCU: 0x9E, offset: 0x4FB7D, size: 0x8, addend: 0x0, symName: _t_fl, symObjAddr: 0x1030, symBinAddr: 0x1E4A8, symSize: 0x0 }
-  - { offsetInCU: 0xB4, offset: 0x4FB93, size: 0x8, addend: 0x0, symName: _t_in, symObjAddr: 0x2030, symBinAddr: 0x1F4A8, symSize: 0x0 }
-  - { offsetInCU: 0xCA, offset: 0x4FBA9, size: 0x8, addend: 0x0, symName: _t_il, symObjAddr: 0x3030, symBinAddr: 0x204A8, symSize: 0x0 }
-  - { offsetInCU: 0xE0, offset: 0x4FBBF, size: 0x8, addend: 0x0, symName: _t_im, symObjAddr: 0x4030, symBinAddr: 0x214A8, symSize: 0x0 }
+  - { offsetInCU: 0x40, offset: 0x4FB1F, size: 0x8, addend: 0x0, symName: _t_rc, symObjAddr: 0x8, symBinAddr: 0x1D4B0, symSize: 0x0 }
+  - { offsetInCU: 0x75, offset: 0x4FB54, size: 0x8, addend: 0x0, symName: _t_fn, symObjAddr: 0x30, symBinAddr: 0x1D4D8, symSize: 0x0 }
+  - { offsetInCU: 0x9E, offset: 0x4FB7D, size: 0x8, addend: 0x0, symName: _t_fl, symObjAddr: 0x1030, symBinAddr: 0x1E4D8, symSize: 0x0 }
+  - { offsetInCU: 0xB4, offset: 0x4FB93, size: 0x8, addend: 0x0, symName: _t_in, symObjAddr: 0x2030, symBinAddr: 0x1F4D8, symSize: 0x0 }
+  - { offsetInCU: 0xCA, offset: 0x4FBA9, size: 0x8, addend: 0x0, symName: _t_il, symObjAddr: 0x3030, symBinAddr: 0x204D8, symSize: 0x0 }
+  - { offsetInCU: 0xE0, offset: 0x4FBBF, size: 0x8, addend: 0x0, symName: _t_im, symObjAddr: 0x4030, symBinAddr: 0x214D8, symSize: 0x0 }
   - { offsetInCU: 0xFF, offset: 0x4FBDE, size: 0x8, addend: 0x0, symName: _aes_init, symObjAddr: 0x0, symBinAddr: 0x9154, symSize: 0x8 }
   - { offsetInCU: 0x26, offset: 0x4FC25, size: 0x8, addend: 0x0, symName: _ripemd160_Init, symObjAddr: 0x0, symBinAddr: 0x915C, symSize: 0x38 }
-  - { offsetInCU: 0x41, offset: 0x4FC40, size: 0x8, addend: 0x0, symName: _ripemd160_padding, symObjAddr: 0x1968, symBinAddr: 0x224D8, symSize: 0x0 }
+  - { offsetInCU: 0x41, offset: 0x4FC40, size: 0x8, addend: 0x0, symName: _ripemd160_padding, symObjAddr: 0x1968, symBinAddr: 0x22508, symSize: 0x0 }
   - { offsetInCU: 0x7F, offset: 0x4FC7E, size: 0x8, addend: 0x0, symName: _ripemd160_Init, symObjAddr: 0x0, symBinAddr: 0x915C, symSize: 0x38 }
   - { offsetInCU: 0x9C, offset: 0x4FC9B, size: 0x8, addend: 0x0, symName: _ripemd160_process, symObjAddr: 0x38, symBinAddr: 0x9194, symSize: 0x1608 }
   - { offsetInCU: 0x183, offset: 0x4FD82, size: 0x8, addend: 0x0, symName: _ripemd160_Update, symObjAddr: 0x1640, symBinAddr: 0xA79C, symSize: 0xE4 }
   - { offsetInCU: 0x226, offset: 0x4FE25, size: 0x8, addend: 0x0, symName: _ripemd160_Final, symObjAddr: 0x1724, symBinAddr: 0xA880, symSize: 0x180 }
   - { offsetInCU: 0x365, offset: 0x4FF64, size: 0x8, addend: 0x0, symName: _ripemd160, symObjAddr: 0x18A4, symBinAddr: 0xAA00, symSize: 0x98 }
   - { offsetInCU: 0x26, offset: 0x50069, size: 0x8, addend: 0x0, symName: _sha3_224_Init, symObjAddr: 0x0, symBinAddr: 0xAA98, symSize: 0x44 }
-  - { offsetInCU: 0x4E, offset: 0x50091, size: 0x8, addend: 0x0, symName: _keccak_round_constants, symObjAddr: 0x7A0, symBinAddr: 0x22518, symSize: 0x0 }
+  - { offsetInCU: 0x4E, offset: 0x50091, size: 0x8, addend: 0x0, symName: _keccak_round_constants, symObjAddr: 0x7A0, symBinAddr: 0x22548, symSize: 0x0 }
   - { offsetInCU: 0x120, offset: 0x50163, size: 0x8, addend: 0x0, symName: _sha3_224_Init, symObjAddr: 0x0, symBinAddr: 0xAA98, symSize: 0x44 }
   - { offsetInCU: 0x148, offset: 0x5018B, size: 0x8, addend: 0x0, symName: _sha3_224_Init, symObjAddr: 0x0, symBinAddr: 0xAA98, symSize: 0x44 }
   - { offsetInCU: 0x173, offset: 0x501B6, size: 0x8, addend: 0x0, symName: _sha3_256_Init, symObjAddr: 0x44, symBinAddr: 0xAADC, symSize: 0x44 }
@@ -95,20 +95,20 @@ relocations:
   - { offsetInCU: 0x35A, offset: 0x5039D, size: 0x8, addend: 0x0, symName: _sha3_process_block, symObjAddr: 0x210, symBinAddr: 0xACA8, symSize: 0x38C }
   - { offsetInCU: 0x534, offset: 0x50577, size: 0x8, addend: 0x0, symName: _sha3_Final, symObjAddr: 0x59C, symBinAddr: 0xB034, symSize: 0xBC }
   - { offsetInCU: 0x5B7, offset: 0x505FA, size: 0x8, addend: 0x0, symName: _keccak_Final, symObjAddr: 0x658, symBinAddr: 0xB0F0, symSize: 0xBC }
-  - { offsetInCU: 0x5C2, offset: 0x50605, size: 0x8, addend: 0x0, symName: _sha3_Final.cold.1, symObjAddr: 0x714, symBinAddr: 0x1391C, symSize: 0x28 }
+  - { offsetInCU: 0x5C2, offset: 0x50605, size: 0x8, addend: 0x0, symName: _sha3_Final.cold.1, symObjAddr: 0x714, symBinAddr: 0x13940, symSize: 0x28 }
   - { offsetInCU: 0x5DA, offset: 0x5061D, size: 0x8, addend: 0x0, symName: _keccak_Final, symObjAddr: 0x658, symBinAddr: 0xB0F0, symSize: 0xBC }
-  - { offsetInCU: 0x65D, offset: 0x506A0, size: 0x8, addend: 0x0, symName: _sha3_Final.cold.1, symObjAddr: 0x714, symBinAddr: 0x1391C, symSize: 0x28 }
-  - { offsetInCU: 0x668, offset: 0x506AB, size: 0x8, addend: 0x0, symName: _keccak_Final.cold.1, symObjAddr: 0x73C, symBinAddr: 0x13944, symSize: 0x28 }
+  - { offsetInCU: 0x65D, offset: 0x506A0, size: 0x8, addend: 0x0, symName: _sha3_Final.cold.1, symObjAddr: 0x714, symBinAddr: 0x13940, symSize: 0x28 }
+  - { offsetInCU: 0x668, offset: 0x506AB, size: 0x8, addend: 0x0, symName: _keccak_Final.cold.1, symObjAddr: 0x73C, symBinAddr: 0x13968, symSize: 0x28 }
   - { offsetInCU: 0x26, offset: 0x5070E, size: 0x8, addend: 0x0, symName: _finalize_rand, symObjAddr: 0x0, symBinAddr: 0xB1AC, symSize: 0x2C }
   - { offsetInCU: 0x4E, offset: 0x50736, size: 0x8, addend: 0x0, symName: _frand, symObjAddr: 0x16B8, symBinAddr: 0x30B28, symSize: 0x0 }
   - { offsetInCU: 0x80, offset: 0x50768, size: 0x8, addend: 0x0, symName: _finalize_rand, symObjAddr: 0x0, symBinAddr: 0xB1AC, symSize: 0x2C }
   - { offsetInCU: 0xD2, offset: 0x507BA, size: 0x8, addend: 0x0, symName: _random32, symObjAddr: 0x2C, symBinAddr: 0xB1D8, symSize: 0x68 }
   - { offsetInCU: 0x11D, offset: 0x50805, size: 0x8, addend: 0x0, symName: _random_uniform, symObjAddr: 0x94, symBinAddr: 0xB240, symSize: 0x3C }
-  - { offsetInCU: 0x128, offset: 0x50810, size: 0x8, addend: 0x0, symName: _random32.cold.1, symObjAddr: 0x1BC, symBinAddr: 0x1396C, symSize: 0x28 }
+  - { offsetInCU: 0x128, offset: 0x50810, size: 0x8, addend: 0x0, symName: _random32.cold.1, symObjAddr: 0x1BC, symBinAddr: 0x13990, symSize: 0x28 }
   - { offsetInCU: 0x140, offset: 0x50828, size: 0x8, addend: 0x0, symName: _random_uniform, symObjAddr: 0x94, symBinAddr: 0xB240, symSize: 0x3C }
   - { offsetInCU: 0x181, offset: 0x50869, size: 0x8, addend: 0x0, symName: _random_buffer, symObjAddr: 0xD0, symBinAddr: 0xB27C, symSize: 0x6C }
   - { offsetInCU: 0x1CB, offset: 0x508B3, size: 0x8, addend: 0x0, symName: _random_permute, symObjAddr: 0x13C, symBinAddr: 0xB2E8, symSize: 0x80 }
-  - { offsetInCU: 0x1D6, offset: 0x508BE, size: 0x8, addend: 0x0, symName: _random_buffer.cold.1, symObjAddr: 0x1E4, symBinAddr: 0x13994, symSize: 0x28 }
+  - { offsetInCU: 0x1D6, offset: 0x508BE, size: 0x8, addend: 0x0, symName: _random_buffer.cold.1, symObjAddr: 0x1E4, symBinAddr: 0x139B8, symSize: 0x28 }
   - { offsetInCU: 0x220, offset: 0x50908, size: 0x8, addend: 0x0, symName: _random_permute, symObjAddr: 0x13C, symBinAddr: 0xB2E8, symSize: 0x80 }
   - { offsetInCU: 0x26, offset: 0x509ED, size: 0x8, addend: 0x0, symName: _point_copy, symObjAddr: 0x0, symBinAddr: 0xB368, symSize: 0x24 }
   - { offsetInCU: 0x94, offset: 0x50A5B, size: 0x8, addend: 0x0, symName: _point_copy, symObjAddr: 0x0, symBinAddr: 0xB368, symSize: 0x24 }
@@ -120,23 +120,23 @@ relocations:
   - { offsetInCU: 0xA41, offset: 0x51408, size: 0x8, addend: 0x0, symName: _point_set_infinity, symObjAddr: 0x4B4, symBinAddr: 0xB81C, symSize: 0x24 }
   - { offsetInCU: 0xA8D, offset: 0x51454, size: 0x8, addend: 0x0, symName: _conditional_negate, symObjAddr: 0x4D8, symBinAddr: 0xB840, symSize: 0x9C }
   - { offsetInCU: 0xB05, offset: 0x514CC, size: 0x8, addend: 0x0, symName: _curve_to_jacobian, symObjAddr: 0x574, symBinAddr: 0xB8DC, symSize: 0xC8 }
-  - { offsetInCU: 0xB10, offset: 0x514D7, size: 0x8, addend: 0x0, symName: _conditional_negate.cold.1, symObjAddr: 0x22A0, symBinAddr: 0x139BC, symSize: 0x28 }
-  - { offsetInCU: 0xB28, offset: 0x514EF, size: 0x8, addend: 0x0, symName: _conditional_negate.cold.2, symObjAddr: 0x22C8, symBinAddr: 0x139E4, symSize: 0x28 }
+  - { offsetInCU: 0xB10, offset: 0x514D7, size: 0x8, addend: 0x0, symName: _conditional_negate.cold.1, symObjAddr: 0x22A0, symBinAddr: 0x139E0, symSize: 0x28 }
+  - { offsetInCU: 0xB28, offset: 0x514EF, size: 0x8, addend: 0x0, symName: _conditional_negate.cold.2, symObjAddr: 0x22C8, symBinAddr: 0x13A08, symSize: 0x28 }
   - { offsetInCU: 0xB40, offset: 0x51507, size: 0x8, addend: 0x0, symName: _curve_to_jacobian, symObjAddr: 0x574, symBinAddr: 0xB8DC, symSize: 0xC8 }
   - { offsetInCU: 0xC4F, offset: 0x51616, size: 0x8, addend: 0x0, symName: _jacobian_to_curve, symObjAddr: 0x63C, symBinAddr: 0xB9A4, symSize: 0xBC }
   - { offsetInCU: 0xD7E, offset: 0x51745, size: 0x8, addend: 0x0, symName: _point_jacobian_add, symObjAddr: 0x6F8, symBinAddr: 0xBA60, symSize: 0x2F0 }
   - { offsetInCU: 0x12F1, offset: 0x51CB8, size: 0x8, addend: 0x0, symName: _point_jacobian_double, symObjAddr: 0x9E8, symBinAddr: 0xBD50, symSize: 0x1FC }
-  - { offsetInCU: 0x133F, offset: 0x51D06, size: 0x8, addend: 0x0, symName: _point_jacobian_add.cold.1, symObjAddr: 0x22F0, symBinAddr: 0x13A0C, symSize: 0x28 }
+  - { offsetInCU: 0x133F, offset: 0x51D06, size: 0x8, addend: 0x0, symName: _point_jacobian_add.cold.1, symObjAddr: 0x22F0, symBinAddr: 0x13A30, symSize: 0x28 }
   - { offsetInCU: 0x1357, offset: 0x51D1E, size: 0x8, addend: 0x0, symName: _point_jacobian_double, symObjAddr: 0x9E8, symBinAddr: 0xBD50, symSize: 0x1FC }
   - { offsetInCU: 0x16C2, offset: 0x52089, size: 0x8, addend: 0x0, symName: _point_multiply, symObjAddr: 0xBE4, symBinAddr: 0xBF4C, symSize: 0x2F4 }
-  - { offsetInCU: 0x16CD, offset: 0x52094, size: 0x8, addend: 0x0, symName: _point_jacobian_double.cold.1, symObjAddr: 0x2318, symBinAddr: 0x13A34, symSize: 0x28 }
+  - { offsetInCU: 0x16CD, offset: 0x52094, size: 0x8, addend: 0x0, symName: _point_jacobian_double.cold.1, symObjAddr: 0x2318, symBinAddr: 0x13A58, symSize: 0x28 }
   - { offsetInCU: 0x16E5, offset: 0x520AC, size: 0x8, addend: 0x0, symName: _point_multiply, symObjAddr: 0xBE4, symBinAddr: 0xBF4C, symSize: 0x2F4 }
-  - { offsetInCU: 0x1A1D, offset: 0x523E4, size: 0x8, addend: 0x0, symName: _point_multiply.cold.1, symObjAddr: 0x2340, symBinAddr: 0x13A5C, symSize: 0x28 }
-  - { offsetInCU: 0x1A35, offset: 0x523FC, size: 0x8, addend: 0x0, symName: _point_multiply.cold.2, symObjAddr: 0x2368, symBinAddr: 0x13A84, symSize: 0x28 }
+  - { offsetInCU: 0x1A1D, offset: 0x523E4, size: 0x8, addend: 0x0, symName: _point_multiply.cold.1, symObjAddr: 0x2340, symBinAddr: 0x13A80, symSize: 0x28 }
+  - { offsetInCU: 0x1A35, offset: 0x523FC, size: 0x8, addend: 0x0, symName: _point_multiply.cold.2, symObjAddr: 0x2368, symBinAddr: 0x13AA8, symSize: 0x28 }
   - { offsetInCU: 0x1A4D, offset: 0x52414, size: 0x8, addend: 0x0, symName: _scalar_multiply, symObjAddr: 0xED8, symBinAddr: 0xC240, symSize: 0x20C }
   - { offsetInCU: 0x1C43, offset: 0x5260A, size: 0x8, addend: 0x0, symName: _generate_k_random, symObjAddr: 0x10E4, symBinAddr: 0xC44C, symSize: 0x44 }
-  - { offsetInCU: 0x1C4E, offset: 0x52615, size: 0x8, addend: 0x0, symName: _scalar_multiply.cold.1, symObjAddr: 0x2390, symBinAddr: 0x13AAC, symSize: 0x28 }
-  - { offsetInCU: 0x1C66, offset: 0x5262D, size: 0x8, addend: 0x0, symName: _scalar_multiply.cold.2, symObjAddr: 0x23B8, symBinAddr: 0x13AD4, symSize: 0x28 }
+  - { offsetInCU: 0x1C4E, offset: 0x52615, size: 0x8, addend: 0x0, symName: _scalar_multiply.cold.1, symObjAddr: 0x2390, symBinAddr: 0x13AD0, symSize: 0x28 }
+  - { offsetInCU: 0x1C66, offset: 0x5262D, size: 0x8, addend: 0x0, symName: _scalar_multiply.cold.2, symObjAddr: 0x23B8, symBinAddr: 0x13AF8, symSize: 0x28 }
   - { offsetInCU: 0x1C7E, offset: 0x52645, size: 0x8, addend: 0x0, symName: _generate_k_random, symObjAddr: 0x10E4, symBinAddr: 0xC44C, symSize: 0x44 }
   - { offsetInCU: 0x1CD4, offset: 0x5269B, size: 0x8, addend: 0x0, symName: _init_k_rfc6979, symObjAddr: 0x1128, symBinAddr: 0xC490, symSize: 0x120 }
   - { offsetInCU: 0x1E3E, offset: 0x52805, size: 0x8, addend: 0x0, symName: _generate_k_rfc6979, symObjAddr: 0x1248, symBinAddr: 0xC5B0, symSize: 0xC0 }
@@ -178,7 +178,7 @@ relocations:
   - { offsetInCU: 0x56D, offset: 0x5483F, size: 0x8, addend: 0x0, symName: _bn_is_equal, symObjAddr: 0x258, symBinAddr: 0xD860, symSize: 0x30 }
   - { offsetInCU: 0x5C6, offset: 0x54898, size: 0x8, addend: 0x0, symName: _bn_cmov, symObjAddr: 0x288, symBinAddr: 0xD890, symSize: 0x48 }
   - { offsetInCU: 0x658, offset: 0x5492A, size: 0x8, addend: 0x0, symName: _bn_lshift, symObjAddr: 0x2D0, symBinAddr: 0xD8D8, symSize: 0x3C }
-  - { offsetInCU: 0x663, offset: 0x54935, size: 0x8, addend: 0x0, symName: _bn_cmov.cold.1, symObjAddr: 0x10F4, symBinAddr: 0x13AFC, symSize: 0x28 }
+  - { offsetInCU: 0x663, offset: 0x54935, size: 0x8, addend: 0x0, symName: _bn_cmov.cold.1, symObjAddr: 0x10F4, symBinAddr: 0x13B20, symSize: 0x28 }
   - { offsetInCU: 0x67B, offset: 0x5494D, size: 0x8, addend: 0x0, symName: _bn_lshift, symObjAddr: 0x2D0, symBinAddr: 0xD8D8, symSize: 0x3C }
   - { offsetInCU: 0x6B3, offset: 0x54985, size: 0x8, addend: 0x0, symName: _bn_rshift, symObjAddr: 0x30C, symBinAddr: 0xD914, symSize: 0x4C }
   - { offsetInCU: 0x6D7, offset: 0x549A9, size: 0x8, addend: 0x0, symName: _bn_mult_half, symObjAddr: 0x358, symBinAddr: 0xD960, symSize: 0x60 }
@@ -189,30 +189,30 @@ relocations:
   - { offsetInCU: 0xA2B, offset: 0x54CFD, size: 0x8, addend: 0x0, symName: _bn_multiply_long, symObjAddr: 0x514, symBinAddr: 0xDB1C, symSize: 0xA4 }
   - { offsetInCU: 0xAA3, offset: 0x54D75, size: 0x8, addend: 0x0, symName: _bn_multiply_reduce_step, symObjAddr: 0x5B8, symBinAddr: 0xDBC0, symSize: 0x94 }
   - { offsetInCU: 0xB24, offset: 0x54DF6, size: 0x8, addend: 0x0, symName: _bn_multiply_reduce, symObjAddr: 0x64C, symBinAddr: 0xDC54, symSize: 0x70 }
-  - { offsetInCU: 0xB2F, offset: 0x54E01, size: 0x8, addend: 0x0, symName: _bn_multiply_reduce_step.cold.1, symObjAddr: 0x111C, symBinAddr: 0x13B24, symSize: 0x28 }
+  - { offsetInCU: 0xB2F, offset: 0x54E01, size: 0x8, addend: 0x0, symName: _bn_multiply_reduce_step.cold.1, symObjAddr: 0x111C, symBinAddr: 0x13B48, symSize: 0x28 }
   - { offsetInCU: 0xB47, offset: 0x54E19, size: 0x8, addend: 0x0, symName: _bn_multiply_reduce, symObjAddr: 0x64C, symBinAddr: 0xDC54, symSize: 0x70 }
   - { offsetInCU: 0xBCA, offset: 0x54E9C, size: 0x8, addend: 0x0, symName: _bn_multiply, symObjAddr: 0x6BC, symBinAddr: 0xDCC4, symSize: 0x7C }
-  - { offsetInCU: 0xBD5, offset: 0x54EA7, size: 0x8, addend: 0x0, symName: _bn_multiply_reduce.cold.1, symObjAddr: 0x1144, symBinAddr: 0x13B4C, symSize: 0x28 }
+  - { offsetInCU: 0xBD5, offset: 0x54EA7, size: 0x8, addend: 0x0, symName: _bn_multiply_reduce.cold.1, symObjAddr: 0x1144, symBinAddr: 0x13B70, symSize: 0x28 }
   - { offsetInCU: 0xBED, offset: 0x54EBF, size: 0x8, addend: 0x0, symName: _bn_multiply, symObjAddr: 0x6BC, symBinAddr: 0xDCC4, symSize: 0x7C }
   - { offsetInCU: 0xD38, offset: 0x5500A, size: 0x8, addend: 0x0, symName: _bn_sqrt, symObjAddr: 0x738, symBinAddr: 0xDD40, symSize: 0x200 }
   - { offsetInCU: 0xF8D, offset: 0x5525F, size: 0x8, addend: 0x0, symName: _bn_addi, symObjAddr: 0x938, symBinAddr: 0xDF40, symSize: 0x28 }
   - { offsetInCU: 0xFC8, offset: 0x5529A, size: 0x8, addend: 0x0, symName: _bn_inverse, symObjAddr: 0x960, symBinAddr: 0xDF68, symSize: 0x5B0 }
-  - { offsetInCU: 0x1205, offset: 0x554D7, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.6, symObjAddr: 0x1234, symBinAddr: 0x13C3C, symSize: 0x28 }
-  - { offsetInCU: 0x121D, offset: 0x554EF, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.1, symObjAddr: 0x116C, symBinAddr: 0x13B74, symSize: 0x28 }
-  - { offsetInCU: 0x1235, offset: 0x55507, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.2, symObjAddr: 0x1194, symBinAddr: 0x13B9C, symSize: 0x28 }
-  - { offsetInCU: 0x124D, offset: 0x5551F, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.3, symObjAddr: 0x11BC, symBinAddr: 0x13BC4, symSize: 0x28 }
-  - { offsetInCU: 0x1265, offset: 0x55537, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.10, symObjAddr: 0x12D4, symBinAddr: 0x13CDC, symSize: 0x28 }
-  - { offsetInCU: 0x127D, offset: 0x5554F, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.4, symObjAddr: 0x11E4, symBinAddr: 0x13BEC, symSize: 0x28 }
-  - { offsetInCU: 0x1295, offset: 0x55567, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.5, symObjAddr: 0x120C, symBinAddr: 0x13C14, symSize: 0x28 }
-  - { offsetInCU: 0x12AD, offset: 0x5557F, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.9, symObjAddr: 0x12AC, symBinAddr: 0x13CB4, symSize: 0x28 }
-  - { offsetInCU: 0x12C5, offset: 0x55597, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.7, symObjAddr: 0x125C, symBinAddr: 0x13C64, symSize: 0x28 }
-  - { offsetInCU: 0x12DD, offset: 0x555AF, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.8, symObjAddr: 0x1284, symBinAddr: 0x13C8C, symSize: 0x28 }
+  - { offsetInCU: 0x1205, offset: 0x554D7, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.6, symObjAddr: 0x1234, symBinAddr: 0x13C60, symSize: 0x28 }
+  - { offsetInCU: 0x121D, offset: 0x554EF, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.1, symObjAddr: 0x116C, symBinAddr: 0x13B98, symSize: 0x28 }
+  - { offsetInCU: 0x1235, offset: 0x55507, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.2, symObjAddr: 0x1194, symBinAddr: 0x13BC0, symSize: 0x28 }
+  - { offsetInCU: 0x124D, offset: 0x5551F, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.3, symObjAddr: 0x11BC, symBinAddr: 0x13BE8, symSize: 0x28 }
+  - { offsetInCU: 0x1265, offset: 0x55537, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.10, symObjAddr: 0x12D4, symBinAddr: 0x13D00, symSize: 0x28 }
+  - { offsetInCU: 0x127D, offset: 0x5554F, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.4, symObjAddr: 0x11E4, symBinAddr: 0x13C10, symSize: 0x28 }
+  - { offsetInCU: 0x1295, offset: 0x55567, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.5, symObjAddr: 0x120C, symBinAddr: 0x13C38, symSize: 0x28 }
+  - { offsetInCU: 0x12AD, offset: 0x5557F, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.9, symObjAddr: 0x12AC, symBinAddr: 0x13CD8, symSize: 0x28 }
+  - { offsetInCU: 0x12C5, offset: 0x55597, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.7, symObjAddr: 0x125C, symBinAddr: 0x13C88, symSize: 0x28 }
+  - { offsetInCU: 0x12DD, offset: 0x555AF, size: 0x8, addend: 0x0, symName: _bn_inverse.cold.8, symObjAddr: 0x1284, symBinAddr: 0x13CB0, symSize: 0x28 }
   - { offsetInCU: 0x12F5, offset: 0x555C7, size: 0x8, addend: 0x0, symName: _bn_normalize, symObjAddr: 0xF10, symBinAddr: 0xE518, symSize: 0x2C }
   - { offsetInCU: 0x1354, offset: 0x55626, size: 0x8, addend: 0x0, symName: _bn_add, symObjAddr: 0xF3C, symBinAddr: 0xE544, symSize: 0x34 }
   - { offsetInCU: 0x138D, offset: 0x5565F, size: 0x8, addend: 0x0, symName: _bn_addmod, symObjAddr: 0xF70, symBinAddr: 0xE578, symSize: 0x28 }
   - { offsetInCU: 0x1432, offset: 0x55704, size: 0x8, addend: 0x0, symName: _bn_subi, symObjAddr: 0xF98, symBinAddr: 0xE5A0, symSize: 0x5C }
   - { offsetInCU: 0x14BB, offset: 0x5578D, size: 0x8, addend: 0x0, symName: _bn_subtractmod, symObjAddr: 0xFF4, symBinAddr: 0xE5FC, symSize: 0x44 }
-  - { offsetInCU: 0x14C6, offset: 0x55798, size: 0x8, addend: 0x0, symName: _bn_subi.cold.1, symObjAddr: 0x12FC, symBinAddr: 0x13D04, symSize: 0x28 }
+  - { offsetInCU: 0x14C6, offset: 0x55798, size: 0x8, addend: 0x0, symName: _bn_subi.cold.1, symObjAddr: 0x12FC, symBinAddr: 0x13D28, symSize: 0x28 }
   - { offsetInCU: 0x14DE, offset: 0x557B0, size: 0x8, addend: 0x0, symName: _bn_subtractmod, symObjAddr: 0xFF4, symBinAddr: 0xE5FC, symSize: 0x44 }
   - { offsetInCU: 0x1554, offset: 0x55826, size: 0x8, addend: 0x0, symName: _bn_divmod58, symObjAddr: 0x1038, symBinAddr: 0xE640, symSize: 0x5C }
   - { offsetInCU: 0x15BD, offset: 0x5588F, size: 0x8, addend: 0x0, symName: _bn_divmod1000, symObjAddr: 0x1094, symBinAddr: 0xE69C, symSize: 0x60 }
@@ -239,23 +239,23 @@ relocations:
   - { offsetInCU: 0x3F9, offset: 0x5654A, size: 0x8, addend: 0x0, symName: _aes_cbc_decrypt, symObjAddr: 0x3B4, symBinAddr: 0xF320, symSize: 0x244 }
   - { offsetInCU: 0x4D3, offset: 0x56624, size: 0x8, addend: 0x0, symName: _aes_cfb_encrypt, symObjAddr: 0x5F8, symBinAddr: 0xF564, symSize: 0x374 }
   - { offsetInCU: 0x5F4, offset: 0x56745, size: 0x8, addend: 0x0, symName: _aes_cfb_decrypt, symObjAddr: 0x96C, symBinAddr: 0xF8D8, symSize: 0x374 }
-  - { offsetInCU: 0x5FF, offset: 0x56750, size: 0x8, addend: 0x0, symName: _aes_cfb_encrypt.cold.1, symObjAddr: 0x13DC, symBinAddr: 0x13D2C, symSize: 0x28 }
-  - { offsetInCU: 0x617, offset: 0x56768, size: 0x8, addend: 0x0, symName: _aes_cfb_encrypt.cold.2, symObjAddr: 0x1404, symBinAddr: 0x13D54, symSize: 0x28 }
+  - { offsetInCU: 0x5FF, offset: 0x56750, size: 0x8, addend: 0x0, symName: _aes_cfb_encrypt.cold.1, symObjAddr: 0x13DC, symBinAddr: 0x13D50, symSize: 0x28 }
+  - { offsetInCU: 0x617, offset: 0x56768, size: 0x8, addend: 0x0, symName: _aes_cfb_encrypt.cold.2, symObjAddr: 0x1404, symBinAddr: 0x13D78, symSize: 0x28 }
   - { offsetInCU: 0x62F, offset: 0x56780, size: 0x8, addend: 0x0, symName: _aes_cfb_decrypt, symObjAddr: 0x96C, symBinAddr: 0xF8D8, symSize: 0x374 }
   - { offsetInCU: 0x7C0, offset: 0x56911, size: 0x8, addend: 0x0, symName: _aes_ofb_crypt, symObjAddr: 0xCE0, symBinAddr: 0xFC4C, symSize: 0x31C }
-  - { offsetInCU: 0x7CB, offset: 0x5691C, size: 0x8, addend: 0x0, symName: _aes_cfb_decrypt.cold.1, symObjAddr: 0x142C, symBinAddr: 0x13D7C, symSize: 0x28 }
-  - { offsetInCU: 0x7E3, offset: 0x56934, size: 0x8, addend: 0x0, symName: _aes_cfb_decrypt.cold.2, symObjAddr: 0x1454, symBinAddr: 0x13DA4, symSize: 0x28 }
+  - { offsetInCU: 0x7CB, offset: 0x5691C, size: 0x8, addend: 0x0, symName: _aes_cfb_decrypt.cold.1, symObjAddr: 0x142C, symBinAddr: 0x13DA0, symSize: 0x28 }
+  - { offsetInCU: 0x7E3, offset: 0x56934, size: 0x8, addend: 0x0, symName: _aes_cfb_decrypt.cold.2, symObjAddr: 0x1454, symBinAddr: 0x13DC8, symSize: 0x28 }
   - { offsetInCU: 0x7FB, offset: 0x5694C, size: 0x8, addend: 0x0, symName: _aes_ofb_crypt, symObjAddr: 0xCE0, symBinAddr: 0xFC4C, symSize: 0x31C }
   - { offsetInCU: 0x91C, offset: 0x56A6D, size: 0x8, addend: 0x0, symName: _aes_ctr_crypt, symObjAddr: 0xFFC, symBinAddr: 0xFF68, symSize: 0x3B8 }
-  - { offsetInCU: 0x927, offset: 0x56A78, size: 0x8, addend: 0x0, symName: _aes_ofb_crypt.cold.1, symObjAddr: 0x147C, symBinAddr: 0x13DCC, symSize: 0x28 }
-  - { offsetInCU: 0x93F, offset: 0x56A90, size: 0x8, addend: 0x0, symName: _aes_ofb_crypt.cold.2, symObjAddr: 0x14A4, symBinAddr: 0x13DF4, symSize: 0x28 }
+  - { offsetInCU: 0x927, offset: 0x56A78, size: 0x8, addend: 0x0, symName: _aes_ofb_crypt.cold.1, symObjAddr: 0x147C, symBinAddr: 0x13DF0, symSize: 0x28 }
+  - { offsetInCU: 0x93F, offset: 0x56A90, size: 0x8, addend: 0x0, symName: _aes_ofb_crypt.cold.2, symObjAddr: 0x14A4, symBinAddr: 0x13E18, symSize: 0x28 }
   - { offsetInCU: 0x9A1, offset: 0x56AF2, size: 0x8, addend: 0x0, symName: _aes_ctr_crypt, symObjAddr: 0xFFC, symBinAddr: 0xFF68, symSize: 0x3B8 }
   - { offsetInCU: 0xB2C, offset: 0x56C7D, size: 0x8, addend: 0x0, symName: _aes_ctr_cbuf_inc, symObjAddr: 0x13B4, symBinAddr: 0x10320, symSize: 0x28 }
   - { offsetInCU: 0x26, offset: 0x56D1B, size: 0x8, addend: 0x0, symName: _sha256_Init, symObjAddr: 0x0, symBinAddr: 0x10348, symSize: 0x30 }
-  - { offsetInCU: 0x40, offset: 0x56D35, size: 0x8, addend: 0x0, symName: _sha256_initial_hash_value, symObjAddr: 0xDF0, symBinAddr: 0x22670, symSize: 0x0 }
-  - { offsetInCU: 0x80, offset: 0x56D75, size: 0x8, addend: 0x0, symName: _sha512_initial_hash_value, symObjAddr: 0xE10, symBinAddr: 0x22690, symSize: 0x0 }
-  - { offsetInCU: 0xB9, offset: 0x56DAE, size: 0x8, addend: 0x0, symName: _K256, symObjAddr: 0xE50, symBinAddr: 0x226D0, symSize: 0x0 }
-  - { offsetInCU: 0xE2, offset: 0x56DD7, size: 0x8, addend: 0x0, symName: _K512, symObjAddr: 0xF50, symBinAddr: 0x227D0, symSize: 0x0 }
+  - { offsetInCU: 0x40, offset: 0x56D35, size: 0x8, addend: 0x0, symName: _sha256_initial_hash_value, symObjAddr: 0xDF0, symBinAddr: 0x226A0, symSize: 0x0 }
+  - { offsetInCU: 0x80, offset: 0x56D75, size: 0x8, addend: 0x0, symName: _sha512_initial_hash_value, symObjAddr: 0xE10, symBinAddr: 0x226C0, symSize: 0x0 }
+  - { offsetInCU: 0xB9, offset: 0x56DAE, size: 0x8, addend: 0x0, symName: _K256, symObjAddr: 0xE50, symBinAddr: 0x22700, symSize: 0x0 }
+  - { offsetInCU: 0xE2, offset: 0x56DD7, size: 0x8, addend: 0x0, symName: _K512, symObjAddr: 0xF50, symBinAddr: 0x22800, symSize: 0x0 }
   - { offsetInCU: 0x1E4, offset: 0x56ED9, size: 0x8, addend: 0x0, symName: _sha256_Init, symObjAddr: 0x0, symBinAddr: 0x10348, symSize: 0x30 }
   - { offsetInCU: 0x201, offset: 0x56EF6, size: 0x8, addend: 0x0, symName: _sha256_Transform, symObjAddr: 0x30, symBinAddr: 0x10378, symSize: 0x288 }
   - { offsetInCU: 0x331, offset: 0x57026, size: 0x8, addend: 0x0, symName: _sha256_Update, symObjAddr: 0x2B8, symBinAddr: 0x10600, symSize: 0x130 }
@@ -270,10 +270,10 @@ relocations:
   - { offsetInCU: 0xBAB, offset: 0x578A0, size: 0x8, addend: 0x0, symName: _sha512_End, symObjAddr: 0xBD8, symBinAddr: 0x10F20, symSize: 0xC4 }
   - { offsetInCU: 0xC49, offset: 0x5793E, size: 0x8, addend: 0x0, symName: _sha512_Raw, symObjAddr: 0xC9C, symBinAddr: 0x10FE4, symSize: 0x70 }
   - { offsetInCU: 0xD06, offset: 0x579FB, size: 0x8, addend: 0x0, symName: _sha512_Data, symObjAddr: 0xD0C, symBinAddr: 0x11054, symSize: 0x70 }
-  - { offsetInCU: 0x34, offset: 0x57B45, size: 0x8, addend: 0x0, symName: _SECP256K1_NAME, symObjAddr: 0x0, symBinAddr: 0x22A50, symSize: 0x0 }
-  - { offsetInCU: 0x69, offset: 0x57B7A, size: 0x8, addend: 0x0, symName: _NIST256P1_NAME, symObjAddr: 0xA, symBinAddr: 0x22A5A, symSize: 0x0 }
-  - { offsetInCU: 0x7F, offset: 0x57B90, size: 0x8, addend: 0x0, symName: _ED25519_NAME, symObjAddr: 0x14, symBinAddr: 0x22A64, symSize: 0x0 }
-  - { offsetInCU: 0xA1, offset: 0x57BB2, size: 0x8, addend: 0x0, symName: _CURVE25519_NAME, symObjAddr: 0x1C, symBinAddr: 0x22A6C, symSize: 0x0 }
+  - { offsetInCU: 0x34, offset: 0x57B45, size: 0x8, addend: 0x0, symName: _SECP256K1_NAME, symObjAddr: 0x0, symBinAddr: 0x22A80, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x57B7A, size: 0x8, addend: 0x0, symName: _NIST256P1_NAME, symObjAddr: 0xA, symBinAddr: 0x22A8A, symSize: 0x0 }
+  - { offsetInCU: 0x7F, offset: 0x57B90, size: 0x8, addend: 0x0, symName: _ED25519_NAME, symObjAddr: 0x14, symBinAddr: 0x22A94, symSize: 0x0 }
+  - { offsetInCU: 0xA1, offset: 0x57BB2, size: 0x8, addend: 0x0, symName: _CURVE25519_NAME, symObjAddr: 0x1C, symBinAddr: 0x22A9C, symSize: 0x0 }
   - { offsetInCU: 0x4F, offset: 0x57C17, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC8standardACvpZ', symObjAddr: 0x99B0, symBinAddr: 0x313F0, symSize: 0x0 }
   - { offsetInCU: 0x207, offset: 0x57DCF, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC012saveToiCloudE0_7service7accounty10Foundation4DataV_S2StFTf4nnnd_n', symObjAddr: 0x860, symBinAddr: 0x116A8, symSize: 0x3F4 }
   - { offsetInCU: 0x48A, offset: 0x58052, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC012saveToDeviceE0_7service7accounty10Foundation4DataV_S2StFTf4nnnd_n', symObjAddr: 0xC54, symBinAddr: 0x11A9C, symSize: 0x394 }
@@ -311,29 +311,28 @@ relocations:
   - { offsetInCU: 0x165, offset: 0x594C3, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC16generateMnemonicSSyFTo', symObjAddr: 0x3B4, symBinAddr: 0x12A6C, symSize: 0x34 }
   - { offsetInCU: 0x1AD, offset: 0x5950B, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC23mnemonicBackedUpToCloudSbyFTo', symObjAddr: 0x488, symBinAddr: 0x12B40, symSize: 0xB0 }
   - { offsetInCU: 0x20C, offset: 0x5956A, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC12saveMnemonic_0I7ToCloud08rejectOnL11SaveFailureSbSS_S2btFTo', symObjAddr: 0x53C, symBinAddr: 0x12BF4, symSize: 0x64 }
-  - { offsetInCU: 0x254, offset: 0x595B2, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC14deleteMnemonicSbyFTo', symObjAddr: 0x5AC, symBinAddr: 0x12C64, symSize: 0x84 }
-  - { offsetInCU: 0x2A1, offset: 0x595FF, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC25getPrivateKeyFromMnemonicyypSSFTo', symObjAddr: 0xA70, symBinAddr: 0x13128, symSize: 0x88 }
-  - { offsetInCU: 0x2E9, offset: 0x59647, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCACycfcTo', symObjAddr: 0xC10, symBinAddr: 0x132C8, symSize: 0xAC }
-  - { offsetInCU: 0x33A, offset: 0x59698, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC16generateMnemonicSSyFTf4d_n', symObjAddr: 0xE14, symBinAddr: 0x134CC, symSize: 0xDC }
-  - { offsetInCU: 0x523, offset: 0x59881, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataVSgWOe', symObjAddr: 0xBB8, symBinAddr: 0x13270, symSize: 0x14 }
-  - { offsetInCU: 0x537, offset: 0x59895, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataV15_RepresentationOWOe', symObjAddr: 0xBCC, symBinAddr: 0x13284, symSize: 0x44 }
-  - { offsetInCU: 0x54B, offset: 0x598A9, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCfETo', symObjAddr: 0xCEC, symBinAddr: 0x133A4, symSize: 0x40 }
-  - { offsetInCU: 0x656, offset: 0x599B4, size: 0x8, addend: 0x0, symName: '_$sypWOc', symObjAddr: 0x1088, symBinAddr: 0x136F0, symSize: 0x3C }
-  - { offsetInCU: 0x66A, offset: 0x599C8, size: 0x8, addend: 0x0, symName: '_$sSSSg5label_yp5valuetWOh', symObjAddr: 0x10C4, symBinAddr: 0x1372C, symSize: 0x40 }
-  - { offsetInCU: 0x67E, offset: 0x599DC, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCMa', symObjAddr: 0x1104, symBinAddr: 0x1376C, symSize: 0x20 }
-  - { offsetInCU: 0x692, offset: 0x599F0, size: 0x8, addend: 0x0, symName: ___swift_project_boxed_opaque_existential_0, symObjAddr: 0x122C, symBinAddr: 0x13894, symSize: 0x24 }
-  - { offsetInCU: 0x6A6, offset: 0x59A04, size: 0x8, addend: 0x0, symName: ___swift_destroy_boxed_opaque_existential_0, symObjAddr: 0x1250, symBinAddr: 0x138B8, symSize: 0x20 }
-  - { offsetInCU: 0x6BA, offset: 0x59A18, size: 0x8, addend: 0x0, symName: '_$sS2SSysWl', symObjAddr: 0x1270, symBinAddr: 0x138D8, symSize: 0x44 }
-  - { offsetInCU: 0x8A8, offset: 0x59C06, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC5helloSSyF', symObjAddr: 0xC8, symBinAddr: 0x12780, symSize: 0x20 }
-  - { offsetInCU: 0x8D0, offset: 0x59C2E, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11getBundleIdSSyF', symObjAddr: 0x118, symBinAddr: 0x127D0, symSize: 0x84 }
-  - { offsetInCU: 0x919, offset: 0x59C77, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11getMnemonicSSSgyF', symObjAddr: 0x24C, symBinAddr: 0x12904, symSize: 0x100 }
-  - { offsetInCU: 0x970, offset: 0x59CCE, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC16generateMnemonicSSyF', symObjAddr: 0x3B0, symBinAddr: 0x12A68, symSize: 0x4 }
-  - { offsetInCU: 0x98B, offset: 0x59CE9, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC23mnemonicBackedUpToCloudSbyF', symObjAddr: 0x3E8, symBinAddr: 0x12AA0, symSize: 0xA0 }
-  - { offsetInCU: 0x9F2, offset: 0x59D50, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC12saveMnemonic_0I7ToCloud08rejectOnL11SaveFailureSbSS_S2btF', symObjAddr: 0x538, symBinAddr: 0x12BF0, symSize: 0x4 }
-  - { offsetInCU: 0xA41, offset: 0x59D9F, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC25getPrivateKeyFromMnemonicyypSSF', symObjAddr: 0x6BC, symBinAddr: 0x12D74, symSize: 0x3B4 }
-  - { offsetInCU: 0xDBC, offset: 0x5A11A, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCACycfC', symObjAddr: 0xAF8, symBinAddr: 0x131B0, symSize: 0x20 }
-  - { offsetInCU: 0xDD0, offset: 0x5A12E, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCACycfc', symObjAddr: 0xB18, symBinAddr: 0x131D0, symSize: 0xA0 }
-  - { offsetInCU: 0xE01, offset: 0x5A15F, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCfD', symObjAddr: 0xCBC, symBinAddr: 0x13374, symSize: 0x30 }
-  - { offsetInCU: 0xE63, offset: 0x5A1C1, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtFs5UInt8V_Tg5', symObjAddr: 0xD2C, symBinAddr: 0x133E4, symSize: 0xE8 }
-  - { offsetInCU: 0xF68, offset: 0x5A2C6, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC12saveMnemonic_0I7ToCloud08rejectOnL11SaveFailureSbSS_S2btFTf4nndn_n', symObjAddr: 0xEF0, symBinAddr: 0x135A8, symSize: 0x138 }
+  - { offsetInCU: 0x259, offset: 0x595B7, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC25getPrivateKeyFromMnemonicyypSSFTo', symObjAddr: 0xA94, symBinAddr: 0x1314C, symSize: 0x88 }
+  - { offsetInCU: 0x2A1, offset: 0x595FF, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCACycfcTo', symObjAddr: 0xC34, symBinAddr: 0x132EC, symSize: 0xAC }
+  - { offsetInCU: 0x2F2, offset: 0x59650, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC16generateMnemonicSSyFTf4d_n', symObjAddr: 0xE38, symBinAddr: 0x134F0, symSize: 0xDC }
+  - { offsetInCU: 0x4DB, offset: 0x59839, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataVSgWOe', symObjAddr: 0xBDC, symBinAddr: 0x13294, symSize: 0x14 }
+  - { offsetInCU: 0x4EF, offset: 0x5984D, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataV15_RepresentationOWOe', symObjAddr: 0xBF0, symBinAddr: 0x132A8, symSize: 0x44 }
+  - { offsetInCU: 0x503, offset: 0x59861, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCfETo', symObjAddr: 0xD10, symBinAddr: 0x133C8, symSize: 0x40 }
+  - { offsetInCU: 0x60E, offset: 0x5996C, size: 0x8, addend: 0x0, symName: '_$sypWOc', symObjAddr: 0x10AC, symBinAddr: 0x13714, symSize: 0x3C }
+  - { offsetInCU: 0x622, offset: 0x59980, size: 0x8, addend: 0x0, symName: '_$sSSSg5label_yp5valuetWOh', symObjAddr: 0x10E8, symBinAddr: 0x13750, symSize: 0x40 }
+  - { offsetInCU: 0x636, offset: 0x59994, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCMa', symObjAddr: 0x1128, symBinAddr: 0x13790, symSize: 0x20 }
+  - { offsetInCU: 0x64A, offset: 0x599A8, size: 0x8, addend: 0x0, symName: ___swift_project_boxed_opaque_existential_0, symObjAddr: 0x1250, symBinAddr: 0x138B8, symSize: 0x24 }
+  - { offsetInCU: 0x65E, offset: 0x599BC, size: 0x8, addend: 0x0, symName: ___swift_destroy_boxed_opaque_existential_0, symObjAddr: 0x1274, symBinAddr: 0x138DC, symSize: 0x20 }
+  - { offsetInCU: 0x672, offset: 0x599D0, size: 0x8, addend: 0x0, symName: '_$sS2SSysWl', symObjAddr: 0x1294, symBinAddr: 0x138FC, symSize: 0x44 }
+  - { offsetInCU: 0x860, offset: 0x59BBE, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC5helloSSyF', symObjAddr: 0xC8, symBinAddr: 0x12780, symSize: 0x20 }
+  - { offsetInCU: 0x888, offset: 0x59BE6, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11getBundleIdSSyF', symObjAddr: 0x118, symBinAddr: 0x127D0, symSize: 0x84 }
+  - { offsetInCU: 0x8D1, offset: 0x59C2F, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11getMnemonicSSSgyF', symObjAddr: 0x24C, symBinAddr: 0x12904, symSize: 0x100 }
+  - { offsetInCU: 0x928, offset: 0x59C86, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC16generateMnemonicSSyF', symObjAddr: 0x3B0, symBinAddr: 0x12A68, symSize: 0x4 }
+  - { offsetInCU: 0x943, offset: 0x59CA1, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC23mnemonicBackedUpToCloudSbyF', symObjAddr: 0x3E8, symBinAddr: 0x12AA0, symSize: 0xA0 }
+  - { offsetInCU: 0x9AA, offset: 0x59D08, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC12saveMnemonic_0I7ToCloud08rejectOnL11SaveFailureSbSS_S2btF', symObjAddr: 0x538, symBinAddr: 0x12BF0, symSize: 0x4 }
+  - { offsetInCU: 0x9E5, offset: 0x59D43, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC25getPrivateKeyFromMnemonicyypSSF', symObjAddr: 0x6E0, symBinAddr: 0x12D98, symSize: 0x3B4 }
+  - { offsetInCU: 0xD60, offset: 0x5A0BE, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCACycfC', symObjAddr: 0xB1C, symBinAddr: 0x131D4, symSize: 0x20 }
+  - { offsetInCU: 0xD74, offset: 0x5A0D2, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCACycfc', symObjAddr: 0xB3C, symBinAddr: 0x131F4, symSize: 0xA0 }
+  - { offsetInCU: 0xDA5, offset: 0x5A103, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCfD', symObjAddr: 0xCE0, symBinAddr: 0x13398, symSize: 0x30 }
+  - { offsetInCU: 0xE07, offset: 0x5A165, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtFs5UInt8V_Tg5', symObjAddr: 0xD50, symBinAddr: 0x13408, symSize: 0xE8 }
+  - { offsetInCU: 0xF0C, offset: 0x5A26A, size: 0x8, addend: 0x0, symName: '_$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC12saveMnemonic_0I7ToCloud08rejectOnL11SaveFailureSbSS_S2btFTf4nndn_n', symObjAddr: 0xF14, symBinAddr: 0x135CC, symSize: 0x138 }
 ...
