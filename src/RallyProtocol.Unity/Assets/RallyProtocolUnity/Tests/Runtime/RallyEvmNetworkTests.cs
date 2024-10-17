@@ -30,7 +30,7 @@ namespace RallyProtocolUnity.Tests
         protected const decimal amount = 2;
         protected const string apiKey = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjYxMX0.PUxW-wsXnE28BBRS8LhltsErvWCSPd6N0xpSCk1MkJ7TxXF4cvCfB7nDptakv5myAtIjJNMS-Gs9D_VTTH2tXQ";
 
-        protected RallyNetworkType networkType = RallyNetworkType.Amoy;
+        protected RallyNetworkType networkType = RallyNetworkType.BaseSepolia;
 
         #region Initilization Tets
 
@@ -52,7 +52,7 @@ namespace RallyProtocolUnity.Tests
         {
             return UniTask.ToCoroutine(() =>
             {
-                RallyNetworkConfig config = RallyNetworkConfig.Amoy;
+                RallyNetworkConfig config = RallyNetworkConfig.BaseSepolia;
                 IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(config);
                 Assert.IsNotNull(rlyNetwork);
 
@@ -68,7 +68,7 @@ namespace RallyProtocolUnity.Tests
         {
             return UniTask.ToCoroutine(() =>
             {
-                RallyNetworkType networkType = RallyNetworkType.Amoy;
+                RallyNetworkType networkType = RallyNetworkType.BaseSepolia;
                 IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(networkType);
                 Assert.IsNotNull(rlyNetwork);
 
@@ -286,7 +286,7 @@ namespace RallyProtocolUnity.Tests
             {
                 LogAssert.ignoreFailingMessages = true;
                 IRallyAccountManager accountManager = RallyUnityAccountManager.Default;
-                IRallyNetwork network = RallyUnityNetworkFactory.Create(RallyNetworkConfig.Amoy, apiKey);
+                IRallyNetwork network = RallyUnityNetworkFactory.Create(RallyNetworkConfig.BaseSepolia, apiKey);
 
                 // Create a new account
                 await accountManager.CreateAccountAsync(new() { Overwrite = true });
