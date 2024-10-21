@@ -16,6 +16,12 @@ namespace RallyProtocol.Networks
             Gsn = RallyGSNConfig.BaseSepoliaDefault
         };
 
+        public static readonly RallyNetworkConfig BaseDefault = new()
+        {
+            Contracts = RallyContracts.BaseDefault,
+            Gsn = RallyGSNConfig.BaseDefault
+        };
+
         public static readonly RallyNetworkConfig AmoyDefault = new()
         {
             Contracts = RallyContracts.AmoyDefault,
@@ -51,6 +57,7 @@ namespace RallyProtocol.Networks
         #region Properties
 
         public static RallyNetworkConfig BaseSepolia => BaseSepoliaDefault.Clone();
+        public static RallyNetworkConfig Base => BaseDefault.Clone();
         public static RallyNetworkConfig Amoy => AmoyDefault.Clone();
         public static RallyNetworkConfig AmoyWithPermit => AmoyWithPermitDefault.Clone();
         public static RallyNetworkConfig Polygon => PolygonDefault.Clone();
@@ -92,8 +99,15 @@ namespace RallyProtocol.Networks
 
         public static readonly RallyContracts BaseSepoliaDefault = new()
         {
-            RlyERC20 = "0x846D8a5fb8a003b431b67115f809a9B9FFFe5012",
-            TokenFaucet = "0xFCfC511B8915D3aFD0eadc794A0c4151278fE7D1",
+            RlyERC20 = "0x16723e9bb894EfC09449994eC5bCF5b41EE0D9b2",
+            TokenFaucet = "0xCeCFB48a9e7C0765Ed1319ee1Bc0F719a30641Ce",
+        };
+
+        public static readonly RallyContracts BaseDefault = new()
+        {
+            // TODO: there are no contracts for base mainnet. Client needs update to handle this case gracefully.
+            RlyERC20 = "0x000",
+            TokenFaucet = "0x000",
         };
 
         public static readonly RallyContracts AmoyDefault = new()
@@ -177,6 +191,25 @@ namespace RallyProtocol.Networks
             RelayUrl = "https://api.rallyprotocol.com",
             RpcUrl = "https://api.rallyprotocol.com/rpc",
             ChainId = "84532",
+            MaxAcceptanceBudget = "285252",
+            DomainSeparatorName = "GSN Relayed Transaction",
+            GtxDataNonZero = 16,
+            GtxDataZero = 4,
+            RequestValidSeconds = 172800,
+            MaxPaymasterDataLength = 300,
+            MaxApprovalDataLength = 300,
+            MaxRelayNonceGap = 3,
+        };
+
+        public static readonly RallyGSNConfig BaseDefault = new()
+        {
+            PaymasterAddress = "0x01B83B33F0DD8be68627a9BE68E9e7E3c209a6b1",
+            ForwarderAddress = "0x524266345fB331cb624E27D2Cf5B61E769527FCC",
+            RelayHubAddress = "0x54623092d2dB00D706e0Ad4ADaCc024F9cB9E915",
+            RelayWorkerAddress = "0x7c5b7cf606ab2b56ead90b583bad47c5fd2c3417",
+            RelayUrl = "https://api.rallyprotocol.com",
+            RpcUrl = "https://api.rallyprotocol.com/rpc",
+            ChainId = "8453",
             MaxAcceptanceBudget = "285252",
             DomainSeparatorName = "GSN Relayed Transaction",
             GtxDataNonZero = 16,
