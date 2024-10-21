@@ -68,7 +68,7 @@ namespace RallyProtocol.GSN
                 string name = await token.NameQueryAsync();
                 BigInteger nonce = await this.transactionHelper.GetSenderContractNonce(provider, contractAddress, account.Address);
                 BigInteger deadline = await GetPermitDeadline(provider);
-                Eip712DomainOutputDTO eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712DomainOutputDTO>();
+                Eip712Domain eip712Domain = await token.ContractHandler.QueryAsync<Eip712DomainFunction, Eip712Domain>();
 
                 byte[] salt = eip712Domain.Salt;
 
@@ -123,6 +123,7 @@ namespace RallyProtocol.GSN
                 new() { TypeName = "chainId", Value = chainId }
             };
 
+            // Add salt to domain type and values
             if (hasSalt)
             {
                 domainType.Add(new() { Name = "salt", Type = "bytes32" });
@@ -150,7 +151,7 @@ namespace RallyProtocol.GSN
                         new() { Name = "spender", Type = "address" },
                         new() { Name = "value", Type = "uint256" },
                         new() { Name = "nonce", Type = "uint256" },
-                        new() { Name = "deadline", Type = "uint256" },
+                        new() { Name = "deadline", Type = "uint256" }
                     }
                 }
             };
@@ -190,21 +191,21 @@ namespace RallyProtocol.GSN
             }
         }
 
-        public Task<ISignature> GetPermitEIP712Signature(Account account, string contractName, string contractAddress, RallyNetworkConfig config, BigInteger nonce, BigInteger amount, BigInteger deadline, byte[] salt)
+        public Task<ISignature> GetPermitEIP712Signature(Account account, string contractName, string contractAddress, RallyNetworkConfig config, BigInteger nonce, BigInteger amount, BigInteger deadline, byte[] salt, string eipDomainVersion = null)
         {
 
             // chainId to be used in EIP712
             BigInteger chainId = BigInteger.Parse(config.Gsn.ChainId);
 
             // typed data for signing
-            string signature = GetSignedTypedPermitTransaction(account, contractName, "1", chainId, contractAddress, account.Address, config.Gsn.PaymasterAddress, amount, nonce, deadline, salt);
+            string signature = GetSignedTypedPermitTransaction(account, contractName, eipDomainVersion ?? "1", chainId, contractAddress, account.Address, config.Gsn.PaymasterAddress, amount, nonce, deadline, salt);
 
             // signature for permit
             EthECDSASignature ethSignature = EthECDSASignatureFactory.ExtractECDSASignature(signature);
             return Task.FromResult<ISignature>(ethSignature);
         }
 
-        public async Task<GsnTransactionDetails> GetPermitTx(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider)
+        public async Task<GsnTransactionDetails> GetPermitTx(Account account, string destinationAddress, BigInteger amount, RallyNetworkConfig config, string contractAddress, Web3 provider, Eip712Domain eip712Domain)
         {
             ERC721ContractService token = new(provider.Eth, contractAddress);
 
@@ -212,10 +213,13 @@ namespace RallyProtocol.GSN
             string name = await token.NameQueryAsync();
 
             BigInteger deadline = await GetPermitDeadline(provider);
-            Eip712DomainOutputDTO eip712Domain = await provider.Eth.GetContractQueryHandler<Eip712DomainFunction>().QueryAsync<Eip712DomainOutputDTO>(contractAddress);
-            byte[] salt = eip712Domain.Salt;
+            if (eip712Domain == null)
+            {
+                eip712Domain = await provider.Eth.GetContractQueryHandler<Eip712DomainFunction>()
+                     .QueryAsync<Eip712Domain>(contractAddress);
+            }
 
-            ISignature signature = await GetPermitEIP712Signature(account, name, token.ContractAddress, config, nonce, amount, deadline, salt);
+            ISignature signature = await GetPermitEIP712Signature(account, name, token.ContractAddress, config, nonce, amount, deadline, eip712Domain.Salt, eip712Domain.Version);
             TransferFromFunction transferTx = new()
             {
                 From = account.Address,
@@ -305,16 +309,16 @@ namespace RallyProtocol.GSN
 
         public partial class Eip712DomainFunction : Eip712DomainFunctionBase { }
 
-        [Function("eip712Domain", typeof(Eip712DomainOutputDTO))]
+        [Function("eip712Domain", typeof(Eip712Domain))]
         public class Eip712DomainFunctionBase : FunctionMessage
         {
 
         }
 
-        public partial class Eip712DomainOutputDTO : Eip712DomainOutputDTOBase { }
+        public partial class Eip712Domain : Eip712DomainBase { }
 
         [FunctionOutput]
-        public class Eip712DomainOutputDTOBase : IFunctionOutputDTO
+        public class Eip712DomainBase : IFunctionOutputDTO
         {
             [Parameter("bytes1", "fields", 1)]
             public virtual byte[] Fields { get; set; }
