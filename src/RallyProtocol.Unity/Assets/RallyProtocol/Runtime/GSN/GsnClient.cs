@@ -136,10 +136,6 @@ namespace RallyProtocol.GSN
 
             GsnServerConfigPayload serverConfigUpdate = httpResponse.DeserializeJson<GsnServerConfigPayload>();
             config.Gsn.RelayWorkerAddress = serverConfigUpdate.RelayWorkerAddress;
-            //config.Gsn.RelayHubAddress = serverConfigUpdate.RelayHubAddress;
-
-            transaction.MaxPriorityFeePerGas = serverConfigUpdate.MinMaxPriorityFeePerGas;
-            transaction.MaxFeePerGas = serverConfigUpdate.MaxMaxFeePerGas;
 
             // Removed based on: https://github.com/rally-dfs/react-native-sdk/commit/67ac5b36a90a9d11b144fe2dff98aecb4a5b892b
             //SetGasFeesForTransaction(transaction, serverConfigUpdate);
