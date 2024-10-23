@@ -9,6 +9,7 @@ using Nethereum.Web3.Accounts;
 using RallyProtocol.Accounts;
 using RallyProtocol.Core;
 using RallyProtocol.GSN;
+using RallyProtocol.GSN.Models;
 using RallyProtocol.Logging;
 
 namespace RallyProtocol.Networks
@@ -20,7 +21,8 @@ namespace RallyProtocol.Networks
         Polygon,
         Local,
         Test,
-        Custom
+        Custom,
+        BaseSepolia
     }
 
     public interface IRallyNetwork
@@ -41,8 +43,8 @@ namespace RallyProtocol.Networks
         public Task<Account> GetAccountAsync();
         public Task<decimal> GetDisplayBalanceAsync(string? tokenAddress = null);
         public Task<BigInteger> GetExactBalanceAsync(string? tokenAddress = null);
-        public Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null);
-        public Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null);
+        public Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null, TokenConfig tokenConfig = null);
+        public Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null, TokenConfig tokenConfig = null);
         public Task<string> ClaimRlyAsync();
         public Task<string> RelayAsync(GsnTransactionDetails tx);
         public void SetApiKey(string apiKey);

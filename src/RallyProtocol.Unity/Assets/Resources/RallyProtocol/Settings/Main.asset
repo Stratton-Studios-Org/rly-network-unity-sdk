@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Main
   m_EditorClassIdentifier: 
   apiKey: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjYxMX0.PUxW-wsXnE28BBRS8LhltsErvWCSPd6N0xpSCk1MkJ7TxXF4cvCfB7nDptakv5myAtIjJNMS-Gs9D_VTTH2tXQ
-  networkType: 0
+  networkType: 5

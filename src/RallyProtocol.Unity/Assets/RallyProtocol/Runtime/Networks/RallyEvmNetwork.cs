@@ -24,6 +24,7 @@ using RallyProtocol.Accounts;
 using RallyProtocol.Contracts.TokenFaucet;
 using RallyProtocol.Core;
 using RallyProtocol.GSN;
+using RallyProtocol.GSN.Models;
 using RallyProtocol.Logging;
 
 namespace RallyProtocol.Networks
@@ -103,7 +104,7 @@ namespace RallyProtocol.Networks
             return account;
         }
 
-        public async Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null)
+        public async Task<string> TransferAsync(string destinationAddress, decimal amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null, TokenConfig tokenConfig = null)
         {
             Web3 provider = await GetProviderAsync();
             Account account = await GetAccountAsync();
@@ -111,10 +112,10 @@ namespace RallyProtocol.Networks
             ERC20ContractService token = new(provider.Eth, tokenAddress);
             byte decimals = await token.DecimalsQueryAsync();
             BigInteger amountBigNum = Web3.Convert.ToWei(amount, decimals);
-            return await TransferExactAsync(destinationAddress, amountBigNum, metaTxMethod, tokenAddress);
+            return await TransferExactAsync(destinationAddress, amountBigNum, metaTxMethod, tokenAddress, tokenConfig);
         }
 
-        public async Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null)
+        public async Task<string> TransferExactAsync(string destinationAddress, BigInteger amount, MetaTxMethod? metaTxMethod = null, string? tokenAddress = null, TokenConfig tokenConfig = null)
         {
             Web3 provider = await GetProviderAsync();
             Account account = await GetAccountAsync();
@@ -127,12 +128,11 @@ namespace RallyProtocol.Networks
             }
 
             GsnTransactionDetails? transferTx = null;
-            // TODO: MetaTxMethod.Permit isn't working
             if (metaTxMethod != null && metaTxMethod == MetaTxMethod.Permit || metaTxMethod == MetaTxMethod.ExecuteMetaTransaction)
             {
                 if (metaTxMethod == MetaTxMethod.Permit)
                 {
-                    transferTx = await this.permitTransaction.GetPermitTx(account, destinationAddress, amount, this.config, tokenAddress, provider);
+                    transferTx = await this.permitTransaction.GetPermitTx(account, destinationAddress, amount, this.config, tokenAddress, provider, tokenConfig?.Eip712Domain);
                 }
                 else if (metaTxMethod == MetaTxMethod.ExecuteMetaTransaction)
                 {
@@ -151,7 +151,7 @@ namespace RallyProtocol.Networks
                 }
                 else if (permitSupported)
                 {
-                    transferTx = await this.permitTransaction.GetPermitTx(account, destinationAddress, amount, this.config, tokenAddress, provider);
+                    transferTx = await this.permitTransaction.GetPermitTx(account, destinationAddress, amount, this.config, tokenAddress, provider, tokenConfig?.Eip712Domain);
                 }
                 else
                 {

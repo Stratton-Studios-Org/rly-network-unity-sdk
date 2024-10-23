@@ -10,6 +10,18 @@ namespace RallyProtocol.Networks
 
         #region Fields
 
+        public static readonly RallyNetworkConfig BaseSepoliaDefault = new()
+        {
+            Contracts = RallyContracts.BaseSepoliaDefault,
+            Gsn = RallyGSNConfig.BaseSepoliaDefault
+        };
+
+        public static readonly RallyNetworkConfig BaseDefault = new()
+        {
+            Contracts = RallyContracts.BaseDefault,
+            Gsn = RallyGSNConfig.BaseDefault
+        };
+
         public static readonly RallyNetworkConfig AmoyDefault = new()
         {
             Contracts = RallyContracts.AmoyDefault,
@@ -44,6 +56,8 @@ namespace RallyProtocol.Networks
 
         #region Properties
 
+        public static RallyNetworkConfig BaseSepolia => BaseSepoliaDefault.Clone();
+        public static RallyNetworkConfig Base => BaseDefault.Clone();
         public static RallyNetworkConfig Amoy => AmoyDefault.Clone();
         public static RallyNetworkConfig AmoyWithPermit => AmoyWithPermitDefault.Clone();
         public static RallyNetworkConfig Polygon => PolygonDefault.Clone();
@@ -83,6 +97,19 @@ namespace RallyProtocol.Networks
 
         #region Fields
 
+        public static readonly RallyContracts BaseSepoliaDefault = new()
+        {
+            RlyERC20 = "0x16723e9bb894EfC09449994eC5bCF5b41EE0D9b2",
+            TokenFaucet = "0xCeCFB48a9e7C0765Ed1319ee1Bc0F719a30641Ce",
+        };
+
+        public static readonly RallyContracts BaseDefault = new()
+        {
+            // TODO: there are no contracts for base mainnet. Client needs update to handle this case gracefully.
+            RlyERC20 = "0x000",
+            TokenFaucet = "0x000",
+        };
+
         public static readonly RallyContracts AmoyDefault = new()
         {
             RlyERC20 = "0x846d8a5fb8a003b431b67115f809a9b9fffe5012",
@@ -117,6 +144,7 @@ namespace RallyProtocol.Networks
 
         #region Properties
 
+        public static RallyContracts BaseSepolia => BaseSepoliaDefault.Clone();
         public static RallyContracts Amoy => AmoyDefault.Clone();
         public static RallyContracts AmoyWithPermit => AmoyWithPermitDefault.Clone();
         public static RallyContracts Polygon => PolygonDefault.Clone();
@@ -153,6 +181,44 @@ namespace RallyProtocol.Networks
     {
 
         #region Fields
+
+        public static readonly RallyGSNConfig BaseSepoliaDefault = new()
+        {
+            PaymasterAddress = "0x9bf59A7924cBa2475A03AD77e92fcf1Eaddb2Cc2",
+            ForwarderAddress = "0xabf9Fa3b2b2d9bDd77f4271A0d5A309AA465BCBa",
+            RelayHubAddress = "0xb570b57b821670707fF4E38Ea53fcb67192278F8",
+            RelayWorkerAddress = "0xdb1d6c7b07c857cc22a4ef10ac7b1dd06dd7501f",
+            RelayUrl = "https://api.rallyprotocol.com",
+            RpcUrl = "https://api.rallyprotocol.com/rpc",
+            ChainId = "84532",
+            MaxAcceptanceBudget = "285252",
+            DomainSeparatorName = "GSN Relayed Transaction",
+            GtxDataNonZero = 16,
+            GtxDataZero = 4,
+            RequestValidSeconds = 172800,
+            MaxPaymasterDataLength = 300,
+            MaxApprovalDataLength = 300,
+            MaxRelayNonceGap = 3,
+        };
+
+        public static readonly RallyGSNConfig BaseDefault = new()
+        {
+            PaymasterAddress = "0x01B83B33F0DD8be68627a9BE68E9e7E3c209a6b1",
+            ForwarderAddress = "0x524266345fB331cb624E27D2Cf5B61E769527FCC",
+            RelayHubAddress = "0x54623092d2dB00D706e0Ad4ADaCc024F9cB9E915",
+            RelayWorkerAddress = "0x7c5b7cf606ab2b56ead90b583bad47c5fd2c3417",
+            RelayUrl = "https://api.rallyprotocol.com",
+            RpcUrl = "https://api.rallyprotocol.com/rpc",
+            ChainId = "8453",
+            MaxAcceptanceBudget = "285252",
+            DomainSeparatorName = "GSN Relayed Transaction",
+            GtxDataNonZero = 16,
+            GtxDataZero = 4,
+            RequestValidSeconds = 172800,
+            MaxPaymasterDataLength = 300,
+            MaxApprovalDataLength = 300,
+            MaxRelayNonceGap = 3,
+        };
 
         public static readonly RallyGSNConfig AmoyDefault = new()
         {
@@ -253,6 +319,7 @@ namespace RallyProtocol.Networks
 
         #region Properties
 
+        public static RallyGSNConfig BaseSepolia => BaseSepoliaDefault.Clone();
         public static RallyGSNConfig Amoy => AmoyDefault.Clone();
         public static RallyGSNConfig AmoyWithPermit => AmoyWithPermit.Clone();
         public static RallyGSNConfig Polygon => PolygonDefault.Clone();

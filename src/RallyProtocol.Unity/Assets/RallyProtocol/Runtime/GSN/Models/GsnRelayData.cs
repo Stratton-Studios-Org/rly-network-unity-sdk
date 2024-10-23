@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -63,21 +64,11 @@ namespace RallyProtocol.GSN.Models
 
         public RelayData ToAbi()
         {
-            BigInteger transactionCalldataGasUsed;
-            if (TransactionCalldataGasUsed.IsHex())
-            {
-                transactionCalldataGasUsed = new HexBigInteger(TransactionCalldataGasUsed);
-            }
-            else
-            {
-                transactionCalldataGasUsed = BigInteger.Parse(TransactionCalldataGasUsed);
-            }
-
             return new()
             {
-                MaxFeePerGas = BigInteger.Parse(MaxFeePerGas),
-                MaxPriorityFeePerGas = BigInteger.Parse(MaxPriorityFeePerGas),
-                TransactionCalldataGasUsed = transactionCalldataGasUsed,
+                MaxFeePerGas = MaxFeePerGas.IsHex() ? new HexBigInteger(MaxFeePerGas) : BigInteger.Parse(MaxFeePerGas),
+                MaxPriorityFeePerGas = MaxPriorityFeePerGas.IsHex() ? new HexBigInteger(MaxPriorityFeePerGas) : BigInteger.Parse(MaxPriorityFeePerGas),
+                TransactionCalldataGasUsed = TransactionCalldataGasUsed.IsHex() ? new HexBigInteger(TransactionCalldataGasUsed) : BigInteger.Parse(TransactionCalldataGasUsed),
                 RelayWorker = RelayWorker,
                 Paymaster = Paymaster,
                 PaymasterData = PaymasterData.HexToByteArray(),
