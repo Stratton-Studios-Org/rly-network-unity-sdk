@@ -421,6 +421,58 @@
             <param name="forwardRequest">The instance to clone</param>
             <returns>Returns the cloned instance</returns>
         </member>
+        <member name="T:RallyProtocol.GSN.Models.TokenConfig">
+            <summary>
+            <see cref="T:RallyProtocol.GSN.Models.TokenConfig"/>> is a configuration object that is used to define the properties of a token.
+            </summary>
+        </member>
+        <member name="F:RallyProtocol.GSN.Models.TokenConfig.BaseUsdcDefault">
+            <summary>
+            Pre-built configuration for USDC on Base Mainnet
+            </summary>
+        </member>
+        <member name="F:RallyProtocol.GSN.Models.TokenConfig.BaseSepoliaUsdcDefault">
+            <summary>
+            Pre-built configuration for USDC on Sepolia Base.
+            </summary>
+            <remarks>
+            To get access to USDC on Sepolia Base, you can use the faucet at https://faucet.circle.com/
+            </remarks>
+        </member>
+        <member name="F:RallyProtocol.GSN.Models.TokenConfig.BaseSepoliaRlyDefault">
+            <summary>
+            Pre built configuration for RLY on Sepolia Base.
+            </summary>
+            <remarks>
+            This is the token this SDK tests with by default.
+            </remarks>
+        </member>
+        <member name="F:RallyProtocol.GSN.Models.TokenConfig.BaseSepoliaExecMetaRlyDefault">
+            <summary>
+            This is a custom version of RLY configured to support the executeMetaTransaction style of meta transactions.
+            </summary>
+            <remarks>
+            Should only be used for specific testing purposes. If you aren't sure whether you need <see cref="F:RallyProtocol.MetaTxMethod.ExecuteMetaTransaction"/>, you probably don't.
+            </remarks>
+        </member>
+        <member name="P:RallyProtocol.GSN.Models.TokenConfig.Address">
+            <summary>
+            The address of the token contract.
+            </summary>
+        </member>
+        <member name="P:RallyProtocol.GSN.Models.TokenConfig.MetaTxMethod">
+            <summary>
+            The method of meta transaction that the token supports. See <see cref="P:RallyProtocol.GSN.Models.TokenConfig.MetaTxMethod"/>> for more information.
+            </summary>
+            <remarks>
+            This is most likely going to be MetaTxMethod.Permit.
+            </remarks>
+        </member>
+        <member name="P:RallyProtocol.GSN.Models.TokenConfig.Eip712Domain">
+            <summary>
+            The EIP712 domain object for the token. This is only required if the token uses non default values for EIP712 signature generation.
+            </summary>
+        </member>
         <member name="T:RallyProtocol.GsnTransactionDetails">
             <summary>
             Rally's GSN transaction details.

@@ -37,7 +37,6 @@ MonoBehaviour:
     - Assets/{1}/Runtime/**/*.cs
     dependencies:
     - Newtonsoft.Json.dll
-    - BouncyCastle.Cryptography.dll
     - Microsoft.Extensions.Logging.Abstractions.dll
     - Nethereum.Web3.dll
     - Nethereum.Accounts.dll
