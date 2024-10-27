@@ -17,7 +17,7 @@ namespace RallyProtocolUnity
         [SerializeField]
         protected string apiKey;
         [SerializeField]
-        protected RallyNetworkType networkType;
+        protected RallyNetworkType networkType = RallyNetworkType.BaseSepolia;
         [SerializeField]
         protected RallyNetworkConfig customNetworkConfig;
 

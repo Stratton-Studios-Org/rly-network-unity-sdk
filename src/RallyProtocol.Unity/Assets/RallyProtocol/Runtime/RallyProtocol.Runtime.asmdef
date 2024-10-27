@@ -7,7 +7,6 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "BouncyCastle.Cryptography.dll",
         "Nethereum.Web3.dll",
         "Nethereum.Accounts.dll",
         "Nethereum.Hex.dll",

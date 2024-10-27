@@ -8,8 +8,6 @@ using Nethereum.Web3;
 
 using RallyProtocol.Core;
 
-using UnityEngine;
-
 namespace RallyProtocol.GSN
 {
 
