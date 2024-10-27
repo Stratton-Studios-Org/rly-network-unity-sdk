@@ -168,7 +168,8 @@ namespace RallyProtocol.GSN
             };
             HexBigInteger gas = await token.ContractHandler.EstimateGasAsync(executeMetaTransactionFunction);
             string executeMetaTransactionFunctionData = token.ContractHandler.GetFunction<ExecuteMetaTransactionFunction>().GetData(executeMetaTransactionFunction);
-            Fee1559 fee = await provider.FeeSuggestion.GetSimpleFeeSuggestionStrategy().SuggestFeeAsync();
+            //Fee1559 fee = await provider.FeeSuggestion.GetSimpleFeeSuggestionStrategy().SuggestFeeAsync();
+            FeeData feeData = await FeeData.GetFeeData(provider);
 
             GsnTransactionDetails gsnTx = new()
             {
@@ -177,8 +178,8 @@ namespace RallyProtocol.GSN
                 Value = "0",
                 To = token.ContractAddress,
                 Gas = gas.HexValue,
-                MaxFeePerGas = new HexBigInteger(fee.MaxFeePerGas.Value).HexValue,
-                MaxPriorityFeePerGas = new HexBigInteger(fee.MaxPriorityFeePerGas.Value).HexValue
+                MaxFeePerGas = new HexBigInteger(feeData.MaxFeePerGas).HexValue,
+                MaxPriorityFeePerGas = new HexBigInteger(feeData.MaxPriorityFeePerGas).HexValue
             };
 
             return gsnTx;

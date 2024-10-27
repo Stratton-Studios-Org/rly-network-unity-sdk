@@ -26,6 +26,9 @@ namespace RallyProtocol.Networks
                 case RallyNetworkType.BaseSepolia:
                     config = RallyNetworkConfig.BaseSepolia;
                     break;
+                case RallyNetworkType.Base:
+                    config = RallyNetworkConfig.Base;
+                    break;
                 case RallyNetworkType.Polygon:
                     config = RallyNetworkConfig.Polygon;
                     break;

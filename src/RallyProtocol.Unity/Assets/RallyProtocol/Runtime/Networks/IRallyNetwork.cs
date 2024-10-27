@@ -22,7 +22,8 @@ namespace RallyProtocol.Networks
         Local,
         Test,
         Custom,
-        BaseSepolia
+        BaseSepolia,
+        Base
     }
 
     public interface IRallyNetwork

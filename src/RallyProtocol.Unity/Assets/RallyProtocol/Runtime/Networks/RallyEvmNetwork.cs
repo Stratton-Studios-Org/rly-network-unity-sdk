@@ -180,15 +180,15 @@ namespace RallyProtocol.Networks
             HexBigInteger estimatedGas = await provider.Eth.GetContractTransactionHandler<ClaimFunction>().EstimateGasAsync(contractAddress, claimFunctionInput);
 
             BlockWithTransactions blockInformation = await provider.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(BlockParameter.CreateLatest());
-            BigInteger maxPriorityFeePerGas = BigInteger.Parse("1500000000");
-            BigInteger maxFeePerGas = blockInformation.BaseFeePerGas.Value * 2 + maxPriorityFeePerGas;
+            FeeData feeData = await FeeData.GetFeeData(provider);
+
             GsnTransactionDetails gsnTx = new()
             {
                 From = account.Address,
                 Data = claimFunctionInput.GetCallData().ToHex(true),
                 To = contractAddress,
-                MaxFeePerGas = new HexBigInteger(maxFeePerGas).HexValue,
-                MaxPriorityFeePerGas = new HexBigInteger(maxPriorityFeePerGas).HexValue,
+                MaxFeePerGas = new HexBigInteger(feeData.MaxFeePerGas).HexValue,
+                MaxPriorityFeePerGas = new HexBigInteger(feeData.MaxPriorityFeePerGas).HexValue,
                 Value = "0",
                 Gas = estimatedGas.HexValue,
             };

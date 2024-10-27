@@ -243,8 +243,9 @@ namespace RallyProtocol.GSN
             string paymasterData = $"0x{contractAddress.Replace("0x", "")}{transferTx.GetCallData().ToHex(false)}";
             BlockWithTransactions info = await provider.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(BlockParameter.CreateLatest());
 
-            BigInteger maxPriorityFeePerGas = BigInteger.Parse("1500000000");
-            BigInteger maxFeePerGas = info.BaseFeePerGas.Value * 2 + maxPriorityFeePerGas;
+            FeeData feeData = await FeeData.GetFeeData(provider);
+            //BigInteger maxPriorityFeePerGas = BigInteger.Parse("1500000000");
+            //BigInteger maxFeePerGas = info.BaseFeePerGas.Value * 2 + maxPriorityFeePerGas;
 
             GsnTransactionDetails gsnTx = new()
             {
@@ -253,8 +254,8 @@ namespace RallyProtocol.GSN
                 Value = "0",
                 To = token.ContractAddress,
                 Gas = gas.HexValue,
-                MaxFeePerGas = new HexBigInteger(maxFeePerGas).HexValue,
-                MaxPriorityFeePerGas = new HexBigInteger(maxPriorityFeePerGas).HexValue,
+                MaxFeePerGas = new HexBigInteger(feeData.MaxFeePerGas).HexValue,
+                MaxPriorityFeePerGas = new HexBigInteger(feeData.MaxPriorityFeePerGas).HexValue,
                 PaymasterData = paymasterData,
             };
 
