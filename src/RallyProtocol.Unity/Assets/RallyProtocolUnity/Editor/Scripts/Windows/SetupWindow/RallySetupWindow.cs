@@ -80,7 +80,6 @@ namespace RallyProtocolUnity.Editor
 
             this.apiKeyField = root.Query<TextField>("apiKey");
             this.networkTypeField = root.Query<EnumField>("networkType");
-            this.networkTypeField.RegisterValueChangedCallback(new EventCallback<ChangeEvent<Enum>>(OnNetworkChanged));
 
             this.saveButton = root.Query<Button>("saveButton");
             this.saveButton.clicked += SaveMainSettingsPreset;
@@ -96,6 +95,7 @@ namespace RallyProtocolUnity.Editor
             }
 
             this.customConfig = root.Query<GroupBox>("customConfig");
+            this.networkTypeField.RegisterValueChangedCallback(new EventCallback<ChangeEvent<Enum>>(OnNetworkChanged));
             OnNetworkChanged(null);
 
             this.customRlyERC20Address = root.Query<TextField>("customRlyERC20Address");

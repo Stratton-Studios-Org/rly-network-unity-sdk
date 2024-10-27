@@ -145,6 +145,7 @@ namespace RallyProtocol.Networks
         #region Properties
 
         public static RallyContracts BaseSepolia => BaseSepoliaDefault.Clone();
+        public static RallyContracts Base => BaseDefault.Clone();
         public static RallyContracts Amoy => AmoyDefault.Clone();
         public static RallyContracts AmoyWithPermit => AmoyWithPermitDefault.Clone();
         public static RallyContracts Polygon => PolygonDefault.Clone();
@@ -320,6 +321,7 @@ namespace RallyProtocol.Networks
         #region Properties
 
         public static RallyGSNConfig BaseSepolia => BaseSepoliaDefault.Clone();
+        public static RallyGSNConfig Base => BaseDefault.Clone();
         public static RallyGSNConfig Amoy => AmoyDefault.Clone();
         public static RallyGSNConfig AmoyWithPermit => AmoyWithPermit.Clone();
         public static RallyGSNConfig Polygon => PolygonDefault.Clone();
