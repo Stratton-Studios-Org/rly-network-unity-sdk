@@ -4,9 +4,6 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        maven { url 'https://maven.google.com' }
-        maven { url "https://www.jitpack.io" }
-        mavenLocal()
     }
 }
 
@@ -19,10 +16,11 @@ dependencyResolutionManagement {
         **ARTIFACTORYREPOSITORY**
         google()
         mavenCentral()
-        maven { url 'https://maven.google.com' }
-        maven { url 'https://jitpack.io' }
 // Android Resolver Repos Start
         def unityProjectPath = $/file:///**DIR_UNITYPROJECT**/$.replace("\\", "/")
+        maven {
+            url "https://jitpack.io" // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:6
+        }
         mavenLocal()
 // Android Resolver Repos End
         flatDir {
