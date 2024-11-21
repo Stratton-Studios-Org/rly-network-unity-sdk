@@ -1,0 +1,1015 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "RallyProtocol_Unity_iOSPlugin",
+    "printedName": "RallyProtocol_Unity_iOSPlugin",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "RallyProtocol_Unity_iOSPlugin"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "KeychainHelper",
+        "printedName": "KeychainHelper",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "standard",
+            "printedName": "standard",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "KeychainHelper",
+                "printedName": "RallyProtocol_Unity_iOSPlugin.KeychainHelper",
+                "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC8standardACvpZ",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC8standardACvpZ",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "KeychainHelper",
+                    "printedName": "RallyProtocol_Unity_iOSPlugin.KeychainHelper",
+                    "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC8standardACvgZ",
+                "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC8standardACvgZ",
+                "moduleName": "RallyProtocol_Unity_iOSPlugin",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent",
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "save",
+            "printedName": "save(_:service:account:saveToCloud:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC4save_7service7account0G7ToCloudy10Foundation4DataV_S2SSbtF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC4save_7service7account0G7ToCloudy10Foundation4DataV_S2SSbtF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "saveToiCloudKeychain",
+            "printedName": "saveToiCloudKeychain(_:service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC012saveToiCloudE0_7service7accounty10Foundation4DataV_S2StF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC012saveToiCloudE0_7service7accounty10Foundation4DataV_S2StF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "saveToDeviceKeychain",
+            "printedName": "saveToDeviceKeychain(_:service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC012saveToDeviceE0_7service7accounty10Foundation4DataV_S2StF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC012saveToDeviceE0_7service7accounty10Foundation4DataV_S2StF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "readAttributes",
+            "printedName": "readAttributes(service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC14readAttributes7service7accountSDySSypGSgSS_SStF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC14readAttributes7service7accountSDySSypGSgSS_SStF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "read",
+            "printedName": "read(service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Data?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Data",
+                    "printedName": "Foundation.Data",
+                    "usr": "s:10Foundation4DataV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC4read7service7account10Foundation4DataVSgSS_SStF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC4read7service7account10Foundation4DataVSgSS_SStF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "readFromDeviceKeychain",
+            "printedName": "readFromDeviceKeychain(service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Data?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Data",
+                    "printedName": "Foundation.Data",
+                    "usr": "s:10Foundation4DataV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC014readFromDeviceE07service7account10Foundation4DataVSgSS_SStF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC014readFromDeviceE07service7account10Foundation4DataVSgSS_SStF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "readFromiCloudKeychain",
+            "printedName": "readFromiCloudKeychain(service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Data?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Data",
+                    "printedName": "Foundation.Data",
+                    "usr": "s:10Foundation4DataV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC014readFromiCloudE07service7account10Foundation4DataVSgSS_SStF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC014readFromiCloudE07service7account10Foundation4DataVSgSS_SStF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "delete",
+            "printedName": "delete(service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC6delete7service7accountySS_SStF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC6delete7service7accountySS_SStF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "deleteFromDeviceKeychain",
+            "printedName": "deleteFromDeviceKeychain(service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC016deleteFromDeviceE07service7accountySS_SStF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC016deleteFromDeviceE07service7accountySS_SStF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "deleteFromiCloudKeychain",
+            "printedName": "deleteFromiCloudKeychain(service:account:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC016deleteFromiCloudE07service7accountySS_SStF",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC016deleteFromiCloudE07service7accountySS_SStF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "Final"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:29RallyProtocol_Unity_iOSPlugin14KeychainHelperC",
+        "mangledName": "$s29RallyProtocol_Unity_iOSPlugin14KeychainHelperC",
+        "moduleName": "RallyProtocol_Unity_iOSPlugin",
+        "declAttributes": [
+          "Final"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "RallyProtocol_Unity_iOSPlugin"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "RlyNetworkMobileSdk",
+        "printedName": "RlyNetworkMobileSdk",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "MNEMONIC_STRENGTH",
+            "printedName": "MNEMONIC_STRENGTH",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC17MNEMONIC_STRENGTHSivp",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC17MNEMONIC_STRENGTHSivp",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC17MNEMONIC_STRENGTHSivg",
+                "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC17MNEMONIC_STRENGTHSivg",
+                "moduleName": "RallyProtocol_Unity_iOSPlugin",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "SERVICE_KEY",
+            "printedName": "SERVICE_KEY",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11SERVICE_KEYSSvp",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11SERVICE_KEYSSvp",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11SERVICE_KEYSSvg",
+                "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11SERVICE_KEYSSvg",
+                "moduleName": "RallyProtocol_Unity_iOSPlugin",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "MNEMONIC_ACCOUNT_KEY",
+            "printedName": "MNEMONIC_ACCOUNT_KEY",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC20MNEMONIC_ACCOUNT_KEYSSvp",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC20MNEMONIC_ACCOUNT_KEYSSvp",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC20MNEMONIC_ACCOUNT_KEYSSvg",
+                "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC20MNEMONIC_ACCOUNT_KEYSSvg",
+                "moduleName": "RallyProtocol_Unity_iOSPlugin",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "hello",
+            "printedName": "hello()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)hello",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC5helloSSyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getBundleId",
+            "printedName": "getBundleId()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)getBundleId",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11getBundleIdSSyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getMnemonic",
+            "printedName": "getMnemonic()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)getMnemonic",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC11getMnemonicSSSgyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "generateMnemonic",
+            "printedName": "generateMnemonic()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)generateMnemonic",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC16generateMnemonicSSyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mnemonicBackedUpToCloud",
+            "printedName": "mnemonicBackedUpToCloud()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)mnemonicBackedUpToCloud",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC23mnemonicBackedUpToCloudSbyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "saveMnemonic",
+            "printedName": "saveMnemonic(_:saveToCloud:rejectOnCloudSaveFailure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)saveMnemonic:saveToCloud:rejectOnCloudSaveFailure:",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC12saveMnemonic_0I7ToCloud08rejectOnL11SaveFailureSbSS_S2btF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "deleteMnemonic",
+            "printedName": "deleteMnemonic()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)deleteMnemonic",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC14deleteMnemonicSbyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "deleteCloudMnemonic",
+            "printedName": "deleteCloudMnemonic()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)deleteCloudMnemonic",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC19deleteCloudMnemonicSbyF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getPrivateKeyFromMnemonic",
+            "printedName": "getPrivateKeyFromMnemonic(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)getPrivateKeyFromMnemonic:",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC25getPrivateKeyFromMnemonicyypSSF",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RlyNetworkMobileSdk",
+                "printedName": "RallyProtocol_Unity_iOSPlugin.RlyNetworkMobileSdk",
+                "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk(im)init",
+            "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkCACycfc",
+            "moduleName": "RallyProtocol_Unity_iOSPlugin",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@RallyProtocol_Unity_iOSPlugin@objc(cs)RlyNetworkMobileSdk",
+        "mangledName": "$s29RallyProtocol_Unity_iOSPlugin19RlyNetworkMobileSdkC",
+        "moduleName": "RallyProtocol_Unity_iOSPlugin",
+        "isOpen": true,
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/hasanbayat\/Documents\/Projects\/StrattonStudios\/RallyProtocol\/rly-network-unity-sdk\/src\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
+      "kind": "IntegerLiteral",
+      "offset": 92,
+      "length": 2,
+      "value": "24"
+    },
+    {
+      "filePath": "\/Users\/hasanbayat\/Documents\/Projects\/StrattonStudios\/RallyProtocol\/rly-network-unity-sdk\/src\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
+      "kind": "StringLiteral",
+      "offset": 117,
+      "length": 16,
+      "value": "\"WALLET_STORAGE\""
+    },
+    {
+      "filePath": "\/Users\/hasanbayat\/Documents\/Projects\/StrattonStudios\/RallyProtocol\/rly-network-unity-sdk\/src\/RallyProtocol.Unity.iOSPlugin\/RallyProtocol.Unity.iOSPlugin\/RlyNetworkMobileSdk.swift",
+      "kind": "StringLiteral",
+      "offset": 165,
+      "length": 16,
+      "value": "\"BIP39_MNEMONIC\""
+    }
+  ]
+}
