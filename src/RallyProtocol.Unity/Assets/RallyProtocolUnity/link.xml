@@ -40,4 +40,6 @@
 	<assembly fullname="Nethereum.Unity" preserve="all"/>
 	<assembly fullname="Nethereum.Util" preserve="all"/>
 	<assembly fullname="Nethereum.Web3" preserve="all"/>
+	<assembly fullname="RallyProtocol.Runtime" preserve="all"/>
+	<assembly fullname="RallyProtocolUnity.Runtime" preserve="all"/>
 </linker>
