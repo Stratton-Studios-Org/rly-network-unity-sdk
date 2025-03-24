@@ -1,8 +1,24 @@
 # Rally Protocol Unity SDK
 
-The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
+The Rally Protocol Unity SDK enables Unity developers to integrate blockchain functionality into their games and applications, leveraging the Rally Protocol for decentralized finance and blockchain interactions.
 
-## Folder Structure
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Unity](https://img.shields.io/badge/Unity-2021.3+-black.svg)](https://unity.com)
+
+## Overview
+
+The Rally Protocol Unity SDK provides a complete solution for integrating blockchain functionality into Unity games and applications. With features for account management, token transfers, gasless transactions, and more, the SDK makes it easy to incorporate Web3 functionality into your Unity projects.
+
+## Documentation
+
+For comprehensive documentation, visit our [Documentation Website](https://docs.rallyprotocol.com/) or explore the [docs](./docs/) directory in this repository.
+
+- [Getting Started Guide](./docs/guides/getting-started.md)
+- [API Reference](./docs/api/index.md)
+- [Examples](./docs/examples/index.md)
+- [Guides](./docs/guides/index.md)
+
+## Project Structure
 
 - `src/RallyProtocol.Unity`: The primary Unity project and SDK code
 - `src/RallyProtocol.Unity.Publish`: The Unity publish project for exporting the installer
@@ -10,163 +26,90 @@ The Rally Protocol Unity SDK, learn more at https://docs.rallyprotocol.com/
 - `src/RallyProtocol.Unity.iOSPlugin`: The iOS plugin for the Unity project
 - `src/RallyProtocol.NET`: The .NET SDK for the Rally Protocol
 - `src/Dependencies`: The dependencies for the .NET SDK project
+- `docs`: Comprehensive documentation
 
-### Initialization
+## Quick Start
 
-You can initialize a Rally Network instance through any of the below methods:
+### Installation
 
-- Initialize through the main settings preset file that is setup using the **Window > Rally Protocol > Setup** window:
+#### Method 1: Using the Unity Package Manager
 
-  ```cs
-  IRallyNetwork rlyNetwork = RallyUnityManager.Instance.RlyNetwork;
-  ```
+1. Open your Unity project
+2. Go to **Window > Package Manager**
+3. Click the **+** button and select **Add package from git URL...**
+4. Enter: `https://github.com/rally-dfs/rly-network-unity-sdk.git`
+5. Click **Add**
 
-- Equivelant to the above:
+#### Method 2: Using the Rally Protocol Installer
 
-  ```cs
-  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create();
-  ```
+1. Download the latest installer from the [GitHub releases page](https://github.com/rally-dfs/rly-network-unity-sdk/releases)
+2. Import the package into your Unity project via **Assets > Import Package > Custom Package...**
 
-- Create using custom settings preset
+### Basic Usage
 
-  ```cs
-  RallyProtocolSettingsPreset preset = Resources.Load<RallyProtocolSettingsPreset>("myPreset");
-  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(preset);
-  ```
+#### 1. Setup
+Open the Rally Protocol setup window via **Window > Rally Protocol > Setup** to configure your API key and network.
 
-- Create using network type
+#### 2. Creating an Account
 
-  ```cs
-  string myApiKey = "...";
-  RallyNetworkType networkType = RallyNetworkType.Polygon;
-  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(networkType, myApiKey);
-  ```
+```csharp
+IRallyNetwork rlyNetwork = RallyUnityManager.Instance.RlyNetwork;
+IRallyAccountManager accountManager = rlyNetwork.AccountManager;
 
-- Create using network config
-
-  ```cs
-  string myApiKey = "...";
-
-  // Create a clone from default Polygon config and apply any changes as needed
-  RallyNetworkConfig config = RallyNetworkConfig.Polygon;
-  config.Gsn.RelayUrl = "https://api.rallyprotocol.com";
-
-  IRallyNetwork rlyNetwork = RallyUnityNetworkFactory.Create(config, myApiKey);
-  ```
-
-## Getting Started
-
-1. Setup the API key and network through Window > Rally Protocol > Setup window
-2. Use `RallyUnityManager.Instance.RlyNetwork` to access the network created based upon the settings that were setup
-
-  ```cs
-  IRallyNetwork rlyNetwork = RallyUnityManager.Instance.RlyNetwork;
-
-  // Get account manager
-  IRallyAccountManager accountManager = rlyNetwork.AccountManager;
-
-  // Load any existing account
-  Nethereum.Web3.Accounts.Account account = await accountManager.GetAccountAsync();
-
-  // Create a new account if there are no existing accounts
-  if (account == null) {
-    await accountManager.CreateAccountAsync(new()
+// Create a new account
+await accountManager.CreateAccountAsync(new()
+{
+    Overwrite = false,
+    StorageOptions = new()
     {
-      Overwrite = false,
-      StorageOptions = new()
-      {
-        RejectOnCloudSaveFailure = true,
-        SaveToCloud = true
-      }
-    });
-  }
-
-  // Claim RLY for example
-  await rlyNetwork.ClaimRlyAsync();
-
-  // Or transfer some RLY
-  string destinationAddress = "...";
-  decimal amount = 5;
-  await rlyNetwork.Transfer(destinationAddress, amount);
-  ```
-
-- Get the default instance of Rally Account Manager and Rally Network (EVM network):
-
-  ```cs
-  IRallyAccountManager accountManager;
-  IRallyNetwork rlyNetwork;
-
-  this.accountManager RallyUnityAccountManager.Default;
-  this.rlyNetwork = RallyUnityNetworkFactory.Create();
-  ```
-
-- Create a new account
-
-  ```cs
-  public async void CreateAccount()
-  {
-    try
-    {
-        Debug.Log("Creating account...");
-
-        // Create a new account & overwrite everytime for testing purposes
-        await this.accountManager.CreateAccountAsync(new() { Overwrite = true });
-        Debug.Log("Account created successfully");
+        SaveToCloud = true,
+        RejectOnCloudSaveFailure = false
     }
-    catch (Exception ex)
-    {
-        Debug.LogError("Account creation failed");
-        Debug.LogException(ex);
-    }
-  }
-  ```
+});
+```
 
-- Claim RLY for the new account:
+#### 3. Claiming and Transferring Tokens
 
-  ```cs
-  public async void ClaimRly()
-  {
-    try
-    {
-        Debug.Log("Claiming RLY...");
-        await this.rlyNetwork.ClaimRlyAsync();
-        Debug.Log("Claimed RLY successfully");
-    }
-    catch (Exception ex)
-    {
-        Debug.LogError("Claiming RLY failed");
-        Debug.LogException(ex);
-    }
-  }
-  ```
+```csharp
+// Claim RLY tokens
+await rlyNetwork.ClaimRlyAsync();
 
-- Relay transactions
+// Check balance
+decimal balance = await rlyNetwork.GetBalanceAsync();
 
-  ```cs
-  // Define the transaction
-  GsnTransactionDetails gsnTx = ...;
+// Transfer tokens
+string destinationAddress = "0xRecipientAddressHere";
+decimal amount = 5.0m;
+await rlyNetwork.TransferAsync(destinationAddress, amount);
+```
 
-  // Relay the transaction
-  await this.rlyNetwork.RelayAsync(gsnTx);
-  ```
+## Features
 
-- Change Logging Filter
-
-  ```cs
-  // You can set the logging filter using the default logger instance in Unity
-  RallyUnityLogger.Default.UnityLogger.filterLogType = LogType.Log;
-  ```
+- **Account Management**: Create, store, and manage blockchain accounts
+- **Token Operations**: Claim and transfer RLY tokens
+- **Gasless Transactions**: Use the Gas Station Network for gasless transactions
+- **Cross-Platform Support**: iOS and Android support via platform-specific plugins
+- **Unity Integration**: Seamless integration with the Unity editor and runtime
 
 ## Running Tests
 
-The tests are included in the `src/RallyProtocol.Unity` project. To run the tests, open the project in Unity and run the tests from the Test Runner window.
+The tests are included in the `src/RallyProtocol.Unity` project. To run the tests, open the project in Unity and use the Unity Test Runner window.
 
 ## Building the Installer
 
-To build the installer, open the `src/RallyProtocol.Unity.Publish` project in Unity and export the installer from the **Stratton Studios > Export Package Utility** menu and selecting **Rally Protocol - Installer** package.
+To build the installer, open the `src/RallyProtocol.Unity.Publish` project in Unity and export the installer from the **Stratton Studios > Export Package Utility** menu by selecting **Rally Protocol - Installer** package.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Resources
 
+- [Official Website](https://rallyprotocol.com)
+- [Documentation](https://docs.rallyprotocol.com/)
 - [Flutter SDK](https://github.com/rally-dfs/flutter-sdk)
 - [Mobile SDK](https://github.com/rally-dfs/rly-network-mobile-sdk)
-- [Unity SDK (WIP)](https://github.com/rally-dfs/rly-network-unity-sdk)
