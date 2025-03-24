@@ -582,7 +582,7 @@ Now that you've got the basics working, you can:
 
 For more detailed information, explore the full documentation:
 
-- [Complete API Reference](api/index.md)
+- [Complete API Reference](api/README.md)
 - [Tutorial: Implementing a Player Reward System](tutorials/reward-system.md)
 - [Platform-Specific Guides](platform-guides/README.md)
 - [Troubleshooting Guide](troubleshooting.md)

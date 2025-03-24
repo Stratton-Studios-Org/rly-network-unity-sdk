@@ -76,8 +76,8 @@ await rlyNetwork.Transfer(destinationAddress, amount);
 
 ## Next Steps
 
-- Explore the [Examples](../examples/index.md) to see more advanced use cases
+- Explore the [Examples](../examples/README.md) to see more advanced use cases
 - Learn about the [Core Concepts](./core-concepts.md) of the Rally Protocol
-- Dive into the [API Reference](../api/index.md) for detailed documentation
+- Dive into the [API Reference](../api/README.md) for detailed documentation
 
 If you encounter any issues during setup, please check the [Troubleshooting](./troubleshooting.md) page or raise an issue on the [GitHub repository](https://github.com/rally-dfs/rly-network-unity-sdk/issues).

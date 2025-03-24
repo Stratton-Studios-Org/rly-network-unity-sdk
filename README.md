@@ -13,9 +13,9 @@ The Rally Protocol Unity SDK provides a complete solution for integrating blockc
 For comprehensive documentation, visit our [Documentation Website](https://docs.rallyprotocol.com/) or explore the [docs](./docs/) directory in this repository.
 
 - [Getting Started Guide](./docs/guides/getting-started.md)
-- [API Reference](./docs/api/index.md)
-- [Examples](./docs/examples/index.md)
-- [Guides](./docs/guides/index.md)
+- [API Reference](./docs/api/README.md)
+- [Examples](./docs/examples/README.md)
+- [Guides](./docs/guides/README.md)
 
 ## Project Structure
 

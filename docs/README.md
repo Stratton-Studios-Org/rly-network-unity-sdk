@@ -24,9 +24,9 @@ See the [Platform-Specific Guides](./platform-guides/README.md) for detailed int
 - [Installation Guide](./guides/installation.md)
 - [Core Concepts](./guides/core-concepts.md)
 - [Configuration](./guides/configuration.md)
-- [Examples](./examples/index.md)
-- [API Reference](./api/index.md)
-- [Feature Guides](./features/index.md)
+- [Examples](./examples/README.md)
+- [API Reference](./api/README.md)
+- [Feature Guides](./features/README.md)
 
 ## Architecture and Design
 
