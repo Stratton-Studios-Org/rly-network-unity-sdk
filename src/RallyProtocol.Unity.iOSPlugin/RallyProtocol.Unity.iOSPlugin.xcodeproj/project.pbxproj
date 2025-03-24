@@ -6,6 +6,23 @@
 	objectVersion = 56;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		3FBAA1822CE35B8900699CF6 /* RallyProtocol.Unity.iOSPlugin.Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3FBAA1832CE35B8900699CF6 /* Build configuration list for PBXAggregateTarget "RallyProtocol.Unity.iOSPlugin.Universal" */;
+			buildPhases = (
+				3FBAA1862CE35B8E00699CF6 /* ShellScript */,
+			);
+			dependencies = (
+				3FBAA1882CE35BA500699CF6 /* PBXTargetDependency */,
+			);
+			name = RallyProtocol.Unity.iOSPlugin.Universal;
+			packageProductDependencies = (
+			);
+			productName = RallyProtocol.Unity.iOSPlugin.Universal;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		3F5FD3602C189E5700A16BCC /* secp256k1.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F5FD3382C189E5600A16BCC /* secp256k1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F5FD3612C189E5700A16BCC /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F5FD3392C189E5600A16BCC /* sha2.c */; };
@@ -55,6 +72,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		3F9673682C108CA100E4214E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F9673532C108CA100E4214E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F96735B2C108CA100E4214E;
+			remoteInfo = RallyProtocol.Unity.iOSPlugin;
+		};
+		3FBAA1872CE35BA500699CF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3F9673532C108CA100E4214E /* Project object */;
 			proxyType = 1;
@@ -282,7 +306,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					3F96735B2C108CA100E4214E = {
 						CreatedOnToolsVersion = 15.3;
@@ -290,6 +314,9 @@
 					};
 					3F9673652C108CA100E4214E = {
 						CreatedOnToolsVersion = 15.3;
+					};
+					3FBAA1822CE35B8900699CF6 = {
+						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
@@ -308,6 +335,7 @@
 			targets = (
 				3F96735B2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */,
 				3F9673652C108CA100E4214E /* RallyProtocol.Unity.iOSPluginTests */,
+				3FBAA1822CE35B8900699CF6 /* RallyProtocol.Unity.iOSPlugin.Universal */,
 			);
 		};
 /* End PBXProject section */
@@ -329,6 +357,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3FBAA1862CE35B8E00699CF6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Paths to build directories\nDEVICE_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos\"\nSIMULATOR_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\"\nUNIVERSAL_OUTPUT_DIR=\"${SRCROOT}/../RallyProtocol.Unity/Assets/RallyProtocolUnity/Plugins/iOS\"\n\n# Clean the build directories\nrm -rf \"${DEVICE_DIR}\"\nrm -rf \"${SIMULATOR_DIR}\"\n#rm -rf \"${UNIVERSAL_OUTPUT_DIR}\"\n\n# Build for iOS Device (arm64)\nxcodebuild -target \"RallyProtocol.Unity.iOSPlugin\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Build for iOS Simulator (x86_64, arm64)\nxcodebuild -target \"RallyProtocol.Unity.iOSPlugin\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" EXCLUDED_ARCHS=\"arm64\" clean build\n\n# Create universal directory\nmkdir -p \"${UNIVERSAL_OUTPUT_DIR}/RallyProtocol_Unity_iOSPlugin.framework\"\n\n# Combine binaries (lipo) excluding the conflicting architectures\nlipo -create \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/RallyProtocol_Unity_iOSPlugin.framework/RallyProtocol_Unity_iOSPlugin\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/RallyProtocol_Unity_iOSPlugin.framework/RallyProtocol_Unity_iOSPlugin\" -output \"${UNIVERSAL_OUTPUT_DIR}/RallyProtocol_Unity_iOSPlugin.framework/RallyProtocol_Unity_iOSPlugin\"  \n\n# Copy the final universal framework to the output directory\ncp -R \"${DEVICE_DIR}/RallyProtocol_Unity_iOSPlugin.framework\" \"${UNIVERSAL_OUTPUT_DIR}/\"\n\necho \"Universal framework created at ${UNIVERSAL_OUTPUT_DIR}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3F9673582C108CA100E4214E /* Sources */ = {
@@ -373,6 +422,11 @@
 			isa = PBXTargetDependency;
 			target = 3F96735B2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */;
 			targetProxy = 3F9673682C108CA100E4214E /* PBXContainerItemProxy */;
+		};
+		3FBAA1882CE35BA500699CF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F96735B2C108CA100E4214E /* RallyProtocol.Unity.iOSPlugin */;
+			targetProxy = 3FBAA1872CE35BA500699CF6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -430,7 +484,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -489,11 +543,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -506,6 +562,7 @@
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -540,6 +597,7 @@
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -571,7 +629,6 @@
 		3F9673742C108CA100E4214E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N5VW83Q2SX;
@@ -587,7 +644,6 @@
 		3F9673752C108CA100E4214E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N5VW83Q2SX;
@@ -597,6 +653,24 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3FBAA1842CE35B8900699CF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3FBAA1852CE35B8900699CF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -626,6 +700,15 @@
 			buildConfigurations = (
 				3F9673742C108CA100E4214E /* Debug */,
 				3F9673752C108CA100E4214E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FBAA1832CE35B8900699CF6 /* Build configuration list for PBXAggregateTarget "RallyProtocol.Unity.iOSPlugin.Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FBAA1842CE35B8900699CF6 /* Debug */,
+				3FBAA1852CE35B8900699CF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

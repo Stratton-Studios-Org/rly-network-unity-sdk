@@ -4,15 +4,16 @@
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.nethereum.unity": "https://github.com/Nethereum/Nethereum.Unity.git",
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.collab-proxy": "2.3.1",
-    "com.unity.feature.development": "1.0.1",
-    "com.unity.mobile.android-logcat": "1.4.2",
+    "com.unity.collab-proxy": "2.5.2",
+    "com.unity.feature.development": "1.0.2",
+    "com.unity.mobile.android-logcat": "1.4.3",
+    "com.unity.multiplayer.center": "1.0.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
-    "com.unity.test-framework": "1.4.4",
-    "com.unity.textmeshpro": "3.0.6",
-    "com.unity.timeline": "1.7.6",
-    "com.unity.ugui": "1.0.0",
+    "com.unity.test-framework": "1.4.5",
+    "com.unity.timeline": "1.8.7",
+    "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.4",
+    "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -43,6 +44,16 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
-  }
+    "com.unity.modules.xr": "1.0.0",
+    "com.google.external-dependency-manager": "1.2.183"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.google.external-dependency-manager"
+      ]
+    }
+  ]
 }

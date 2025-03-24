@@ -1,10 +1,8 @@
-group 'com.rly_network.rly_network_mobile_sdk'
-version '1.0-SNAPSHOT'
-
-
+version '1.0.0'
 
 buildscript {
-    ext.kotlin_version = '1.8.0'
+    ext.kotlin_version = '2.0.21'
+    ext.ketherium_version = '0.86.0'
     repositories {
         google()
         mavenCentral()
@@ -12,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:8.7.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -29,7 +27,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 33
+    namespace = "com.rallyprotocol.unity.android"
+    compileSdk 35
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -54,13 +53,27 @@ android {
 }
 
 dependencies {
-    implementation "com.github.komputing.kethereum:model:0.85.7"
-    implementation "com.github.komputing.kethereum:extensions_kotlin:0.85.7"
-    implementation "com.github.komputing.kethereum:bip39:0.85.7"
-    implementation 'com.github.komputing.kethereum:bip39_wordlist_en:0.85.7'
-    implementation "com.github.komputing.kethereum:bip32:0.85.7"
-    implementation "com.github.komputing.kethereum:crypto_impl_spongycastle:0.85.7"
+    implementation "com.github.komputing.kethereum:model:$ketherium_version"
+    implementation "com.github.komputing.kethereum:extensions_kotlin:$ketherium_version"
+    implementation "com.github.komputing.kethereum:bip39:$ketherium_version"
+    implementation "com.github.komputing.kethereum:bip39_wordlist_en:$ketherium_version"
+    implementation "com.github.komputing.kethereum:bip32:$ketherium_version"
+    implementation "com.github.komputing.kethereum:crypto_impl_spongycastle:$ketherium_version"
     implementation "androidx.security:security-crypto-ktx:1.1.0-alpha06"
-    implementation 'com.google.android.gms:play-services-auth-blockstore:16.2.0'
+    implementation 'com.google.android.gms:play-services-auth-blockstore:16.4.0'
 
+}
+
+tasks.register('copyAar', Copy) {
+    // Replace with your desired output path
+    def outputDir = file("$rootDir/../RallyProtocol.Unity/Assets/RallyProtocolUnity/Plugins/Android")
+    from(layout.buildDirectory.dir("outputs/aar"))
+    include("*-release.aar")
+    into(outputDir)
+}
+
+afterEvaluate {
+    tasks.named("assembleRelease").configure {
+        finalizedBy(copyAar)
+    }
 }

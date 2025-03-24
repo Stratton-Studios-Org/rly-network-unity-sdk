@@ -1,24 +1,25 @@
 apply plugin: 'com.android.library'
+apply from: '../shared/keepUnitySymbols.gradle'
 **APPLY_PLUGINS**
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 // Android Resolver Dependencies Start
-    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:5
-    implementation 'com.github.komputing.kethereum:bip32:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:6
-    implementation 'com.github.komputing.kethereum:bip39:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:7
-    implementation 'com.github.komputing.kethereum:bip39_wordlist_en:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:8
-    implementation 'com.github.komputing.kethereum:crypto_impl_spongycastle:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:9
-    implementation 'com.github.komputing.kethereum:extensions_kotlin:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:10
-    implementation 'com.github.komputing.kethereum:model:0.85.7' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:11
-    implementation 'com.google.android.gms:play-services-auth-blockstore:16.2.0' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:12
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10' // Assets/RallyProtocolUnity/Editor/RlyNetworkDependencies.xml:4
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha06' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:8
+    implementation 'com.github.komputing.kethereum:bip32:0.86.0' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:9
+    implementation 'com.github.komputing.kethereum:bip39:0.86.0' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:10
+    implementation 'com.github.komputing.kethereum:bip39_wordlist_en:0.86.0' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:11
+    implementation 'com.github.komputing.kethereum:crypto_impl_spongycastle:0.86.0' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:12
+    implementation 'com.github.komputing.kethereum:extensions_kotlin:0.86.0' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:13
+    implementation 'com.github.komputing.kethereum:model:0.86.0' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:14
+    implementation 'com.google.android.gms:play-services-auth-blockstore:16.4.0' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:15
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.0.21' // Assets/RallyProtocolUnity/Editor/RallyProtocolDependencies.xml:7
 // Android Resolver Dependencies End
 **DEPS**}
 
 // Android Resolver Exclusions Start
 android {
-  packagingOptions {
+  packaging {
       exclude ('/lib/armeabi/*' + '*')
       exclude ('/lib/mips/*' + '*')
       exclude ('/lib/mips64/*' + '*')
@@ -28,35 +29,39 @@ android {
 }
 // Android Resolver Exclusions End
 android {
+    namespace "com.unity3d.player"
     ndkPath "**NDKPATH**"
+    ndkVersion "**NDKVERSION**"
 
-    compileSdkVersion **APIVERSION**
-    buildToolsVersion '**BUILDTOOLS**'
+    compileSdk **APIVERSION**
+    buildToolsVersion = "**BUILDTOOLS**"
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     defaultConfig {
-        minSdkVersion **MINSDKVERSION**
-        targetSdkVersion **TARGETSDKVERSION**
+        minSdk **MINSDK**
+        targetSdk **TARGETSDK**
         ndk {
             abiFilters **ABIFILTERS**
+            debugSymbolLevel **DEBUGSYMBOLLEVEL**
         }
         versionCode **VERSIONCODE**
         versionName '**VERSIONNAME**'
         consumerProguardFiles 'proguard-unity.txt'**USER_PROGUARD**
+**DEFAULT_CONFIG_SETUP**
     }
 
-    lintOptions {
+    lint {
         abortOnError false
     }
 
-    aaptOptions {
+    androidResources {
         noCompress = **BUILTIN_NOCOMPRESS** + unityStreamingAssets.tokenize(', ')
         ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
-    }**PACKAGING_OPTIONS**
+    }**PACKAGING**
 }
 **IL_CPP_BUILD_SETUP**
 **SOURCE_BUILD_SETUP**
