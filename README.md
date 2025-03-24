@@ -91,6 +91,20 @@ await rlyNetwork.TransferAsync(destinationAddress, amount);
 - **Cross-Platform Support**: iOS and Android support via platform-specific plugins
 - **Unity Integration**: Seamless integration with the Unity editor and runtime
 
+## Troubleshooting
+
+You need to enable Git longpaths before cloning, just run the below command in the terminal (this is intended for Windows users only):
+
+```
+git config --system core.longpaths true
+```
+
+If you're using Git GUIs, use `--global` like so:
+
+```
+git config --global core.longpaths true
+```
+
 ## Running Tests
 
 The tests are included in the `src/RallyProtocol.Unity` project. To run the tests, open the project in Unity and use the Unity Test Runner window.
