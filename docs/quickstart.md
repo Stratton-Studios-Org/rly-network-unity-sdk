@@ -31,14 +31,14 @@ Before you begin:
 5. Enter the Rally Protocol Unity SDK repository URL:
 
    ```
-   https://github.com/rally-io/rly-network-unity-sdk.git
+   https://github.com/rally-dfs/rly-network-unity-sdk.git
    ```
 
 6. Click **Add**
 
 ### Option 2: Manual Installation
 
-1. Download the latest release from the [GitHub repository](https://github.com/rally-io/rly-network-unity-sdk/releases)
+1. Download the latest release from the [GitHub repository](https://github.com/rally-dfs/rly-network-unity-sdk/releases)
 2. Unzip the package
 3. In your Unity project, go to **Assets > Import Package > Custom Package...**
 4. Navigate to the downloaded `.unitypackage` file and import it
@@ -593,4 +593,4 @@ If you encounter any issues:
 
 1. Check the [Troubleshooting Guide](troubleshooting.md)
 2. Visit the [Rally Protocol Discord](https://discord.gg/rlynetwork)
-3. Open an issue on [GitHub](https://github.com/rally-io/rly-network-unity-sdk/issues)
+3. Open an issue on [GitHub](https://github.com/rally-dfs/rly-network-unity-sdk/issues)

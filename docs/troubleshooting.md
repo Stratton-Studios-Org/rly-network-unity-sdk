@@ -995,7 +995,7 @@ If you're still experiencing issues:
 
 2. **Community Resources**
    - Visit the [Rally Protocol Discord server](https://discord.gg/rlynetwork)
-   - Check the [GitHub repository](https://github.com/rally-io/rly-network-unity-sdk) for known issues
+   - Check the [GitHub repository](https://github.com/rally-dfs/rly-network-unity-sdk) for known issues
 
 3. **Support Channels**
    - Contact support at <support@rallyprotocol.com>
