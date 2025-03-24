@@ -2,7 +2,6 @@
 
 The Rally Protocol Unity SDK enables Unity developers to integrate blockchain functionality into their games and applications, leveraging the Rally Protocol for decentralized finance and blockchain interactions.
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3+-black.svg)](https://unity.com)
 
 ## Overview
@@ -116,10 +115,6 @@ To build the installer, open the `src/RallyProtocol.Unity.Publish` project in Un
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Resources
 
